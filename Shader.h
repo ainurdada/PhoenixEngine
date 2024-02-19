@@ -16,11 +16,7 @@ class Shader
 public:
 	HRESULT Compile(LPCWSTR pathToShader,
 		D3D_SHADER_MACRO macros[],
-		ID3DInclude* include,
-		LPCSTR entryPoint,
-		LPCSTR target,
-		UINT flags1,
-		UINT flags2);
+		ID3DInclude* include);
 private:
 	ID3DBlob* BC = nullptr;
 	ID3DBlob* errorCode = nullptr;

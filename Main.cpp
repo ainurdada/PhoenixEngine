@@ -23,8 +23,7 @@ int main() {
 	Shader shader;
 	HRESULT res;
 	D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
-	res = shader.CompileFromFile(L"",
-		Shader_Macros);
+	res = shader.Compile(L"", nullptr, nullptr);
 	if (FAILED(res)) {
 		window.ShowMessageBox(L"", L"Missing Shader File");
 		return 0;

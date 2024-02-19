@@ -4,20 +4,16 @@
 
 HRESULT Shader::Compile(LPCWSTR pathToShader,
 	D3D_SHADER_MACRO macros[],
-	ID3DInclude* include,
-	LPCSTR entryPoint,
-	LPCSTR target,
-	UINT flags1,
-	UINT flags2)
+	ID3DInclude* include)
 {
 	HRESULT res;
 	res = D3DCompileFromFile(pathToShader,
 		macros /*macros*/,
 		include /*include*/,
-		entryPoint,
-		target,
-		flags1,
-		flags2,
+		"VSMain",
+		"vs_5_0",
+		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_PACK_MATRIX_ROW_MAJOR,
+		0,
 		&BC,
 		&errorCode);
 
