@@ -20,12 +20,20 @@ int main() {
 	Graphics graphics;
 	graphics.Init(window.GetHWND(), window.ClientWidth, window.ClientHeight);
 	Time time;
+	Shader shader;
+	HRESULT res;
+	D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
+	res = shader.CompileFromFile(L"",
+		Shader_Macros);
+	if (FAILED(res)) {
+		window.ShowMessageBox(L"", L"Missing Shader File");
+		return 0;
+	}
 
 	float lag = 0;
 	while (true)
 	{
 		time.Update();
-		std::cout <<  time.GetDeltaTime() << "\n";
 		lag += time.GetDeltaTime();
 
 		processInput();

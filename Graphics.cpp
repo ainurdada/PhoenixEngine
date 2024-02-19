@@ -40,7 +40,6 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	}
 
 	ID3D11Texture2D* backTex;
-	ID3D11RenderTargetView* rtv;
 	res = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backTex);	// __uuidof(ID3D11Texture2D)
 	res = device->CreateRenderTargetView(backTex, nullptr, &rtv);
 	return res;

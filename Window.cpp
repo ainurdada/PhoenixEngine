@@ -72,3 +72,8 @@ const HWND& Window::GetHWND() const
 {
 	return hWnd;
 }
+
+void Window::ShowMessageBox(const LPCWSTR& text, const LPCWSTR& caption)
+{
+	MessageBox(hWnd, text, caption, MB_OK);
+}

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Shader.h"
-
 #include <wrl.h>
 #include <d3d11.h>
 #include <d3d.h>
@@ -13,17 +11,18 @@
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "dxguid.lib")
 
-
-class Graphics
+class Shader
 {
 public:
-	HRESULT Init(const HWND& hWnd, int screenWidth, int screenHeight);
+	HRESULT Compile(LPCWSTR pathToShader,
+		D3D_SHADER_MACRO macros[],
+		ID3DInclude* include,
+		LPCSTR entryPoint,
+		LPCSTR target,
+		UINT flags1,
+		UINT flags2);
 private:
-	Microsoft::WRL::ComPtr<ID3D11Device> device;
-	ID3D11DeviceContext* context;
-	IDXGISwapChain* swapChain;
-	DXGI_SWAP_CHAIN_DESC swapDesc = {};
-	ID3D11RenderTargetView* rtv;
+	ID3DBlob* BC = nullptr;
+	ID3DBlob* errorCode = nullptr;
 };
-
 
