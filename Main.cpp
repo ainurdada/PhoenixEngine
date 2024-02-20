@@ -1,8 +1,3 @@
-#include <windows.h>
-#include <chrono>
-
-#include "Window.h"
-#include "Time.h"
 #include "GraphicsEngine.h"
 #include "RenderComponent.h"
 #include "Mesh.h"
@@ -10,7 +5,6 @@
 #include "GameObject.h"
 
 #include <iostream>
-#include <thread>
 
 Mesh& CreateMesh();
 
