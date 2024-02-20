@@ -12,7 +12,7 @@ class Graphics;
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "dxguid.lib")
 
-#include "MeshComponent.h"
+#include "Mesh.h"
 #include "Shader.h"
 
 class Graphics
@@ -21,7 +21,7 @@ public:
 	HRESULT Init(const HWND& hWnd, int screenWidth, int screenHeight);
 	const Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() const;
 	ID3D11DeviceContext* GetContext() const;
-	void SetUpIA(ID3D11InputLayout* layout, MeshComponent& mesh, Shader& shader);
+	void SetUpIA(ID3D11InputLayout* layout, Mesh& mesh, Shader& shader);
 	void SetShader(const Shader& shader);
 	HRESULT SetUpRasterizer();
 	void SetUpViewPort(int width, int height);

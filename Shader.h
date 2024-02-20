@@ -15,7 +15,7 @@ class Shader;
 class Shader
 {
 public:
-	Shader(LPCWSTR pathToShader, const Microsoft::WRL::ComPtr<ID3D11Device>& device);
+	Shader() {};
 	~Shader();
 public:
 	HRESULT CompileVS(D3D_SHADER_MACRO macros[], ID3DInclude* include);
@@ -25,12 +25,16 @@ public:
 	ID3D11VertexShader* VS = nullptr;
 	ID3D11PixelShader* PS = nullptr;
 	ID3D11InputLayout* layout = nullptr; 
+	LPCWSTR pathToShader = L"emty";
+	D3D_SHADER_MACRO* VSMacros = nullptr;
+	D3D_SHADER_MACRO* PSMacros = nullptr;
+	ID3DInclude* VSInclude = nullptr;
+	ID3DInclude* PSInclude = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11Device> device;
 private:
 	ID3DBlob* vertexBC = nullptr;
 	ID3DBlob* pixelBC = nullptr;
 	ID3DBlob* errorVertexCode = nullptr;
 	ID3DBlob* errorPixelCode = nullptr;
-	LPCWSTR pathToShader;
-	Microsoft::WRL::ComPtr<ID3D11Device> device;
 };
 

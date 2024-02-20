@@ -37,11 +37,20 @@
     <ClCompile Include="GameComponent.cpp">
       <Filter>GameComponents</Filter>
     </ClCompile>
-    <ClCompile Include="MeshComponent.cpp">
+    <ClCompile Include="Mesh.cpp">
       <Filter>GameComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Vec4.cpp">
+    <ClCompile Include="Vec.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>App</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,14 +72,19 @@
     <ClInclude Include="GameComponent.h">
       <Filter>GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="MeshComponent.h">
+    <ClInclude Include="Mesh.h">
       <Filter>GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="Vec4.h">
+    <ClInclude Include="Vec.h">
       <Filter>Math</Filter>
     </ClInclude>
     <ClInclude Include="MathEngine.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>App</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="RenderComponent.h" />
   </ItemGroup>
 </Project>

@@ -2,12 +2,6 @@
 
 #include <iostream>
 
-Shader::Shader(LPCWSTR pathToShader, const Microsoft::WRL::ComPtr<ID3D11Device>& device)
-{
-	this->pathToShader = pathToShader;
-	this->device = device;
-}
-
 Shader::~Shader()
 {
 	VS->Release();

@@ -6,3 +6,9 @@ struct Vec4
 	float x, y, z, a;
 };
 
+struct Vec2Int
+{
+	Vec2Int(int x, int y) : x(x), y(y) {};
+	int x, y;
+};
+

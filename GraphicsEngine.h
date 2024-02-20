@@ -1,5 +1,6 @@
 #pragma once
 
 #include "Graphics.h"
-#include "MeshComponent.h"
+#include "Mesh.h"
 #include "Shader.h"
+#include "RenderComponent.h"

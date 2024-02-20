@@ -1,0 +1,27 @@
+#pragma once
+class Mesh;
+
+#include <vector>
+
+#include "Graphics.h"
+#include "GameComponent.h"
+#include "MathEngine.h"
+
+class Mesh
+{
+public:
+	Mesh() {};
+	Mesh(const std::vector<Vec4>& points, const std::vector<int>& indexes);
+public:
+	D3D11_BUFFER_DESC vertexBufDesc = {};
+	D3D11_BUFFER_DESC indexBufDesc = {};
+	D3D11_SUBRESOURCE_DATA vertexData = {};
+	D3D11_SUBRESOURCE_DATA indexData = {};
+	ID3D11Buffer* vb; 
+	ID3D11Buffer* ib;
+
+private:
+	std::vector<DirectX::XMFLOAT4> points;
+	std::vector<int> indexes;
+};
+
