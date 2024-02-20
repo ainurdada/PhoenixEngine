@@ -18,6 +18,7 @@ class Graphics
 {
 public:
 	HRESULT Init(const HWND& hWnd, int screenWidth, int screenHeight);
+	const Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() const;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;

@@ -44,3 +44,8 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	res = device->CreateRenderTargetView(backTex, nullptr, &rtv);
 	return res;
 }
+
+const Microsoft::WRL::ComPtr<ID3D11Device>& Graphics::GetDevice() const
+{
+	return device;
+}

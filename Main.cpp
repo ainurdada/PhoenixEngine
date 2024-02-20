@@ -17,17 +17,22 @@ void render(float deltaFrame);
 int main() {
 	Window window;
 	window.Create(L"test", 800, 800);
+
 	Graphics graphics;
 	graphics.Init(window.GetHWND(), window.ClientWidth, window.ClientHeight);
+
 	Time time;
-	Shader shader;
 	HRESULT res;
-	D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
-	res = shader.Compile(L"", nullptr, nullptr);
+
+	Shader shader(L"", graphics.GetDevice());
+	res = shader.CompileVS(nullptr, nullptr);
 	if (FAILED(res)) {
 		window.ShowMessageBox(L"", L"Missing Shader File");
 		return 0;
 	}
+	D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
+	res = shader.CompilePS(Shader_Macros, nullptr);
+	res = shader.CreateInputLayout();
 
 	float lag = 0;
 	while (true)
