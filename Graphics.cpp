@@ -49,3 +49,23 @@ const Microsoft::WRL::ComPtr<ID3D11Device>& Graphics::GetDevice() const
 {
 	return device;
 }
+
+UINT strides[] = { 32 };
+UINT offsets[] = { 0 };
+
+ID3D11Buffer* vb;
+void Graphics::SetUpIA(ID3D11InputLayout* layout, MeshComponent& mesh, Shader& shader)
+{
+	context->IASetInputLayout(layout);
+	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	context->IASetIndexBuffer(mesh.IB(), DXGI_FORMAT_R32_UINT, 0);
+	//ID3D11Buffer* vb = mesh.VB();
+	vb = mesh.VB();
+	context->IASetVertexBuffers(0, 1, &vb, strides, offsets);
+}
+
+void Graphics::SetShader(const Shader& shader)
+{
+	context->VSSetShader(shader.VS, nullptr, 0);
+	context->PSSetShader(shader.PS, nullptr, 0);
+}

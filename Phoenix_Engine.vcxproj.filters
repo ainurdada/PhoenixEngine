@@ -11,6 +11,12 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{83558bfd-cdf3-4801-bdd6-699dc294885c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameComponents">
+      <UniqueIdentifier>{8cc6f90e-65fd-46cf-8001-36e36c89c5de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{32f31ed9-548b-4394-b1bd-b3ff79ffb967}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -28,6 +34,15 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GameComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>GameComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Vec4.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
@@ -41,6 +56,21 @@
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsEngine.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h">
+      <Filter>GameComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MathEngine.h">
+      <Filter>Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 #pragma once
+class Shader;
 
 #include <wrl.h>
 #include <d3d11.h>
@@ -19,14 +20,15 @@ public:
 	HRESULT CompileVS(D3D_SHADER_MACRO macros[], ID3DInclude* include);
 	HRESULT CompilePS(D3D_SHADER_MACRO macros[], ID3DInclude* include);
 	HRESULT CreateInputLayout();
+public:
+	ID3D11VertexShader* VS = nullptr;
+	ID3D11PixelShader* PS = nullptr;
+	ID3D11InputLayout* layout = nullptr; 
 private:
 	ID3DBlob* vertexBC = nullptr;
 	ID3DBlob* pixelBC = nullptr;
 	ID3DBlob* errorVertexCode = nullptr;
 	ID3DBlob* errorPixelCode = nullptr;
-	ID3D11VertexShader* VS = nullptr;
-	ID3D11PixelShader* PS = nullptr; 
-	ID3D11InputLayout* layout = nullptr; 
 	LPCWSTR pathToShader;
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 };

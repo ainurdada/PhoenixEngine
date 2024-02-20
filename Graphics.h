@@ -1,6 +1,5 @@
 #pragma once
-
-#include "Shader.h"
+class Graphics;
 
 #include <wrl.h>
 #include <d3d11.h>
@@ -13,12 +12,18 @@
 #pragma comment(lib, "d3dcompiler.lib")
 #pragma comment(lib, "dxguid.lib")
 
+#include "MeshComponent.h"
+#include "Shader.h"
 
 class Graphics
 {
 public:
 	HRESULT Init(const HWND& hWnd, int screenWidth, int screenHeight);
 	const Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() const;
+	void SetUpIA(ID3D11InputLayout* layout,
+		MeshComponent& mesh,
+		Shader& shader);
+	void SetShader(const Shader& shader);
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;
@@ -26,5 +31,3 @@ private:
 	DXGI_SWAP_CHAIN_DESC swapDesc = {};
 	ID3D11RenderTargetView* rtv;
 };
-
-

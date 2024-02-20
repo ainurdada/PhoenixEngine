@@ -3,7 +3,8 @@
 
 #include "Window.h"
 #include "Time.h"
-#include "Graphics.h"
+#include "GraphicsEngine.h"
+#include "MeshComponent.h"
 
 #include <iostream>
 #include <thread>
@@ -12,43 +13,45 @@
 
 void processInput();
 void update(float deltaTime);
-void render(float deltaFrame);
+void render(MeshComponent& mesh, Shader& shader, float deltaFrame);
+MeshComponent& CreateMesh(const Graphics& grapgics);
+
+static Window window;
+static Graphics graphics;
+static Time game_time;
+static HRESULT res;
 
 int main() {
-	Window window;
 	window.Create(L"test", 800, 800);
-
-	Graphics graphics;
 	graphics.Init(window.GetHWND(), window.ClientWidth, window.ClientHeight);
 
-	Time time;
-	HRESULT res;
-
-	Shader shader(L"", graphics.GetDevice());
+	Shader shader(L"./Shaders/MyVeryFirstShader.hlsl", graphics.GetDevice());
 	res = shader.CompileVS(nullptr, nullptr);
 	if (FAILED(res)) {
-		window.ShowMessageBox(L"", L"Missing Shader File");
+		window.ShowMessageBox(L"MyVeryFirstShader.hlsl", L"Missing Shader File");
 		return 0;
 	}
 	D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
 	res = shader.CompilePS(Shader_Macros, nullptr);
 	res = shader.CreateInputLayout();
 
+	MeshComponent triangle = CreateMesh(graphics);
+
 	float lag = 0;
 	while (true)
 	{
-		time.Update();
-		lag += time.GetDeltaTime();
+		game_time.Update();
+		lag += game_time.GetDeltaTime();
 
 		processInput();
 
 		while (lag >= MS_PER_UPDATE)
 		{
-			update(time.GetDeltaTime());
+			update(game_time.GetDeltaTime());
 			lag -= MS_PER_UPDATE;
 		}
 
-		render(lag / MS_PER_UPDATE);
+		render(triangle, shader, lag / MS_PER_UPDATE);
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 	return 0;
@@ -69,6 +72,20 @@ void update(float deltaTime)
 {
 }
 
-void render(float deltaFrame)
+void render(MeshComponent& mesh, Shader& shader, float deltaFrame)
 {
+	graphics.SetUpIA(shader.layout, mesh, shader);
+	graphics.SetShader(shader);
+}
+
+MeshComponent& CreateMesh(const Graphics& grapgics) {
+	std::vector<Vec4> points = {
+		Vec4(0.5f, 0.5f, 0.5f, 1.0f), Vec4(1.0f, 0.0f, 0.0f, 1.0f),
+		Vec4(-0.5f, -0.5f, 0.5f, 1.0f), Vec4(0.0f, 0.0f, 1.0f, 1.0f),
+		Vec4(0.5f, -0.5f, 0.5f, 1.0f), Vec4(0.0f, 1.0f, 0.0f, 1.0f),
+		Vec4(-0.5f, 0.5f, 0.5f, 1.0f), Vec4(1.0f, 1.0f, 1.0f, 1.0f),
+	};
+	std::vector<int> indeces = { 0,1,2, 1,0,3 };
+	MeshComponent* pTriangle = new MeshComponent(grapgics, points, indeces);
+	return *pTriangle;
 }
