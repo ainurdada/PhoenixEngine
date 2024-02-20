@@ -50,6 +50,11 @@ const Microsoft::WRL::ComPtr<ID3D11Device>& Graphics::GetDevice() const
 	return device;
 }
 
+ID3D11DeviceContext* Graphics::GetContext() const
+{
+	return context;
+}
+
 UINT strides[] = { 32 };
 UINT offsets[] = { 0 };
 
@@ -59,7 +64,6 @@ void Graphics::SetUpIA(ID3D11InputLayout* layout, MeshComponent& mesh, Shader& s
 	context->IASetInputLayout(layout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	context->IASetIndexBuffer(mesh.IB(), DXGI_FORMAT_R32_UINT, 0);
-	//ID3D11Buffer* vb = mesh.VB();
 	vb = mesh.VB();
 	context->IASetVertexBuffers(0, 1, &vb, strides, offsets);
 }
@@ -68,4 +72,47 @@ void Graphics::SetShader(const Shader& shader)
 {
 	context->VSSetShader(shader.VS, nullptr, 0);
 	context->PSSetShader(shader.PS, nullptr, 0);
+}
+
+HRESULT Graphics::SetUpRasterizer()
+{
+	rastDesc.CullMode = D3D11_CULL_NONE;
+	rastDesc.FillMode = D3D11_FILL_SOLID;
+
+	HRESULT res;
+	res = device->CreateRasterizerState(&rastDesc, &rastState);
+
+	context->RSSetState(rastState);
+
+	return res;
+}
+
+void Graphics::SetUpViewPort(int width, int height)
+{
+	viewport.Width = static_cast<float>(width);
+	viewport.Height = static_cast<float>(height);
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.MinDepth = 0;
+	viewport.MaxDepth = 1.0f;
+
+	context->RSSetViewports(1, &viewport);
+}
+
+void Graphics::UpdateState()
+{
+	context->ClearState();
+	context->RSSetState(rastState);
+}
+
+void Graphics::UpdateRenderTarget()
+{
+	context->OMSetRenderTargets(1, &rtv, nullptr);
+	float color[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	context->ClearRenderTargetView(rtv, color);
+}
+
+void Graphics::Present()
+{
+	swapChain->Present(0, DXGI_PRESENT_DO_NOT_WAIT);
 }

@@ -8,6 +8,12 @@ Shader::Shader(LPCWSTR pathToShader, const Microsoft::WRL::ComPtr<ID3D11Device>&
 	this->device = device;
 }
 
+Shader::~Shader()
+{
+	VS->Release();
+	PS->Release();
+}
+
 HRESULT Shader::CompileVS(D3D_SHADER_MACRO macros[], ID3DInclude* include)
 {
 	HRESULT res;

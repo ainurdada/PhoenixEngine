@@ -14,12 +14,13 @@
 void processInput();
 void update(float deltaTime);
 void render(MeshComponent& mesh, Shader& shader, float deltaFrame);
-MeshComponent& CreateMesh(const Graphics& grapgics);
+MeshComponent& CreateMesh(Graphics& grapgics);
 
 static Window window;
 static Graphics graphics;
 static Time game_time;
 static HRESULT res;
+static bool isExitRequested = false;
 
 int main() {
 	window.Create(L"test", 800, 800);
@@ -37,8 +38,10 @@ int main() {
 
 	MeshComponent triangle = CreateMesh(graphics);
 
+	graphics.SetUpRasterizer();
+
 	float lag = 0;
-	while (true)
+	while (!isExitRequested)
 	{
 		game_time.Update();
 		lag += game_time.GetDeltaTime();
@@ -52,7 +55,7 @@ int main() {
 		}
 
 		render(triangle, shader, lag / MS_PER_UPDATE);
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		//std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 	return 0;
 }
@@ -66,6 +69,11 @@ void processInput()
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
+
+	// If windows signals to end the application then exit out.
+	if (msg.message == WM_QUIT) {
+		isExitRequested = true;
+	}
 }
 
 void update(float deltaTime)
@@ -74,11 +82,16 @@ void update(float deltaTime)
 
 void render(MeshComponent& mesh, Shader& shader, float deltaFrame)
 {
+	graphics.UpdateState();
+	graphics.SetUpViewPort(window.ClientWidth, window.ClientHeight);
 	graphics.SetUpIA(shader.layout, mesh, shader);
 	graphics.SetShader(shader);
+	graphics.UpdateRenderTarget();
+	mesh.Draw();
+	graphics.Present();
 }
 
-MeshComponent& CreateMesh(const Graphics& grapgics) {
+MeshComponent& CreateMesh(Graphics& grapgics) {
 	std::vector<Vec4> points = {
 		Vec4(0.5f, 0.5f, 0.5f, 1.0f), Vec4(1.0f, 0.0f, 0.0f, 1.0f),
 		Vec4(-0.5f, -0.5f, 0.5f, 1.0f), Vec4(0.0f, 0.0f, 1.0f, 1.0f),

@@ -10,7 +10,7 @@ class MeshComponent;
 class MeshComponent : public GameComponent
 {
 public:
-	MeshComponent(const Graphics& graphics, const std::vector<Vec4>& points, const std::vector<int>& indexes);
+	MeshComponent(Graphics& graphics, const std::vector<Vec4>& points, const std::vector<int>& indexes);
 	ID3D11Buffer* VB();
 	ID3D11Buffer* IB();
 public:
@@ -21,6 +21,7 @@ public:
 	void Reload() override;
 	void Update() override;
 private:
+	Graphics* pGraphics;
 	std::vector<DirectX::XMFLOAT4> points;
 	std::vector<int> indexes;
 	ID3D11Buffer* vb; 

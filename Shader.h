@@ -16,6 +16,7 @@ class Shader
 {
 public:
 	Shader(LPCWSTR pathToShader, const Microsoft::WRL::ComPtr<ID3D11Device>& device);
+	~Shader();
 public:
 	HRESULT CompileVS(D3D_SHADER_MACRO macros[], ID3DInclude* include);
 	HRESULT CompilePS(D3D_SHADER_MACRO macros[], ID3DInclude* include);

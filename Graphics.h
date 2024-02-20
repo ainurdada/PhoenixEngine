@@ -20,14 +20,21 @@ class Graphics
 public:
 	HRESULT Init(const HWND& hWnd, int screenWidth, int screenHeight);
 	const Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() const;
-	void SetUpIA(ID3D11InputLayout* layout,
-		MeshComponent& mesh,
-		Shader& shader);
+	ID3D11DeviceContext* GetContext() const;
+	void SetUpIA(ID3D11InputLayout* layout, MeshComponent& mesh, Shader& shader);
 	void SetShader(const Shader& shader);
+	HRESULT SetUpRasterizer();
+	void SetUpViewPort(int width, int height);
+	void UpdateState();
+	void UpdateRenderTarget();
+	void Present();
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;
 	IDXGISwapChain* swapChain;
 	DXGI_SWAP_CHAIN_DESC swapDesc = {};
 	ID3D11RenderTargetView* rtv;
+	CD3D11_RASTERIZER_DESC rastDesc = {};
+	ID3D11RasterizerState* rastState;
+	D3D11_VIEWPORT viewport = {};
 };

@@ -1,7 +1,8 @@
 #include "MeshComponent.h"
 
-MeshComponent::MeshComponent(const Graphics& graphics, const std::vector<Vec4>& points, const std::vector<int>& indexes)
+MeshComponent::MeshComponent(Graphics& graphics, const std::vector<Vec4>& points, const std::vector<int>& indexes)
 {
+	pGraphics = &graphics;
 	for (Vec4 p : points) {
 		DirectX::XMFLOAT4 XMp(p.x, p.y, p.z, p.a);
 		this->points.push_back(XMp);
@@ -56,6 +57,7 @@ void MeshComponent::DestroyResources()
 
 void MeshComponent::Draw()
 {
+	pGraphics->GetContext()->DrawIndexed(indexes.size(), 0, 0);
 }
 
 void MeshComponent::Initialize()

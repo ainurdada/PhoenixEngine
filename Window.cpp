@@ -1,9 +1,6 @@
 #include "Window.h"
 #include <iostream>
 
-//#include <windows.h>
-//#include <WinUser.h>
-
 LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 {
 	switch (umessage)
