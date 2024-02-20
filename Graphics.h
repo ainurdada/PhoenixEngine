@@ -14,6 +14,7 @@ class Graphics;
 
 #include "Mesh.h"
 #include "Shader.h"
+#include "MathEngine.h"
 
 class Graphics
 {
@@ -28,6 +29,7 @@ public:
 	void UpdateState();
 	void UpdateRenderTarget();
 	void Present();
+	Vec4 backgroundColor;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;

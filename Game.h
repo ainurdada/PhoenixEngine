@@ -6,6 +6,7 @@ class Game;
 #include "GraphicsEngine.h"
 #include "MathEngine.h"
 #include "GameObject.h"
+#include "iostream"
 
 class Game
 {

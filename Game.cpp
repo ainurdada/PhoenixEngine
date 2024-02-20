@@ -32,6 +32,7 @@ void Game::Run()
 			lag -= ms_per_update;
 		}
 
+		graphics.backgroundColor.x = (float)((int)(this->time.GetTime() * 100) % 100) / 100.0f;
 		render(lag / ms_per_update);
 	}
 }

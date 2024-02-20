@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Time.h"
 #include "GraphicsEngine.h"
+#include "RenderComponent.h"
 #include "Mesh.h"
 #include "Game.h"
 #include "GameObject.h"
@@ -17,6 +18,8 @@ Mesh& CreateMesh();
 int main() {
 	Game game;
 	game.Create();
+	Vec4 color = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	game.graphics.backgroundColor = color;
 
 	GameObject gameObj;
 
@@ -37,13 +40,14 @@ int main() {
 
 
 Mesh& CreateMesh() {
-	std::vector<Vec4> XMPoints = {
+	std::vector<Vec4> points = {
 		Vec4(0.5f, 0.5f, 0.5f, 1.0f), Vec4(1.0f, 0.0f, 0.0f, 1.0f),
 		Vec4(-0.5f, -0.5f, 0.5f, 1.0f), Vec4(0.0f, 0.0f, 1.0f, 1.0f),
 		Vec4(0.5f, -0.5f, 0.5f, 1.0f), Vec4(0.0f, 1.0f, 0.0f, 1.0f),
 		Vec4(-0.5f, 0.5f, 0.5f, 1.0f), Vec4(1.0f, 1.0f, 1.0f, 1.0f),
 	};
 	std::vector<int> indeces = { 0,1,2, 1,0,3 };
-	Mesh* pTriangle = new Mesh(XMPoints, indeces);
+
+	Mesh* pTriangle = new Mesh(points, indeces);
 	return *pTriangle;
 }
