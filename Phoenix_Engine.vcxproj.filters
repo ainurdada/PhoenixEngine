@@ -22,72 +22,72 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Window.cpp">
+    <ClCompile Include="App\Window.cpp">
       <Filter>App</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
+    <ClCompile Include="App\Time.cpp">
       <Filter>App</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.cpp">
+    <ClCompile Include="GraphicsEngine\Graphics.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="GraphicsEngine\Shader.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="GameComponent.cpp">
+    <ClCompile Include="App\GameComponents\GameComponent.cpp">
       <Filter>GameComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
+    <ClCompile Include="GraphicsEngine\Mesh.cpp">
       <Filter>GameComponents</Filter>
     </ClCompile>
-    <ClCompile Include="Vec.cpp">
+    <ClCompile Include="Math\Vec.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="App\Game.cpp">
       <Filter>App</Filter>
     </ClCompile>
-    <ClCompile Include="RenderComponent.cpp">
+    <ClCompile Include="App\GameComponents\RenderComponent.cpp">
       <Filter>GameComponents</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="App\GameObject.cpp">
       <Filter>App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window.h">
+    <ClInclude Include="App\Window.h">
       <Filter>App</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="App\Time.h">
       <Filter>App</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.h">
+    <ClInclude Include="GraphicsEngine\Graphics.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="GraphicsEngine\Shader.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsEngine.h">
+    <ClInclude Include="GraphicsEngine\GraphicsEngine.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="GameComponent.h">
+    <ClInclude Include="App\GameComponents\GameComponent.h">
       <Filter>GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
+    <ClInclude Include="GraphicsEngine\Mesh.h">
       <Filter>GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="Vec.h">
+    <ClInclude Include="Math\Vec.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="MathEngine.h">
+    <ClInclude Include="Math\MathEngine.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="App\Game.h">
       <Filter>App</Filter>
     </ClInclude>
-    <ClInclude Include="RenderComponent.h">
+    <ClInclude Include="App\GameComponents\RenderComponent.h">
       <Filter>GameComponents</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="App\GameObject.h">
       <Filter>App</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,8 +3,8 @@ class Game;
 
 #include "Time.h"
 #include "Window.h"
-#include "GraphicsEngine.h"
-#include "MathEngine.h"
+#include "../GraphicsEngine/GraphicsEngine.h"
+#include "../Math/MathEngine.h"
 #include "GameObject.h"
 #include "iostream"
 

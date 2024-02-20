@@ -1,8 +1,7 @@
-#include "GraphicsEngine.h"
-#include "RenderComponent.h"
-#include "Mesh.h"
-#include "Game.h"
-#include "GameObject.h"
+#include "GraphicsEngine/GraphicsEngine.h"
+#include "App/GameComponents/RenderComponent.h"
+#include "App/Game.h"
+#include "App/GameObject.h"
 
 #include <iostream>
 

@@ -127,31 +127,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameComponent.cpp" />
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="App\Game.cpp" />
+    <ClCompile Include="App\GameComponents\GameComponent.cpp" />
+    <ClCompile Include="App\GameObject.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Vec.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="GraphicsEngine\Graphics.cpp" />
+    <ClCompile Include="App\GameComponents\RenderComponent.cpp" />
+    <ClCompile Include="GraphicsEngine\Shader.cpp" />
+    <ClCompile Include="App\Time.cpp" />
+    <ClCompile Include="GraphicsEngine\Mesh.cpp" />
+    <ClCompile Include="Math\Vec.cpp" />
+    <ClCompile Include="App\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameComponent.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Graphics.h" />
-    <ClInclude Include="GraphicsEngine.h" />
-    <ClInclude Include="MathEngine.h" />
-    <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="Time.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Vec.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="App\Game.h" />
+    <ClInclude Include="App\GameComponents\GameComponent.h" />
+    <ClInclude Include="App\GameObject.h" />
+    <ClInclude Include="GraphicsEngine\Graphics.h" />
+    <ClInclude Include="GraphicsEngine\GraphicsEngine.h" />
+    <ClInclude Include="Math\MathEngine.h" />
+    <ClInclude Include="App\GameComponents\RenderComponent.h" />
+    <ClInclude Include="GraphicsEngine\Shader.h" />
+    <ClInclude Include="App\Time.h" />
+    <ClInclude Include="GraphicsEngine\Mesh.h" />
+    <ClInclude Include="Math\Vec.h" />
+    <ClInclude Include="App\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

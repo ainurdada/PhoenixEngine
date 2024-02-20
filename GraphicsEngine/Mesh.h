@@ -4,8 +4,8 @@ class Mesh;
 #include <vector>
 
 #include "Graphics.h"
-#include "GameComponent.h"
-#include "MathEngine.h"
+#include "../App/GameComponents/GameComponent.h"
+#include "../Math/MathEngine.h"
 
 class Mesh
 {

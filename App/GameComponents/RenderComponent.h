@@ -2,9 +2,8 @@
 class RenderComponent;
 
 #include "GameComponent.h"
-#include "GraphicsEngine.h"
-#include "Mesh.h"
-#include "Game.h"
+#include "../../GraphicsEngine/GraphicsEngine.h"
+#include "../Game.h"
 
 class RenderComponent : public GameComponent
 {
