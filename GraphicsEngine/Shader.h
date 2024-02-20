@@ -25,7 +25,7 @@ public:
 	ID3D11VertexShader* VS = nullptr;
 	ID3D11PixelShader* PS = nullptr;
 	ID3D11InputLayout* layout = nullptr; 
-	LPCWSTR pathToShader = L"emty";
+	LPCWSTR pathToShader = L"";
 	D3D_SHADER_MACRO* VSMacros = nullptr;
 	D3D_SHADER_MACRO* PSMacros = nullptr;
 	ID3DInclude* VSInclude = nullptr;

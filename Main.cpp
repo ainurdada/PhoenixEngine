@@ -3,7 +3,6 @@
 #include "App/Game.h"
 #include "App/GameObject.h"
 
-#include <iostream>
 
 Mesh& CreateMesh();
 

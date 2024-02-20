@@ -18,7 +18,7 @@ public:
 public:
 	Mesh mesh;
 	Shader shader;
-	LPCWSTR shaderPath = L"emty";
+	LPCWSTR shaderPath = L"";
 
 private:
 };
