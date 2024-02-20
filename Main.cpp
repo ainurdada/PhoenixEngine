@@ -12,8 +12,6 @@ Mesh& CreateMesh();
 int main() {
 	Game game;
 	game.Create();
-	Vec4 color = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
-	game.graphics.backgroundColor = color;
 
 	GameObject gameObj;
 
