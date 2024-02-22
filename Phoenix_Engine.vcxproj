@@ -130,6 +130,7 @@
     <ClCompile Include="App\Game.cpp" />
     <ClCompile Include="App\GameComponents\GameComponent.cpp" />
     <ClCompile Include="App\GameObject.cpp" />
+    <ClCompile Include="InputSystem\InputDevice.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="App\GameComponents\RenderComponent.cpp" />
@@ -138,6 +139,8 @@
     <ClCompile Include="GraphicsEngine\Mesh.cpp" />
     <ClCompile Include="Math\Vec.cpp" />
     <ClCompile Include="App\Window.cpp" />
+    <ClCompile Include="App\GameComponents\TransformComponent.cpp" />
+    <ClCompile Include="Tools\Delegates.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
@@ -145,6 +148,9 @@
     <ClInclude Include="App\GameObject.h" />
     <ClInclude Include="GraphicsEngine\Graphics.h" />
     <ClInclude Include="GraphicsEngine\GraphicsEngine.h" />
+    <ClInclude Include="Exports.h" />
+    <ClInclude Include="InputSystem\InputDevice.h" />
+    <ClInclude Include="InputSystem\Keys.h" />
     <ClInclude Include="Math\MathEngine.h" />
     <ClInclude Include="App\GameComponents\RenderComponent.h" />
     <ClInclude Include="GraphicsEngine\Shader.h" />
@@ -152,6 +158,11 @@
     <ClInclude Include="GraphicsEngine\Mesh.h" />
     <ClInclude Include="Math\Vec.h" />
     <ClInclude Include="App\Window.h" />
+    <ClInclude Include="App\GameComponents\TransformComponent.h" />
+    <ClInclude Include="Tools\Delegates.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="Tools\Delegates.natvis" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

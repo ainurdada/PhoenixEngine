@@ -52,6 +52,15 @@
     <ClCompile Include="App\GameObject.cpp">
       <Filter>App</Filter>
     </ClCompile>
+    <ClCompile Include="App\GameComponents\TransformComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem\InputDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tools\Delegates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -90,5 +99,13 @@
     <ClInclude Include="App\GameObject.h">
       <Filter>App</Filter>
     </ClInclude>
+    <ClInclude Include="App\GameComponents\TransformComponent.h" />
+    <ClInclude Include="InputSystem\InputDevice.h" />
+    <ClInclude Include="InputSystem\Keys.h" />
+    <ClInclude Include="Exports.h" />
+    <ClInclude Include="Tools\Delegates.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="Tools\Delegates.natvis" />
   </ItemGroup>
 </Project>
