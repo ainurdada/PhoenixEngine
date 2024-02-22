@@ -151,7 +151,6 @@
     <ClInclude Include="Exports.h" />
     <ClInclude Include="InputSystem\InputDevice.h" />
     <ClInclude Include="InputSystem\Keys.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="Math\MathEngine.h" />
     <ClInclude Include="App\GameComponents\RenderComponent.h" />
     <ClInclude Include="GraphicsEngine\Shader.h" />

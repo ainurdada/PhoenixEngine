@@ -1,4 +1,3 @@
-#include "../pch.h"
 #include "InputDevice.h"
 #include <iostream>
 #include "../App/Game.h"

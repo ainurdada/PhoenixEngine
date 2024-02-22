@@ -102,7 +102,6 @@
     <ClInclude Include="App\GameComponents\TransformComponent.h" />
     <ClInclude Include="InputSystem\InputDevice.h" />
     <ClInclude Include="InputSystem\Keys.h" />
-    <ClInclude Include="pch.h" />
     <ClInclude Include="Exports.h" />
     <ClInclude Include="Tools\Delegates.h" />
   </ItemGroup>
