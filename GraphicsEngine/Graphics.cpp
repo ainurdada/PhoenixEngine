@@ -108,7 +108,7 @@ void Graphics::UpdateState()
 void Graphics::UpdateRenderTarget()
 {
 	context->OMSetRenderTargets(1, &rtv, nullptr);
-	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.a };
+	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.w };
 	context->ClearRenderTargetView(rtv, color);
 }
 

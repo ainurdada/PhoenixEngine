@@ -3,7 +3,7 @@
 Mesh::Mesh(std::vector<Vec4> XMPoints, std::vector<int> indexes)
 {
 	for (Vec4 p : XMPoints) {
-		DirectX::XMFLOAT4 XMp(p.x, p.y, p.z, p.a);
+		DirectX::XMFLOAT4 XMp(p.x, p.y, p.z, p.w);
 		this->XMPoints.push_back(XMp);
 	}
 
