@@ -9,6 +9,8 @@ class Player : public GameComponent
 public:
 	Player() {};
 
+	bool isEnemy = false;
+
 	// Inherited via GameComponent
 	void DestroyResources() override;
 	void Draw() override;

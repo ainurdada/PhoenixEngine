@@ -8,7 +8,9 @@ class GameObject;
 #include "../../Lib/Math/Math.h"
 
 struct Transform {
-	SMath::Vector3 position = { 0.0f, 0.0f, 0.0f };
+	SMath::Vector3 position = { 0,0,0 };
+	//SMath::Vector3 scale = { 1,1,1 };
+	//SMath::Quaternion rotation = SMath::Quaternion::Identity;
 };
 
 class GameObject
