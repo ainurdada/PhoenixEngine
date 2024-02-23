@@ -18,6 +18,7 @@ public:
 	virtual void Create();
 	virtual void Run();
 	virtual void InstantiateGameObject(GameObject gameObject);
+	virtual void Quit();
 public:
 	static Game* instance;
 	Time time;

@@ -50,6 +50,11 @@ void Game::InstantiateGameObject(GameObject gameObject)
 	gameObjects.push_back(gameObject);
 }
 
+void Game::Quit()
+{
+	isExitRequested = true;
+}
+
 static MSG msg = {};
 void Game::processInput()
 {
