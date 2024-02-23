@@ -139,6 +139,7 @@
     <ClCompile Include="GraphicsEngine\Mesh.cpp" />
     <ClCompile Include="Math\Vec.cpp" />
     <ClCompile Include="App\Window.cpp" />
+    <ClCompile Include="Games\PingPongGame.cpp" />
     <ClCompile Include="Tools\Delegates.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="GraphicsEngine\Mesh.h" />
     <ClInclude Include="Math\Vec.h" />
     <ClInclude Include="App\Window.h" />
+    <ClInclude Include="Games\PingPongGame.h" />
     <ClInclude Include="Tools\Delegates.h" />
   </ItemGroup>
   <ItemGroup>

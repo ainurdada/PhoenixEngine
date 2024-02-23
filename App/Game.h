@@ -13,9 +13,9 @@ class Game
 public:
 	Game();
 public:
-	void Create();
-	void Run();
-	void InstantiateGameObject(GameObject gameObject);
+	virtual void Create();
+	virtual void Run();
+	virtual void InstantiateGameObject(GameObject gameObject);
 public:
 	static Game* instance;
 	Time time;
@@ -26,9 +26,9 @@ public:
 
 private:
 	std::vector<GameObject> gameObjects;
-	void processInput();
-	void update(float deltaTime);
-	void render(float deltaFrame);
+	virtual void processInput();
+	virtual void update(float deltaTime);
+	virtual void render(float deltaFrame);
 private:
 	HRESULT res;
 	bool isExitRequested = false;

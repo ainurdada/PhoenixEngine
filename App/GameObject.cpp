@@ -1,9 +1,9 @@
 #include "GameObject.h"
 
-void GameObject::AddComponent(GameComponent& component)
+void GameObject::AddComponent(GameComponent* component)
 {
-	component.gameObject = this;
-	components.push_back(&component);
+	component->gameObject = this;
+	components.push_back(component);
 }
 
 void GameObject::Draw()
