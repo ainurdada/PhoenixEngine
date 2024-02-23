@@ -1,6 +1,8 @@
 #pragma once
 class GameObject;
 
+#define GAMEOBJECT_H
+
 #include "vector"
 #include "GameComponents/GameComponent.h"
 #include "GameComponents/TransformComponent.h"

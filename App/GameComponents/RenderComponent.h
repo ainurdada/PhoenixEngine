@@ -28,6 +28,6 @@ public:
 	LPCWSTR shaderPath = L"";
 private:
 	TransformData transform_data;
-	ID3D11Buffer* transform_buffer;
+	ID3D11Buffer* transform_buffer = nullptr;
 };
 

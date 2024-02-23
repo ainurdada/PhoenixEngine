@@ -1,8 +1,14 @@
-#pragma once
+//#pragma once
+#ifndef GAME_COMPONENT_DECLARATION
+#define GAME_COMPONENT_DECLARATION
 class GameComponent;
+#endif 
 
 #include "../GameObject.h"
 
+
+#ifndef GAME_COMPONENT_H
+#define GAME_COMPONENT_H
 class GameComponent
 {
 public:
@@ -12,6 +18,7 @@ public:
 	virtual void Reload() = 0;
 	virtual void Update() = 0;
 public:
-	GameObject* gameObject;
+	GameObject* gameObject = nullptr;
 };
+#endif 
 

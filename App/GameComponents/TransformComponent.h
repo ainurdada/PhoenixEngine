@@ -1,9 +1,15 @@
-#pragma once
+//#pragma once
+#ifndef TRANSFORM_COMPONENT_DECLARATION
+#define TRANSFORM_COMPONENT_DECLARATION
 class TransformComponent;
+#endif 
+
 
 #include "GameComponent.h"
 #include "../../Math/MathEngine.h"
 
+#ifndef TRANSFORM_COMPONENT_H
+#define TRANSFORM_COMPONENT_H
 class TransformComponent : public GameComponent
 {
 public:
@@ -19,4 +25,5 @@ public:
 	void Reload() override;
 	void Update() override;
 };
+#endif 
 
