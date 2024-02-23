@@ -23,6 +23,8 @@ int main() {
 
 	game.InstantiateGameObject(gameObj);
 
+	gameObj.transform.position.x += 0;
+
 	game.Run();
 
 	return 0;

@@ -1,4 +1,8 @@
 #pragma once
+class GameComponent;
+
+#include "../GameObject.h"
+
 class GameComponent
 {
 public:
@@ -7,5 +11,7 @@ public:
 	virtual void Initialize() = 0;
 	virtual void Reload() = 0;
 	virtual void Update() = 0;
+public:
+	GameObject* gameObject;
 };
 

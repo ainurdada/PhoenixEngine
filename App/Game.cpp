@@ -62,6 +62,9 @@ void Game::processInput()
 
 void Game::update(float deltaTime)
 {
+	for (GameObject& gameObj : gameObjects) {
+		gameObj.Update(deltaTime);
+	}
 }
 
 void Game::render(float deltaFrame)
