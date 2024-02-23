@@ -1,7 +1,8 @@
 #include "PingPongGame.h"
 
 #include "../GraphicsEngine/GraphicsEngine.h"
-#include "../App/GameComponents/RenderComponent.h"
+#include "../App/GameComponents/BaseGameComponents.h"
+#include "../Scripts/Player.h"
 
 static Mesh& CreateMesh();
 
@@ -16,10 +17,15 @@ void PingPongGame::Create()
 	D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
 	renderComponent->shader.PSMacros = Shader_Macros;
 	renderComponent->mesh = CreateMesh();
-
 	gameObj->AddComponent(*renderComponent);
 
-	gameObj->transform.position.x += 0.5f;
+
+	Player* player = new Player;
+	gameObj->AddComponent(*player);
+
+
+	gameObj->transform.position.x += 0.0f;
+
 
 	InstantiateGameObject(*gameObj);
 }

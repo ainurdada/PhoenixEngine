@@ -6,6 +6,8 @@ class Time
 {
 public:
 	Time();
+
+	static Time* instance;
 public:
 	void Update();
 	/// <summary>

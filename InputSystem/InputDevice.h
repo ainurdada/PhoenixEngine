@@ -1,11 +1,11 @@
 #pragma once
+class InputDevice;
 
 #include <unordered_set>
 #include "Keys.h"
 #include "../Exports.h"
 #include "../DirectXTK-main/Inc/SimpleMath.h"
-
-class Game;
+#include "../App/Game.h"
 
 class GAMEFRAMEWORK_API InputDevice
 {
@@ -109,9 +109,11 @@ protected:
 		int X;
 		int Y;
 	};
-
+public:
 	void OnKeyDown(KeyboardInputEventArgs args);
 	void OnMouseMove(RawMouseEventArgs args);
+
+
 };
 
 /*

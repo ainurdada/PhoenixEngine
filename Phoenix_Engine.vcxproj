@@ -140,6 +140,7 @@
     <ClCompile Include="Math\Vec.cpp" />
     <ClCompile Include="App\Window.cpp" />
     <ClCompile Include="Games\PingPongGame.cpp" />
+    <ClCompile Include="Scripts\Player.cpp" />
     <ClCompile Include="Tools\Delegates.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="Math\Vec.h" />
     <ClInclude Include="App\Window.h" />
     <ClInclude Include="Games\PingPongGame.h" />
+    <ClInclude Include="Scripts\Player.h" />
     <ClInclude Include="Tools\Delegates.h" />
   </ItemGroup>
   <ItemGroup>

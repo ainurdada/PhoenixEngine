@@ -1,12 +1,15 @@
 #include "Time.h"
 
+
 Time::Time()
 {
+	instance = this;
 	start_time = std::chrono::steady_clock::now();
 	current_time = std::chrono::steady_clock::now();
 	previous_time = std::chrono::steady_clock::now();
 	delta_time = 0;
 }
+Time* Time::instance = nullptr;
 
 void Time::Update()
 {

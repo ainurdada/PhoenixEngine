@@ -3,6 +3,7 @@
 Game::Game()
 {
 	instance = this;
+	input = new InputDevice(this);
 }
 
 Game* Game::instance = nullptr;
@@ -18,16 +19,19 @@ void Game::Run()
 	isExitRequested = false;
 	graphics.SetUpRasterizer();
 
+	auto previousTime = std::chrono::steady_clock::now();
 	float lag = 0;
 	while (!isExitRequested)
 	{
-		this->time.Update();
-		lag += this->time.GetDeltaTime();
+		auto currentTime = std::chrono::steady_clock::now();
+		lag += std::chrono::duration_cast<std::chrono::microseconds>(currentTime - previousTime).count() / 1000000.0f;
+		previousTime = currentTime;
 
 		processInput();
 
 		while (lag >= ms_per_update)
 		{
+			this->time.Update();
 			update(this->time.GetDeltaTime());
 			lag -= ms_per_update;
 		}
@@ -73,7 +77,7 @@ void Game::render(float deltaFrame)
 	graphics.UpdateState();
 	graphics.SetUpViewPort(window.ClientWidth, window.ClientHeight);
 	graphics.UpdateRenderTarget();
-	for (GameObject& obj : gameObjects) 
+	for (GameObject& obj : gameObjects)
 	{
 		obj.Draw();
 	}
