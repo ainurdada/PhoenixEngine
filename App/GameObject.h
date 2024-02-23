@@ -14,7 +14,7 @@ struct Transform {
 class GameObject
 {
 public:
-	void AddComponent(GameComponent* component);
+	void AddComponent(GameComponent& component);
 	void Draw();
 	void Update(float deltaTime);
 	void Release();

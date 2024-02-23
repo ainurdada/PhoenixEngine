@@ -9,7 +9,7 @@ void PingPongGame::Create()
 {
 	Game::Create();
 
-	GameObject gameObj;
+	GameObject* gameObj = new GameObject;
 
 	RenderComponent* renderComponent = new RenderComponent();
 	renderComponent->shaderPath = L"./Shaders/MyVeryFirstShader.hlsl";
@@ -17,11 +17,11 @@ void PingPongGame::Create()
 	renderComponent->shader.PSMacros = Shader_Macros;
 	renderComponent->mesh = CreateMesh();
 
-	gameObj.AddComponent(renderComponent);
+	gameObj->AddComponent(*renderComponent);
 
-	gameObj.transform.position.x += 0.5f;
+	gameObj->transform.position.x += 0.5f;
 
-	InstantiateGameObject(gameObj);
+	InstantiateGameObject(*gameObj);
 }
 
 static Mesh& CreateMesh() {
