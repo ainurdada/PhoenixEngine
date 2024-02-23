@@ -4,9 +4,9 @@ class Game;
 #include "Time.h"
 #include <chrono>
 #include "Window.h"
-#include "../GraphicsEngine/GraphicsEngine.h"
-#include "../Math/MathEngine.h"
-#include "GameObject.h"
+#include "../Engine/GraphicsEngine/GraphicsEngine.h"
+#include "../Lib/Math/Math.h"
+#include "../Engine/GameplayEngine/GameObject.h"
 #include "iostream"
 #include "../InputSystem/InputDevice.h"
 

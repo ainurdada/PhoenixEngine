@@ -1,7 +1,7 @@
 #include "PingPongGame.h"
 
-#include "../GraphicsEngine/GraphicsEngine.h"
-#include "../App/GameComponents/BaseGameComponents.h"
+#include "../Engine/GraphicsEngine/GraphicsEngine.h"
+#include "../Engine/GameplayEngine/GameComponents/BaseGameComponents.h"
 #include "../Scripts/Player.h"
 
 static Mesh& CreateMesh();

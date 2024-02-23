@@ -3,15 +3,15 @@ class RenderComponent;
 
 #include "GameComponent.h"
 #include "../../GraphicsEngine/GraphicsEngine.h"
-#include "../Game.h"
-#include "../../Math/MathEngine.h"
+#include "../../../App/Game.h"
+#include "../../../Lib/Math/Math.h"
 
 class RenderComponent : public GameComponent
 {
 public:
 	struct TransformData
 	{
-		Math::Vector4 position = { 0,0,0,1 };
+		SMath::Vector4 position = { 0,0,0,1 };
 	};
 	static_assert((sizeof(TransformData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 

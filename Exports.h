@@ -2,4 +2,4 @@
 
 #define GAMEFRAMEWORK_API
 
-#include "Tools/Delegates.h"
+#include "Lib/Delegates/Delegates.h"

@@ -5,10 +5,10 @@ class GameObject;
 
 #include "vector"
 #include "GameComponents/GameComponent.h"
-#include "../Math/MathEngine.h"
+#include "../../Lib/Math/Math.h"
 
 struct Transform {
-	Math::Vector3 position = { 0.0f, 0.0f, 0.0f };
+	SMath::Vector3 position = { 0.0f, 0.0f, 0.0f };
 };
 
 class GameObject
