@@ -17,6 +17,7 @@ public:
 	void AddComponent(GameComponent* component);
 	void Draw();
 	void Update(float deltaTime);
+	void Release();
 
 	Transform transform;
 public:

@@ -83,8 +83,6 @@ void Game::render(float deltaFrame)
 void Game::ClearResources()
 {
 	for (GameObject& gameObj : gameObjects) {
-		for (GameComponent* comp : gameObj.components) {
-			comp->DestroyResources();
-		}
+		gameObj.Release();
 	}
 }

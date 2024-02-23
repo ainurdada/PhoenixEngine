@@ -19,3 +19,10 @@ void GameObject::Update(float deltaTime)
 		comp->Update();
 	}
 }
+
+void GameObject::Release()
+{
+	for (GameComponent* comp : components) {
+		comp->DestroyResources();
+	}
+}

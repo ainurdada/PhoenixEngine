@@ -3,6 +3,7 @@
 void RenderComponent::DestroyResources()
 {
 	shader.~Shader();
+	transform_buffer->Release();
 }
 
 #include "iostream"

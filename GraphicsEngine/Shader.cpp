@@ -6,6 +6,7 @@ Shader::~Shader()
 {
 	VS->Release();
 	PS->Release();
+	layout->Release();
 }
 
 HRESULT Shader::CompileVS(D3D_SHADER_MACRO macros[], ID3DInclude* include)

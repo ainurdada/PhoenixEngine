@@ -30,6 +30,5 @@ public:
 private:
 	TransformData transform_data;
 	ID3D11Buffer* transform_buffer = nullptr;
-	ID3D11Buffer* test_buffer = nullptr;
 };
 
