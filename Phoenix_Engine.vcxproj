@@ -139,7 +139,6 @@
     <ClCompile Include="GraphicsEngine\Mesh.cpp" />
     <ClCompile Include="Math\Vec.cpp" />
     <ClCompile Include="App\Window.cpp" />
-    <ClCompile Include="App\GameComponents\TransformComponent.cpp" />
     <ClCompile Include="Tools\Delegates.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,11 +157,15 @@
     <ClInclude Include="GraphicsEngine\Mesh.h" />
     <ClInclude Include="Math\Vec.h" />
     <ClInclude Include="App\Window.h" />
-    <ClInclude Include="App\GameComponents\TransformComponent.h" />
     <ClInclude Include="Tools\Delegates.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Tools\Delegates.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\MyVeryFirstShader.hlsl">
+      <FileType>Document</FileType>
+    </Text>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

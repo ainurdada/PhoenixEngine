@@ -5,7 +5,11 @@ class GameObject;
 
 #include "vector"
 #include "GameComponents/GameComponent.h"
-#include "GameComponents/TransformComponent.h"
+#include "../Math/MathEngine.h"
+
+struct Transform {
+	Math::Vector3 position = { 0.0f, 0.0f, 0.0f };
+};
 
 class GameObject
 {
@@ -14,7 +18,7 @@ public:
 	void Draw();
 	void Update(float deltaTime);
 
-	TransformComponent transform;
+	Transform transform;
 public:
 	std::vector<GameComponent*> components;
 };
