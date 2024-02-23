@@ -2,7 +2,7 @@
 
 #include "../Engine/GameplayEngine/GameComponents/GameComponent.h"
 #include "../App/Game.h"
-#include "../InputSystem/InputDevice.h"
+#include "../Engine/InputSystem/InputDevice.h"
 
 class Player : public GameComponent
 {

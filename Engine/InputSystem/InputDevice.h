@@ -3,9 +3,9 @@ class InputDevice;
 
 #include <unordered_set>
 #include "Keys.h"
-#include "../Exports.h"
-#include "../Inc/DirectXTK-main/Inc/SimpleMath.h"
-#include "../App/Game.h"
+#include "../../Exports.h"
+#include "../../Inc/DirectXTK-main/Inc/SimpleMath.h"
+#include "../../App/Game.h"
 
 class GAMEFRAMEWORK_API InputDevice
 {

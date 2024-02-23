@@ -130,7 +130,7 @@
     <ClCompile Include="App\Game.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\GameComponent.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameObject.cpp" />
-    <ClCompile Include="InputSystem\InputDevice.cpp" />
+    <ClCompile Include="Engine\InputSystem\InputDevice.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp" />
@@ -150,8 +150,8 @@
     <ClInclude Include="Engine\GraphicsEngine\Graphics.h" />
     <ClInclude Include="Engine\GraphicsEngine\GraphicsEngine.h" />
     <ClInclude Include="Exports.h" />
-    <ClInclude Include="InputSystem\InputDevice.h" />
-    <ClInclude Include="InputSystem\Keys.h" />
+    <ClInclude Include="Engine\InputSystem\InputDevice.h" />
+    <ClInclude Include="Engine\InputSystem\Keys.h" />
     <ClInclude Include="Lib\Math\Math.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\RenderComponent.h" />
     <ClInclude Include="Engine\GraphicsEngine\Shader.h" />

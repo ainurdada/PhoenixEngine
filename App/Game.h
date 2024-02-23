@@ -8,7 +8,7 @@ class Game;
 #include "../Lib/Math/Math.h"
 #include "../Engine/GameplayEngine/GameObject.h"
 #include "iostream"
-#include "../InputSystem/InputDevice.h"
+#include "../Engine/InputSystem/InputDevice.h"
 
 class Game
 {
