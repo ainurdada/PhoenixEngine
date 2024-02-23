@@ -19,9 +19,9 @@ void PingPongGame::Create()
 
 	gameObj.AddComponent(renderComponent);
 
-	InstantiateGameObject(gameObj);
-
 	gameObj.transform.position.x += 0.5f;
+
+	InstantiateGameObject(gameObj);
 }
 
 static Mesh& CreateMesh() {

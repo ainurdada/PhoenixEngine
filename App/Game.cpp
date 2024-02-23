@@ -35,6 +35,7 @@ void Game::Run()
 		graphics.backgroundColor.x = (float)((int)(this->time.GetTime() * 100) % 100) / 100.0f;
 		render(lag / ms_per_update);
 	}
+	ClearResources();
 }
 
 void Game::InstantiateGameObject(GameObject gameObject)
@@ -77,4 +78,13 @@ void Game::render(float deltaFrame)
 		obj.Draw();
 	}
 	graphics.Present();
+}
+
+void Game::ClearResources()
+{
+	for (GameObject& gameObj : gameObjects) {
+		for (GameComponent* comp : gameObj.components) {
+			comp->DestroyResources();
+		}
+	}
 }

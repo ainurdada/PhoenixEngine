@@ -29,6 +29,7 @@ private:
 	virtual void processInput();
 	virtual void update(float deltaTime);
 	virtual void render(float deltaFrame);
+	virtual void ClearResources();
 private:
 	HRESULT res;
 	bool isExitRequested = false;
