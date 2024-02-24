@@ -5,18 +5,14 @@ class Collider;
 
 class Collider : public GameComponent
 {
-public:
-
-	bool IsCollisionEnter(GameObject* out);
-
+protected:
+	virtual void DestroyResources() override;
+	virtual void Initialize() override;
 private:
 	// Inherited via GameComponent
 	void Awake() override;
 	void Start() override;
-	void Update() override;
-	void DestroyResources() override;
 	void Draw() override;
-	void Initialize() override;
 	void Reload() override;
 
 };

@@ -7,9 +7,12 @@ class Physics;
 class Physics
 {
 	friend class Collider;
+	friend class BoxCollider;
 
 public:
 	~Physics();
+
+	void Update();
 
 private:
 	void RemoveCollider(Collider* col);

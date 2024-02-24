@@ -3,10 +3,10 @@ class GameObject;
 
 #define GAMEOBJECT_H
 
-#include "vector"
-#include "GameComponents/GameComponent.h"
+#include <vector>
 #include "../../Lib/Math/Math.h"
 #include "../../App/Game.h"
+#include "GameComponents/GameComponent.h"
 
 struct Transform {
 	SMath::Vector3 position = { 0,0,0 };

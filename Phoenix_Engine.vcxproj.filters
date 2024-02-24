@@ -79,6 +79,9 @@
     <ClCompile Include="Engine\PhysicsEngine\Physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\BoxCollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -117,6 +120,7 @@
     <ClInclude Include="Engine\GameplayEngine\GameObject.hpp" />
     <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
     <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\BoxCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

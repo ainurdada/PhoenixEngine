@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Lib/Math/Math.h"
+
 #include "App/Game.h"
 #include "App/Time.h"
 
@@ -9,5 +11,3 @@
 #include "Engine/GameplayEngine/GameplayEngine.h"
 #include "Engine/InputSystem/InputSystem.h"
 #include "Engine/PhysicsEngine/PhysicsEngine.h"
-
-#include "Lib/Math/Math.h"
