@@ -140,8 +140,8 @@
     <ClCompile Include="Engine\GraphicsEngine\Mesh.cpp" />
     <ClCompile Include="Lib\Math\src\Vec.cpp" />
     <ClCompile Include="App\Window.cpp" />
-    <ClCompile Include="Games\PingPongGame.cpp" />
-    <ClCompile Include="Scripts\Player.cpp" />
+    <ClCompile Include="Games\PingPong\PingPongGame.cpp" />
+    <ClCompile Include="Games\PingPong\Scripts\Player.cpp" />
     <ClCompile Include="Lib\Delegates\Delegates.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,8 +161,8 @@
     <ClInclude Include="Engine\GraphicsEngine\Mesh.h" />
     <ClInclude Include="Lib\Math\src\Vec.h" />
     <ClInclude Include="App\Window.h" />
-    <ClInclude Include="Games\PingPongGame.h" />
-    <ClInclude Include="Scripts\Player.h" />
+    <ClInclude Include="Games\PingPong\PingPongGame.h" />
+    <ClInclude Include="Games\PingPong\Scripts\Player.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-#include "Games/PingPongGame.h"
+#include "Games/PingPong/PingPongGame.h"
 
 int main() {
 	PingPongGame game;

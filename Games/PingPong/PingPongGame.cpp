@@ -1,32 +1,27 @@
 #include "PingPongGame.h"
 
-#include "../Engine/GraphicsEngine/GraphicsEngine.h"
-#include "../Engine/GameplayEngine/GameComponents/BaseGameComponents.h"
-#include "../Scripts/Player.h"
-#include "../Basic/Shapes/Box2D.h"
+#include "../../Engine/GraphicsEngine/GraphicsEngine.h"
+#include "../../Engine/GameplayEngine/GameComponents/BaseGameComponents.h"
+#include "Scripts/Player.h"
+#include "../../Basic/Shapes/Box2D.h"
 
 void PingPongGame::Create()
 {
 	Game::Create();
 
-	GameObject* gameObj1 = new GameObject;
 
+	GameObject* gameObj1 = new GameObject;
 	RenderComponent* renderComponent = new RenderComponent();
 	renderComponent->shaderPath = L"./Shaders/MyVeryFirstShader.hlsl";
-	//D3D_SHADER_MACRO Shader_Macros[] = { "TEST", "1", "TCOLOR", "float4(0.0f, 1.0f, 0.0f, 1.0f)", nullptr, nullptr };
-	//renderComponent->shader.PSMacros = Shader_Macros;
 	renderComponent->mesh = Basic::Box2D::Create(0.05f, 0.2f);
 	gameObj1->AddComponent(*renderComponent);
-
 	Player* player = new Player;
 	gameObj1->AddComponent(*player);
-
 	gameObj1->transform.position.x = -0.9f;
 	InstantiateGameObject(*gameObj1);
 
 
 	GameObject* gameObj2 = new GameObject;
-
 	RenderComponent* renderComponent2 = new RenderComponent();
 	renderComponent2->shaderPath = L"./Shaders/MyVeryFirstShader.hlsl";
 	renderComponent2->mesh = Basic::Box2D::Create(0.05f, 0.2f);
@@ -34,7 +29,6 @@ void PingPongGame::Create()
 	Player* player2 = new Player;
 	player2->isEnemy = true;
 	gameObj2->AddComponent(*player2);
-
 	gameObj2->transform.position.x = 0.9f;
 	InstantiateGameObject(*gameObj2);
 }

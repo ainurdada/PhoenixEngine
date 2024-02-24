@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Engine/GameplayEngine/GameComponents/GameComponent.h"
-#include "../App/Game.h"
-#include "../Engine/InputSystem/InputDevice.h"
+#include "../../../Engine/GameplayEngine/GameComponents/GameComponent.h"
+#include "../../../App/Game.h"
+#include "../../../Engine/InputSystem/InputDevice.h"
 
 class Player : public GameComponent
 {

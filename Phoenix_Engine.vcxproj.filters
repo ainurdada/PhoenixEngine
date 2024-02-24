@@ -55,10 +55,10 @@
     <ClCompile Include="Lib\Math\src\Vec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Games\PingPongGame.cpp">
+    <ClCompile Include="Games\PingPong\PingPongGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Scripts\Player.cpp">
+    <ClCompile Include="Games\PingPong\Scripts\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Lib\Delegates\Delegates.cpp">
@@ -90,8 +90,8 @@
     <ClInclude Include="Engine\GraphicsEngine\Shader.h" />
     <ClInclude Include="Engine\GraphicsEngine\Mesh.h" />
     <ClInclude Include="Lib\Math\src\Vec.h" />
-    <ClInclude Include="Games\PingPongGame.h" />
-    <ClInclude Include="Scripts\Player.h" />
+    <ClInclude Include="Games\PingPong\PingPongGame.h" />
+    <ClInclude Include="Games\PingPong\Scripts\Player.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
     <ClInclude Include="Basic\Shapes\Box2D.h" />
   </ItemGroup>
