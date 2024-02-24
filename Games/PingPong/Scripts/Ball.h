@@ -1,8 +1,11 @@
 #pragma once
 #include "../PingPongGame.h"
 
+class Player;
+
 class Ball : public BehaviourScript
 {
+public:
 	// Inherited via BehaviourScript
 	void Awake() override;
 	void Update() override;
@@ -11,6 +14,9 @@ class Ball : public BehaviourScript
 	void Start() override;
 
 public:
-	RenderComponent renderComponent;
+	Player* player;
+	Player* enemy;
+
+	SMath::Vector2 velocity;
 };
 

@@ -8,8 +8,6 @@ void Player::Reload()
 {
 }
 
-#include "iostream"
-
 void Player::Update()
 {
 	if (!isEnemy) {

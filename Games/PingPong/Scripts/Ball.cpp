@@ -12,6 +12,8 @@ void Ball::Awake()
 
 void Ball::Update()
 {
+	gameObject->transform.position.x += velocity.x * Time::instance->GetDeltaTime();
+	gameObject->transform.position.y += velocity.y * Time::instance->GetDeltaTime();
 }
 
 void Ball::DestroyResources()
