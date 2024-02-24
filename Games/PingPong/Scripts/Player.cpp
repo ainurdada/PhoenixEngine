@@ -1,16 +1,6 @@
 #include "Player.h"
 
-#include "../../../App/Time.h"
-
 void Player::DestroyResources()
-{
-}
-
-void Player::Draw()
-{
-}
-
-void Player::Initialize()
 {
 }
 
