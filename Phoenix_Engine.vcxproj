@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\Game.cpp" />
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\Collider.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp" />
     <ClCompile Include="Games\PingPong\Scripts\Ball.cpp" />
     <ClCompile Include="Basic\Shapes\Box2D.cpp" />
@@ -145,14 +146,18 @@
     <ClCompile Include="Games\PingPong\PingPongGame.cpp" />
     <ClCompile Include="Games\PingPong\Scripts\Player.cpp" />
     <ClCompile Include="Lib\Delegates\Delegates.cpp" />
+    <ClCompile Include="Engine\PhysicsEngine\Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
     <ClInclude Include="Basic\Shapes\BasicShapes.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\Collider.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BaseGameComponents.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BehaviourScript.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameObject.hpp" />
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
+    <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
     <ClInclude Include="Games\PingPong\Scripts\Ball.h" />
     <ClInclude Include="Basic\Shapes\Box2D.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\GameComponent.h" />
@@ -173,6 +178,7 @@
     <ClInclude Include="Games\PingPong\Scripts\Player.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
     <ClInclude Include="PhoenixEngine.h" />
+    <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

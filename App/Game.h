@@ -5,6 +5,7 @@ class Game;
 #include <chrono>
 #include "Window.h"
 #include "../Engine/GraphicsEngine/GraphicsEngine.h"
+#include "../Engine/PhysicsEngine/Physics.h"
 #include "../Lib/Math/Math.h"
 #include "../Engine/GameplayEngine/GameObject.h"
 #include "iostream"
@@ -12,8 +13,11 @@ class Game;
 
 class Game
 {
+	friend class Collider;
+
 public:
 	Game();
+	~Game();
 public:
 	virtual void Create();
 	virtual void Run();
@@ -30,6 +34,7 @@ public:
 	Window window;
 	Graphics graphics;
 	InputDevice* input;
+	Physics* physics;
 
 private:
 	std::vector<GameObject> gameObjects;

@@ -4,6 +4,12 @@ Game::Game()
 {
 	instance = this;
 	input = new InputDevice(this);
+	physics = new Physics;
+}
+
+Game::~Game()
+{
+	physics->~Physics();
 }
 
 Game* Game::instance = nullptr;

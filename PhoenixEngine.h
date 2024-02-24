@@ -8,5 +8,6 @@
 #include "Engine/GraphicsEngine/GraphicsEngine.h"
 #include "Engine/GameplayEngine/GameplayEngine.h"
 #include "Engine/InputSystem/InputSystem.h"
+#include "Engine/PhysicsEngine/PhysicsEngine.h"
 
 #include "Lib/Math/Math.h"

@@ -3,6 +3,8 @@
 #include "Scripts/Player.h"
 #include "Scripts/Ball.h"
 
+#include "iostream"
+
 void PingPongGame::Create()
 {
 	Game::Create();
@@ -15,6 +17,8 @@ void PingPongGame::Create()
 	gameObj1->AddComponent(*renderComponent);
 	Player* player = new Player;
 	gameObj1->AddComponent(*player);
+	Collider* collider = new Collider;
+	gameObj1->AddComponent(*collider);
 	gameObj1->transform.position.x = -0.9f;
 	InstantiateGameObject(gameObj1);
 

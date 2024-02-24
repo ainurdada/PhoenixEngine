@@ -19,6 +19,10 @@ class GameObject
 	friend class Game;
 public:
 	void AddComponent(GameComponent& component);
+
+	template <typename T>
+	T* GetComponent();
+
 private:
 	void Awake();
 	void Start();
@@ -32,3 +36,4 @@ public:
 	std::vector<GameComponent*> components;
 };
 
+#include "GameObject.hpp"

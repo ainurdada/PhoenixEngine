@@ -73,6 +73,12 @@
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\Collider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PhysicsEngine\Physics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -107,6 +113,10 @@
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
     <ClInclude Include="Basic\Shapes\BasicShapes.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BaseGameComponents.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\Collider.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameObject.hpp" />
+    <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
+    <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

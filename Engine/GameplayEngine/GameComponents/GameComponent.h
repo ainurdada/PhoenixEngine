@@ -12,6 +12,7 @@ class GameComponent;
 class GameComponent
 {
 	friend class GameObject;
+
 protected:
 	virtual void Awake() = 0;
 	virtual void Start() = 0;
