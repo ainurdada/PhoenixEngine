@@ -8,6 +8,7 @@ public:
 	Player() {};
 
 	bool isEnemy = false;
+	SMath::Vector3 startPosition;
 
 	// Inherited via GameComponent
 	void DestroyResources() override;

@@ -31,8 +31,16 @@ void Player::Update()
 
 void Player::Awake()
 {
+	RenderComponent* renderComponent = new RenderComponent();
+	renderComponent->shaderPath = L"./Shaders/MyVeryFirstShader.hlsl";
+	renderComponent->mesh = Basic::Box2D::Create(0.05f, 0.2f);
+	gameObject->AddComponent(*renderComponent);
+	BoxCollider* collider = new BoxCollider;
+	collider->size = { 0.05, 0.2f };
+	gameObject->AddComponent(*collider);
 }
 
 void Player::Start()
 {
+	gameObject->transform.position = startPosition;
 }

@@ -18,5 +18,6 @@ public:
 	Player* enemy;
 
 	SMath::Vector2 velocity;
+	BoxCollider* col;
 };
 
