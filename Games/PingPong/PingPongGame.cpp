@@ -36,6 +36,6 @@ void PingPongGame::Create()
 	ball->AddComponent(*ballScript);
 	ballScript->player = player;
 	ballScript->enemy = player2;
-	ballScript->velocity = { 0.5f,0.0f };
+	ballScript->velocity = { 0.0f,0.5f };
 	InstantiateGameObject(ball);
 }

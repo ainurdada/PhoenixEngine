@@ -14,6 +14,13 @@ void Ball::Update()
 {
 	gameObject->transform.position.x += velocity.x * Time::instance->GetDeltaTime();
 	gameObject->transform.position.y += velocity.y * Time::instance->GetDeltaTime();
+
+	if (gameObject->transform.position.y <= -0.975f) {
+		velocity.y = -velocity.y;
+	}
+	if (gameObject->transform.position.y >= 0.975f) {
+		velocity.y = -velocity.y;
+	}
 }
 
 void Ball::DestroyResources()
