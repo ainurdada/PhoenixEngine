@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\Game.cpp" />
+    <ClCompile Include="Basic\Shapes\Box2D.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\GameComponent.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameObject.cpp" />
     <ClCompile Include="Engine\InputSystem\InputDevice.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
+    <ClInclude Include="Basic\Shapes\Box2D.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\GameComponent.h" />
     <ClInclude Include="Engine\GameplayEngine\GameObject.h" />
     <ClInclude Include="Engine\GraphicsEngine\Graphics.h" />

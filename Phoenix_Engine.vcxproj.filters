@@ -28,37 +28,43 @@
     <ClCompile Include="App\Time.cpp">
       <Filter>App</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicsEngine\Graphics.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsEngine\Shader.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="App\GameComponents\GameComponent.cpp">
-      <Filter>GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsEngine\Mesh.cpp">
-      <Filter>GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Math\Vec.cpp">
-      <Filter>Math</Filter>
-    </ClCompile>
     <ClCompile Include="App\Game.cpp">
       <Filter>App</Filter>
     </ClCompile>
-    <ClCompile Include="App\GameComponents\RenderComponent.cpp">
-      <Filter>GameComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="App\GameObject.cpp">
-      <Filter>App</Filter>
-    </ClCompile>
-    <ClCompile Include="App\GameComponents\TransformComponent.cpp">
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\GameComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputSystem\InputDevice.cpp">
+    <ClCompile Include="Engine\GameplayEngine\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tools\Delegates.cpp">
+    <ClCompile Include="Engine\InputSystem\InputDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GraphicsEngine\Shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GraphicsEngine\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lib\Math\src\Vec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\PingPongGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lib\Delegates\Delegates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Shapes\Box2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -69,43 +75,30 @@
     <ClInclude Include="App\Time.h">
       <Filter>App</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicsEngine\Graphics.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsEngine\Shader.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsEngine\GraphicsEngine.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="App\GameComponents\GameComponent.h">
-      <Filter>GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicsEngine\Mesh.h">
-      <Filter>GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\Vec.h">
-      <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\MathEngine.h">
-      <Filter>Math</Filter>
-    </ClInclude>
     <ClInclude Include="App\Game.h">
       <Filter>App</Filter>
     </ClInclude>
-    <ClInclude Include="App\GameComponents\RenderComponent.h">
-      <Filter>GameComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="App\GameObject.h">
-      <Filter>App</Filter>
-    </ClInclude>
-    <ClInclude Include="App\GameComponents\TransformComponent.h" />
-    <ClInclude Include="InputSystem\InputDevice.h" />
-    <ClInclude Include="InputSystem\Keys.h" />
     <ClInclude Include="Exports.h" />
-    <ClInclude Include="Tools\Delegates.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\GameComponent.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameObject.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Graphics.h" />
+    <ClInclude Include="Engine\GraphicsEngine\GraphicsEngine.h" />
+    <ClInclude Include="Engine\InputSystem\InputDevice.h" />
+    <ClInclude Include="Engine\InputSystem\Keys.h" />
+    <ClInclude Include="Lib\Math\Math.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\RenderComponent.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Shader.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Mesh.h" />
+    <ClInclude Include="Lib\Math\src\Vec.h" />
+    <ClInclude Include="Games\PingPongGame.h" />
+    <ClInclude Include="Scripts\Player.h" />
+    <ClInclude Include="Lib\Delegates\Delegates.h" />
+    <ClInclude Include="Basic\Shapes\Box2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <Natvis Include="Tools\Delegates.natvis" />
+    <Natvis Include="Lib\Delegates\Delegates.natvis" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\MyVeryFirstShader.hlsl" />
   </ItemGroup>
 </Project>
