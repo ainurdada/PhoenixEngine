@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
     <ClInclude Include="Basic\Shapes\BasicShapes.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\BaseGameComponents.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BehaviourScript.h" />
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />

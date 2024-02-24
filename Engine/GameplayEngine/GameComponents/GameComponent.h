@@ -21,6 +21,9 @@ protected:
 	virtual void Initialize() = 0;
 	virtual void Reload() = 0;
 public:
+	/// <summary>
+	/// The game object that this component is linked to
+	/// </summary>
 	GameObject* gameObject = nullptr;
 };
 #endif 

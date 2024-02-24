@@ -106,6 +106,7 @@
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
     <ClInclude Include="Basic\Shapes\BasicShapes.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\BaseGameComponents.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />
