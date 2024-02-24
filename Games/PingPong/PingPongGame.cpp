@@ -27,10 +27,28 @@ void PingPongGame::Create()
 	ballScript->enemy = player2;
 	ballScript->velocity = { 0.5f,0.1f };
 	InstantiateGameObject(ball);
+
+	this->player1 = player;
+	this->player2 = player2;
+	this->ball = ballScript;
 }
 
 void initPlayer(Player* player) {
 	GameObject* gameObj1 = new GameObject;
 	gameObj1->AddComponent(*player);
 	Game::instance->InstantiateGameObject(gameObj1);
+}
+
+void PingPongGame::Restart()
+{
+	player1->gameObject->transform.position.y = 0;
+	player2->gameObject->transform.position.y = 0;
+	ball->gameObject->transform.position.x = 0;
+	ball->gameObject->transform.position.y = 0;
+	if (std::signbit(ball->velocity.x)) {
+		ball->velocity.x = -0.5f;
+	}
+	else {
+		ball->velocity.x = 0.5f;
+	}
 }

@@ -15,6 +15,16 @@ void Ball::Awake()
 	gameObject->AddComponent(*ballCollider);
 }
 
+
+
+static void printGameScore() {
+	std::system("cls");
+	std::cout <<
+		((PingPongGame*)PingPongGame::instance)->player1->score
+		<< " - " <<
+		((PingPongGame*)PingPongGame::instance)->player2->score
+		<< std::endl;
+}
 void Ball::Update()
 {
 	gameObject->transform.position.x += velocity.x * Time::instance->GetDeltaTime();
@@ -32,10 +42,24 @@ void Ball::Update()
 		bool dirSign = std::signbit(res->gameObject->transform.position.x - gameObject->transform.position.x);
 		bool velSign = std::signbit(velocity.x);
 		if (dirSign == velSign) {
-			velocity.x = -velocity.x;
+			velocity.x = -1.1f * velocity.x;
 		}
 	}
+
+	if (gameObject->transform.position.x < -1)
+	{
+		((PingPongGame*)PingPongGame::instance)->player2->score++;
+		printGameScore();
+		((PingPongGame*)PingPongGame::instance)->Restart();
+	}
+	if (gameObject->transform.position.x > 1) 
+	{
+		((PingPongGame*)PingPongGame::instance)->player1->score++;
+		printGameScore();
+		((PingPongGame*)PingPongGame::instance)->Restart();
+	}
 }
+
 
 void Ball::DestroyResources()
 {

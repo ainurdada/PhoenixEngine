@@ -7,8 +7,9 @@ class Player : public BehaviourScript
 public:
 	Player() {};
 
-	bool isEnemy = false;
 	SMath::Vector3 startPosition;
+	unsigned score;
+	bool isEnemy = false;
 
 	// Inherited via GameComponent
 	void DestroyResources() override;
