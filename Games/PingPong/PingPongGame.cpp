@@ -1,9 +1,7 @@
 #include "PingPongGame.h"
 
-#include "../../Engine/GraphicsEngine/GraphicsEngine.h"
-#include "../../Engine/GameplayEngine/GameComponents/BaseGameComponents.h"
 #include "Scripts/Player.h"
-#include "../../Basic/Shapes/Box2D.h"
+#include "Scripts/Ball.h"
 
 void PingPongGame::Create()
 {
@@ -18,7 +16,7 @@ void PingPongGame::Create()
 	Player* player = new Player;
 	gameObj1->AddComponent(*player);
 	gameObj1->transform.position.x = -0.9f;
-	InstantiateGameObject(*gameObj1);
+	InstantiateGameObject(gameObj1);
 
 
 	GameObject* gameObj2 = new GameObject;
@@ -30,5 +28,11 @@ void PingPongGame::Create()
 	player2->isEnemy = true;
 	gameObj2->AddComponent(*player2);
 	gameObj2->transform.position.x = 0.9f;
-	InstantiateGameObject(*gameObj2);
+	InstantiateGameObject(gameObj2);
+
+
+	GameObject* ball = new GameObject;;
+	Ball* ballScript = new Ball;
+	ball->AddComponent(*ballScript);
+	InstantiateGameObject(ball);
 }

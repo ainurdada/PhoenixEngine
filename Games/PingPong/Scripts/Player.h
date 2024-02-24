@@ -1,10 +1,8 @@
 #pragma once
 
-#include "../../../Engine/GameplayEngine/GameComponents/GameComponent.h"
-#include "../../../App/Game.h"
-#include "../../../Engine/InputSystem/InputDevice.h"
+#include "../PingPongGame.h"
 
-class Player : public GameComponent
+class Player : public BehaviourScript
 {
 public:
 	Player() {};
@@ -17,5 +15,7 @@ public:
 	void Initialize() override;
 	void Reload() override;
 	void Update() override;
+	void Awake() override;
+	void Start() override;
 };
 

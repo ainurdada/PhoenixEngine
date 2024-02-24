@@ -20,9 +20,12 @@ class GameObject
 public:
 	void AddComponent(GameComponent& component);
 private:
+	void Awake();
+	void Start();
 	void Draw();
 	void Update(float deltaTime);
 	void Release();
+	void Initialize();
 
 public:
 	Transform transform;

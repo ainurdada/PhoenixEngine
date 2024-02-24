@@ -67,6 +67,12 @@
     <ClCompile Include="Basic\Shapes\Box2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Games\PingPong\Scripts\Ball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -94,6 +100,12 @@
     <ClInclude Include="Games\PingPong\Scripts\Player.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
     <ClInclude Include="Basic\Shapes\Box2D.h" />
+    <ClInclude Include="Games\PingPong\Scripts\Ball.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\BehaviourScript.h" />
+    <ClInclude Include="PhoenixEngine.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
+    <ClInclude Include="Engine\InputSystem\InputSystem.h" />
+    <ClInclude Include="Basic\Shapes\BasicShapes.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

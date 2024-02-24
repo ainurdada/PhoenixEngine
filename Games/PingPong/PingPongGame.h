@@ -1,5 +1,6 @@
 #pragma once
-#include "../../App/Game.h"
+#include "../../PhoenixEngine.h"
+
 class PingPongGame : public Game
 {
 public:

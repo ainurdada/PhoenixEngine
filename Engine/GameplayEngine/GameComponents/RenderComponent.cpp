@@ -60,3 +60,11 @@ void RenderComponent::Reload()
 void RenderComponent::Update()
 {
 }
+
+void RenderComponent::Awake()
+{
+}
+
+void RenderComponent::Start()
+{
+}

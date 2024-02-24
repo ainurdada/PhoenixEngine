@@ -17,10 +17,13 @@ public:
 public:
 	virtual void Create();
 	virtual void Run();
-	virtual void InstantiateGameObject(GameObject gameObject);
+	virtual void InstantiateGameObject(GameObject* gameObject);
 	virtual void Quit();
 public:
 	static Game* instance;
+
+	bool isRun = false;
+
 	Time time;
 	LPCWSTR name = L"My game";
 	Vec2Int size = Vec2Int(800, 800);

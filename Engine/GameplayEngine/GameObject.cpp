@@ -6,6 +6,20 @@ void GameObject::AddComponent(GameComponent& component)
 	components.push_back(&component);
 }
 
+void GameObject::Awake()
+{
+	for (GameComponent* comp : components) {
+		comp->Awake();
+	}
+}
+
+void GameObject::Start()
+{
+	for (GameComponent* comp : components) {
+		comp->Start();
+	}
+}
+
 void GameObject::Draw()
 {
 	for (GameComponent* comp : components) {
@@ -24,5 +38,12 @@ void GameObject::Release()
 {
 	for (GameComponent* comp : components) {
 		comp->DestroyResources();
+	}
+}
+
+void GameObject::Initialize()
+{
+	for (GameComponent* comp : components) {
+		comp->Initialize();
 	}
 }

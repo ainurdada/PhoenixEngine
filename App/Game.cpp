@@ -21,6 +21,11 @@ void Game::Run()
 
 	auto previousTime = std::chrono::steady_clock::now();
 	float lag = 0;
+	for (GameObject& gameObj : gameObjects) {
+		gameObj.Start();
+	}
+
+	isRun = true;
 	while (!isExitRequested)
 	{
 		auto currentTime = std::chrono::steady_clock::now();
@@ -38,15 +43,18 @@ void Game::Run()
 
 		render(lag / ms_per_update);
 	}
+	isRun = false;
 	ClearResources();
 }
 
-void Game::InstantiateGameObject(GameObject gameObject)
+void Game::InstantiateGameObject(GameObject* gameObject)
 {
-	for (GameComponent* comp : gameObject.components) {
-		comp->Initialize();
+	gameObject->Awake();
+	gameObject->Initialize();
+	if (isRun) {
+		gameObject->Start();
 	}
-	gameObjects.push_back(gameObject);
+	gameObjects.push_back(*gameObject);
 }
 
 void Game::Quit()

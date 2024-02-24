@@ -40,3 +40,11 @@ void Player::Update()
 		}
 	}
 }
+
+void Player::Awake()
+{
+}
+
+void Player::Start()
+{
+}
