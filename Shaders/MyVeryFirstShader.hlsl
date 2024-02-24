@@ -17,14 +17,14 @@ struct TransformData
 
 cbuffer TransformBuffer : register(b0)
 {
-    float4 position;
+    TransformData transform;
 }
 
 PS_IN VSMain( VS_IN input)
 {
 	PS_IN output = (PS_IN)0;
 	
-    output.pos = float4(input.pos.xyz + position.xyz, 1.0f);
+    output.pos = float4(input.pos.xyz + transform.position.xyz, 1.0f);
 	output.col = input.col;
 	
 	return output;
