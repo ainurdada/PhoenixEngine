@@ -20,6 +20,7 @@ bool BoxCollider::IsCollided(BoxCollider** out)
 
 void BoxCollider::Update()
 {
+	velocity = (gameObject->transform.position - oBox.Center) / Game::instance->time.GetDeltaTime();
 	oBox.Center = gameObject->transform.position;
 }
 

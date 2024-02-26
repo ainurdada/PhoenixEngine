@@ -9,6 +9,7 @@ public:
 
 public:
 	SMath::Vector3 size;
+	SMath::Vector3 velocity;
 private:
 	DirectX::BoundingOrientedBox oBox;
 

@@ -19,5 +19,11 @@ public:
 
 	SMath::Vector2 velocity;
 	BoxCollider* col;
+
+private:
+	float speed_increase = 1.1f;
+	float max_speed = 2;
+	float friction = 0.5f;
+	float spread = 0.9f;
 };
 

@@ -42,7 +42,21 @@ void Ball::Update()
 		bool dirSign = std::signbit(res->gameObject->transform.position.x - gameObject->transform.position.x);
 		bool velSign = std::signbit(velocity.x);
 		if (dirSign == velSign) {
-			velocity.x = -1.1f * velocity.x;
+			float distY = gameObject->transform.position.y - res->gameObject->transform.position.y;
+			float signY = std::signbit(velocity.y);
+			float reflection = (0.5f * res->size.y + signY * distY) / res->size.y;
+			float currentSpeed = velocity.Length();
+			SMath::Vector2 up = { 0,1 };
+
+			velocity.x = -1.0f * velocity.x;
+			velocity = velocity + up * distY * spread + reflection * res->velocity * friction;
+			velocity.Normalize();
+			velocity = velocity * currentSpeed * speed_increase;
+
+			if (velocity.Length() > max_speed) {
+				velocity.Normalize();
+				velocity = velocity * max_speed;
+			}
 		}
 	}
 
