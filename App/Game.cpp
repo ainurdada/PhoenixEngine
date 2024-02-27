@@ -27,7 +27,8 @@ void Game::Run()
 
 	auto previousTime = std::chrono::steady_clock::now();
 	float lag = 0;
-	for (GameObject& gameObj : gameObjects) {
+	for (GameObject& gameObj : gameObjects)
+	{
 		gameObj.Start();
 	}
 
@@ -40,14 +41,15 @@ void Game::Run()
 
 		processInput();
 
-		while (lag >= ms_per_update)
+		while (lag >= time.GetFixedDeltaTime())
 		{
-			this->time.Update();
-			update(this->time.GetDeltaTime());
-			lag -= ms_per_update;
+			fixedUpdate();
+			lag -= time.GetFixedDeltaTime();
 		}
+		this->time.Update();
+		update(this->time.GetDeltaTime());
 
-		render(lag / ms_per_update);
+		render(lag / time.GetFixedDeltaTime());
 	}
 	isRun = false;
 	ClearResources();
@@ -57,7 +59,8 @@ void Game::InstantiateGameObject(GameObject* gameObject)
 {
 	gameObject->Awake();
 	gameObject->Initialize();
-	if (isRun) {
+	if (isRun)
+	{
 		gameObject->Start();
 	}
 	gameObjects.push_back(*gameObject);
@@ -72,21 +75,31 @@ static MSG msg = {};
 void Game::processInput()
 {
 	// Handle the windows messages.
-	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 	}
 
 	// If windows signals to end the application then exit out.
-	if (msg.message == WM_QUIT) {
+	if (msg.message == WM_QUIT)
+	{
 		isExitRequested = true;
 	}
 }
 
 void Game::update(float deltaTime)
 {
-	for (GameObject& gameObj : gameObjects) {
+	for (GameObject& gameObj : gameObjects)
+	{
 		gameObj.Update(deltaTime);
+	}
+}
+void Game::fixedUpdate()
+{
+	for (GameObject& gameObj : gameObjects)
+	{
+		gameObj.FixedUpdate();
 	}
 }
 
@@ -104,7 +117,9 @@ void Game::render(float deltaFrame)
 
 void Game::ClearResources()
 {
-	for (GameObject& gameObj : gameObjects) {
+	for (GameObject& gameObj : gameObjects)
+	{
 		gameObj.Release();
 	}
 }
+

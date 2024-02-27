@@ -14,6 +14,5 @@ private:
 	void Start() override;
 	void Draw() override;
 	void Reload() override;
-
 };
 

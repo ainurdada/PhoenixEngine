@@ -18,11 +18,6 @@ void Time::Update()
 	previous_time = current_time;
 }
 
-float Time::GetDeltaTime() const
-{
-	return delta_time;
-}
-
 float Time::GetTime() const
 {
 	return std::chrono::duration_cast<std::chrono::milliseconds>(current_time - start_time).count() / 1000.0f;

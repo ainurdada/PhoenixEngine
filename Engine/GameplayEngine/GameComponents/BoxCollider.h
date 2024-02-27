@@ -16,6 +16,7 @@ private:
 private:
 	// Inherited via Collider
 	void Update() override;
+	void FixedUpdate() override;
 	void DestroyResources() override;
 	void Initialize() override;
 };

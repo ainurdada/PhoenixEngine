@@ -33,6 +33,13 @@ void GameObject::Update(float deltaTime)
 		comp->Update();
 	}
 }
+void GameObject::FixedUpdate()
+{
+	for (GameComponent* comp : components)
+	{
+		comp->FixedUpdate();
+	}
+}
 
 void GameObject::Release()
 {
@@ -47,3 +54,4 @@ void GameObject::Initialize()
 		comp->Initialize();
 	}
 }
+

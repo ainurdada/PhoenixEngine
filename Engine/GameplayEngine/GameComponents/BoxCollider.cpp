@@ -24,6 +24,10 @@ void BoxCollider::Update()
 	oBox.Center = gameObject->transform.position;
 }
 
+void BoxCollider::FixedUpdate()
+{
+}
+
 void BoxCollider::DestroyResources()
 {
 	Collider::DestroyResources();

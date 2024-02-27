@@ -68,3 +68,7 @@ void RenderComponent::Awake()
 void RenderComponent::Start()
 {
 }
+
+void RenderComponent::FixedUpdate()
+{
+}

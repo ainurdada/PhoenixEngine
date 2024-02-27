@@ -23,6 +23,7 @@ public:
 	void Initialize() override;
 	void Reload() override;
 	void Update() override;
+	void FixedUpdate() override;
 	void Awake() override;
 	void Start() override;
 public:
@@ -32,6 +33,5 @@ public:
 private:
 	TransformData transform_data;
 	ID3D11Buffer* transform_buffer = nullptr;
-
 };
 

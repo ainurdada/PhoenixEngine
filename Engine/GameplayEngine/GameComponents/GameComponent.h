@@ -17,6 +17,7 @@ protected:
 	virtual void Awake() = 0;
 	virtual void Start() = 0;
 	virtual void Update() = 0;
+	virtual void FixedUpdate() = 0;
 	virtual void DestroyResources() = 0;
 	virtual void Draw() = 0;
 	virtual void Initialize() = 0;

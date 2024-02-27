@@ -40,11 +40,11 @@ private:
 	std::vector<GameObject> gameObjects;
 	virtual void processInput();
 	virtual void update(float deltaTime);
+	virtual void fixedUpdate();
 	virtual void render(float deltaFrame);
 	virtual void ClearResources();
 private:
 	HRESULT res;
 	bool isExitRequested = false;
-	float ms_per_update = 0.01f;
 };
 

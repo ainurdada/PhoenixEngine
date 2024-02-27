@@ -28,6 +28,7 @@ private:
 	void Start();
 	void Draw();
 	void Update(float deltaTime);
+	void FixedUpdate();
 	void Release();
 	void Initialize();
 
