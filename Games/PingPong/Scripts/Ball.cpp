@@ -6,11 +6,11 @@ void Ball::Awake()
 {
 	RenderComponent* rend = new RenderComponent;
 	rend->shaderPath = L"./Shaders/MyVeryFirstShader.hlsl";
-	rend->mesh = Basic::Box2D::Create(0.05f, 0.05f);
+	rend->mesh = Basic::Box2D::Create(size.x, size.y);
 	gameObject->AddComponent(*rend);
 
 	BoxCollider* ballCollider = new BoxCollider;
-	ballCollider->size = { 0.05f, 0.05f };
+	ballCollider->size = { size.x, size.y };
 	col = ballCollider;
 	gameObject->AddComponent(*ballCollider);
 }
@@ -30,10 +30,11 @@ void Ball::Update()
 	gameObject->transform.position.x += velocity.x * Time::instance->GetDeltaTime();
 	gameObject->transform.position.y += velocity.y * Time::instance->GetDeltaTime();
 
-	if (gameObject->transform.position.y <= -0.975f) {
+	if (gameObject->transform.position.y <= (- 1 + size.y / 2) && velocity.y < 0) {
 		velocity.y = -velocity.y;
 	}
-	if (gameObject->transform.position.y >= 0.975f) {
+	if (gameObject->transform.position.y >= (1 - size.y / 2) && velocity.y > 0)
+	{
 		velocity.y = -velocity.y;
 	}
 

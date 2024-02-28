@@ -26,6 +26,7 @@ void PingPongGame::Create()
 	ballScript->player = player;
 	ballScript->enemy = player2;
 	ballScript->velocity = { 0.5f,0.0f };
+	ballScript->size = { 0.05f, 0.05f };
 	InstantiateGameObject(ball);
 
 	this->player1 = player;
@@ -36,6 +37,7 @@ void PingPongGame::Create()
 void initPlayer(Player* player) {
 	GameObject* gameObj1 = new GameObject;
 	gameObj1->AddComponent(*player);
+	player->size = { 0.05f, 0.2f };
 	Game::instance->InstantiateGameObject(gameObj1);
 }
 

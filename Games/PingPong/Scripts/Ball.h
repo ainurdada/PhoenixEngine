@@ -17,8 +17,9 @@ public:
 	Player* player;
 	Player* enemy;
 
-	SMath::Vector2 velocity;
+	SMath::Vector2 velocity = { .0f, .0f };
 	BoxCollider* col;
+	SMath::Vector2 size = { 0.05f, 0.05f };
 
 private:
 	float speed_increase = 1.1f;
