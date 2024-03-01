@@ -4,15 +4,11 @@ class GameObject;
 #define GAMEOBJECT_H
 
 #include <vector>
-#include "../../Lib/Math/Math.h"
 #include "../../App/Game.h"
 #include "GameComponents/GameComponent.h"
+#include "Transform.h"
 
-struct Transform {
-	SMath::Vector3 position = { 0,0,0 };
-	//SMath::Vector3 scale = { 1,1,1 };
-	//SMath::Quaternion rotation = SMath::Quaternion::Identity;
-};
+
 
 class GameObject
 {

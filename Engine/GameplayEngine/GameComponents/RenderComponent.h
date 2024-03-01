@@ -11,7 +11,7 @@ class RenderComponent : public GameComponent
 public:
 	struct TransformData
 	{
-		SMath::Vector4 position = { 0,0,0,1 };
+		SMath::Matrix transformMatrix;
 	};
 	static_assert((sizeof(TransformData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 

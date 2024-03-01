@@ -12,19 +12,19 @@ struct PS_IN
 
 struct TransformData
 {
-    float4 position;
+    float4x4 transformMatrix;
 };
 
 cbuffer TransformBuffer : register(b0)
 {
-    TransformData transform;
+    float4x4 transformMatrix;
 }
 
 PS_IN VSMain( VS_IN input)
 {
 	PS_IN output = (PS_IN)0;
 	
-    output.pos = float4(input.pos.xyz + transform.position.xyz, 1.0f);
+    output.pos = input.pos + transformMatrix._m30_m31_m32_m33;
 	output.col = input.col;
 	
 	return output;

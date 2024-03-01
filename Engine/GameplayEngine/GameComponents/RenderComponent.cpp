@@ -9,9 +9,7 @@ void RenderComponent::DestroyResources()
 #include "iostream"
 void RenderComponent::Draw()
 {
-	transform_data.position.x = gameObject->transform.position.x;
-	transform_data.position.y = gameObject->transform.position.y;
-	transform_data.position.z = gameObject->transform.position.z;
+	transform_data.transformMatrix = gameObject->transform.LocalToWorld();
 	D3D11_MAPPED_SUBRESOURCE res1 = {};
 	Game::instance->graphics.GetContext()->Map(transform_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &res1);
 	auto dataPtr = (TransformData*)(res1.pData);
