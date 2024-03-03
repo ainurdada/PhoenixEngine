@@ -132,10 +132,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\Game.cpp" />
+    <ClCompile Include="Basic\Shapes\Box.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BoxCollider.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\Collider.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp" />
     <ClCompile Include="Engine\GameplayEngine\Transform.cpp" />
+    <ClCompile Include="Games\3DScene\Scene3DTest.cpp" />
+    <ClCompile Include="Games\3DScene\Scripts\TestBox.cpp" />
     <ClCompile Include="Games\PingPong\Scripts\Ball.cpp" />
     <ClCompile Include="Basic\Shapes\Box2D.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\GameComponent.cpp" />
@@ -157,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
     <ClInclude Include="Basic\Shapes\BasicShapes.h" />
+    <ClInclude Include="Basic\Shapes\Box.h" />
     <ClInclude Include="Engine\GameplayEngine\Camera.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BoxCollider.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\Collider.h" />
@@ -167,6 +171,8 @@
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
+    <ClInclude Include="Games\3DScene\Scene3DTest.h" />
+    <ClInclude Include="Games\3DScene\Scripts\TestBox.h" />
     <ClInclude Include="Games\PingPong\Scripts\Ball.h" />
     <ClInclude Include="Basic\Shapes\Box2D.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\GameComponent.h" />

@@ -6,6 +6,6 @@ namespace Basic {
 	class Box
 	{
 	public:
-		static Mesh& Create(GMath::Vector3& extents, GMath::Vector3& color);
+		static Mesh& Create(SMath::Vector3& extents, SMath::Vector3& color);
 	};
 }

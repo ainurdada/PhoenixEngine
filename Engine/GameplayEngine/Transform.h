@@ -18,5 +18,11 @@ public:
 	SMath::Matrix LocalToWorld();
 
 private:
+	///// SRT
+	SMath::Vector3 m_local_scale;
+	SMath::Quaternion m_local_rotation;
 	SMath::Vector3 m_local_position;
+	/////
+
+
 };

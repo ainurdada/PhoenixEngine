@@ -1,7 +1,7 @@
 #include "Box.h"
 #include <vector>
 #include <iostream>
-using namespace GMath;
+using namespace SMath;
 namespace Basic {
 	Mesh& Box::Create(Vector3& extents, Vector3& color)
 	{
