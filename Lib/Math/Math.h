@@ -2,7 +2,9 @@
 
 #include "src/Vec.h"
 
-#include "../../Inc/DirectXTK-main/Inc/SimpleMath.h"
+//#include "../../Inc/DirectXTK-main/Inc/SimpleMath.h"
+
+#include <SimpleMath.h>
 
 namespace SMath = DirectX::SimpleMath;
 
