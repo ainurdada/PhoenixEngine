@@ -11,10 +11,10 @@ void RenderComponent::Draw()
 {
 	transform_data.transformMatrix = gameObject->transform.LocalToWorld();
 	transform_data.transformMatrix =
-		 (
-			 gameObject->transform.LocalToWorld()
-		 * Game::instance->mainCamera->transform.LocalToWorld().Invert()
-		 * Game::instance->mainCamera->ViewMatrix()
+		(
+			gameObject->transform.LocalToWorld()
+			* Game::instance->mainCamera->transform.LocalToWorld().Invert()
+			//* Game::instance->mainCamera->ProjectionMatrix()
 		);
 	D3D11_MAPPED_SUBRESOURCE res1 = {};
 	Game::instance->graphics.GetContext()->Map(transform_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &res1);
@@ -37,7 +37,8 @@ void RenderComponent::Initialize()
 	shader.pathToShader = shaderPath;
 	shader.device = Game::instance->graphics.GetDevice();
 	res = this->shader.CompileVS(shader.VSMacros, shader.VSInclude);
-	if (FAILED(res)) {
+	if (FAILED(res))
+	{
 		Game::instance->window.ShowMessageBox(this->shader.pathToShader, L"Missing Shader File");
 	}
 	res = this->shader.CompilePS(shader.PSMacros, shader.PSInclude);
