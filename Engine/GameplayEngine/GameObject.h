@@ -4,7 +4,6 @@ class GameObject;
 #define GAMEOBJECT_H
 
 #include <vector>
-#include "../../App/Game.h"
 #include "GameComponents/GameComponent.h"
 #include "Transform.h"
 
@@ -14,6 +13,8 @@ class GameObject
 {
 	friend class Game;
 public:
+	GameObject() {};
+
 	void AddComponent(GameComponent& component);
 
 	template <typename T>
@@ -30,7 +31,7 @@ private:
 
 public:
 	Transform transform;
-	std::vector<GameComponent*> components;
+	std::vector<GameComponent*> components = {};
 };
 
 #include "GameObject.hpp"

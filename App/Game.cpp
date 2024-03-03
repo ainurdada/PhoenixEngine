@@ -16,12 +16,15 @@ Game* Game::instance = nullptr;
 
 void Game::Create()
 {
+	mainCamera = new Camera;
 	window.Create(name, size.x, size.y);
 	graphics.Init(window.GetHWND(), window.ClientWidth, window.ClientHeight);
 }
 
 void Game::Run()
 {
+	InstantiateGameObject(mainCamera);
+
 	isExitRequested = false;
 	graphics.SetUpRasterizer();
 

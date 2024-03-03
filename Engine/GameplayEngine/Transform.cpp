@@ -38,10 +38,6 @@ SMath::Matrix Transform::LocalToWorld()
 	m = Matrix::CreateScale(m_local_scale);
 	m *= Matrix::CreateFromQuaternion(m_local_rotation);
 	m *= Matrix::CreateTranslation(m_local_position);
-	/*Matrix::CreateWorld(
-		m_local_position,
-		
-	)*/
 	return m;
 }
 
@@ -49,6 +45,11 @@ void Transform::RotateAroundAxis(const SMath::Vector3& axis, float angle)
 {
 	Quaternion q = Quaternion::CreateFromAxisAngle(axis, angle);
 	m_local_rotation *= q;
+}
+
+void Transform::Move(const SMath::Vector3& dir)
+{
+	m_local_position += dir;
 }
 
 Vector3 Transform::Right() const

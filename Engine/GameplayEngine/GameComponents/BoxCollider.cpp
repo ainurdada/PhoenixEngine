@@ -1,4 +1,5 @@
 #include "BoxCollider.h"
+#include "../../App/Game.h"
 
 bool BoxCollider::IsCollided(BoxCollider** out)
 {

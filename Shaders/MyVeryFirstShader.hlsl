@@ -25,6 +25,9 @@ PS_IN VSMain( VS_IN input)
 	PS_IN output = (PS_IN)0;
 	
     output.pos = mul(input.pos, transformMatrix);
+    output.pos.x = output.pos.x / output.pos.w;
+    output.pos.y = output.pos.y / output.pos.w;
+    output.pos.z = output.pos.z / output.pos.w;
 	output.col = input.col;
 	
 	return output;

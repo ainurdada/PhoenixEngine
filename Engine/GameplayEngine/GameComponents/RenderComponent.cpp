@@ -10,6 +10,12 @@ void RenderComponent::DestroyResources()
 void RenderComponent::Draw()
 {
 	transform_data.transformMatrix = gameObject->transform.LocalToWorld();
+	transform_data.transformMatrix =
+		 (
+			 gameObject->transform.LocalToWorld()
+		 * Game::instance->mainCamera->transform.LocalToWorld().Invert()
+		 * Game::instance->mainCamera->ViewMatrix()
+		);
 	D3D11_MAPPED_SUBRESOURCE res1 = {};
 	Game::instance->graphics.GetContext()->Map(transform_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &res1);
 	auto dataPtr = (TransformData*)(res1.pData);

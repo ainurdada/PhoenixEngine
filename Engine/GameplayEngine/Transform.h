@@ -23,6 +23,7 @@ public:
 	/// </summary>
 	/// <param name="angle">in radians</param>
 	void RotateAroundAxis(const SMath::Vector3& axis, float angle);
+	void Move(const SMath::Vector3& dir);
 
 	SMath::Vector3 Right() const;
 	SMath::Vector3 Up() const;

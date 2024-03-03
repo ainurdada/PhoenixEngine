@@ -1,5 +1,6 @@
 #include "Scene3DTest.h"
 #include "Scripts/TestBox.h"
+#include "Scripts/CameraControl.h"
 
 void Scene3DTest::Create()
 {
@@ -8,6 +9,9 @@ void Scene3DTest::Create()
 	GameObject* gameObj = new GameObject;
 	gameObj->AddComponent(*box);
 	InstantiateGameObject(gameObj);
+
+	CameraControl* camera = new CameraControl;
+	Game::instance->mainCamera->AddComponent(*camera);
 }
 
 void Scene3DTest::Run()

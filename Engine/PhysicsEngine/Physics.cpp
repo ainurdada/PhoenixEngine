@@ -11,7 +11,7 @@ void Physics::Update()
 	for (Collider* col : collidersInGame) {
 		BoxCollider* res;
 		if (((BoxCollider*)col)->IsCollided(&res)) {
-			std::cout << col->gameObject <<" collides " <<res->gameObject << "\n";
+			// do something
 		}
 	}
 }

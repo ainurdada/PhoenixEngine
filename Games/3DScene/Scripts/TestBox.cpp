@@ -22,7 +22,7 @@ static float angleX = 0;
 
 void TestBox::Update()
 {
-	Vector3 pos = gameObject->transform.localPosition();
+	/*Vector3 pos = gameObject->transform.localPosition();
 	if (Game::instance->input->IsKeyDown(Keys::A))
 	{
 		gameObject->transform.localPosition(pos - Vector3::Right * Game::instance->time.GetDeltaTime());
@@ -51,5 +51,5 @@ void TestBox::Update()
 	{
 		angleY = Game::instance->time.GetDeltaTime();
 		gameObject->transform.RotateAroundAxis(gameObject->transform.Right(), -angleY);
-	}
+	}*/
 }

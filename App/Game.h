@@ -10,6 +10,7 @@ class Game;
 #include "../Engine/GameplayEngine/GameObject.h"
 #include <iostream>
 #include "../Engine/InputSystem/InputDevice.h"
+#include "../Engine/GameplayEngine/Camera.h"
 
 class Game
 {
@@ -35,6 +36,7 @@ public:
 	Graphics graphics;
 	InputDevice* input;
 	Physics* physics;
+	Camera* mainCamera;
 
 private:
 	std::vector<GameObject> gameObjects;
