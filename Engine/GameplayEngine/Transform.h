@@ -2,18 +2,21 @@
 
 #include "../../Lib/Math/Math.h"
 
-struct Transform {
-	SMath::Vector3 position = { 0,0,0 };
-	SMath::Vector3 scale = { 1,1,1 };
-	SMath::Quaternion rotation;
+class Transform {
+public:
+	Transform() {};
 
-	SMath::Vector3 Forward();
-	SMath::Vector3 Right();
-	SMath::Vector3 Up();
+	///// get / set
+	const SMath::Vector3& localPosition() const;
+	void localPosition(const SMath::Vector3& newLocalPosition);
 
+	const SMath::Vector3& position() const;
+	void position(const SMath::Vector3& newPosition);
+
+
+	///// methods 
 	SMath::Matrix LocalToWorld();
-	SMath::Matrix GetMatrix();
 
 private:
-	SMath::Matrix matrix;
+	SMath::Vector3 m_local_position;
 };

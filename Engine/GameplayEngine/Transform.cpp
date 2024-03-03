@@ -2,32 +2,29 @@
 
 using namespace SMath;
 
-Matrix Transform::GetMatrix()
+const SMath::Vector3& Transform::localPosition() const
 {
-	return Matrix::CreateTranslation(position);
+	return m_local_position;
 }
 
-inline Vector3 Transform::Forward()
+void Transform::localPosition(const SMath::Vector3& newLocalPosition)
 {
-	return { 0.f, 0.f, 1.f };
+	m_local_position = newLocalPosition;
 }
 
-inline Vector3 Transform::Right()
+const SMath::Vector3& Transform::position() const
 {
-	return { 1.f, 0.f, 0.f };
+	return m_local_position;
 }
 
-inline Vector3 Transform::Up()
+void Transform::position(const SMath::Vector3& newPosition)
 {
-	return { 0.f, 1.f, 0.f };
+	m_local_position = newPosition;
 }
 
-Matrix Transform::LocalToWorld()
+SMath::Matrix Transform::LocalToWorld()
 {
-	Matrix res;
-	res.Forward(Forward());
-	res.Right(Right());
-	res.Up(Up());
-	res.Translation(position);
-	return res;
+	SMath::Matrix m;
+	m.Translation(m_local_position);
+	return m;
 }

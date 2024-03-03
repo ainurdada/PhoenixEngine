@@ -20,8 +20,8 @@ bool BoxCollider::IsCollided(BoxCollider** out)
 
 void BoxCollider::Update()
 {
-	velocity = (gameObject->transform.position - oBox.Center) / Game::instance->time.GetDeltaTime();
-	oBox.Center = gameObject->transform.position;
+	velocity = (gameObject->transform.position() - oBox.Center) / Game::instance->time.GetDeltaTime();
+	oBox.Center = gameObject->transform.position();
 }
 
 void BoxCollider::FixedUpdate()
@@ -36,7 +36,7 @@ void BoxCollider::DestroyResources()
 void BoxCollider::Initialize()
 {
 	Collider::Initialize();
-	oBox.Center = gameObject->transform.position;
+	oBox.Center = gameObject->transform.position();
 	oBox.Extents = size / 2;
 	SMath::Quaternion quat;
 	oBox.Orientation;

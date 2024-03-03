@@ -43,10 +43,17 @@ void initPlayer(Player* player) {
 
 void PingPongGame::Restart()
 {
-	player1->gameObject->transform.position.y = 0;
-	player2->gameObject->transform.position.y = 0;
-	ball->gameObject->transform.position.x = 0;
-	ball->gameObject->transform.position.y = 0;
+	SMath::Vector3 pos1 = player1->gameObject->transform.position();
+	SMath::Vector3 pos2 = player2->gameObject->transform.position();
+	pos1.y = 0;
+	pos2.y = 0;
+	player1->gameObject->transform.position(pos1);
+	player2->gameObject->transform.position(pos2);
+
+	SMath::Vector3 posB = ball->gameObject->transform.position();
+	posB.x = 0; 
+	posB.y = 0;
+	ball->gameObject->transform.position(posB);
 	ball->velocity.y = 0;
 	if (std::signbit(ball->velocity.x)) {
 		ball->velocity.x = -0.5f;

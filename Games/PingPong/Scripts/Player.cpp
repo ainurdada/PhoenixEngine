@@ -10,25 +10,27 @@ void Player::Reload()
 
 void Player::Update()
 {
+	SMath::Vector3 pos = gameObject->transform.position();
 	if (!isEnemy) {
 		if (Game::instance->input->IsKeyDown(Keys::W)) {
-			gameObject->transform.position.y += speed * Time::instance->GetDeltaTime();
+			pos.y += speed * Time::instance->GetDeltaTime();
 		}
 		if (Game::instance->input->IsKeyDown(Keys::S)) {
-			gameObject->transform.position.y -= speed * Time::instance->GetDeltaTime();
+			pos.y -= speed * Time::instance->GetDeltaTime();
 		}
 	}
 	else
 	{
 		if (Game::instance->input->IsKeyDown(Keys::Up)) {
-			gameObject->transform.position.y += speed * Time::instance->GetDeltaTime();
+			pos.y += speed * Time::instance->GetDeltaTime();
 		}
 		if (Game::instance->input->IsKeyDown(Keys::Down)) {
-			gameObject->transform.position.y -= speed * Time::instance->GetDeltaTime();
+			pos.y -= speed * Time::instance->GetDeltaTime();
 		}
 	}
-	gameObject->transform.position.y = gameObject->transform.position.y > (1 - size.y / 2) ? (1 - size.y / 2) : gameObject->transform.position.y;
-	gameObject->transform.position.y = gameObject->transform.position.y < (-1 + size.y / 2) ? (-1 + size.y / 2) : gameObject->transform.position.y;
+	pos.y = pos.y > (1 - size.y / 2) ? (1 - size.y / 2) : pos.y;
+	pos.y = pos.y < (-1 + size.y / 2) ? (-1 + size.y / 2) : pos.y;
+	gameObject->transform.position(pos);
 }
 
 void Player::Awake()
@@ -44,5 +46,5 @@ void Player::Awake()
 
 void Player::Start()
 {
-	gameObject->transform.position = startPosition;
+	gameObject->transform.position(startPosition);
 }

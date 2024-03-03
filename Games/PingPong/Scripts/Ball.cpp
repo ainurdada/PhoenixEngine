@@ -27,23 +27,25 @@ static void printGameScore() {
 }
 void Ball::Update()
 {
-	gameObject->transform.position.x += velocity.x * Time::instance->GetDeltaTime();
-	gameObject->transform.position.y += velocity.y * Time::instance->GetDeltaTime();
+	SMath::Vector3 pos = gameObject->transform.position();
+	pos.x += velocity.x * Time::instance->GetDeltaTime();
+	pos.y += velocity.y * Time::instance->GetDeltaTime();
+	gameObject->transform.position(pos);
 
-	if (gameObject->transform.position.y <= (- 1 + size.y / 2) && velocity.y < 0) {
+	if (pos.y <= (- 1 + size.y / 2) && velocity.y < 0) {
 		velocity.y = -velocity.y;
 	}
-	if (gameObject->transform.position.y >= (1 - size.y / 2) && velocity.y > 0)
+	if (pos.y >= (1 - size.y / 2) && velocity.y > 0)
 	{
 		velocity.y = -velocity.y;
 	}
 
 	BoxCollider* res;
 	if (col->IsCollided(&res)) {
-		bool dirSign = std::signbit(res->gameObject->transform.position.x - gameObject->transform.position.x);
+		bool dirSign = std::signbit(res->gameObject->transform.position().x - gameObject->transform.position().x);
 		bool velSign = std::signbit(velocity.x);
 		if (dirSign == velSign) {
-			float distY = gameObject->transform.position.y - res->gameObject->transform.position.y;
+			float distY = gameObject->transform.position().y - res->gameObject->transform.position().y;
 			float signY = std::signbit(velocity.y);
 			float reflection = (0.5f * res->size.y + signY * distY) / res->size.y;
 			float currentSpeed = velocity.Length();
@@ -61,13 +63,13 @@ void Ball::Update()
 		}
 	}
 
-	if (gameObject->transform.position.x < -1)
+	if (gameObject->transform.position().x < -1)
 	{
 		((PingPongGame*)PingPongGame::instance)->player2->score++;
 		printGameScore();
 		((PingPongGame*)PingPongGame::instance)->Restart();
 	}
-	if (gameObject->transform.position.x > 1) 
+	if (gameObject->transform.position().x > 1)
 	{
 		((PingPongGame*)PingPongGame::instance)->player1->score++;
 		printGameScore();
