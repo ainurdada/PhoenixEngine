@@ -22,9 +22,31 @@ void Transform::position(const SMath::Vector3& newPosition)
 	m_local_position = newPosition;
 }
 
+const SMath::Quaternion& Transform::localRotation() const
+{
+	return m_local_rotation;
+}
+
+void Transform::localRotation(const SMath::Quaternion& newLocalRotation)
+{
+	m_local_rotation = newLocalRotation;
+}
+
 SMath::Matrix Transform::LocalToWorld()
 {
 	SMath::Matrix m;
-	m.Translation(m_local_position);
+	m = Matrix::CreateScale(m_local_scale);
+	m *= Matrix::CreateFromQuaternion(m_local_rotation);
+	m *= Matrix::CreateTranslation(m_local_position);
+	/*Matrix::CreateWorld(
+		m_local_position,
+		
+	)*/
 	return m;
+}
+
+void Transform::RotateAroundAxis(const SMath::Vector3& axis, float angle)
+{
+	Quaternion q = Quaternion::CreateFromAxisAngle(axis, angle);
+	m_local_rotation *= q;
 }

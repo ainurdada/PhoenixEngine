@@ -31,10 +31,8 @@ void TestBox::Update()
 	{
 		gameObject->transform.localPosition(pos + Vector3::Right * Game::instance->time.GetDeltaTime());
 	}
-	angleY += Game::instance->time.GetDeltaTime();
-	Quaternion res;
-	res = Quaternion::CreateFromAxisAngle(Vector3::Up, angleY);
-	//gameObject->transform.localRotation(res);
+	angleY = Game::instance->time.GetDeltaTime();
+	gameObject->transform.RotateAroundAxis(Vector3::Up, angleY);
 	/*if (Game::instance->input->IsKeyDown(Keys::E))
 	{
 	}
