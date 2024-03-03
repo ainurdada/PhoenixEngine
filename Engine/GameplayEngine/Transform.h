@@ -24,6 +24,10 @@ public:
 	/// <param name="angle">in radians</param>
 	void RotateAroundAxis(const SMath::Vector3& axis, float angle);
 
+	SMath::Vector3 Right() const;
+	SMath::Vector3 Up() const;
+	SMath::Vector3 Forward() const;
+
 private:
 	///// SRT
 	SMath::Vector3 m_local_scale = { 1.f, 1.f, 1.f };

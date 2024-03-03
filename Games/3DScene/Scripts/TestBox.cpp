@@ -31,31 +31,25 @@ void TestBox::Update()
 	{
 		gameObject->transform.localPosition(pos + Vector3::Right * Game::instance->time.GetDeltaTime());
 	}
-	angleY = Game::instance->time.GetDeltaTime();
-	gameObject->transform.RotateAroundAxis(Vector3::Up, angleY);
-	/*if (Game::instance->input->IsKeyDown(Keys::E))
+	if (Game::instance->input->IsKeyDown(Keys::E))
 	{
+		angleY = Game::instance->time.GetDeltaTime();
+		gameObject->transform.RotateAroundAxis(gameObject->transform.Up(), angleY);
 	}
 	if (Game::instance->input->IsKeyDown(Keys::Q))
 	{
-		angleY -= Game::instance->time.GetDeltaTime();
-		Quaternion res;
-		Quaternion::Create(GMath::Vector3::up, angleY, res);
-		gameObject->transform.localRotation(res);
-	}*/
-
-	/*if (Game::instance->input->IsKeyDown(Keys::LeftShift))
-	{
-		angleX += Game::instance->time.GetDeltaTime();
-		Quaternion res;
-		Quaternion::Create(GMath::Vector3::right, angleX, res);
-		gameObject->transform.localRotation(res);
+		angleY = Game::instance->time.GetDeltaTime();
+		gameObject->transform.RotateAroundAxis(gameObject->transform.Up(), -angleY);
 	}
-	if (Game::instance->input->IsKeyDown(Keys::LeftControl))
+
+	if (Game::instance->input->IsKeyDown(Keys::LeftShift))
 	{
-		angleX -= Game::instance->time.GetDeltaTime();
-		Quaternion res;
-		Quaternion::Create(GMath::Vector3::right, angleX, res);
-		gameObject->transform.localRotation(res);
-	}*/
+		angleY = Game::instance->time.GetDeltaTime();
+		gameObject->transform.RotateAroundAxis(gameObject->transform.Right(), angleY);
+	}
+	if (Game::instance->input->IsKeyDown(Keys::Z))
+	{
+		angleY = Game::instance->time.GetDeltaTime();
+		gameObject->transform.RotateAroundAxis(gameObject->transform.Right(), -angleY);
+	}
 }

@@ -50,3 +50,27 @@ void Transform::RotateAroundAxis(const SMath::Vector3& axis, float angle)
 	Quaternion q = Quaternion::CreateFromAxisAngle(axis, angle);
 	m_local_rotation *= q;
 }
+
+Vector3 Transform::Right() const
+{
+	Vector3 res;
+	Matrix m = Matrix::CreateFromQuaternion(m_local_rotation);
+	Vector3::Transform(Vector3::Right, m, res);
+	return res;
+}
+
+Vector3 Transform::Up() const
+{
+	Vector3 res;
+	Matrix m = Matrix::CreateFromQuaternion(m_local_rotation);
+	Vector3::Transform(Vector3::Up, m, res);
+	return res;
+}
+
+Vector3 Transform::Forward() const
+{
+	Vector3 res;
+	Matrix m = Matrix::CreateFromQuaternion(m_local_rotation);
+	Vector3::Transform(Vector3::Forward, m, res);
+	return res;
+}
