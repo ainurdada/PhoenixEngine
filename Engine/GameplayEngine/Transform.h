@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Lib/Math/Math.h"
+#include <vector>
 
 class Transform {
 public:
@@ -24,6 +25,7 @@ public:
 	/// <param name="angle">in radians</param>
 	void RotateAroundAxis(const SMath::Vector3& axis, float angle);
 	void Move(const SMath::Vector3& dir);
+	void SetParent(Transform* parent);
 
 	SMath::Vector3 Right() const;
 	SMath::Vector3 Up() const;
@@ -36,5 +38,6 @@ private:
 	SMath::Vector3 m_local_position;
 	/////
 
-
+	Transform* parent = nullptr;
+	std::vector<Transform*> childs;
 };

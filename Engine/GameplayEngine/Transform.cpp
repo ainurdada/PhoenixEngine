@@ -37,8 +37,18 @@ SMath::Matrix Transform::LocalToWorld()
 {
 	XMMATRIX m;
 	m = XMMatrixScalingFromVector(m_local_scale)
-		* XMMatrixRotationQuaternion(Quaternion::Identity)
+		* XMMatrixRotationQuaternion(m_local_rotation)
 		* XMMatrixTranslationFromVector(m_local_position);
+	Transform* next = parent;
+	while (next != nullptr)
+	{
+		XMMATRIX mNext;
+		mNext = XMMatrixScalingFromVector(next->m_local_scale)
+			* XMMatrixRotationQuaternion(next->m_local_rotation)
+			* XMMatrixTranslationFromVector(next->m_local_position);
+		m *= mNext;
+		next = next->parent;
+	}
 	return m;
 }
 
@@ -53,6 +63,20 @@ void Transform::RotateAroundAxis(const SMath::Vector3& axis, float angle)
 void Transform::Move(const SMath::Vector3& dir)
 {
 	m_local_position += dir;
+}
+
+void Transform::SetParent(Transform* parent)
+{
+	if (parent != nullptr)
+	{
+		this->parent->childs.erase(std::remove(childs.begin(), childs.end(), this),
+					 childs.end());
+	}
+	this->parent = parent;
+	if (this->parent != nullptr)
+	{
+		this->parent->childs.push_back(this);
+	}
 }
 
 Vector3 Transform::Right() const
