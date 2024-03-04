@@ -19,4 +19,15 @@ void Planet::Init(Vector3& worldPosition, Transform* orbitCenter, Vector3& orbit
 
 void Planet::Update()
 {
+	float deltaTime = Game::instance->time.GetDeltaTime();
+	gameObject->transform.RotateAroundAxis(selfRotationAxis, selfAngleVelocity * deltaTime);
+
+	if (orbitCenter != nullptr)
+	{
+		gameObject->transform.RotateAroundPoint(
+			orbitCenter->position(),
+			orbitAxisRotation,
+			orbitAngleVelocity * deltaTime
+		);
+	}
 }

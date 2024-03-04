@@ -16,17 +16,29 @@ GameObject* CreatePlanet(Vector3& pos)
 void SolarSystemBehaviour::Awake()
 {
 	GameObject* sun = new GameObject;
-	Planet* planet = new Planet;
+	Planet* star = new Planet;
 	Vector3 up = Vector3::Up;
-	Vector3 zero = Vector3::Up;
-	sun->AddComponent(*planet);
-	planet->Init(zero,
+	Vector3 pos = Vector3::Zero + Vector3::Up * 2;
+	sun->AddComponent(*star);
+	star->Init(pos,
 				 nullptr,
 				 up,
 				 DirectX::XM_PI,
 				 up,
 				 DirectX::XM_PI);
 	Game::instance->InstantiateGameObject(sun);
+
+	GameObject* planet1 = new GameObject;
+	Planet* mercury = new Planet;
+	pos = { 3, 2, 0 };
+	planet1->AddComponent(*mercury);
+	mercury->Init(pos,
+				  &sun->transform,
+			   up,
+			   DirectX::XM_PI,
+			   up,
+			   DirectX::XM_PI);
+	Game::instance->InstantiateGameObject(planet1);
 
 	Vector3 size = { 1.f, 1.f, 1.f };
 	float border = 1.f;

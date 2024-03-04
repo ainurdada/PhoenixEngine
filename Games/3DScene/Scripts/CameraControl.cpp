@@ -54,7 +54,8 @@ void CameraControl::Reload()
 
 void CameraControl::RotateCamera(const InputDevice::MouseMoveEventArgs& args)
 {
-	Vector2 offset = -args.Offset;
+	Vector2 offset = args.Position - prevMousePos;
 	gameObject->transform.RotateAroundAxis(Vector3::Up, offset.x * Game::instance->time.GetDeltaTime() * mouseSensevity);
 	gameObject->transform.RotateAroundAxis(gameObject->transform.Right(), offset.y * Game::instance->time.GetDeltaTime() * mouseSensevity);
+	prevMousePos = args.Position;
 }

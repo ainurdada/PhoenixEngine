@@ -61,10 +61,16 @@ SMath::Matrix Transform::LocalToWorld() const
 
 void Transform::RotateAroundAxis(const SMath::Vector3& axis, float angle)
 {
-	Quaternion q = Quaternion::CreateFromAxisAngle(axis, angle);
-	Quaternion inv;
-	q.Inverse(inv);
-	m_local_rotation *= inv;
+	m_local_rotation *= Quaternion::CreateFromAxisAngle(axis, angle);
+}
+
+void Transform::RotateAroundPoint(const SMath::Vector3& point, const SMath::Vector3& axisAlongRotation, float angle)
+{
+	Quaternion q = Quaternion::CreateFromAxisAngle(axisAlongRotation, angle);
+	Vector3 origin = point;
+	Vector3 dif = point - position();
+	Vector3 newDif = XMVector3Rotate(dif, q);
+	position(origin - newDif);
 }
 
 void Transform::Move(const SMath::Vector3& dir)

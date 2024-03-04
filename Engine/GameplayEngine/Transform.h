@@ -24,6 +24,7 @@ public:
 	/// </summary>
 	/// <param name="angle">in radians</param>
 	void RotateAroundAxis(const SMath::Vector3& axis, float angle);
+	void RotateAroundPoint(const SMath::Vector3& point, const SMath::Vector3& axisAlongRotation, float angle);
 	void Move(const SMath::Vector3& dir);
 	void SetParent(Transform* parent);
 

@@ -166,6 +166,7 @@
     <ClInclude Include="Basic\Shapes\Sphere.h" />
     <ClInclude Include="Engine\FileManager\BaseResources.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
+    <ClInclude Include="Games\SolarSystem\Scripts\TestRotateAroundPoint.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

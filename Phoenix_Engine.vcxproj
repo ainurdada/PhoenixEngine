@@ -192,6 +192,7 @@
     <ClInclude Include="Engine\InputSystem\InputDevice.h" />
     <ClInclude Include="Engine\InputSystem\Keys.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\CameraControl.h" />
+    <ClInclude Include="Games\SolarSystem\Scripts\TestRotateAroundPoint.h" />
     <ClInclude Include="Lib\Math\Math.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\RenderComponent.h" />
     <ClInclude Include="Engine\GraphicsEngine\Shader.h" />
