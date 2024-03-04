@@ -7,7 +7,7 @@ GameObject* CreatePlanet(Vector3& pos)
 	GameObject* gameObj = new GameObject;
 	RenderComponent* render = new RenderComponent;
 	render->shaderPath = BaseResource::litShader;
-	render->mesh = Basic::Box::Create(size, size);
+	render->mesh = Basic::Sphere::Create(1.f / 2.f, 20, 20);
 	gameObj->AddComponent(*render);
 	gameObj->transform.position(pos);
 	return gameObj;

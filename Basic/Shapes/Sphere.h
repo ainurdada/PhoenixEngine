@@ -7,6 +7,6 @@ namespace Basic {
 	class Sphere
 	{
 	public:
-		static Mesh& Create(float radius);
+		static Mesh& Create(float radius, int sliceCount, int stackCount);
 	};
 }

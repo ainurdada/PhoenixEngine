@@ -122,7 +122,7 @@ void Graphics::SetShader(const Shader& shader)
 HRESULT Graphics::SetUpRasterizer()
 {
 	rastDesc.CullMode = D3D11_CULL_BACK;
-	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
+	rastDesc.FillMode = D3D11_FILL_SOLID;
 
 	HRESULT res;
 	res = device->CreateRasterizerState(&rastDesc, &rastState);
