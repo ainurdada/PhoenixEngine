@@ -1,6 +1,7 @@
 #include "Camera.h"
 
 using namespace SMath;
+using namespace DirectX;
 Camera::Camera() : GameObject()
 {
 	m_viewMatrix = Matrix::CreatePerspectiveFieldOfView(
@@ -11,42 +12,30 @@ Camera::Camera() : GameObject()
 	);
 }
 
+
+
 const SMath::Matrix& Camera::ViewMatrix()
 {
-	m_viewMatrix = Matrix::CreateLookAt(
-		transform.position(),
-		transform.position() + transform.Forward(),
-		transform.Up());
-	DirectX::XMMatrixLookAtLH(
-		transform.position(),
-		transform.position() + transform.Forward(),
-		transform.Up());
-	return DirectX::XMMatrixLookAtLH(
-		transform.position(),
-		transform.position() + transform.Forward(),
-		transform.Up());
-}
+	// Инициализация матрицы вида
+	XMVECTOR At = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);    // Куда смотрим
 
-#include <DirectXMath.h>
+	XMVECTOR Eye = XMVectorSet(0.0f, 5.0f, -10.0f, 0.0f);  // Откуда смотрим
+
+	XMVECTOR Up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);    // Направление верха
+
+	m_viewMatrix = XMMatrixLookAtLH(
+		transform.position(),
+		transform.position() + transform.Forward(),
+		transform.Up()
+	);
+
+	//m_viewMatrix = XMMatrixLookAtLH(Eye, At, Up);
+
+	return m_viewMatrix;
+}
 
 const SMath::Matrix& Camera::ProjectionMatrix()
 {
-	m_projectionMatrix = Matrix::CreatePerspectiveFieldOfView(
-		fov,
-		aspectRation,
-		minClipDistance,
-		maxClipDistance
-	);
-	DirectX::XMMatrixPerspectiveFovLH(
-		fov,
-		aspectRation,
-		minClipDistance,
-		maxClipDistance
-	);
-	return DirectX::XMMatrixPerspectiveFovLH(
-		fov,
-		aspectRation,
-		minClipDistance,
-		maxClipDistance
-	);
+	m_projectionMatrix = XMMatrixPerspectiveFovLH(XM_PIDIV4, aspectRation, minClipDistance, maxClipDistance);
+	return m_projectionMatrix;
 }

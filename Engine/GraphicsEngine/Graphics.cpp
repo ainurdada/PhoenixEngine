@@ -42,6 +42,37 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	ID3D11Texture2D* backTex;
 	res = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backTex);	// __uuidof(ID3D11Texture2D)
 	res = device->CreateRenderTargetView(backTex, nullptr, &rtv);
+
+
+	//Describe our Depth/Stencil Buffer
+	D3D11_TEXTURE2D_DESC depthStencilDesc;
+	ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
+	depthStencilDesc.Width = screenWidth;
+	depthStencilDesc.Height = screenHeight;
+	depthStencilDesc.MipLevels = 1;
+	depthStencilDesc.ArraySize = 1;
+	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	depthStencilDesc.SampleDesc.Count = 1;
+	depthStencilDesc.SampleDesc.Quality = 0;
+	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthStencilDesc.CPUAccessFlags = 0;
+	depthStencilDesc.MiscFlags = 0;
+
+	//Create the Depth/Stencil View
+	res = device->CreateTexture2D(&depthStencilDesc, NULL, &depthStencilBuffer);
+
+	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc;
+	ZeroMemory(&dsvDesc, sizeof(dsvDesc));
+	dsvDesc.Format = depthStencilDesc.Format;
+	dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	dsvDesc.Texture2D.MipSlice = 0;
+
+	res = device->CreateDepthStencilView(depthStencilBuffer, &dsvDesc, &depthStencilView);
+
+	//Set our Render Target
+	context->OMSetRenderTargets(1, &rtv, depthStencilView);
+
 	return res;
 }
 
@@ -110,9 +141,22 @@ void Graphics::UpdateRenderTarget()
 	context->OMSetRenderTargets(1, &rtv, nullptr);
 	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.w };
 	context->ClearRenderTargetView(rtv, color);
+	context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 void Graphics::Present()
 {
 	swapChain->Present(0, DXGI_PRESENT_DO_NOT_WAIT);
+}
+
+void Graphics::Cleanup()
+{
+
+	if (context) context->ClearState();
+	if (depthStencilBuffer) depthStencilBuffer->Release();
+	if (depthStencilView) depthStencilView->Release();
+	if (rtv) rtv->Release();
+	if (swapChain) swapChain->Release();
+	if (context) context->Release();
+	if (device) device->Release();
 }

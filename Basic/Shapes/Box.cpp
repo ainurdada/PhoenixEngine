@@ -20,10 +20,6 @@ namespace Basic {
 				}
 			}
 		}
-		for (int i = 0; i < points.size(); i++)
-		{
-			std::cout << points[i].x << " " << points[i].y << " " << points[i].z << std::endl;
-		}
 		std::vector<int> indexes = { 
 			0,1,2, 1,3,2, // left
 			0,5,1, 0,4,5, // down

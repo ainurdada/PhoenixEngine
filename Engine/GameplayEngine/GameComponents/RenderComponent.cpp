@@ -7,19 +7,17 @@ void RenderComponent::DestroyResources()
 }
 
 #include "iostream"
+using namespace DirectX;
 void RenderComponent::Draw()
 {
-	transform_data.transformMatrix = gameObject->transform.LocalToWorld();
-	transform_data.transformMatrix =
-		(
-			gameObject->transform.LocalToWorld()
-			* Game::instance->mainCamera->transform.LocalToWorld().Invert()
-			//* Game::instance->mainCamera->ProjectionMatrix()
-		);
+	matrix_data.world = XMMatrixTranspose(gameObject->transform.LocalToWorld());
+	matrix_data.view = XMMatrixTranspose(Game::instance->mainCamera->ViewMatrix());
+	matrix_data.projection = XMMatrixTranspose(Game::instance->mainCamera->ProjectionMatrix());
+
 	D3D11_MAPPED_SUBRESOURCE res1 = {};
 	Game::instance->graphics.GetContext()->Map(transform_buffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &res1);
-	auto dataPtr = (TransformData*)(res1.pData);
-	memcpy(dataPtr, &(transform_data), sizeof(TransformData));
+	auto dataPtr = (MatrixData*)(res1.pData);
+	memcpy(dataPtr, &(matrix_data), sizeof(MatrixData));
 	Game::instance->graphics.GetContext()->Unmap(transform_buffer, 0);
 
 	Game::instance->graphics.SetUpIA(shader.layout, mesh, shader);
@@ -51,7 +49,7 @@ void RenderComponent::Initialize()
 	transformBufDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	transformBufDesc.MiscFlags = 0;
 	transformBufDesc.StructureByteStride = 0;
-	transformBufDesc.ByteWidth = sizeof(TransformData);
+	transformBufDesc.ByteWidth = sizeof(MatrixData);
 	Game::instance->graphics.GetDevice()->CreateBuffer(&transformBufDesc, nullptr, &transform_buffer);
 
 	Game::instance->graphics.GetDevice()->CreateBuffer(&(mesh.vertexBufDesc), &(mesh.vertexData), &(mesh.vb));

@@ -29,6 +29,8 @@ public:
 	void UpdateState();
 	void UpdateRenderTarget();
 	void Present();
+	void Cleanup();
+
 	Vec4 backgroundColor;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
@@ -39,4 +41,6 @@ private:
 	CD3D11_RASTERIZER_DESC rastDesc = {};
 	ID3D11RasterizerState* rastState;
 	D3D11_VIEWPORT viewport = {};
+	ID3D11DepthStencilView* depthStencilView;
+	ID3D11Texture2D* depthStencilBuffer;
 };

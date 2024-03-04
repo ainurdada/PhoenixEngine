@@ -1,6 +1,7 @@
 #include "Transform.h"
 
 using namespace SMath;
+using namespace DirectX;
 
 const SMath::Vector3& Transform::localPosition() const
 {
@@ -34,17 +35,19 @@ void Transform::localRotation(const SMath::Quaternion& newLocalRotation)
 
 SMath::Matrix Transform::LocalToWorld()
 {
-	SMath::Matrix m;
-	m = Matrix::CreateScale(m_local_scale);
-	m *= Matrix::CreateFromQuaternion(m_local_rotation);
-	m *= Matrix::CreateTranslation(m_local_position);
+	XMMATRIX m;
+	m = XMMatrixScalingFromVector(m_local_scale)
+		* XMMatrixRotationQuaternion(Quaternion::Identity)
+		* XMMatrixTranslationFromVector(m_local_position);
 	return m;
 }
 
 void Transform::RotateAroundAxis(const SMath::Vector3& axis, float angle)
 {
 	Quaternion q = Quaternion::CreateFromAxisAngle(axis, angle);
-	m_local_rotation *= q;
+	Quaternion inv;
+	q.Inverse(inv);
+	m_local_rotation *= inv;
 }
 
 void Transform::Move(const SMath::Vector3& dir)
@@ -54,24 +57,15 @@ void Transform::Move(const SMath::Vector3& dir)
 
 Vector3 Transform::Right() const
 {
-	Vector3 res;
-	Matrix m = Matrix::CreateFromQuaternion(m_local_rotation);
-	Vector3::Transform(Vector3::Right, m, res);
-	return res;
+	return Vector3::Transform(Vector3::Right, m_local_rotation);
 }
 
 Vector3 Transform::Up() const
 {
-	Vector3 res;
-	Matrix m = Matrix::CreateFromQuaternion(m_local_rotation);
-	Vector3::Transform(Vector3::Up, m, res);
-	return res;
+	return Vector3::Transform(Vector3::Up, m_local_rotation);
 }
 
 Vector3 Transform::Forward() const
 {
-	Vector3 res;
-	Matrix m = Matrix::CreateFromQuaternion(m_local_rotation);
-	Vector3::Transform(Vector3::Forward, m, res);
-	return res;
+	return Vector3::Transform(-Vector3::Forward, m_local_rotation);
 }

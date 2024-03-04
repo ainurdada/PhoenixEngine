@@ -9,3 +9,6 @@
 namespace SMath = DirectX::SimpleMath;
 
 typedef DirectX::SimpleMath::Vector4 Vec4;
+
+#define DEG_TO_RAD 0.017453
+#define RAD_TO_DEG 57.29578

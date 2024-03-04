@@ -124,5 +124,6 @@ void Game::ClearResources()
 	{
 		gameObj.Release();
 	}
+	graphics.Cleanup();
 }
 

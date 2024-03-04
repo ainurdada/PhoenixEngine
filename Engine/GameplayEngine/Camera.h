@@ -12,9 +12,9 @@ public:
 	const SMath::Matrix& ProjectionMatrix();
 
 private:
-	float minClipDistance = 0.1f;
+	float minClipDistance = 0.01f;
 	float maxClipDistance = 100.0f;
-	float fov = 67.0f;
+	float fov = 90.0f;
 	float aspectRation = 16.0f / 9.0f;
 
 	SMath::Matrix m_viewMatrix;

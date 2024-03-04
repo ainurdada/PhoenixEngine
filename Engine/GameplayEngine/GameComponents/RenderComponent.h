@@ -9,11 +9,13 @@ class RenderComponent;
 class RenderComponent : public GameComponent
 {
 public:
-	struct TransformData
+	struct MatrixData
 	{
-		SMath::Matrix transformMatrix;
+		SMath::Matrix world;
+		SMath::Matrix view;
+		SMath::Matrix projection;
 	};
-	static_assert((sizeof(TransformData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
+	static_assert((sizeof(MatrixData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
 public:
 	RenderComponent() {};
@@ -31,7 +33,7 @@ public:
 	Shader shader;
 	LPCWSTR shaderPath = L"";
 private:
-	TransformData transform_data;
+	MatrixData matrix_data;
 	ID3D11Buffer* transform_buffer = nullptr;
 };
 
