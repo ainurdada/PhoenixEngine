@@ -7,6 +7,7 @@
 
 #include "Basic/Shapes/BasicShapes.h"
 
+#include "Engine/FileManager/BaseResources.h"
 #include "Engine/GraphicsEngine/GraphicsEngine.h"
 #include "Engine/GameplayEngine/GameplayEngine.h"
 #include "Engine/InputSystem/InputSystem.h"

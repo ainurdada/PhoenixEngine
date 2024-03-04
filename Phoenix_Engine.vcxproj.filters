@@ -85,6 +85,33 @@
     <ClCompile Include="Engine\GameplayEngine\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Basic\Shapes\Box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameplayEngine\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\3DScene\Scene3DTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\3DScene\Scripts\CameraControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\3DScene\Scripts\TestBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\SolarSystem\SolarSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\SolarSystem\Scripts\CameraControl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Basic\Shapes\Sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -126,11 +153,23 @@
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BoxCollider.h" />
     <ClInclude Include="Engine\GameplayEngine\Camera.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
+    <ClInclude Include="Basic\Shapes\Box.h" />
+    <ClInclude Include="Games\3DScene\Scene3DTest.h" />
+    <ClInclude Include="Games\3DScene\Scripts\CameraControl.h" />
+    <ClInclude Include="Games\3DScene\Scripts\TestBox.h" />
+    <ClInclude Include="Games\SolarSystem\SolarSystem.h" />
+    <ClInclude Include="Games\SolarSystem\Scripts\CameraControl.h" />
+    <ClInclude Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.h" />
+    <ClInclude Include="Basic\Shapes\Sphere.h" />
+    <ClInclude Include="Engine\FileManager\BaseResources.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\MyVeryFirstShader.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

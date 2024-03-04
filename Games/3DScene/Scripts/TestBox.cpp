@@ -8,7 +8,6 @@ void TestBox::Awake()
 
 	RenderComponent* r = new RenderComponent;
 	r->shaderPath = L"./Shaders/MyVeryFirstShader.hlsl";
-	r->shader.device = Game::instance->graphics.GetDevice();
 	r->mesh = Basic::Box::Create(ex, color);
 	gameObject->AddComponent(*r);
 }

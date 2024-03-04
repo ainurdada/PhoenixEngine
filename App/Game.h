@@ -48,5 +48,8 @@ private:
 private:
 	HRESULT res;
 	bool isExitRequested = false;
+
+protected:
+	virtual void OnCreated() = 0;
 };
 

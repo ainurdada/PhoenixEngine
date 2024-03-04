@@ -19,6 +19,8 @@ void Game::Create()
 	mainCamera = new Camera;
 	window.Create(name, size.x, size.y);
 	graphics.Init(window.GetHWND(), window.ClientWidth, window.ClientHeight);
+
+	OnCreated();
 }
 
 void Game::Run()
