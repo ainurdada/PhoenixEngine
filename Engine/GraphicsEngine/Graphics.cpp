@@ -1,9 +1,13 @@
 #include "Graphics.h"
 
+#include "iostream"
+
+using namespace std;
+
 HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 {
 	D3D_FEATURE_LEVEL featureLevel[] = { D3D_FEATURE_LEVEL_11_1 };
-
+	ZeroMemory(&swapDesc, sizeof(swapDesc));
 	swapDesc.BufferCount = 2;
 	swapDesc.BufferDesc.Width = screenWidth;
 	swapDesc.BufferDesc.Height = screenHeight;
@@ -36,13 +40,17 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 
 	if (FAILED(res))
 	{
-		// Well, that was unexpected
+		cout << "failed to create DeviceAndSwapChain" << endl;
 	}
 
 	ID3D11Texture2D* backTex;
 	res = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backTex);	// __uuidof(ID3D11Texture2D)
 	res = device->CreateRenderTargetView(backTex, nullptr, &rtv);
 
+	if (FAILED(res))
+	{
+		cout << "failed to create RenderTargetView" << endl;
+	}
 
 	//Describe our Depth/Stencil Buffer
 	D3D11_TEXTURE2D_DESC depthStencilDesc;
@@ -70,8 +78,14 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 
 	res = device->CreateDepthStencilView(depthStencilBuffer, &dsvDesc, &depthStencilView);
 
+	if (FAILED(res))
+	{
+		cout << "failed to create DepthStencilView" << endl;
+	}
+
 	//Set our Render Target
 	context->OMSetRenderTargets(1, &rtv, depthStencilView);
+
 
 	return res;
 }
@@ -138,20 +152,19 @@ void Graphics::UpdateState()
 
 void Graphics::UpdateRenderTarget()
 {
-	context->OMSetRenderTargets(1, &rtv, nullptr);
-	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, backgroundColor.w };
-	context->ClearRenderTargetView(rtv, color);
+	context->OMSetRenderTargets(1, &rtv, depthStencilView);
+	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f };
 	context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	context->ClearRenderTargetView(rtv, color);
 }
 
 void Graphics::Present()
 {
-	swapChain->Present(0, DXGI_PRESENT_DO_NOT_WAIT);
+	swapChain->Present(0, 0);
 }
 
 void Graphics::Cleanup()
 {
-
 	if (context) context->ClearState();
 	if (depthStencilBuffer) depthStencilBuffer->Release();
 	if (depthStencilView) depthStencilView->Release();
