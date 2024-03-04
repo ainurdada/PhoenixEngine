@@ -15,12 +15,19 @@ void Transform::localPosition(const SMath::Vector3& newLocalPosition)
 
 const SMath::Vector3& Transform::position() const
 {
-	return m_local_position;
+	return LocalToWorld().Translation();
 }
 
 void Transform::position(const SMath::Vector3& newPosition)
 {
-	m_local_position = newPosition;
+	if (parent != nullptr)
+	{
+		m_local_position = XMVector3TransformCoord(newPosition, XMMatrixInverse(nullptr, parent->LocalToWorld()));
+	}
+	else
+	{
+		m_local_position = newPosition;
+	}
 }
 
 const SMath::Quaternion& Transform::localRotation() const
@@ -33,7 +40,7 @@ void Transform::localRotation(const SMath::Quaternion& newLocalRotation)
 	m_local_rotation = newLocalRotation;
 }
 
-SMath::Matrix Transform::LocalToWorld()
+SMath::Matrix Transform::LocalToWorld() const
 {
 	XMMATRIX m;
 	m = XMMatrixScalingFromVector(m_local_scale)
@@ -62,7 +69,7 @@ void Transform::RotateAroundAxis(const SMath::Vector3& axis, float angle)
 
 void Transform::Move(const SMath::Vector3& dir)
 {
-	m_local_position += dir;
+	position(position() + dir);
 }
 
 void Transform::SetParent(Transform* parent)
@@ -81,15 +88,15 @@ void Transform::SetParent(Transform* parent)
 
 Vector3 Transform::Right() const
 {
-	return Vector3::Transform(Vector3::Right, m_local_rotation);
+	return XMVector3TransformNormal(Vector3::Right, LocalToWorld());
 }
 
 Vector3 Transform::Up() const
 {
-	return Vector3::Transform(Vector3::Up, m_local_rotation);
+	return XMVector3TransformNormal(Vector3::Up, LocalToWorld());
 }
 
 Vector3 Transform::Forward() const
 {
-	return Vector3::Transform(-Vector3::Forward, m_local_rotation);
+	return XMVector3TransformNormal(-Vector3::Forward, LocalToWorld());
 }

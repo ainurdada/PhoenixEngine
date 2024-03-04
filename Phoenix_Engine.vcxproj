@@ -162,6 +162,7 @@
     <ClCompile Include="Games\SolarSystem\SolarSystem.cpp" />
     <ClCompile Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.cpp" />
     <ClCompile Include="Basic\Shapes\Sphere.cpp" />
+    <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Games\SolarSystem\SolarSystem.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.h" />
     <ClInclude Include="Basic\Shapes\Sphere.h" />
+    <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

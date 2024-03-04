@@ -18,7 +18,7 @@ public:
 	void localRotation(const SMath::Quaternion& newLocalRotation);
 
 	///// methods 
-	SMath::Matrix LocalToWorld();
+	SMath::Matrix LocalToWorld() const;
 	/// <summary>
 	/// rotates object around axis
 	/// </summary>

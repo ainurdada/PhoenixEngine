@@ -3,7 +3,7 @@ using namespace SMath;
 
 void CameraControl::Awake()
 {
-	Game::instance->mainCamera->transform.position({ 0.f, 5.f, -10.0f });
+	Game::instance->mainCamera->transform.position({ 0.f, 2.f, -10.0f });
 }
 
 void CameraControl::Start()
@@ -13,15 +13,13 @@ void CameraControl::Start()
 
 void CameraControl::Update()
 {
-	float angle = Game::instance->time.GetDeltaTime();
-	Vector3 pos = gameObject->transform.localPosition();
 	if (Game::instance->input->IsKeyDown(Keys::A))
 	{
-		gameObject->transform.localPosition(pos - gameObject->transform.Right() * Game::instance->time.GetDeltaTime() * moveSpeed);
+		gameObject->transform.Move(-gameObject->transform.Right() * Game::instance->time.GetDeltaTime() * moveSpeed);
 	}
 	if (Game::instance->input->IsKeyDown(Keys::D))
 	{
-		gameObject->transform.localPosition(pos + gameObject->transform.Right() * Game::instance->time.GetDeltaTime() * moveSpeed);
+		gameObject->transform.Move(gameObject->transform.Right() * Game::instance->time.GetDeltaTime() * moveSpeed);
 	}
 	if (Game::instance->input->IsKeyDown(Keys::W))
 	{

@@ -112,6 +112,9 @@
     <ClCompile Include="Basic\Shapes\Sphere.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -162,6 +165,7 @@
     <ClInclude Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.h" />
     <ClInclude Include="Basic\Shapes\Sphere.h" />
     <ClInclude Include="Engine\FileManager\BaseResources.h" />
+    <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

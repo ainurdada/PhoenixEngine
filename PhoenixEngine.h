@@ -12,3 +12,5 @@
 #include "Engine/GameplayEngine/GameplayEngine.h"
 #include "Engine/InputSystem/InputSystem.h"
 #include "Engine/PhysicsEngine/PhysicsEngine.h"
+
+using namespace SMath;

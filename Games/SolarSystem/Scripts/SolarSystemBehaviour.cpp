@@ -1,4 +1,5 @@
 #include "SolarSystemBehaviour.h"
+#include "Planet.h"
 
 using namespace SMath;
 GameObject* CreatePlanet(Vector3& pos)
@@ -14,13 +15,18 @@ GameObject* CreatePlanet(Vector3& pos)
 }
 void SolarSystemBehaviour::Awake()
 {
-	/*GameObject* sun = new GameObject;
-	RenderComponent* sunRender = new RenderComponent;
-	sunRender->shader.pathToShader = BaseResource::litShader;
-	sunRender->shader.device = Game::instance->graphics.GetDevice();
-	sunRender->mesh = Basic::Sphere::Create(1.f);
-	sun->AddComponent(*sunRender);
-	Game::instance->InstantiateGameObject(sun);*/
+	GameObject* sun = new GameObject;
+	Planet* planet = new Planet;
+	Vector3 up = Vector3::Up;
+	Vector3 zero = Vector3::Up;
+	sun->AddComponent(*planet);
+	planet->Init(zero,
+				 nullptr,
+				 up,
+				 DirectX::XM_PI,
+				 up,
+				 DirectX::XM_PI);
+	Game::instance->InstantiateGameObject(sun);
 
 	Vector3 size = { 1.f, 1.f, 1.f };
 	float border = 1.f;
