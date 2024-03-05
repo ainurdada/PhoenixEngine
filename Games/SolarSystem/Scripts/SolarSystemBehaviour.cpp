@@ -26,8 +26,8 @@ void SolarSystemBehaviour::Awake()
 			   up,
 			   DirectX::XM_PI,
 			   up,
-			   DirectX::XM_PIDIV4);
-	sun->transform.RotateAroundAxis(Vector3::Right, DirectX::XM_PIDIV2);
+			   -DirectX::XM_PIDIV4);
+	//sun->transform.RotateAroundAxis(Vector3::Right, DirectX::XM_PIDIV2);
 	Game::instance->InstantiateGameObject(sun);
 
 	GameObject* planet1 = new GameObject;
@@ -46,17 +46,17 @@ void SolarSystemBehaviour::Awake()
 
 	GameObject* planet2 = new GameObject;
 	Planet* venus = new Planet;
-	pos = { 3, 3, 0 };
+	pos = pos + Vector3::Up;
 	Vector3 OrbitAxis = Vector3::Right;
+	Vector3 SelfAxis = Vector3::Forward;
 	planet2->AddComponent(*venus);
-	planet2->transform.SetParent(&mercury->gameObject->transform);
-	planet2->transform.position(pos);
+	//planet2->transform.SetParent(&mercury->gameObject->transform);
 	planet2->transform.localScale({0.5f, 0.5f, 0.5f});
 	venus->Init(pos,
-				  nullptr,
+				&mercury->gameObject->transform,
 				OrbitAxis,
 				  DirectX::XM_PIDIV4,
-				OrbitAxis,
+				SelfAxis,
 				  DirectX::XM_PIDIV4);
 	Game::instance->InstantiateGameObject(planet2);
 
@@ -72,7 +72,7 @@ void SolarSystemBehaviour::Awake()
 		{
 			Vector3 pos = {
 				startX + ((float)i) * size.x * border,
-				2,
+				-2,
 				startY + ((float)j) * size.z * border
 			};
 			Game::instance->InstantiateGameObject(CreatePlanet(pos));

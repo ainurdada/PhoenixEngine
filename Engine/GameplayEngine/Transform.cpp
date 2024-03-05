@@ -134,3 +134,9 @@ Vector3 Transform::Forward() const
 {
 	return XMVector3TransformNormal(-Vector3::Forward, LocalToWorld());
 }
+
+SMath::Vector3 Transform::Distance(const Transform* from, const Transform* to)
+{
+	Vector3 t1Pos = from->position();
+	return to->position() - t1Pos;
+}

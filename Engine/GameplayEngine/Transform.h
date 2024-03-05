@@ -36,6 +36,9 @@ public:
 	SMath::Vector3 Up() const;
 	SMath::Vector3 Forward() const;
 
+
+	static SMath::Vector3 Distance(const Transform* from, const Transform* to);
+
 private:
 	///// SRT
 	SMath::Vector3 m_local_scale = { 1.f, 1.f, 1.f };

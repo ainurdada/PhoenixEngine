@@ -8,6 +8,11 @@ void Planet::Init(Vector3& worldPosition, Transform* orbitCenter, Vector3& orbit
 	this->selfRotationAxis = selfRotationAxis;
 	this->selfAngleVelocity = selfAngleVelocity;
 	gameObject->transform.position(worldPosition);
+
+	if (orbitCenter != nullptr)
+	{
+		centerOffset = Transform::Distance(orbitCenter, &gameObject->transform);
+	}
 }
 
 void Planet::Awake()
@@ -25,16 +30,16 @@ void Planet::Awake()
 void Planet::Update()
 {
 	float deltaTime = Game::instance->time.GetDeltaTime();
-	if (selfAngleVelocity > 0.01)
-	{
-		gameObject->transform.RotateAroundLocalAxis(selfRotationAxis, selfAngleVelocity * deltaTime);
-	}
+	gameObject->transform.RotateAroundLocalAxis(selfRotationAxis, selfAngleVelocity * deltaTime);
 	if (orbitCenter != nullptr)
 	{
+		gameObject->transform.position(orbitCenter->position() + centerOffset);
 		gameObject->transform.RotateAroundPoint(
 			orbitCenter->position(),
 			orbitAxisRotation,
 			orbitAngleVelocity * deltaTime
 		);
+		Vector3 orbCenterPos = orbitCenter->position();
+		centerOffset = Transform::Distance(orbitCenter, &gameObject->transform);
 	}
 }

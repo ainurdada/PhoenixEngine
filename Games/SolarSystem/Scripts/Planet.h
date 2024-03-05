@@ -18,5 +18,6 @@ private:
 	float orbitAngleVelocity;
 	Vector3 selfRotationAxis;
 	float selfAngleVelocity;
+	Vector3 centerOffset;
 };
 

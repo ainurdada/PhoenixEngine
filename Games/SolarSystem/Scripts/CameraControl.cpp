@@ -3,7 +3,7 @@ using namespace SMath;
 
 void CameraControl::Awake()
 {
-	Game::instance->mainCamera->transform.position({ 0.f, 2.f, -3.0f });
+	Game::instance->mainCamera->transform.position({ 0.f, 2.f, -10.0f });
 }
 
 void CameraControl::Start()
