@@ -31,7 +31,7 @@ public:
 
 	Time time;
 	LPCWSTR name = L"My game";
-	Vec2Int size = Vec2Int(800, 800);
+	Vec2Int size = Vec2Int(1920, 1080);
 	Window window;
 	Graphics graphics;
 	InputDevice* input;

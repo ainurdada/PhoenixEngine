@@ -27,8 +27,8 @@ const SMath::Matrix& Camera::ViewMatrix()
 const SMath::Matrix& Camera::ProjectionMatrix()
 {
 	m_projectionMatrix = XMMatrixPerspectiveFovLH(
-		XM_PIDIV4, 
-		Game::instance->window.ClientWidth / Game::instance->window.ClientHeight,
+		60 * DEG_TO_RAD, 
+		(float)Game::instance->window.ClientWidth / (float)Game::instance->window.ClientHeight,
 		minClipDistance, 
 		maxClipDistance);
 	return m_projectionMatrix;
