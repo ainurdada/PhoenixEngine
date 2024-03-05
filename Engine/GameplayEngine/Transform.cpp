@@ -22,7 +22,7 @@ void Transform::position(const SMath::Vector3& newPosition)
 {
 	if (parent != nullptr)
 	{
-		m_local_position = XMVector3TransformCoord(newPosition, XMMatrixInverse(nullptr, parent->LocalToWorld()));
+		m_local_position = XMVector3Transform(newPosition, XMMatrixInverse(nullptr, parent->LocalToWorld()));
 	}
 	else
 	{
@@ -40,20 +40,36 @@ void Transform::localRotation(const SMath::Quaternion& newLocalRotation)
 	m_local_rotation = newLocalRotation;
 }
 
+const SMath::Vector3& Transform::localScale() const
+{
+	return m_local_scale;
+}
+
+void Transform::localScale(const SMath::Vector3& newLocalScale)
+{
+	m_local_scale = newLocalScale;
+}
+
 SMath::Matrix Transform::LocalToWorld() const
 {
 	XMMATRIX m;
-	m = XMMatrixScalingFromVector(m_local_scale)
-		* XMMatrixRotationQuaternion(m_local_rotation)
-		* XMMatrixTranslationFromVector(m_local_position);
+	m = XMMatrixAffineTransformation(
+		m_local_scale,
+		g_XMZero,
+		m_local_rotation,
+		m_local_position
+	);
 	Transform* next = parent;
 	while (next != nullptr)
 	{
 		XMMATRIX mNext;
-		mNext = XMMatrixScalingFromVector(next->m_local_scale)
-			* XMMatrixRotationQuaternion(next->m_local_rotation)
-			* XMMatrixTranslationFromVector(next->m_local_position);
-		m *= mNext;
+		mNext = XMMatrixAffineTransformation(
+			next->m_local_scale,
+			g_XMZero,
+			next->m_local_rotation,
+			next->m_local_position
+		);
+		m = XMMatrixMultiply(m, mNext);
 		next = next->parent;
 	}
 	return m;
@@ -61,7 +77,18 @@ SMath::Matrix Transform::LocalToWorld() const
 
 void Transform::RotateAroundAxis(const SMath::Vector3& axis, float angle)
 {
-	m_local_rotation *= Quaternion::CreateFromAxisAngle(axis, angle);
+	Vector3 globalAxis = axis;
+	if (parent != nullptr)
+	{
+		globalAxis = XMVector3TransformNormal(axis, parent->LocalToWorld());
+	}
+	m_local_rotation *= Quaternion::CreateFromAxisAngle(globalAxis, angle);
+}
+
+void Transform::RotateAroundLocalAxis(const SMath::Vector3& axis, float angle)
+{
+	Vector3 local = XMVector3Rotate(axis, m_local_rotation);
+	m_local_rotation *= Quaternion::CreateFromAxisAngle(local, angle);
 }
 
 void Transform::RotateAroundPoint(const SMath::Vector3& point, const SMath::Vector3& axisAlongRotation, float angle)
@@ -71,6 +98,7 @@ void Transform::RotateAroundPoint(const SMath::Vector3& point, const SMath::Vect
 	Vector3 dif = point - position();
 	Vector3 newDif = XMVector3Rotate(dif, q);
 	position(origin - newDif);
+	m_local_rotation *= q;
 }
 
 void Transform::Move(const SMath::Vector3& dir)
@@ -80,10 +108,10 @@ void Transform::Move(const SMath::Vector3& dir)
 
 void Transform::SetParent(Transform* parent)
 {
-	if (parent != nullptr)
+	if (this->parent != nullptr)
 	{
 		this->parent->childs.erase(std::remove(childs.begin(), childs.end(), this),
-					 childs.end());
+								   childs.end());
 	}
 	this->parent = parent;
 	if (this->parent != nullptr)

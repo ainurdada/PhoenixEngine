@@ -17,6 +17,9 @@ public:
 	const SMath::Quaternion& localRotation() const;
 	void localRotation(const SMath::Quaternion& newLocalRotation);
 
+	const SMath::Vector3& localScale() const;
+	void localScale(const SMath::Vector3& newLocalScale);
+
 	///// methods 
 	SMath::Matrix LocalToWorld() const;
 	/// <summary>
@@ -24,6 +27,7 @@ public:
 	/// </summary>
 	/// <param name="angle">in radians</param>
 	void RotateAroundAxis(const SMath::Vector3& axis, float angle);
+	void RotateAroundLocalAxis(const SMath::Vector3& axis, float angle);
 	void RotateAroundPoint(const SMath::Vector3& point, const SMath::Vector3& axisAlongRotation, float angle);
 	void Move(const SMath::Vector3& dir);
 	void SetParent(Transform* parent);

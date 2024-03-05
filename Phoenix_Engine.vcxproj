@@ -147,6 +147,7 @@
     <ClCompile Include="Engine\GameplayEngine\GameObject.cpp" />
     <ClCompile Include="Engine\InputSystem\InputDevice.cpp" />
     <ClCompile Include="Games\SolarSystem\Scripts\CameraControl.cpp" />
+    <ClCompile Include="Engine\DebugSystem\Grid.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="App\Game.h" />
     <ClInclude Include="Basic\Shapes\BasicShapes.h" />
     <ClInclude Include="Basic\Shapes\Box.h" />
+    <ClInclude Include="Engine\DebugSystem\DebugSystem.h" />
     <ClInclude Include="Engine\FileManager\BaseResources.h" />
     <ClInclude Include="Engine\GameplayEngine\Camera.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BoxCollider.h" />
@@ -193,6 +195,7 @@
     <ClInclude Include="Engine\InputSystem\Keys.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\CameraControl.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\TestRotateAroundPoint.h" />
+    <ClInclude Include="Engine\DebugSystem\Grid.h" />
     <ClInclude Include="Lib\Math\Math.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\RenderComponent.h" />
     <ClInclude Include="Engine\GraphicsEngine\Shader.h" />

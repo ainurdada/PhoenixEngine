@@ -10,6 +10,7 @@ public:
 			  float orbitAngleVelocity,
 			  Vector3& selfRotationAxis,
 			  float selfAngleVelocity);
+	void Awake() override;
 	void Update() override;
 private:
 	Transform* orbitCenter = nullptr;

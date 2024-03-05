@@ -115,6 +115,9 @@
     <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\DebugSystem\Grid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -167,6 +170,8 @@
     <ClInclude Include="Engine\FileManager\BaseResources.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\TestRotateAroundPoint.h" />
+    <ClInclude Include="Engine\DebugSystem\Grid.h" />
+    <ClInclude Include="Engine\DebugSystem\DebugSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

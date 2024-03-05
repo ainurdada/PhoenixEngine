@@ -3,7 +3,7 @@ using namespace SMath;
 
 void CameraControl::Awake()
 {
-	Game::instance->mainCamera->transform.position({ 0.f, 0.f, -3.0f });
+	Game::instance->mainCamera->transform.position({ 0.f, 2.f, -3.0f });
 }
 
 void CameraControl::Start()
@@ -56,8 +56,8 @@ void CameraControl::Reload()
 
 void CameraControl::RotateCamera(const InputDevice::MouseMoveEventArgs& args)
 {
-	Vector2 offset = args.Offset;
-	std::cout << offset.x << std::endl;
-	gameObject->transform.RotateAroundAxis(Vector3::Up, offset.x * mouseSensevity);
-	gameObject->transform.RotateAroundAxis(gameObject->transform.Right(), offset.y * mouseSensevity);
+	Vector2 offset = args.Position - prevMousePos;
+	gameObject->transform.RotateAroundAxis(Vector3::Up, offset.x * Game::instance->time.GetDeltaTime() * mouseSensevity);
+	gameObject->transform.RotateAroundLocalAxis(Vector3::Right, offset.y * Game::instance->time.GetDeltaTime() * mouseSensevity);
+	prevMousePos = args.Position;
 }
