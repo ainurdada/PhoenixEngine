@@ -18,9 +18,9 @@ Game* Game::instance = nullptr;
 void Game::Create()
 {
 	size = { 1024, 720 };
-	mainCamera = new Camera;
 	window.Create(name, size.x, size.y);
 	graphics.Init(window.GetHWND(), window.ClientWidth, window.ClientHeight);
+	mainCamera = new Camera;
 
 	OnCreated();
 }

@@ -14,7 +14,4 @@ class CameraControl : public BehaviourScript {
 	float mouseSensevity = .0000000000000000000001f;
 
 	void RotateCamera(const InputDevice::MouseMoveEventArgs& args);
-
-private:
-	Vector2 prevMousePos;
 };

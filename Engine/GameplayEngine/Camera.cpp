@@ -1,15 +1,11 @@
 #include "Camera.h"
+#include "../../App/Game.h"
 
 using namespace SMath;
 using namespace DirectX;
 Camera::Camera() : GameObject()
 {
-	m_viewMatrix = Matrix::CreatePerspectiveFieldOfView(
-		fov,
-		aspectRation,
-		minClipDistance,
-		maxClipDistance
-	);
+	UpdateProjectionMatrix();
 }
 
 const SMath::Matrix& Camera::ViewMatrix()
@@ -22,14 +18,47 @@ const SMath::Matrix& Camera::ViewMatrix()
 	return m_viewMatrix;
 }
 
-#include "../../App/Game.h"
 
 const SMath::Matrix& Camera::ProjectionMatrix()
 {
-	m_projectionMatrix = XMMatrixPerspectiveFovLH(
-		60 * DEG_TO_RAD, 
-		(float)Game::instance->window.ClientWidth / (float)Game::instance->window.ClientHeight,
-		minClipDistance, 
-		maxClipDistance);
 	return m_projectionMatrix;
+}
+
+void Camera::UpdateProjectionMatrix()
+{
+	if (isPerspective)
+	{
+		m_projectionMatrix = XMMatrixPerspectiveFovLH(
+			fov * DEG_TO_RAD / zoomFactor,
+			(float)Game::instance->window.ClientWidth / (float)Game::instance->window.ClientHeight,
+			minClipDistance,
+			maxClipDistance);
+	}
+	else
+	{
+		m_projectionMatrix = XMMatrixOrthographicLH(
+			(float)Game::instance->window.ClientWidth / zoomFactor,
+			(float)Game::instance->window.ClientHeight / zoomFactor,
+			minClipDistance,
+			maxClipDistance);
+	}
+}
+
+void Camera::SetPerspective(bool perspective)
+{
+	isPerspective = perspective;
+	if (zoomFactor < 1 && isPerspective) zoomFactor = 1;
+	UpdateProjectionMatrix();
+}
+
+void Camera::zoom(float value)
+{
+	zoomFactor = value;
+	if (zoomFactor < 1 && isPerspective) zoomFactor = 1;
+	UpdateProjectionMatrix();
+}
+
+float Camera::zoom()
+{
+	return zoomFactor;
 }

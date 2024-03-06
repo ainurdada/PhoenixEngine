@@ -40,6 +40,15 @@ void CameraControl::Update()
 	{
 		gameObject->transform.Move(-Vector3::Up * Game::instance->time.GetDeltaTime() * moveSpeed);
 	}
+
+	if (Game::instance->input->IsKeyDown(Keys::NumPad1))
+	{
+		Game::instance->mainCamera->SetPerspective(true);
+	}
+	if (Game::instance->input->IsKeyDown(Keys::NumPad2))
+	{
+		Game::instance->mainCamera->SetPerspective(false);
+	}
 }
 
 void CameraControl::FixedUpdate()
@@ -56,8 +65,13 @@ void CameraControl::Reload()
 
 void CameraControl::RotateCamera(const InputDevice::MouseMoveEventArgs& args)
 {
-	Vector2 offset = args.Position - prevMousePos;
-	gameObject->transform.RotateAroundAxis(Vector3::Up, offset.x * Game::instance->time.GetDeltaTime() * mouseSensevity);
-	gameObject->transform.RotateAroundLocalAxis(Vector3::Right, offset.y * Game::instance->time.GetDeltaTime() * mouseSensevity);
-	prevMousePos = args.Position;
+	if (!Game::instance->input->IsKeyDown(Keys::LeftShift))
+	{
+		Vector2 offset = args.Offset;
+		gameObject->transform.RotateAroundAxis(Vector3::Up, offset.x * Game::instance->time.GetDeltaTime() * mouseSensevity);
+		gameObject->transform.RotateAroundLocalAxis(Vector3::Right, offset.y * Game::instance->time.GetDeltaTime() * mouseSensevity);
+	}
+
+	float deltaWheel = (float)args.WheelDelta * Game::instance->time.GetDeltaTime();
+	Game::instance->mainCamera->zoom(Game::instance->mainCamera->zoom() + deltaWheel);
 }
