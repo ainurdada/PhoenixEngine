@@ -14,4 +14,9 @@ class CameraControl : public BehaviourScript {
 	float mouseSensevity = .0000000000000000000001f;
 
 	void RotateCamera(const InputDevice::MouseMoveEventArgs& args);
+
+private:
+	Vector3 centerPoint = { 0,2,0 };
+	bool rotateAroundCentre = false;
+	float distanceFromCenter = 10.0f;
 };
