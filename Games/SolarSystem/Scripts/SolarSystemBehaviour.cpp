@@ -60,7 +60,25 @@ void SolarSystemBehaviour::Awake()
 				  DirectX::XM_PIDIV4);
 	Game::instance->InstantiateGameObject(planet2);
 
-	Vector3 size = { 1.f, 1.f, 1.f };
+	GameObject* planet3 = new GameObject;
+	Planet* earth = new Planet;
+	pos = sun->transform.position() + Vector3::Up * 4 + Vector3::Right * 4;
+	OrbitAxis = -Vector3::Right + Vector3::Up;
+	OrbitAxis.Normalize();
+	SelfAxis = Vector3::Forward;
+	planet3->AddComponent(*earth);
+	//planet2->transform.SetParent(&mercury->gameObject->transform);
+	//planet3->transform.localScale({ 0.5f, 0.5f, 0.5f });
+	earth->Init(pos,
+				&sun->transform,
+				OrbitAxis,
+				DirectX::XM_PIDIV2,
+				SelfAxis,
+				DirectX::XM_PIDIV4);
+	Game::instance->InstantiateGameObject(planet3);
+
+
+	Vector3 size = { .9f, .9f, .9f };
 	float border = 1.1f;
 	int countX = 20;
 	int countY = 20;
@@ -72,7 +90,7 @@ void SolarSystemBehaviour::Awake()
 		{
 			Vector3 pos = {
 				startX + ((float)i) * size.x * border,
-				-2,
+				-4,
 				startY + ((float)j) * size.z * border
 			};
 			Game::instance->InstantiateGameObject(CreatePlanet(pos));

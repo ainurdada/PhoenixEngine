@@ -37,8 +37,8 @@ void Camera::UpdateProjectionMatrix()
 	else
 	{
 		m_projectionMatrix = XMMatrixOrthographicLH(
-			(float)Game::instance->window.ClientWidth / zoomFactor,
-			(float)Game::instance->window.ClientHeight / zoomFactor,
+			(float)Game::instance->window.ClientWidth / zoomFactor * 0.025f,
+			(float)Game::instance->window.ClientHeight / zoomFactor * 0.025f,
 			minClipDistance,
 			maxClipDistance);
 	}
