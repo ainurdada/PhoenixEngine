@@ -16,6 +16,10 @@ GameObject* CreatePlanet(Vector3& pos)
 }
 void SolarSystemBehaviour::Awake()
 {
+	cameraControl = Game::instance->mainCamera->GetComponent<CameraControl>();
+	isPressed = false;
+
+	focusIndex = -1;
 	GameObject* sun = new GameObject;
 	Planet* star = new Planet;
 	Vector3 up = Vector3::Up;
@@ -29,6 +33,7 @@ void SolarSystemBehaviour::Awake()
 			   -DirectX::XM_PIDIV4);
 	//sun->transform.RotateAroundAxis(Vector3::Right, DirectX::XM_PIDIV2);
 	Game::instance->InstantiateGameObject(sun);
+	planets.push_back(sun);
 
 	GameObject* planet1 = new GameObject;
 	Planet* mercury = new Planet;
@@ -43,6 +48,7 @@ void SolarSystemBehaviour::Awake()
 				  DirectX::XM_PI);
 	//planet1->transform.RotateAroundAxis(Vector3::Forward, DirectX::XM_PIDIV2);
 	Game::instance->InstantiateGameObject(planet1);
+	planets.push_back(planet1);
 
 	GameObject* planet2 = new GameObject;
 	Planet* venus = new Planet;
@@ -59,6 +65,7 @@ void SolarSystemBehaviour::Awake()
 				SelfAxis,
 				  DirectX::XM_PIDIV4);
 	Game::instance->InstantiateGameObject(planet2);
+	planets.push_back(planet2);
 
 	GameObject* planet3 = new GameObject;
 	Planet* earth = new Planet;
@@ -76,6 +83,7 @@ void SolarSystemBehaviour::Awake()
 				SelfAxis,
 				DirectX::XM_PIDIV4);
 	Game::instance->InstantiateGameObject(planet3);
+	planets.push_back(planet3);
 
 
 	Vector3 size = { .9f, .9f, .9f };
@@ -95,5 +103,36 @@ void SolarSystemBehaviour::Awake()
 			};
 			Game::instance->InstantiateGameObject(CreatePlanet(pos));
 		}
+	}
+}
+
+void SolarSystemBehaviour::Update()
+{
+	if (focusIndex != -1)
+	{
+		cameraControl->centerPoint = planets[focusIndex]->transform.position();
+	}
+	else
+	{
+		cameraControl->centerPoint = Vector3::One;
+	}
+	if (Game::instance->input->IsKeyDown(Keys::V))
+	{
+		if (!isPressed)
+		{
+			focusIndex++;
+			if (focusIndex >= planets.size()) focusIndex = -1;
+			if (focusIndex != -1)
+			{
+				cameraControl->distanceFromCenter =
+					planets[focusIndex]->GetComponent<Planet>()->radius * planets[focusIndex]->transform.localScale().x /
+					(sinf(Game::instance->mainCamera->fov() / 2 * DEG_TO_RAD));
+			}
+			isPressed = true;
+		}
+	}
+	else
+	{
+		isPressed = false;
 	}
 }

@@ -9,25 +9,27 @@ Shader::~Shader()
 	layout->Release();
 }
 
-HRESULT Shader::CompileVS(D3D_SHADER_MACRO macros[], ID3DInclude* include)
+HRESULT Shader::Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device> device)
 {
+	pathToShader = shaderPath;
 	HRESULT res;
 	res = D3DCompileFromFile(pathToShader,
-		macros /*macros*/,
-		include /*include*/,
-		"VSMain",
-		"vs_5_0",
-		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR,
-		0,
-		&vertexBC,
-		&errorVertexCode);
+							 nullptr,
+							 nullptr,
+							 "VSMain",
+							 "vs_5_0",
+							 D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION | D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR,
+							 0,
+							 &vertexBC,
+							 &errorVertexCode);
 
 	// If the shader failed to compile it should have written something to the error message.
-	if (errorVertexCode) {
+	if (errorVertexCode)
+	{
 		char* compileErrors = (char*)(errorVertexCode->GetBufferPointer());
 		std::cout << compileErrors << std::endl;
 	}
-	else if (FAILED(res)) 
+	else if (FAILED(res))
 	{
 		return res;
 	}
@@ -36,24 +38,20 @@ HRESULT Shader::CompileVS(D3D_SHADER_MACRO macros[], ID3DInclude* include)
 		vertexBC->GetBufferPointer(),
 		vertexBC->GetBufferSize(),
 		nullptr, &VS);
-	return res;
-}
 
-HRESULT Shader::CompilePS(D3D_SHADER_MACRO macros[], ID3DInclude* include)
-{
-	HRESULT res;
 	res = D3DCompileFromFile(pathToShader,
-		macros /*macros*/,
-		include /*include*/,
-		"PSMain",
-		"ps_5_0",
-		D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
-		0,
-		&pixelBC,
-		&errorPixelCode);
+							 nullptr,
+							 nullptr,
+							 "PSMain",
+							 "ps_5_0",
+							 D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION,
+							 0,
+							 &pixelBC,
+							 &errorPixelCode);
 
 	// If the shader failed to compile it should have written something to the error message.
-	if (errorPixelCode) {
+	if (errorPixelCode)
+	{
 		char* compileErrors = (char*)(errorPixelCode->GetBufferPointer());
 		std::cout << compileErrors << std::endl;
 	}
@@ -62,11 +60,7 @@ HRESULT Shader::CompilePS(D3D_SHADER_MACRO macros[], ID3DInclude* include)
 		pixelBC->GetBufferPointer(),
 		pixelBC->GetBufferSize(),
 		nullptr, &PS);
-	return res;
-}
 
-HRESULT Shader::CreateInputLayout()
-{
 	D3D11_INPUT_ELEMENT_DESC inputElements[] = {
 		D3D11_INPUT_ELEMENT_DESC {
 			"POSITION",
@@ -86,7 +80,6 @@ HRESULT Shader::CreateInputLayout()
 			0}
 	};
 
-	HRESULT res;
 	res = device->CreateInputLayout(
 		inputElements,
 		2,

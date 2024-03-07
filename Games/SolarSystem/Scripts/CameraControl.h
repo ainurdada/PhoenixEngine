@@ -15,8 +15,10 @@ class CameraControl : public BehaviourScript {
 
 	void RotateCamera(const InputDevice::MouseMoveEventArgs& args);
 
-private:
+public:
 	Vector3 centerPoint = { 0,2,0 };
-	bool rotateAroundCentre = false;
 	float distanceFromCenter = 10.0f;
+
+private:
+	bool rotateAroundCentre = false;
 };

@@ -12,6 +12,8 @@ public:
 			  float selfAngleVelocity);
 	void Awake() override;
 	void Update() override;
+
+	float radius;
 private:
 	Transform* orbitCenter = nullptr;
 	Vector3 orbitAxisRotation;

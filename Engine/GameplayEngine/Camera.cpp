@@ -29,7 +29,7 @@ void Camera::UpdateProjectionMatrix()
 	if (isPerspective)
 	{
 		m_projectionMatrix = XMMatrixPerspectiveFovLH(
-			fov * DEG_TO_RAD / zoomFactor,
+			m_fov * DEG_TO_RAD / zoomFactor,
 			(float)Game::instance->window.ClientWidth / (float)Game::instance->window.ClientHeight,
 			minClipDistance,
 			maxClipDistance);
@@ -61,4 +61,9 @@ void Camera::zoom(float value)
 float Camera::zoom()
 {
 	return zoomFactor;
+}
+
+float Camera::fov() const
+{
+	return m_fov;
 }

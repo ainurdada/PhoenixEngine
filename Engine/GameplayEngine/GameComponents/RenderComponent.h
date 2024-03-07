@@ -30,7 +30,7 @@ public:
 	void Start() override;
 public:
 	Mesh mesh;
-	Shader shader;
+	const Shader* shader;
 	LPCWSTR shaderPath = L"";
 private:
 	MatrixData matrix_data;

@@ -19,7 +19,8 @@ void Planet::Awake()
 {
 	RenderComponent* sunRender = new RenderComponent;
 	sunRender->shaderPath = BaseResource::litShader;
-	sunRender->mesh = Basic::Sphere::Create(1.f / 2, 20, 20);
+	radius = 1.f / 2;
+	sunRender->mesh = Basic::Sphere::Create(radius, 20, 20);
 	Vector3 size = { 1,1,1 };
 	//sunRender->mesh = Basic::Box::Create(size, size);
 	gameObject->AddComponent(*sunRender);

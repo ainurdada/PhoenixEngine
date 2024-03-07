@@ -138,9 +138,6 @@
     <ClCompile Include="Engine\GameplayEngine\GameComponents\Collider.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp" />
     <ClCompile Include="Engine\GameplayEngine\Transform.cpp" />
-    <ClCompile Include="Games\3DScene\Scene3DTest.cpp" />
-    <ClCompile Include="Games\3DScene\Scripts\CameraControl.cpp" />
-    <ClCompile Include="Games\3DScene\Scripts\TestBox.cpp" />
     <ClCompile Include="Games\PingPong\Scripts\Ball.cpp" />
     <ClCompile Include="Basic\Shapes\Box2D.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\GameComponent.cpp" />
@@ -163,6 +160,7 @@
     <ClCompile Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.cpp" />
     <ClCompile Include="Basic\Shapes\Sphere.cpp" />
     <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\ShaderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
@@ -180,9 +178,6 @@
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
-    <ClInclude Include="Games\3DScene\Scene3DTest.h" />
-    <ClInclude Include="Games\3DScene\Scripts\CameraControl.h" />
-    <ClInclude Include="Games\3DScene\Scripts\TestBox.h" />
     <ClInclude Include="Games\PingPong\Scripts\Ball.h" />
     <ClInclude Include="Basic\Shapes\Box2D.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\GameComponent.h" />
@@ -210,6 +205,7 @@
     <ClInclude Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.h" />
     <ClInclude Include="Basic\Shapes\Sphere.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
+    <ClInclude Include="Engine\GraphicsEngine\ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

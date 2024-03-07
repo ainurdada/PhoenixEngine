@@ -1,8 +1,8 @@
 #include "RenderComponent.h"
+#include "../../GraphicsEngine/ShaderManager.h"
 
 void RenderComponent::DestroyResources()
 {
-	shader.~Shader();
 	transform_buffer->Release();
 }
 
@@ -20,11 +20,11 @@ void RenderComponent::Draw()
 	memcpy(dataPtr, &(matrix_data), sizeof(MatrixData));
 	Game::instance->graphics.GetContext()->Unmap(transform_buffer, 0);
 
-	Game::instance->graphics.SetUpIA(shader.layout, mesh, shader);
+	Game::instance->graphics.SetUpIA(shader->layout, mesh, *shader);
 
 	// Set shader
 	Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, &transform_buffer);
-	Game::instance->graphics.SetShader(shader);
+	Game::instance->graphics.SetShader(*shader);
 
 	Game::instance->graphics.GetContext()->DrawIndexed(mesh.indexes.size(), 0, 0);
 }
@@ -32,15 +32,7 @@ void RenderComponent::Draw()
 void RenderComponent::Initialize()
 {
 	HRESULT res;
-	shader.pathToShader = shaderPath;
-	shader.device = Game::instance->graphics.GetDevice();
-	res = this->shader.CompileVS(shader.VSMacros, shader.VSInclude);
-	if (FAILED(res))
-	{
-		Game::instance->window.ShowMessageBox(this->shader.pathToShader, L"Missing Shader File");
-	}
-	res = this->shader.CompilePS(shader.PSMacros, shader.PSInclude);
-	res = this->shader.CreateInputLayout();
+	shader = ShaderManager::Get(shaderPath);
 
 	// Create transform buffer
 	D3D11_BUFFER_DESC transformBufDesc = {};

@@ -5,7 +5,7 @@ void CameraControl::Awake()
 {
 	centerPoint = { 0,2,0 };
 	rotateAroundCentre = false;
-	distanceFromCenter = 10.0f;
+	distanceFromCenter = 5.0f;
 	moveSpeed = 5.0f;
 	mouseSensevity = .001f;
 	Game::instance->mainCamera->transform.position({ 0.f, 2.f, -10.0f });
@@ -60,12 +60,15 @@ void CameraControl::Update()
 	if (Game::instance->input->IsKeyDown(Keys::R))
 	{
 		rotateAroundCentre = true;
-		Vector3 dir = gameObject->transform.Forward();
-		gameObject->transform.position(centerPoint - dir * distanceFromCenter);
 	}
 	if (Game::instance->input->IsKeyDown(Keys::F))
 	{
 		rotateAroundCentre = false;
+	}
+	if (rotateAroundCentre)
+	{
+		Vector3 dir = gameObject->transform.Forward();
+		gameObject->transform.position(centerPoint - dir * distanceFromCenter);
 	}
 }
 

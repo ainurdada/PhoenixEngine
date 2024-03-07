@@ -91,15 +91,6 @@
     <ClCompile Include="Engine\GameplayEngine\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Games\3DScene\Scene3DTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Games\3DScene\Scripts\CameraControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Games\3DScene\Scripts\TestBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Games\SolarSystem\SolarSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -113,6 +104,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GraphicsEngine\ShaderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -157,9 +151,6 @@
     <ClInclude Include="Engine\GameplayEngine\Camera.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
     <ClInclude Include="Basic\Shapes\Box.h" />
-    <ClInclude Include="Games\3DScene\Scene3DTest.h" />
-    <ClInclude Include="Games\3DScene\Scripts\CameraControl.h" />
-    <ClInclude Include="Games\3DScene\Scripts\TestBox.h" />
     <ClInclude Include="Games\SolarSystem\SolarSystem.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\CameraControl.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.h" />
@@ -168,6 +159,7 @@
     <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\TestRotateAroundPoint.h" />
     <ClInclude Include="Engine\DebugSystem\DebugSystem.h" />
+    <ClInclude Include="Engine\GraphicsEngine\ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

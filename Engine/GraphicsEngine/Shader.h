@@ -16,23 +16,17 @@ class Shader
 {
 	friend class RenderComponent;
 	friend class Graphics;
+	friend class ShaderManager;
 public:
 	Shader() {};
 	~Shader();
 private:
-	HRESULT CompileVS(D3D_SHADER_MACRO macros[], ID3DInclude* include);
-	HRESULT CompilePS(D3D_SHADER_MACRO macros[], ID3DInclude* include);
-	HRESULT CreateInputLayout();
+	HRESULT Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device> device);
 
 	ID3D11VertexShader* VS = nullptr;
 	ID3D11PixelShader* PS = nullptr;
 	ID3D11InputLayout* layout = nullptr; 
 	LPCWSTR pathToShader = L"";
-	D3D_SHADER_MACRO* VSMacros = nullptr;
-	D3D_SHADER_MACRO* PSMacros = nullptr;
-	ID3DInclude* VSInclude = nullptr;
-	ID3DInclude* PSInclude = nullptr;
-	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3DBlob* vertexBC = nullptr;
 	ID3DBlob* pixelBC = nullptr;
 	ID3DBlob* errorVertexCode = nullptr;

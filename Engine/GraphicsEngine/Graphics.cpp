@@ -104,7 +104,7 @@ UINT strides[] = { 32 };
 UINT offsets[] = { 0 };
 
 ID3D11Buffer* vb;
-void Graphics::SetUpIA(ID3D11InputLayout* layout, Mesh& mesh, Shader& shader)
+void Graphics::SetUpIA(ID3D11InputLayout* layout, Mesh& mesh, const Shader& shader)
 {
 	context->IASetInputLayout(layout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
