@@ -10,8 +10,8 @@ class CameraControl : public BehaviourScript {
 	void DestroyResources() override;
 	void Reload() override;
 
-	float moveSpeed = 5.0f;
-	float mouseSensevity = .0000000000000000000001f;
+	float moveSpeed;
+	float mouseSensevity;
 
 	void RotateCamera(const InputDevice::MouseMoveEventArgs& args);
 

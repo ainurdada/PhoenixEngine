@@ -6,6 +6,8 @@ void CameraControl::Awake()
 	centerPoint = { 0,2,0 };
 	rotateAroundCentre = false;
 	distanceFromCenter = 10.0f;
+	moveSpeed = 1.0f;
+	mouseSensevity = .001f;
 	Game::instance->mainCamera->transform.position({ 0.f, 2.f, -10.0f });
 }
 
@@ -83,7 +85,7 @@ void CameraControl::RotateCamera(const InputDevice::MouseMoveEventArgs& args)
 {
 	if (!Game::instance->input->IsKeyDown(Keys::LeftShift))
 	{
-		Vector2 offset = args.Offset * Game::instance->time.GetDeltaTime() * mouseSensevity;
+		Vector2 offset = args.Offset * mouseSensevity;
 		if (rotateAroundCentre)
 		{
 			gameObject->transform.RotateAroundPoint(centerPoint, Vector3::Up, offset.x);
