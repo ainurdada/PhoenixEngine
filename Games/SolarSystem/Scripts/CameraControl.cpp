@@ -6,7 +6,7 @@ void CameraControl::Awake()
 	centerPoint = { 0,2,0 };
 	rotateAroundCentre = false;
 	distanceFromCenter = 10.0f;
-	moveSpeed = 1.0f;
+	moveSpeed = 5.0f;
 	mouseSensevity = .001f;
 	Game::instance->mainCamera->transform.position({ 0.f, 2.f, -10.0f });
 }
