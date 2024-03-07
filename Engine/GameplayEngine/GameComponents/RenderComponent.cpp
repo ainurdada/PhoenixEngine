@@ -20,9 +20,9 @@ void RenderComponent::Draw()
 	memcpy(dataPtr, &(matrix_data), sizeof(MatrixData));
 	Game::instance->graphics.GetContext()->Unmap(transform_buffer, 0);
 
-	Game::instance->graphics.SetUpIA(shader->layout, mesh, *shader);
 
 	// Set shader
+	Game::instance->graphics.SetUpIA(mesh, *shader);
 	Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, &transform_buffer);
 	Game::instance->graphics.SetShader(*shader);
 

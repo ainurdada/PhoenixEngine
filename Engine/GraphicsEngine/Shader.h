@@ -27,9 +27,5 @@ private:
 	ID3D11PixelShader* PS = nullptr;
 	ID3D11InputLayout* layout = nullptr; 
 	LPCWSTR pathToShader = L"";
-	ID3DBlob* vertexBC = nullptr;
-	ID3DBlob* pixelBC = nullptr;
-	ID3DBlob* errorVertexCode = nullptr;
-	ID3DBlob* errorPixelCode = nullptr;
 };
 

@@ -10,7 +10,7 @@ class Mesh
 {
 public:
 	Mesh() {};
-	Mesh(std::vector<Vec4> XMPoints, std::vector<int> indexes);
+	Mesh(const std::vector<Vec4> points, const std::vector<int> indexes);
 public:
 	D3D11_BUFFER_DESC vertexBufDesc = {};
 	D3D11_BUFFER_DESC indexBufDesc = {};

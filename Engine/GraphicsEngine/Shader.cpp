@@ -13,6 +13,8 @@ HRESULT Shader::Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device>
 {
 	pathToShader = shaderPath;
 	HRESULT res;
+	ID3DBlob* vertexBC = nullptr;
+	ID3DBlob* errorVertexCode = nullptr;
 	res = D3DCompileFromFile(pathToShader,
 							 nullptr,
 							 nullptr,
@@ -39,6 +41,8 @@ HRESULT Shader::Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device>
 		vertexBC->GetBufferSize(),
 		nullptr, &VS);
 
+	ID3DBlob* pixelBC = nullptr;
+	ID3DBlob* errorPixelCode = nullptr;
 	res = D3DCompileFromFile(pathToShader,
 							 nullptr,
 							 nullptr,
