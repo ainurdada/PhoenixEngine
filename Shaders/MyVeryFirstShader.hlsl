@@ -10,24 +10,20 @@ struct PS_IN
  	float4 col : COLOR;
 };
 
-struct MatrixData
+struct ConstantData
 {
-    matrix world;
-    matrix view;
-    matrix projection;
+    matrix WorldViewProjection;
 };
 
-cbuffer TransformBuffer : register(b0)
+cbuffer ConstantBuffer : register(b0)
 {
-    MatrixData mat;
+    ConstantData cdata;
 }
 
 PS_IN VSMain( VS_IN input)
 {
 	PS_IN output = (PS_IN)0;
-    output.pos = mul(input.pos, mat.world);
-    output.pos = mul(output.pos, mat.view);
-    output.pos = mul(output.pos, mat.projection);
+    output.pos = mul(input.pos, cdata.WorldViewProjection);
 	output.col = input.col;
 	
 	return output;
@@ -36,8 +32,5 @@ PS_IN VSMain( VS_IN input)
 float4 PSMain( PS_IN input ) : SV_Target
 {
 	float4 col = input.col;
-#ifdef TEST
-	if (input.pos.x > 400) col = TCOLOR;
-#endif
 	return col;
 }
