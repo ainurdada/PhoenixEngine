@@ -51,5 +51,9 @@ private:
 
 protected:
 	virtual void OnCreated() = 0;
+	virtual void OnUpdate() = 0;
+	virtual void OnFixedUpdate() = 0;
+	virtual void OnDebugRender() = 0;
+	virtual void OnClearResources() = 0;
 };
 

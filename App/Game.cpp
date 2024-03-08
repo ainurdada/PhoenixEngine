@@ -97,6 +97,7 @@ void Game::processInput()
 
 void Game::update(float deltaTime)
 {
+	OnUpdate();
 	for (GameObject& gameObj : gameObjects)
 	{
 		gameObj.Update(deltaTime);
@@ -104,6 +105,7 @@ void Game::update(float deltaTime)
 }
 void Game::fixedUpdate()
 {
+	OnFixedUpdate();
 	for (GameObject& gameObj : gameObjects)
 	{
 		gameObj.FixedUpdate();
@@ -115,6 +117,7 @@ void Game::render(float deltaFrame)
 	graphics.UpdateState();
 	graphics.SetUpViewPort(window.ClientWidth, window.ClientHeight);
 	graphics.UpdateRenderTarget();
+	OnDebugRender();
 	for (GameObject& obj : gameObjects)
 	{
 		obj.Draw();
@@ -124,6 +127,7 @@ void Game::render(float deltaFrame)
 
 void Game::ClearResources()
 {
+	OnClearResources();
 	for (GameObject& gameObj : gameObjects)
 	{
 		gameObj.Release();

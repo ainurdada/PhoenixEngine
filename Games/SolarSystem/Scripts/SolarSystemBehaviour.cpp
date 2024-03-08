@@ -86,7 +86,7 @@ void SolarSystemBehaviour::Awake()
 	planets.push_back(planet3);
 
 
-	Vector3 size = { .9f, .9f, .9f };
+	/*Vector3 size = { .9f, .9f, .9f };
 	float border = 1.1f;
 	int countX = 20;
 	int countY = 20;
@@ -103,7 +103,7 @@ void SolarSystemBehaviour::Awake()
 			};
 			Game::instance->InstantiateGameObject(CreatePlanet(pos));
 		}
-	}
+	}*/
 }
 
 void SolarSystemBehaviour::Update()

@@ -12,4 +12,24 @@ void SolarSystem::OnCreated()
 	SolarSystemBehaviour* b = new SolarSystemBehaviour;
 	solarSystem->AddComponent(*b);
 	InstantiateGameObject(solarSystem);
+
+	debugGrid.Init(0, 0, 0);
+}
+
+void SolarSystem::OnDebugRender()
+{
+	debugGrid.Draw();
+}
+
+void SolarSystem::OnClearResources()
+{
+	debugGrid.ShotDown();
+}
+
+void SolarSystem::OnUpdate()
+{
+}
+
+void SolarSystem::OnFixedUpdate()
+{
 }

@@ -17,6 +17,7 @@ class Shader
 	friend class RenderComponent;
 	friend class Graphics;
 	friend class ShaderManager;
+	friend class DebugLine;
 public:
 	Shader() {};
 	~Shader();

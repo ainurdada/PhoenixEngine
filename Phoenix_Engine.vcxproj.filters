@@ -109,6 +109,12 @@
     <ClCompile Include="Engine\GraphicsEngine\ShaderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\DebugSystem\DebugGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DebugSystem\DebugLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -160,12 +166,15 @@
     <ClInclude Include="Games\SolarSystem\Scripts\TestRotateAroundPoint.h" />
     <ClInclude Include="Engine\DebugSystem\DebugSystem.h" />
     <ClInclude Include="Engine\GraphicsEngine\ShaderManager.h" />
+    <ClInclude Include="Engine\DebugSystem\DebugGrid.h" />
+    <ClInclude Include="Engine\DebugSystem\DebugLine.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Shaders\MyVeryFirstShader.hlsl" />
+    <Text Include="Shaders\LitShader.hlsl" />
+    <Text Include="Shaders\LineDebugShader.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

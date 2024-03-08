@@ -82,11 +82,6 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	{
 		cout << "failed to create DepthStencilView" << endl;
 	}
-
-	//Set our Render Target
-	context->OMSetRenderTargets(1, &rtv, depthStencilView);
-
-
 	return res;
 }
 
