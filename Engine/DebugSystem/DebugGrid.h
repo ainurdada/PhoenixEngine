@@ -22,9 +22,6 @@ namespace Debug
 		float cell_size;
 		DirectX::XMFLOAT4 color;
 
-		std::vector<DirectX::XMFLOAT4> points;
-		std::vector<int> indexes;
-
 		std::unique_ptr<DirectX::CommonStates> m_states;
 		std::unique_ptr<DirectX::BasicEffect> m_effect;
 		std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionColor>> m_batch;

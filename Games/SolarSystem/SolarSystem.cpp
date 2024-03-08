@@ -13,7 +13,7 @@ void SolarSystem::OnCreated()
 	solarSystem->AddComponent(*b);
 	InstantiateGameObject(solarSystem);
 
-	debugGrid.Init(0, 0, 0);
+	debugGrid.Init(100, 100, 1);
 }
 
 void SolarSystem::OnDebugRender()

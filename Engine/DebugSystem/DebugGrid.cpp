@@ -9,6 +9,11 @@ namespace Debug
 {
 	void DebugGrid::Init(int lines, int column, float cellSize)
 	{
+		color = { 1,1,1,1 };
+		lines_count = lines;
+		column_count = column;
+		cell_size = cellSize;
+
 		auto device = Game::instance->graphics.GetDevice().Get();
 		m_states = std::make_unique<CommonStates>(device);
 
@@ -20,8 +25,6 @@ namespace Debug
 
 		auto context = Game::instance->graphics.GetContext();
 		m_batch = std::make_unique<PrimitiveBatch<VertexPositionColor>>(context);
-
-		color = { 1,1,1,1 };
 	}
 	void DebugGrid::ShotDown()
 	{
@@ -45,15 +48,15 @@ namespace Debug
 
 		m_batch->Begin();
 
-		Vector3 xaxis(2.f, 0.f, 0.f);
-		Vector3 yaxis(0.f, 0.f, 2.f);
+		Vector3 xaxis = Vector3::Right * column_count * cell_size / 2.0f;
+		Vector3 yaxis = Vector3::Forward * lines_count * cell_size / 2.0f;
 		Vector3 origin = Vector3::Zero;
 
 		constexpr size_t divisions = 20;
 
-		for (size_t i = 0; i <= divisions; ++i)
+		for (size_t i = 0; i <= column_count; ++i)
 		{
-			float fPercent = float(i) / float(divisions);
+			float fPercent = float(i) / float(column_count);
 			fPercent = (fPercent * 2.0f) - 1.0f;
 
 			Vector3 scale = xaxis * fPercent + origin;
@@ -63,9 +66,9 @@ namespace Debug
 			m_batch->DrawLine(v1, v2);
 		}
 
-		for (size_t i = 0; i <= divisions; i++)
+		for (size_t i = 0; i <= lines_count; i++)
 		{
-			float fPercent = float(i) / float(divisions);
+			float fPercent = float(i) / float(lines_count);
 			fPercent = (fPercent * 2.0f) - 1.0f;
 
 			Vector3 scale = yaxis * fPercent + origin;
