@@ -133,8 +133,7 @@
   <ItemGroup>
     <ClCompile Include="App\Game.cpp" />
     <ClCompile Include="Basic\Shapes\Box.cpp" />
-    <ClCompile Include="Engine\DebugSystem\DebugLine.cpp" />
-    <ClCompile Include="Engine\DebugSystem\DebugGrid.cpp" />
+    <ClCompile Include="Engine\DebugSystem\Debug.cpp" />
     <ClCompile Include="Engine\GameplayEngine\Camera.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BoxCollider.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\Collider.cpp" />
@@ -168,8 +167,7 @@
     <ClInclude Include="App\Game.h" />
     <ClInclude Include="Basic\Shapes\BasicShapes.h" />
     <ClInclude Include="Basic\Shapes\Box.h" />
-    <ClInclude Include="Engine\DebugSystem\DebugLine.h" />
-    <ClInclude Include="Engine\DebugSystem\DebugGrid.h" />
+    <ClInclude Include="Engine\DebugSystem\Debug.h" />
     <ClInclude Include="Engine\DebugSystem\DebugSystem.h" />
     <ClInclude Include="Engine\FileManager\BaseResources.h" />
     <ClInclude Include="Engine\GameplayEngine\Camera.h" />

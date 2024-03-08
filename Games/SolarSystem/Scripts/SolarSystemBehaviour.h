@@ -7,6 +7,7 @@ class SolarSystemBehaviour : public BehaviourScript
 {
 	void Awake() override;
 	void Update() override;
+	void Draw() override;
 
 	std::vector<GameObject*> planets;
 	int focusIndex;

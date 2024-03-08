@@ -1,6 +1,5 @@
 #pragma once
 
-#include <vector>
 #include <directxmath.h>
 #include <Effects.h>
 #include <PrimitiveBatch.h>
@@ -8,19 +7,20 @@
 #include <CommonStates.h>
 #include <wrl.h>
 
-namespace Debug
+
+namespace DebugTool 
 {
-	class DebugGrid
+	class Debug
 	{
 	public:
-		void Init(int lines, int column, float cellSize);
+		void Init();
 		void ShotDown();
-		void Draw();
+
+		static void DrawLine(DirectX::XMFLOAT3 from, DirectX::XMFLOAT3 to, DirectX::XMFLOAT4 color);
+		static void DrawGrid(int lines, int column, float cellSize, DirectX::XMFLOAT4 color);
+
 	private:
-		int lines_count;
-		int column_count;
-		float cell_size;
-		DirectX::XMFLOAT4 color;
+		static Debug* instance;
 
 		std::unique_ptr<DirectX::CommonStates> m_states;
 		std::unique_ptr<DirectX::BasicEffect> m_effect;

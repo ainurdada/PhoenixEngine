@@ -11,6 +11,7 @@ class Game;
 #include <iostream>
 #include "../Engine/InputSystem/InputDevice.h"
 #include "../Engine/GameplayEngine/Camera.h"
+#include "../Engine/DebugSystem/DebugSystem.h"
 
 class Game
 {
@@ -46,6 +47,7 @@ private:
 	virtual void render(float deltaFrame);
 	virtual void ClearResources();
 private:
+	DebugTool::Debug debug;
 	HRESULT res;
 	bool isExitRequested = false;
 

@@ -15,3 +15,4 @@
 #include "Engine/PhysicsEngine/PhysicsEngine.h"
 
 using namespace SMath;
+using namespace DebugTool;

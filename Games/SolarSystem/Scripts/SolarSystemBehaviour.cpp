@@ -136,3 +136,7 @@ void SolarSystemBehaviour::Update()
 		isPressed = false;
 	}
 }
+
+void SolarSystemBehaviour::Draw()
+{
+}

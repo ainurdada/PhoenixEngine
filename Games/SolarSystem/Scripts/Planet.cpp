@@ -44,3 +44,18 @@ void Planet::Update()
 		centerOffset = Transform::Distance(orbitCenter, &gameObject->transform);
 	}
 }
+
+void Planet::Draw()
+{
+	Debug::DrawLine(
+		gameObject->transform.position(),
+		gameObject->transform.position() + gameObject->transform.Up(),
+		{ 0,0,1,1 }
+	);
+
+	Debug::DrawLine(
+		gameObject->transform.position(),
+		Vector3::Zero,
+		{ 1,0,0,1 }
+	);
+}

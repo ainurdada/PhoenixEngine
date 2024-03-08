@@ -12,6 +12,7 @@ public:
 			  float selfAngleVelocity);
 	void Awake() override;
 	void Update() override;
+	void Draw() override;
 
 	float radius;
 private:

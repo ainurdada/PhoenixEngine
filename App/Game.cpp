@@ -20,6 +20,8 @@ void Game::Create()
 	size = { 1024, 720 };
 	window.Create(name, size.x, size.y);
 	graphics.Init(window.GetHWND(), window.ClientWidth, window.ClientHeight);
+	debug.Init();
+
 	mainCamera = new Camera;
 
 	OnCreated();
@@ -128,6 +130,7 @@ void Game::render(float deltaFrame)
 void Game::ClearResources()
 {
 	OnClearResources();
+	debug.ShotDown();
 	for (GameObject& gameObj : gameObjects)
 	{
 		gameObj.Release();

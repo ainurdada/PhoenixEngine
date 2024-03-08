@@ -1,3 +1,3 @@
 #pragma once
 
-#include "DebugGrid.h"
+#include "Debug.h"
