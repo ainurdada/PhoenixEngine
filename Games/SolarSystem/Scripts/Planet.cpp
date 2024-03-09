@@ -18,7 +18,10 @@ void Planet::Init(Vector3& worldPosition, Transform* orbitCenter, Vector3& orbit
 void Planet::Awake()
 {
 	RenderComponent* sunRender = new RenderComponent;
-	sunRender->shaderPath = BaseResource::litShader;
+	Material* material = new Material;
+	material->shaderPath = BaseResource::litShader;
+	material->texture = new Texture(BaseResource::brickTextur);
+	sunRender->material = material;
 	radius = 1.f / 2;
 	sunRender->mesh = Basic::Sphere::Create(radius, 20, 20);
 	Vector3 size = { 1,1,1 };

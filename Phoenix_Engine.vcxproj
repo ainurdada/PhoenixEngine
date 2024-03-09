@@ -139,12 +139,12 @@
     <ClCompile Include="Engine\GameplayEngine\GameComponents\Collider.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp" />
     <ClCompile Include="Engine\GameplayEngine\Transform.cpp" />
-    <ClCompile Include="Games\PingPong\Scripts\Ball.cpp" />
     <ClCompile Include="Basic\Shapes\Box2D.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\GameComponent.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameObject.cpp" />
     <ClCompile Include="Engine\InputSystem\InputDevice.cpp" />
     <ClCompile Include="Games\SolarSystem\Scripts\CameraControl.cpp" />
+    <ClCompile Include="Basic\Textures\LinearTexture.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp" />
@@ -153,8 +153,6 @@
     <ClCompile Include="Engine\GraphicsEngine\Mesh.cpp" />
     <ClCompile Include="Lib\Math\src\Vec.cpp" />
     <ClCompile Include="App\Window.cpp" />
-    <ClCompile Include="Games\PingPong\PingPongGame.cpp" />
-    <ClCompile Include="Games\PingPong\Scripts\Player.cpp" />
     <ClCompile Include="Lib\Delegates\Delegates.cpp" />
     <ClCompile Include="Engine\PhysicsEngine\Physics.cpp" />
     <ClCompile Include="Games\SolarSystem\SolarSystem.cpp" />
@@ -162,6 +160,9 @@
     <ClCompile Include="Basic\Shapes\Sphere.cpp" />
     <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\ShaderManager.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\Texture.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\Material.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
@@ -178,9 +179,9 @@
     <ClInclude Include="Engine\GameplayEngine\GameObject.hpp" />
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Vertex.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
-    <ClInclude Include="Games\PingPong\Scripts\Ball.h" />
     <ClInclude Include="Basic\Shapes\Box2D.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\GameComponent.h" />
     <ClInclude Include="Engine\GameplayEngine\GameObject.h" />
@@ -198,9 +199,9 @@
     <ClInclude Include="Engine\GraphicsEngine\Mesh.h" />
     <ClInclude Include="Lib\Math\src\Vec.h" />
     <ClInclude Include="App\Window.h" />
-    <ClInclude Include="Games\PingPong\PingPongGame.h" />
-    <ClInclude Include="Games\PingPong\Scripts\Player.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Material.h" />
+    <ClInclude Include="Basic\Textures\LinearTexture.h" />
     <ClInclude Include="PhoenixEngine.h" />
     <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
     <ClInclude Include="Games\SolarSystem\SolarSystem.h" />
@@ -208,6 +209,8 @@
     <ClInclude Include="Basic\Shapes\Sphere.h" />
     <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
     <ClInclude Include="Engine\GraphicsEngine\ShaderManager.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Texture.h" />
+    <ClInclude Include="Engine\GraphicsEngine\TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

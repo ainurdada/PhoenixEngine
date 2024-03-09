@@ -1,12 +1,13 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<Vec4> points, const std::vector<int> indexes)
+Mesh::Mesh(const std::vector<Vertex> verteces, const std::vector<int> indexes)
 {
-	this->indexes = indexes;
-
-	for (Vec4 p : points) {
-		DirectX::XMFLOAT4 XMp(p.x, p.y, p.z, p.w);
-		XMPoints.push_back(XMp);
+	for (const Vertex& v : verteces) {
+		m_verteces.push_back(v);
+	}
+	for (int i : indexes)
+	{
+		this->indexes.push_back(i);
 	}
 
 	vertexBufDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -14,9 +15,9 @@ Mesh::Mesh(const std::vector<Vec4> points, const std::vector<int> indexes)
 	vertexBufDesc.CPUAccessFlags = 0;
 	vertexBufDesc.MiscFlags = 0;
 	vertexBufDesc.StructureByteStride = 0;
-	vertexBufDesc.ByteWidth = sizeof(DirectX::XMFLOAT4) * XMPoints.size();
+	vertexBufDesc.ByteWidth = sizeof(Vertex) * m_verteces.size();
 
-	vertexData.pSysMem = XMPoints.data();
+	vertexData.pSysMem = m_verteces.data();
 	vertexData.SysMemPitch = 0;
 	vertexData.SysMemSlicePitch = 0;
 

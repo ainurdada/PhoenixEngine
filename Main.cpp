@@ -1,4 +1,3 @@
-#include "Games/PingPong/PingPongGame.h"
 #include "Games/SolarSystem/SolarSystem.h"
 
 int main() {

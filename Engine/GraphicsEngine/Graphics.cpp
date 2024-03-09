@@ -6,6 +6,8 @@ using namespace std;
 
 HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 {
+	HRESULT res;
+
 	D3D_FEATURE_LEVEL featureLevel[] = { D3D_FEATURE_LEVEL_11_1 };
 	ZeroMemory(&swapDesc, sizeof(swapDesc));
 	swapDesc.BufferCount = 2;
@@ -24,7 +26,7 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	swapDesc.SampleDesc.Count = 1;
 	swapDesc.SampleDesc.Quality = 0;
 
-	auto res = D3D11CreateDeviceAndSwapChain(
+	res = D3D11CreateDeviceAndSwapChain(
 		nullptr,
 		D3D_DRIVER_TYPE_HARDWARE,
 		nullptr,
@@ -83,7 +85,7 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 		cout << "failed to create DepthStencilView" << endl;
 	}
 	return res;
-}
+	}
 
 const Microsoft::WRL::ComPtr<ID3D11Device>& Graphics::GetDevice() const
 {

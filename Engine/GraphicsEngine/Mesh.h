@@ -4,13 +4,14 @@ class Mesh;
 #include <vector>
 
 #include "Graphics.h"
-#include "../../Lib/Math/Math.h"
+#include "Vertex.h"
+
 
 class Mesh
 {
 public:
 	Mesh() {};
-	Mesh(const std::vector<Vec4> points, const std::vector<int> indexes);
+	Mesh(const std::vector<Vertex> verteces, const std::vector<int> indexes);
 public:
 	D3D11_BUFFER_DESC vertexBufDesc = {};
 	D3D11_BUFFER_DESC indexBufDesc = {};
@@ -18,7 +19,7 @@ public:
 	D3D11_SUBRESOURCE_DATA indexData = {};
 	ID3D11Buffer* vb; 
 	ID3D11Buffer* ib;
-	std::vector<DirectX::XMFLOAT4> XMPoints;
+	std::vector<Vertex> m_verteces;
 	std::vector<int> indexes;
 };
 

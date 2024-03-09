@@ -1,4 +1,5 @@
 #include "Sphere.h"
+#include "../../Engine/GraphicsEngine/Vertex.h"
 #include "cmath"
 using namespace DirectX;
 using namespace SMath;
@@ -8,11 +9,13 @@ namespace Basic
 	{
 		float phiStep = XM_PI / stackCount;
 		float thetaStep = 2.0f * XM_PI / sliceCount;
-		std::vector<Vec4> points;
+		std::vector<Vertex> points;
 		std::vector<int> indexes;
 
-		points.push_back({ 0, radius,0, 1 });
-		points.push_back({ 0, 1, 0, 1 });
+		XMFLOAT4 pos = { 0, radius,0,1 };
+		Vector4 tex = { 0,0,0,0 };
+		Vertex vert = { pos, tex };
+		points.push_back(vert);
 		for (int i = 1; i <= stackCount - 1; i++)
 		{
 			float phi = i * phiStep;
@@ -24,12 +27,16 @@ namespace Basic
 					(radius * cosf(phi)),
 					(radius * sinf(phi) * sinf(theta))
 				);
-				points.push_back({ p.x,p.y,p.z,1 });
-				points.push_back({ p.x,p.y,p.z,1 });
+				pos = { p.x,p.y,p.z,1 };
+				tex = { theta / (XM_PI * 2), phi / XM_PI };
+				vert = { pos, tex };
+				points.push_back(vert);
 			}
 		}
-		points.push_back({ 0, -radius, 0, 1 });
-		points.push_back({ 0, -radius, 0, 1 });
+		pos = { 0, -radius, 0,1 };
+		tex = { 0,1 };
+		vert = { pos, tex };
+		points.push_back(vert);
 
 		for (int i = 1; i <= sliceCount; i++)
 		{
@@ -52,7 +59,7 @@ namespace Basic
 				indexes.push_back(baseIndex + (i + 1) * ringVertexCount + j + 1);
 			}
 		}
-		int southPoleIndex = points.size() / 2 - 1;
+		int southPoleIndex = points.size() - 1;
 		baseIndex = southPoleIndex - ringVertexCount;
 		for (int i = 0; i < sliceCount; i++)
 		{

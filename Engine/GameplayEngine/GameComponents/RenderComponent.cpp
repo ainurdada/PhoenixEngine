@@ -11,9 +11,11 @@ using namespace DirectX;
 void RenderComponent::Draw()
 {
 	// Set shader
-	Game::instance->graphics.SetUpIA(mesh, *shader);
+	Game::instance->graphics.SetUpIA(mesh, *material->shader);
+	Game::instance->graphics.SetShader(*material->shader);
 	Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, &transform_buffer);
-	Game::instance->graphics.SetShader(*shader);
+	Game::instance->graphics.GetContext()->PSSetShaderResources(0, 1, &material->texture->pTextureRV);
+	Game::instance->graphics.GetContext()->PSSetSamplers(0, 1, &material->texture->pSampler);
 
 	Game::instance->graphics.GetContext()->DrawIndexed(mesh.indexes.size(), 0, 0);
 }
@@ -21,7 +23,12 @@ void RenderComponent::Draw()
 void RenderComponent::Initialize()
 {
 	HRESULT res;
-	shader = ShaderManager::Get(shaderPath);
+	if (material == nullptr)
+	{
+		Game::instance->window.ShowMessageBox(L"material on render component not instanced", L"");
+	}
+	material->Init();
+	
 
 	// Create transform buffer
 	D3D11_BUFFER_DESC transformBufDesc = {};

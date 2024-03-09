@@ -28,8 +28,7 @@ public:
 	void Start() override;
 public:
 	Mesh mesh;
-	const Shader* shader;
-	LPCWSTR shaderPath = L"";
+	Material* material;
 private:
 	ConstantData constant_data;
 	ID3D11Buffer* transform_buffer = nullptr;

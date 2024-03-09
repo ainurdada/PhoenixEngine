@@ -75,7 +75,7 @@ HRESULT Shader::Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device>
 			D3D11_INPUT_PER_VERTEX_DATA,
 			0},
 		D3D11_INPUT_ELEMENT_DESC {
-			"COLOR",
+			"TEXCOORD",
 			0,
 			DXGI_FORMAT_R32G32B32A32_FLOAT,
 			0,
@@ -84,9 +84,11 @@ HRESULT Shader::Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device>
 			0}
 	};
 
+	layout = NULL;
+	UINT nuElements = ARRAYSIZE(inputElements);
 	res = device->CreateInputLayout(
 		inputElements,
-		2,
+		nuElements,
 		vertexBC->GetBufferPointer(),
 		vertexBC->GetBufferSize(),
 		&layout);

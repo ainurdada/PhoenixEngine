@@ -1,4 +1,5 @@
 #include "Box.h"
+#include "../../Engine/GraphicsEngine/Vertex.h"
 #include <vector>
 #include <iostream>
 using namespace SMath;
@@ -6,7 +7,7 @@ namespace Basic {
 	Mesh& Box::Create(Vector3& extents, Vector3& color)
 	{
 		Vec4 start = { extents.x / -2.0f, extents.y / -2.0f, extents.z / -2.0f, 1.0f };
-		std::vector<Vec4> points;
+		std::vector<Vertex> points;
 		for (int i = 0; i < 2; i++)
 		{
 			for (int j = 0; j < 2; j++)
@@ -15,12 +16,12 @@ namespace Basic {
 				{
 					Vec4 v = { i * extents.x, j * extents.y, k * extents.z, .0f };
 					Vec4 c = { color.x * i, color.y * j, color.z * k, 1.0f };
-					points.push_back(start + v);
-					points.push_back(c);
+					Vertex vert = { v,c };
+					points.push_back(vert);
 				}
 			}
 		}
-		std::vector<int> indexes = { 
+		std::vector<int> indexes = {
 			0,1,2, 1,3,2, // left
 			0,5,1, 0,4,5, // down
 			0,2,6, 0,6,4, // front

@@ -15,6 +15,7 @@ class Shader;
 class Shader
 {
 	friend class RenderComponent;
+	friend class Material;
 	friend class Graphics;
 	friend class ShaderManager;
 	friend class DebugLine;
