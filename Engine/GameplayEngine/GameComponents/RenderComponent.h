@@ -27,9 +27,11 @@ public:
 	void Awake() override;
 	void Start() override;
 public:
-	Mesh* mesh;
-	Material* material;
+	LPCWSTR modelPath;
+	const Shader* shader;
+	Texture* texture;
 private:
+	Model model;
 	ConstantData constant_data;
 	ID3D11Buffer* transform_buffer = nullptr;
 };

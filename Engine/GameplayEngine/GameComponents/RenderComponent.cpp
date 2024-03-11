@@ -11,24 +11,22 @@ using namespace DirectX;
 void RenderComponent::Draw()
 {
 	// Set shader
-	Game::instance->graphics.SetUpIA(*material->shader);
-	Game::instance->graphics.SetShader(*material->shader);
+	Game::instance->graphics.SetUpIA(*shader);
+	Game::instance->graphics.SetShader(*shader);
 	Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, &transform_buffer);
-	Game::instance->graphics.GetContext()->PSSetShaderResources(0, 1, &material->texture->pTextureRV);
-	Game::instance->graphics.GetContext()->PSSetSamplers(0, 1, &material->texture->pSampler);
+	Game::instance->graphics.GetContext()->PSSetShaderResources(0, 1, &texture->pTextureRV);
+	Game::instance->graphics.GetContext()->PSSetSamplers(0, 1, &texture->pSampler);
 
-	mesh->Draw();
+	model.Draw();
 }
 
 void RenderComponent::Initialize()
 {
-	HRESULT res;
-	if (material == nullptr)
+	// Init model
+	if (!model.Initialize(modelPath))
 	{
-		Game::instance->window.ShowMessageBox(L"material on render component not instanced", L"");
+		std::cout << "failed to download model: " << modelPath << std::endl;
 	}
-	material->Init();
-	
 
 	// Create transform buffer
 	D3D11_BUFFER_DESC transformBufDesc = {};

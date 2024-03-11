@@ -3,11 +3,9 @@ class Mesh;
 
 #include <vector>
 
-#include "Graphics.h"
 #include "Vertex.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
-
 
 class Mesh
 {

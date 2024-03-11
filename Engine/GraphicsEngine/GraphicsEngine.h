@@ -4,4 +4,5 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "Material.h"
+#include "ShaderManager.h"
+#include "Model.h"

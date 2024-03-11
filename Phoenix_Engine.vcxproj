@@ -90,9 +90,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\DirectXTK\inc;$(SolutionDir)Lib\assimp\bin\x64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\DirectXTK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,9 +109,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\DirectXTK\inc;$(SolutionDir)Lib\assimp\bin\x64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\DirectXTK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,9 +128,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\DirectXTK\inc;$(SolutionDir)Lib\assimp\bin\x64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\DirectXTK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,9 +147,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);NOMINMAX</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\DirectXTK\inc;$(SolutionDir)Lib\assimp\bin\x64;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\DirectXTK\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -194,7 +194,6 @@
     <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\ShaderManager.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Texture.cpp" />
-    <ClCompile Include="Engine\GraphicsEngine\Material.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +212,7 @@
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
     <ClInclude Include="Engine\GraphicsEngine\IndexBuffer.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Model.h" />
     <ClInclude Include="Engine\GraphicsEngine\Vertex.h" />
     <ClInclude Include="Engine\GraphicsEngine\VertexBuffer.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
@@ -235,7 +235,6 @@
     <ClInclude Include="Lib\Math\src\Vec.h" />
     <ClInclude Include="App\Window.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
-    <ClInclude Include="Engine\GraphicsEngine\Material.h" />
     <ClInclude Include="Basic\Textures\LinearTexture.h" />
     <ClInclude Include="PhoenixEngine.h" />
     <ClInclude Include="Engine\PhysicsEngine\Physics.h" />

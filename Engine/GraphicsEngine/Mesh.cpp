@@ -1,5 +1,4 @@
 #include "Mesh.h"
-
 Mesh::Mesh(ID3D11Device* device, ID3D11DeviceContext* deviceContext, std::vector<Vertex>& verteces, std::vector<int>& indexes)
 {
 	this->deviceContext = deviceContext;
