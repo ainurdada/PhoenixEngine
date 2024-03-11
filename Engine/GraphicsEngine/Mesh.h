@@ -1,8 +1,6 @@
 #pragma once
 class Mesh;
 
-#include <vector>
-
 #include "Vertex.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
