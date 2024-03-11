@@ -27,7 +27,7 @@ public:
 	void Awake() override;
 	void Start() override;
 public:
-	Mesh mesh;
+	Mesh* mesh;
 	Material* material;
 private:
 	ConstantData constant_data;

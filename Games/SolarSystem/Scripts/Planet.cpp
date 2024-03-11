@@ -23,7 +23,7 @@ void Planet::Awake()
 	material->texture = new Texture(BaseResource::brickTextur);
 	sunRender->material = material;
 	radius = 1.f / 2;
-	sunRender->mesh = Basic::Sphere::Create(radius, 20, 20);
+	sunRender->mesh = &Basic::Sphere::Create(radius, 20, 20);
 	Vector3 size = { 1,1,1 };
 	//sunRender->mesh = Basic::Box::Create(size, size);
 	gameObject->AddComponent(*sunRender);

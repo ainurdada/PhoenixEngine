@@ -1,6 +1,7 @@
 #include "Sphere.h"
 #include "../../Engine/GraphicsEngine/Vertex.h"
 #include "cmath"
+#include "../../App/Game.h"
 using namespace DirectX;
 using namespace SMath;
 namespace Basic
@@ -68,7 +69,7 @@ namespace Basic
 			indexes.push_back(baseIndex + i + 1);
 		}
 
-		Mesh* mesh = new Mesh(points, indexes);
+		Mesh* mesh = new Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), points, indexes);
 		return *mesh;
 	}
 }

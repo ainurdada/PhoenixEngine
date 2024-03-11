@@ -11,13 +11,13 @@ using namespace DirectX;
 void RenderComponent::Draw()
 {
 	// Set shader
-	Game::instance->graphics.SetUpIA(mesh, *material->shader);
+	Game::instance->graphics.SetUpIA(*material->shader);
 	Game::instance->graphics.SetShader(*material->shader);
 	Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, &transform_buffer);
 	Game::instance->graphics.GetContext()->PSSetShaderResources(0, 1, &material->texture->pTextureRV);
 	Game::instance->graphics.GetContext()->PSSetSamplers(0, 1, &material->texture->pSampler);
 
-	Game::instance->graphics.GetContext()->DrawIndexed(mesh.indexes.size(), 0, 0);
+	mesh->Draw();
 }
 
 void RenderComponent::Initialize()
@@ -39,9 +39,6 @@ void RenderComponent::Initialize()
 	transformBufDesc.StructureByteStride = 0;
 	transformBufDesc.ByteWidth = sizeof(ConstantData);
 	Game::instance->graphics.GetDevice()->CreateBuffer(&transformBufDesc, nullptr, &transform_buffer);
-
-	Game::instance->graphics.GetDevice()->CreateBuffer(&(mesh.vertexBufDesc), &(mesh.vertexData), &(mesh.vb));
-	Game::instance->graphics.GetDevice()->CreateBuffer(&(mesh.indexBufDesc), &(mesh.indexData), &(mesh.ib));
 }
 
 void RenderComponent::Reload()

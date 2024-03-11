@@ -1,35 +1,33 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<Vertex> verteces, const std::vector<int> indexes)
+Mesh::Mesh(ID3D11Device* device, ID3D11DeviceContext* deviceContext, std::vector<Vertex>& verteces, std::vector<int>& indexes)
 {
-	for (const Vertex& v : verteces) {
-		m_verteces.push_back(v);
-	}
-	for (int i : indexes)
+	this->deviceContext = deviceContext;
+	
+	HRESULT res = vb.Initialize(device, verteces.data(), verteces.size());
+	if (FAILED(res))
 	{
-		this->indexes.push_back(i);
+		// error
 	}
 
-	vertexBufDesc.Usage = D3D11_USAGE_DEFAULT;
-	vertexBufDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vertexBufDesc.CPUAccessFlags = 0;
-	vertexBufDesc.MiscFlags = 0;
-	vertexBufDesc.StructureByteStride = 0;
-	vertexBufDesc.ByteWidth = sizeof(Vertex) * m_verteces.size();
+	res = ib.Initialize(device, indexes.data(), indexes.size());
+	if (FAILED(res))
+	{
+		// error
+	}
+}
 
-	vertexData.pSysMem = m_verteces.data();
-	vertexData.SysMemPitch = 0;
-	vertexData.SysMemSlicePitch = 0;
+Mesh::Mesh(const Mesh& mesh)
+{
+	this->deviceContext = mesh.deviceContext;
+	this->vb = mesh.vb;
+	this->ib = mesh.ib;
+}
 
-
-	indexBufDesc.Usage = D3D11_USAGE_DEFAULT;
-	indexBufDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	indexBufDesc.CPUAccessFlags = 0;
-	indexBufDesc.MiscFlags = 0;
-	indexBufDesc.StructureByteStride = 0;
-	indexBufDesc.ByteWidth = sizeof(int) * indexes.size();
-
-	indexData.pSysMem = this->indexes.data();
-	indexData.SysMemPitch = 0;
-	indexData.SysMemSlicePitch = 0;
+void Mesh::Draw()
+{
+	UINT offset = 0;
+	deviceContext->IASetVertexBuffers(0, 1, vb.GetAddressOf(), vb.StridePtr(), &offset);
+	deviceContext->IASetIndexBuffer(ib.Get(), DXGI_FORMAT_R32_UINT, 0);
+	deviceContext->DrawIndexed(ib.BufferSize(), 0, 0);
 }

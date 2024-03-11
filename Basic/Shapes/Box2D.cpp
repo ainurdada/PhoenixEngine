@@ -1,5 +1,6 @@
 #include "Box2D.h"
 #include "../../Engine/GraphicsEngine/Vertex.h"
+#include "../../App/Game.h"
 
 Mesh& Basic::Box2D::Create(float width, float height)
 {
@@ -11,6 +12,6 @@ Mesh& Basic::Box2D::Create(float width, float height)
 	};
 	std::vector<int> indexes = { 0,1,2, 1,0,3 };
 
-	Mesh* pMesh = new Mesh(points, indexes);
+	Mesh* pMesh = new Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), points, indexes);
 	return *pMesh;
 }

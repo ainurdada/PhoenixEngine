@@ -212,7 +212,9 @@
     <ClInclude Include="Engine\GameplayEngine\GameObject.hpp" />
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
+    <ClInclude Include="Engine\GraphicsEngine\IndexBuffer.h" />
     <ClInclude Include="Engine\GraphicsEngine\Vertex.h" />
+    <ClInclude Include="Engine\GraphicsEngine\VertexBuffer.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
     <ClInclude Include="Basic\Shapes\Box2D.h" />

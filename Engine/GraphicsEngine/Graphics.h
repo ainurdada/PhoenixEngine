@@ -22,7 +22,7 @@ public:
 	HRESULT Init(const HWND& hWnd, int screenWidth, int screenHeight);
 	const Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() const;
 	ID3D11DeviceContext* GetContext() const;
-	void SetUpIA(const Mesh& mesh, const Shader& shader);
+	void SetUpIA(const Shader& shader);
 	void SetShader(const Shader& shader);
 	HRESULT SetUpRasterizer();
 	void SetUpViewPort(int width, int height);

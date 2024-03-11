@@ -101,12 +101,10 @@ UINT strides[] = { 32 };
 UINT offsets[] = { 0 };
 
 ID3D11Buffer* vb;
-void Graphics::SetUpIA(const Mesh& mesh, const Shader& shader)
+void Graphics::SetUpIA(const Shader& shader)
 {
 	context->IASetInputLayout(shader.layout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->IASetIndexBuffer(mesh.ib, DXGI_FORMAT_R32_UINT, 0);
-	context->IASetVertexBuffers(0, 1, &mesh.vb, strides, offsets);
 }
 
 void Graphics::SetShader(const Shader& shader)

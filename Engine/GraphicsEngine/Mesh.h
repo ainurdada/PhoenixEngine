@@ -5,21 +5,19 @@ class Mesh;
 
 #include "Graphics.h"
 #include "Vertex.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 
 class Mesh
 {
 public:
-	Mesh() {};
-	Mesh(const std::vector<Vertex> verteces, const std::vector<int> indexes);
-public:
-	D3D11_BUFFER_DESC vertexBufDesc = {};
-	D3D11_BUFFER_DESC indexBufDesc = {};
-	D3D11_SUBRESOURCE_DATA vertexData = {};
-	D3D11_SUBRESOURCE_DATA indexData = {};
-	ID3D11Buffer* vb; 
-	ID3D11Buffer* ib;
-	std::vector<Vertex> m_verteces;
-	std::vector<int> indexes;
+	Mesh(ID3D11Device* device, ID3D11DeviceContext* deviceContext, std::vector<Vertex>& verteces, std::vector<int>& indexes);
+	Mesh(const Mesh& mesh);
+	void Draw();
+private:
+	VertexBuffer<Vertex> vb; 
+	IndexBuffer ib;
+	ID3D11DeviceContext* deviceContext;
 };
 
