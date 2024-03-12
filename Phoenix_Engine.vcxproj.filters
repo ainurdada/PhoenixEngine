@@ -172,6 +172,7 @@
     <ClInclude Include="Engine\GraphicsEngine\VertexBuffer.h" />
     <ClInclude Include="Basic\Constants\Colors.h" />
     <ClInclude Include="Lib\Tools\StringHelper.h" />
+    <ClInclude Include="Engine\GraphicsEngine\ConstantBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

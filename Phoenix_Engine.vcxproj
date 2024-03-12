@@ -212,6 +212,7 @@
     <ClInclude Include="Engine\GameplayEngine\GameObject.hpp" />
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
+    <ClInclude Include="Engine\GraphicsEngine\ConstantBuffer.h" />
     <ClInclude Include="Engine\GraphicsEngine\IndexBuffer.h" />
     <ClInclude Include="Engine\GraphicsEngine\Model.h" />
     <ClInclude Include="Engine\GraphicsEngine\Vertex.h" />

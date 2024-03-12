@@ -72,7 +72,13 @@ namespace Basic
 
 		std::vector<Texture> textures;
 		textures.push_back(Texture(Game::instance->graphics.GetDevice().Get(), Basic::UnloadedTextureColor, aiTextureType_DIFFUSE));
-		Mesh* pMesh = new Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), points, indexes, textures);
+		Mesh* pMesh = new Mesh(
+			Game::instance->graphics.GetDevice().Get(),
+			Game::instance->graphics.GetContext(),
+			points,
+			indexes,
+			textures,
+			DirectX::XMMatrixIdentity());
 		return *pMesh;
 	}
 }

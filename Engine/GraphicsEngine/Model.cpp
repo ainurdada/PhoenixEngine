@@ -1,12 +1,25 @@
 #include <codecvt>
 
-
 #include "Model.h"
 #include "../../App/Game.h"
 #include "../../Basic/Constants/Colors.h"
 #include "../../Lib/Tools/StringHelper.h"
+
+using namespace DirectX;
 bool Model::Initialize(const LPCWSTR filePath)
 {
+    // Create transform buffer
+    D3D11_BUFFER_DESC transformBufDesc = {};
+    transformBufDesc.Usage = D3D11_USAGE_DYNAMIC;
+    transformBufDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+    transformBufDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+    transformBufDesc.MiscFlags = 0;
+    transformBufDesc.StructureByteStride = 0;
+    transformBufDesc.ByteWidth = sizeof(ConstantData);
+    Game::instance->graphics.GetDevice()->CreateBuffer(&transformBufDesc, nullptr, &transform_buffer);
+
+    constant_data.Initialize(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext());
+
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
     this->directory = StringHelper::GetDirectoryFromPath(converter.to_bytes(filePath));
 
@@ -20,33 +33,48 @@ bool Model::Initialize(const LPCWSTR filePath)
         return false;
     }
 
-    ProcessNode(scene->mRootNode, scene);
+    ProcessNode(scene->mRootNode, scene, XMMatrixIdentity());
     return true;
 }
 
-void Model::Draw()
+void Model::Release()
+{
+    transform_buffer->Release();
+}
+
+void Model::Draw(const SMath::Matrix& modelMatrix)
 {
     for (int i = 0; i < meshes.size(); i++)
     {
+        constant_data.data.WorldViewProjection = XMMatrixTranspose(
+            SMath::Matrix(meshes[i].GetTransformMatrix())
+            * modelMatrix
+            * Game::instance->mainCamera->ViewMatrix()
+            * Game::instance->mainCamera->ProjectionMatrix()
+        );
+        constant_data.ApplyChanges();
+        Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
         meshes[i].Draw();
     }
 }
 
-void Model::ProcessNode(aiNode* node, const aiScene* scene)
+void Model::ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMATRIX& parentTransformMatrix)
 {
+    XMMATRIX nodeTransformMatrix = XMMatrixTranspose(XMMATRIX(&node->mTransformation.a1)) * parentTransformMatrix;
+
     for (UINT i = 0; i < node->mNumMeshes; i++)
     {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        meshes.push_back(ProcessMesh(mesh, scene));
+        meshes.push_back(ProcessMesh(mesh, scene, nodeTransformMatrix));
     }
 
     for (UINT i = 0; i < node->mNumChildren; i++)
     {
-        ProcessNode(node->mChildren[i], scene);
+        ProcessNode(node->mChildren[i], scene, nodeTransformMatrix);
     }
 }
 
-Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, DirectX::XMMATRIX& transformMatrix)
 {
     // Data to fill
     std::vector<Vertex> vertices;
@@ -86,7 +114,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
     std::vector<Texture> diffuseTetures = LoadMaterialTextures(material, aiTextureType_DIFFUSE, scene);
     textures.insert(textures.end(), diffuseTetures.begin(), diffuseTetures.end());
 
-    return Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), vertices, indices, textures);
+    return Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), vertices, indices, textures, transformMatrix);
 }
 
 TextureStorageType Model::DetermineTextureStorageType(const aiScene* pScene, aiMaterial* pMat, unsigned int index, aiTextureType textureType)

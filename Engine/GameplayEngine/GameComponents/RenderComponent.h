@@ -8,11 +8,6 @@ class RenderComponent;
 class RenderComponent : public GameComponent
 {
 public:
-	struct ConstantData
-	{
-		SMath::Matrix WorldViewProjection;
-	};
-	static_assert((sizeof(ConstantData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
 public:
 	RenderComponent() {};
@@ -30,7 +25,5 @@ public:
 	const Shader* shader;
 private:
 	Model model;
-	ConstantData constant_data;
-	ID3D11Buffer* transform_buffer = nullptr;
 };
 

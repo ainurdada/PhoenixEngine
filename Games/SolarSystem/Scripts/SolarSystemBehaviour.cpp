@@ -11,7 +11,7 @@ void SolarSystemBehaviour::Awake()
 	GameObject* sun = new GameObject;
 	Planet* star = new Planet;
 	Vector3 up = Vector3::Up;
-	Vector3 pos = Vector3::Zero + Vector3::Up * 2;
+	Vector3 pos = Vector3::Zero;
 	sun->AddComponent(*star);
 	star->Init(pos,
 			   nullptr,

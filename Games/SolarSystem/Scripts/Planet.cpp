@@ -20,6 +20,7 @@ void Planet::Awake()
 	RenderComponent* sunRender = new RenderComponent;
 	sunRender->shader = ShaderManager::Get(BaseResource::litShader);
 	radius = 1.f / 2;
+	//sunRender->modelPath = L"./Models\\Dodge\\Dodge.fbx";
 	sunRender->modelPath = L"./Models\\nanosuit\\nanosuit.obj";
 	//sunRender->mesh = &Basic::Sphere::Create(radius, 20, 20);
 	Vector3 size = { 1,1,1 };

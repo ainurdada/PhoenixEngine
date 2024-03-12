@@ -1,8 +1,14 @@
 #include "Mesh.h"
-Mesh::Mesh(ID3D11Device* device, ID3D11DeviceContext* deviceContext, std::vector<Vertex>& verteces, std::vector<int>& indexes, std::vector<Texture>& textures)
+Mesh::Mesh(ID3D11Device* device, 
+		   ID3D11DeviceContext* deviceContext, 
+		   std::vector<Vertex>& verteces, 
+		   std::vector<int>& indexes, 
+		   std::vector<Texture>& textures, 
+		   const DirectX::XMMATRIX& transformMatrix)
 {
 	this->deviceContext = deviceContext;
 	this->textures = textures;
+	this->transformMatrix = transformMatrix;
 
 	HRESULT res = vb.Initialize(device, verteces.data(), verteces.size());
 	if (FAILED(res))
@@ -23,6 +29,12 @@ Mesh::Mesh(const Mesh& mesh)
 	this->vb = mesh.vb;
 	this->ib = mesh.ib;
 	this->textures = mesh.textures;
+	this->transformMatrix = mesh.transformMatrix;
+}
+
+const DirectX::XMMATRIX& Mesh::GetTransformMatrix()
+{
+	return this->transformMatrix;
 }
 
 void Mesh::Draw()
