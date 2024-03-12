@@ -32,6 +32,7 @@ public:
 	void Cleanup();
 
 	Vec4 backgroundColor;
+	ID3D11SamplerState* pSampler;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;

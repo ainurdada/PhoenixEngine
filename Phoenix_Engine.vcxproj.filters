@@ -112,6 +112,9 @@
     <ClCompile Include="Engine\GraphicsEngine\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Lib\Tools\StringHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -168,6 +171,7 @@
     <ClInclude Include="Engine\GraphicsEngine\Model.h" />
     <ClInclude Include="Engine\GraphicsEngine\VertexBuffer.h" />
     <ClInclude Include="Basic\Constants\Colors.h" />
+    <ClInclude Include="Lib\Tools\StringHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

@@ -21,6 +21,7 @@ class Texture
 public:
 	Texture(ID3D11Device* device, const SMath::Color& color, aiTextureType type);
 	Texture(ID3D11Device* device, const SMath::Color* colorData, UINT width, UINT height, aiTextureType type);
+	Texture(ID3D11Device* device, const std::string& filePath, aiTextureType type);
 
 	aiTextureType GetType();
 	ID3D11ShaderResourceView* GetTextureResourceView();

@@ -84,8 +84,25 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	{
 		cout << "failed to create DepthStencilView" << endl;
 	}
-	return res;
+
+	D3D11_SAMPLER_DESC sampDesc;
+	ZeroMemory(&sampDesc, sizeof(sampDesc));
+	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;      // Тип фильтрации
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;         // Задаем координаты
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	sampDesc.MinLOD = 0;
+	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+
+	res = device->CreateSamplerState(&sampDesc, &pSampler);
+	if (FAILED(res))
+	{
+		cout << "failed to create SamplerState" << endl;
 	}
+
+	return res;
+}
 
 const Microsoft::WRL::ComPtr<ID3D11Device>& Graphics::GetDevice() const
 {

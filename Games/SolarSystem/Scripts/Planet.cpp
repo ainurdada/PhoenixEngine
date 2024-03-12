@@ -20,7 +20,7 @@ void Planet::Awake()
 	RenderComponent* sunRender = new RenderComponent;
 	sunRender->shader = ShaderManager::Get(BaseResource::litShader);
 	radius = 1.f / 2;
-	sunRender->modelPath = L"./Models/nanosuit/nanosuit.obj";
+	sunRender->modelPath = L"Models\\nanosuit/nanosuit.obj";
 	//sunRender->mesh = &Basic::Sphere::Create(radius, 20, 20);
 	Vector3 size = { 1,1,1 };
 	//sunRender->mesh = Basic::Box::Create(size, size);
@@ -32,7 +32,7 @@ void Planet::Awake()
 void Planet::Update()
 {
 	float deltaTime = Game::instance->time.GetDeltaTime();
-	gameObject->transform.RotateAroundLocalAxis(selfRotationAxis, selfAngleVelocity * deltaTime);
+	//gameObject->transform.RotateAroundLocalAxis(selfRotationAxis, selfAngleVelocity * deltaTime);
 	if (orbitCenter != nullptr)
 	{
 		gameObject->transform.position(orbitCenter->position() + centerOffset);

@@ -4,12 +4,13 @@
 #include "Model.h"
 #include "../../App/Game.h"
 #include "../../Basic/Constants/Colors.h"
+#include "../../Lib/Tools/StringHelper.h"
 bool Model::Initialize(const LPCWSTR filePath)
 {
-    Assimp::Importer importer;
-
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+    this->directory = StringHelper::GetDirectoryFromPath(converter.to_bytes(filePath));
 
+    Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(converter.to_bytes(filePath),
                                              aiProcess_Triangulate 
                                             | aiProcess_ConvertToLeftHanded
@@ -88,6 +89,49 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
     return Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), vertices, indices, textures);
 }
 
+TextureStorageType Model::DetermineTextureStorageType(const aiScene* pScene, aiMaterial* pMat, unsigned int index, aiTextureType textureType)
+{
+    if (pMat->GetTextureCount(textureType) == 0)
+        return TextureStorageType::None;
+
+    aiString path;
+    pMat->GetTexture(textureType, index, &path);
+    std::string texturePath = path.C_Str();
+
+    if (texturePath[0] == '*')
+    {
+        if (pScene->mTextures[0]->mHeight == 0)
+        {
+            return TextureStorageType::EmbeddedIndexCompressed;
+        }
+        else
+        {
+            assert("SUPPORT DOES NOT EXIST FOR INDEXED NON COMPRESSED TEXTURES!" && 0);
+            return TextureStorageType::EmbeddedIndexNonCompressed;
+        }
+    }
+
+    if (auto pTex = pScene->GetEmbeddedTexture(texturePath.c_str()))
+    {
+        if (pTex->mHeight == 0)
+        {
+            return TextureStorageType::EmbeddedCompressed;
+        }
+        else
+        {
+            assert("SUPPORT DOES NOT EXIST FOR EMBEDDED NON COMPRESSED TEXTURES!" && 0);
+            return TextureStorageType::EmbeddedNonCompressed;
+        }
+    }
+
+    if (texturePath.find('.') != std::string::npos)
+    {
+        return TextureStorageType::Disk;
+    }
+
+    return TextureStorageType::None;
+}
+
 std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* pMaterial, aiTextureType textureType, const aiScene* pScene)
 {
     std::vector<Texture> materialTextures;
@@ -114,7 +158,25 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* pMaterial, aiTextur
     }
     else
     {
-        materialTextures.push_back(Texture(device, Basic::UnhandledTextureColor, aiTextureType_DIFFUSE));
-        return materialTextures;
+        for (UINT i = 0; i < textureCount; i++)
+        {
+            aiString path;
+            pMaterial->GetTexture(textureType, i, &path);
+            TextureStorageType storageType = DetermineTextureStorageType(pScene, pMaterial, i, textureType);
+            switch (storageType)
+            {
+            case TextureStorageType::Disk:
+                std::string fileName = this->directory + '\\' + path.C_Str();
+                Texture diskTexture(device, fileName, textureType);
+                materialTextures.push_back(diskTexture);
+                break;
+            }
+        }
     }
+
+    if (materialTextures.size() == 0)
+    {
+        materialTextures.push_back(Texture(device, Basic::UnhandledTextureColor, aiTextureType_DIFFUSE));
+    }
+    return materialTextures;
 }
