@@ -3,29 +3,23 @@
 
 #include "Model.h"
 #include "../../App/Game.h"
+#include "../../Basic/Constants/Colors.h"
 bool Model::Initialize(const LPCWSTR filePath)
 {
-	//Create an instance of the Importer class
     Assimp::Importer importer;
 
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 
-    // And have it read the given file with some example postprocessing
-    // Usually - if speed is not the most important aspect for you - you'll
-    // probably to request more postprocessing than we do in this example.
     const aiScene* scene = importer.ReadFile(converter.to_bytes(filePath),
                                              aiProcess_Triangulate 
                                             | aiProcess_ConvertToLeftHanded
     );
-
-    // If the import failed, report it
     if (nullptr == scene)
     {
         return false;
     }
 
     ProcessNode(scene->mRootNode, scene);
-    // We're done. Everything will be cleaned up by the importer destructor
     return true;
 }
 
@@ -86,5 +80,41 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
         }
     }
 
-    return Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), vertices, indices);
+    std::vector<Texture> textures;
+    aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
+    std::vector<Texture> diffuseTetures = LoadMaterialTextures(material, aiTextureType_DIFFUSE, scene);
+    textures.insert(textures.end(), diffuseTetures.begin(), diffuseTetures.end());
+
+    return Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), vertices, indices, textures);
+}
+
+std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* pMaterial, aiTextureType textureType, const aiScene* pScene)
+{
+    std::vector<Texture> materialTextures;
+    TextureStorageType storageType = TextureStorageType::Invalid;
+    unsigned int textureCount = pMaterial->GetTextureCount(textureType);
+    ID3D11Device* device = Game::instance->graphics.GetDevice().Get();
+
+    if (textureCount == 0)
+    {
+        storageType = TextureStorageType::None;
+        aiColor3D aiColor(0, 0, 0);
+        switch (textureType)
+        {
+        case aiTextureType_DIFFUSE:
+            pMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, aiColor);
+            if (aiColor.IsBlack())
+            {
+                materialTextures.push_back(Texture(device, Basic::UnloadedTextureColor, textureType));
+                return materialTextures;
+            }
+            materialTextures.push_back(Texture(device, SMath::Color(aiColor.r, aiColor.g, aiColor.b), textureType));
+            return materialTextures;
+        }
+    }
+    else
+    {
+        materialTextures.push_back(Texture(device, Basic::UnhandledTextureColor, aiTextureType_DIFFUSE));
+        return materialTextures;
+    }
 }

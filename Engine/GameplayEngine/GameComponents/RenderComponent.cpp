@@ -15,8 +15,7 @@ void RenderComponent::Draw()
 	Game::instance->graphics.SetUpIA(*shader);
 	Game::instance->graphics.SetShader(*shader);
 	Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, &transform_buffer);
-	Game::instance->graphics.GetContext()->PSSetShaderResources(0, 1, &texture->pTextureRV);
-	Game::instance->graphics.GetContext()->PSSetSamplers(0, 1, &texture->pSampler);
+	//Game::instance->graphics.GetContext()->PSSetSamplers(0, 1, &texture->pSampler);
 
 	model.Draw();
 }

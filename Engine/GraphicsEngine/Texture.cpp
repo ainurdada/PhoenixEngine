@@ -3,30 +3,54 @@
 #include "TextureManager.h"
 #include "../../App/Game.h"
 
-Texture::Texture(LPCWSTR path, ID3D11SamplerState* sampler)
+Texture::Texture(ID3D11Device* device, const SMath::Color& color, aiTextureType type)
 {
-	pTextureRV = TextureManager::Get(path);
-	pSampler = sampler;
+	this->Initialize1x1ColorTexture(device, color, type);
 }
 
-Texture::Texture(LPCWSTR path)
+Texture::Texture(ID3D11Device* device, const SMath::Color* colorData, UINT width, UINT height, aiTextureType type)
 {
-	D3D11_SAMPLER_DESC sampDesc = {};
-	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
-	sampDesc.MinLOD = 0;
-	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
+	this->InitializeColorTexture(device, colorData, width, height, type);
+}
 
-	ID3D11SamplerState* sampler;
-	HRESULT res = Game::instance->graphics.GetDevice()->CreateSamplerState(&sampDesc, &sampler);
+aiTextureType Texture::GetType()
+{
+	return this->type;
+}
+
+ID3D11ShaderResourceView* Texture::GetTextureResourceView()
+{
+	return this->textureView.Get();
+}
+
+ID3D11ShaderResourceView** Texture::GetTextureResourceViewAddress()
+{
+	return this->textureView.GetAddressOf();
+}
+
+void Texture::Initialize1x1ColorTexture(ID3D11Device* device, const SMath::Color& colorData, aiTextureType type)
+{
+	this->InitializeColorTexture(device, &colorData, 1, 1, type);
+}
+
+void Texture::InitializeColorTexture(ID3D11Device* device, const SMath::Color* colorData, UINT width, UINT height, aiTextureType type)
+{
+	this->type = type;
+	CD3D11_TEXTURE2D_DESC textDesc(DXGI_FORMAT_R32G32B32A32_FLOAT, width, height);
+	ID3D11Texture2D* p2DTexture = nullptr;
+	D3D11_SUBRESOURCE_DATA initialData{};
+	initialData.pSysMem = colorData;
+	initialData.SysMemPitch = width * sizeof(SMath::Color);
+	HRESULT res = device->CreateTexture2D(&textDesc, &initialData, &p2DTexture);
 	if (FAILED(res))
 	{
-		//error
+		// error
 	}
-
-	pTextureRV = TextureManager::Get(path);
-	pSampler = sampler;
+	texture = static_cast<ID3D11Texture2D*>(p2DTexture);
+	CD3D11_SHADER_RESOURCE_VIEW_DESC srvDesc(D3D11_SRV_DIMENSION_TEXTURE2D, textDesc.Format);
+	res = device->CreateShaderResourceView(texture.Get(), &srvDesc, textureView.GetAddressOf());
+	if (FAILED(res))
+	{
+		// error
+	}
 }

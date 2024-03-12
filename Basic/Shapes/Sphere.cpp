@@ -2,6 +2,7 @@
 #include "../../Engine/GraphicsEngine/Vertex.h"
 #include "cmath"
 #include "../../App/Game.h"
+#include "../../Basic/Constants/Colors.h"
 using namespace DirectX;
 using namespace SMath;
 namespace Basic
@@ -69,7 +70,9 @@ namespace Basic
 			indexes.push_back(baseIndex + i + 1);
 		}
 
-		Mesh* mesh = new Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), points, indexes);
-		return *mesh;
+		std::vector<Texture> textures;
+		textures.push_back(Texture(Game::instance->graphics.GetDevice().Get(), Basic::UnloadedTextureColor, aiTextureType_DIFFUSE));
+		Mesh* pMesh = new Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), points, indexes, textures);
+		return *pMesh;
 	}
 }

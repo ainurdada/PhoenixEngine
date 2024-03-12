@@ -18,13 +18,20 @@ enum class TextureStorageType
 
 class Texture
 {
-	friend class RenderComponent;
 public:
-	Texture(LPCWSTR path, ID3D11SamplerState* sampler);
-	Texture(LPCWSTR path);
+	Texture(ID3D11Device* device, const SMath::Color& color, aiTextureType type);
+	Texture(ID3D11Device* device, const SMath::Color* colorData, UINT width, UINT height, aiTextureType type);
+
+	aiTextureType GetType();
+	ID3D11ShaderResourceView* GetTextureResourceView();
+	ID3D11ShaderResourceView** GetTextureResourceViewAddress();
 
 private:
-	ID3D11ShaderResourceView* pTextureRV = NULL;
-	ID3D11SamplerState* pSampler = NULL;
+	void Initialize1x1ColorTexture(ID3D11Device* device, const SMath::Color& colorData, aiTextureType type);
+	void InitializeColorTexture(ID3D11Device* device, const SMath::Color* colorData, UINT width, UINT height, aiTextureType type);
+
+	Microsoft::WRL::ComPtr<ID3D11Resource> texture = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> textureView = nullptr;
+	aiTextureType type = aiTextureType::aiTextureType_UNKNOWN;
 };
 

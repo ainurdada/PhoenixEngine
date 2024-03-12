@@ -19,7 +19,6 @@ void Planet::Awake()
 {
 	RenderComponent* sunRender = new RenderComponent;
 	sunRender->shader = ShaderManager::Get(BaseResource::litShader);
-	sunRender->texture = new Texture(BaseResource::brickTextur);
 	radius = 1.f / 2;
 	sunRender->modelPath = L"./Models/nanosuit/nanosuit.obj";
 	//sunRender->mesh = &Basic::Sphere::Create(radius, 20, 20);

@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "../../App/Game.h"
+#include "../../Basic/Constants/Colors.h"
 using namespace SMath;
 namespace Basic {
 	Mesh& Box::Create(Vector3& extents, Vector3& color)
@@ -31,7 +32,9 @@ namespace Basic {
 			1,7,3, 1,5,7, // back
 		};
 
-		Mesh* pMesh = new Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), points, indexes);
+		std::vector<Texture> textures;
+		textures.push_back(Texture(Game::instance->graphics.GetDevice().Get(), Basic::UnloadedTextureColor, aiTextureType_DIFFUSE));
+		Mesh* pMesh = new Mesh(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext(), points, indexes, textures);
 		return *pMesh;
 	}
 }

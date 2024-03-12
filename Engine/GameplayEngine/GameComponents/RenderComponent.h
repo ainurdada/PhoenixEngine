@@ -28,7 +28,6 @@ public:
 public:
 	LPCWSTR modelPath;
 	const Shader* shader;
-	Texture* texture;
 private:
 	Model model;
 	ConstantData constant_data;
