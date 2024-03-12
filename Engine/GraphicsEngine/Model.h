@@ -10,11 +10,12 @@
 
 class Model
 {
+	friend class RenderComponent;
 public:
 	bool Initialize(const LPCWSTR filePath);
-	void Draw();
 
 private:
+	void Draw();
 	void ProcessNode(aiNode* node, const aiScene* scene);
 	Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
 

@@ -3,7 +3,6 @@ class RenderComponent;
 
 #include "GameComponent.h"
 #include "../../GraphicsEngine/GraphicsEngine.h"
-#include "../../../App/Game.h"
 #include "../../../Lib/Math/Math.h"
 
 class RenderComponent : public GameComponent

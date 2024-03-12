@@ -7,11 +7,12 @@ class Mesh;
 
 class Mesh
 {
+	friend class Model;
 public:
 	Mesh(ID3D11Device* device, ID3D11DeviceContext* deviceContext, std::vector<Vertex>& verteces, std::vector<int>& indexes);
 	Mesh(const Mesh& mesh);
-	void Draw();
 private:
+	void Draw();
 	VertexBuffer<Vertex> vb; 
 	IndexBuffer ib;
 	ID3D11DeviceContext* deviceContext;

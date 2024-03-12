@@ -106,13 +106,10 @@
     <ClCompile Include="Engine\GraphicsEngine\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\GraphicsEngine\Material.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Basic\Textures\LinearTexture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\GraphicsEngine\TextureManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GraphicsEngine\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -165,10 +162,12 @@
     <ClInclude Include="Engine\GraphicsEngine\ShaderManager.h" />
     <ClInclude Include="Engine\DebugSystem\Debug.h" />
     <ClInclude Include="Engine\GraphicsEngine\Texture.h" />
-    <ClInclude Include="Engine\GraphicsEngine\Material.h" />
-    <ClInclude Include="Basic\Textures\LinearTexture.h" />
     <ClInclude Include="Engine\GraphicsEngine\Vertex.h" />
     <ClInclude Include="Engine\GraphicsEngine\TextureManager.h" />
+    <ClInclude Include="Engine\GraphicsEngine\IndexBuffer.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Model.h" />
+    <ClInclude Include="Engine\GraphicsEngine\VertexBuffer.h" />
+    <ClInclude Include="Basic\Constants\Colors.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

@@ -177,7 +177,6 @@
     <ClCompile Include="Engine\GraphicsEngine\Model.cpp" />
     <ClCompile Include="Engine\InputSystem\InputDevice.cpp" />
     <ClCompile Include="Games\SolarSystem\Scripts\CameraControl.cpp" />
-    <ClCompile Include="Basic\Textures\LinearTexture.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp" />
@@ -198,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
+    <ClInclude Include="Basic\Constants\Colors.h" />
     <ClInclude Include="Basic\Shapes\BasicShapes.h" />
     <ClInclude Include="Basic\Shapes\Box.h" />
     <ClInclude Include="Engine\DebugSystem\Debug.h" />
@@ -235,7 +235,6 @@
     <ClInclude Include="Lib\Math\src\Vec.h" />
     <ClInclude Include="App\Window.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
-    <ClInclude Include="Basic\Textures\LinearTexture.h" />
     <ClInclude Include="PhoenixEngine.h" />
     <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
     <ClInclude Include="Games\SolarSystem\SolarSystem.h" />

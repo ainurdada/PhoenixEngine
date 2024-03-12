@@ -1,5 +1,6 @@
 #include "RenderComponent.h"
 #include "../../GraphicsEngine/ShaderManager.h"
+#include "../../../App/Game.h"
 
 void RenderComponent::DestroyResources()
 {

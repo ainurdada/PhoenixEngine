@@ -28,5 +28,5 @@ void Mesh::Draw()
 	UINT offset = 0;
 	deviceContext->IASetVertexBuffers(0, 1, vb.GetAddressOf(), vb.StridePtr(), &offset);
 	deviceContext->IASetIndexBuffer(ib.Get(), DXGI_FORMAT_R32_UINT, 0);
-	deviceContext->DrawIndexed(ib.BufferSize(), 0, 0);
+	deviceContext->DrawIndexed(ib.IndexCount(), 0, 0);
 }
