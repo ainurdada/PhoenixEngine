@@ -1,7 +1,7 @@
-#include "Games/SolarSystem/SolarSystem.h"
+#include "Games/Katamari/KatamariGame.h"
 
 int main() {
-	SolarSystem game;
+	KatamariGame game;
 	game.Create();
 
 	game.Run();

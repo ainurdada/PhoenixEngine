@@ -176,7 +176,8 @@
     <ClCompile Include="Engine\GameplayEngine\GameObject.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Model.cpp" />
     <ClCompile Include="Engine\InputSystem\InputDevice.cpp" />
-    <ClCompile Include="Games\SolarSystem\Scripts\CameraControl.cpp" />
+    <ClCompile Include="Games\Katamari\Scripts\CameraControl.cpp" />
+    <ClCompile Include="Games\Katamari\KatamariGame.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp" />
@@ -187,14 +188,13 @@
     <ClCompile Include="App\Window.cpp" />
     <ClCompile Include="Lib\Delegates\Delegates.cpp" />
     <ClCompile Include="Engine\PhysicsEngine\Physics.cpp" />
-    <ClCompile Include="Games\SolarSystem\SolarSystem.cpp" />
-    <ClCompile Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.cpp" />
+    <ClCompile Include="Games\Katamari\SolarSystem.cpp" />
     <ClCompile Include="Basic\Shapes\Sphere.cpp" />
-    <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\ShaderManager.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Texture.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\TextureManager.cpp" />
     <ClCompile Include="Lib\Tools\StringHelper.cpp" />
+    <ClCompile Include="Games\Katamari\Scripts\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
@@ -227,8 +227,8 @@
     <ClInclude Include="Exports.h" />
     <ClInclude Include="Engine\InputSystem\InputDevice.h" />
     <ClInclude Include="Engine\InputSystem\Keys.h" />
-    <ClInclude Include="Games\SolarSystem\Scripts\CameraControl.h" />
-    <ClInclude Include="Games\SolarSystem\Scripts\TestRotateAroundPoint.h" />
+    <ClInclude Include="Games\Katamari\Scripts\CameraControl.h" />
+    <ClInclude Include="Games\Katamari\KatamariGame.h" />
     <ClInclude Include="Lib\Math\Math.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\RenderComponent.h" />
     <ClInclude Include="Engine\GraphicsEngine\Shader.h" />
@@ -239,14 +239,13 @@
     <ClInclude Include="Lib\Delegates\Delegates.h" />
     <ClInclude Include="PhoenixEngine.h" />
     <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
-    <ClInclude Include="Games\SolarSystem\SolarSystem.h" />
-    <ClInclude Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.h" />
+    <ClInclude Include="Games\Katamari\SolarSystem.h" />
     <ClInclude Include="Basic\Shapes\Sphere.h" />
-    <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
     <ClInclude Include="Engine\GraphicsEngine\ShaderManager.h" />
     <ClInclude Include="Engine\GraphicsEngine\Texture.h" />
     <ClInclude Include="Engine\GraphicsEngine\TextureManager.h" />
     <ClInclude Include="Lib\Tools\StringHelper.h" />
+    <ClInclude Include="Games\Katamari\Scripts\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

@@ -82,19 +82,13 @@
     <ClCompile Include="Engine\GameplayEngine\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Games\SolarSystem\SolarSystem.cpp">
+    <ClCompile Include="Games\Katamari\SolarSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Games\SolarSystem\Scripts\CameraControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.cpp">
+    <ClCompile Include="Games\Katamari\Scripts\CameraControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Basic\Shapes\Sphere.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Games\SolarSystem\Scripts\Planet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\GraphicsEngine\ShaderManager.cpp">
@@ -113,6 +107,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Lib\Tools\StringHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Katamari\KatamariGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Katamari\Scripts\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -154,13 +154,10 @@
     <ClInclude Include="Engine\GameplayEngine\Camera.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
     <ClInclude Include="Basic\Shapes\Box.h" />
-    <ClInclude Include="Games\SolarSystem\SolarSystem.h" />
-    <ClInclude Include="Games\SolarSystem\Scripts\CameraControl.h" />
-    <ClInclude Include="Games\SolarSystem\Scripts\SolarSystemBehaviour.h" />
+    <ClInclude Include="Games\Katamari\SolarSystem.h" />
+    <ClInclude Include="Games\Katamari\Scripts\CameraControl.h" />
     <ClInclude Include="Basic\Shapes\Sphere.h" />
     <ClInclude Include="Engine\FileManager\BaseResources.h" />
-    <ClInclude Include="Games\SolarSystem\Scripts\Planet.h" />
-    <ClInclude Include="Games\SolarSystem\Scripts\TestRotateAroundPoint.h" />
     <ClInclude Include="Engine\DebugSystem\DebugSystem.h" />
     <ClInclude Include="Engine\GraphicsEngine\ShaderManager.h" />
     <ClInclude Include="Engine\DebugSystem\Debug.h" />
@@ -173,6 +170,8 @@
     <ClInclude Include="Basic\Constants\Colors.h" />
     <ClInclude Include="Lib\Tools\StringHelper.h" />
     <ClInclude Include="Engine\GraphicsEngine\ConstantBuffer.h" />
+    <ClInclude Include="Games\Katamari\KatamariGame.h" />
+    <ClInclude Include="Games\Katamari\Scripts\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />
