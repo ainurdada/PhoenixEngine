@@ -2,12 +2,17 @@
 
 void Player::Awake()
 {
-	LPCWSTR modelPath = L"Basic\\Shapes\\Models\\Sphere.glb";
+	LPCWSTR modelPath = L"Models\\Football/football.glb";
 	RenderComponent* rc = new RenderComponent;
 	rc->shader = ShaderManager::Get(BaseResource::litShader);
 	rc->modelPath = modelPath;
-	gameObject->AddComponent(*rc);
-	gameObject->transform.position(Vector3::Zero);
+	//gameObject->AddComponent(*rc);
+	gameObject->transform.position(Vector3::Zero + Vector3::Forward * 2);
+	gameObject->transform.localScale({ .01f,.01f ,.01f });
+
+	SphereCollider* col = new SphereCollider;
+	col->radius = 2;
+	gameObject->AddComponent(*col);
 }
 
 void Player::Update()

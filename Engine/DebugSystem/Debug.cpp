@@ -1,6 +1,7 @@
 #include "Debug.h"
 #include "../../App/Game.h"
 #include <DirectXHelpers.h>
+#include <GeometricPrimitive.h>
 
 using namespace DirectX;
 using namespace SimpleMath;
@@ -81,5 +82,21 @@ namespace DebugTool
 
 			Debug::DrawLine(scale - xaxis, scale + xaxis, color);
 		}
+	}
+
+	using namespace DirectX;
+	void Debug::DrawWiredSphere(const DirectX::XMFLOAT3& position, float radius, const DirectX::XMFLOAT4& color)
+	{
+		std::unique_ptr<GeometricPrimitive> sphere;
+		sphere = GeometricPrimitive::CreateSphere(Game::instance->graphics.GetContext());
+		XMMATRIX world = XMMatrixTranslation(position.x, position.y, position.z);
+		sphere->Draw(
+			world,
+			Game::instance->mainCamera->ViewMatrix(),
+			Game::instance->mainCamera->ProjectionMatrix(),
+			{ color.x, color.y, color.z, color.w },
+			nullptr,
+			true
+		);
 	}
 }

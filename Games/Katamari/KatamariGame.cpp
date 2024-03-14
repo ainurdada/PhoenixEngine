@@ -12,7 +12,7 @@ void KatamariGame::CreateCrocodile(Vector3 position)
 	rc->modelPath = modelPath;
 	obj->AddComponent(*rc);
 	InstantiateGameObject(obj);
-	obj->transform.localScale({ .1f,.1f,.1f });
+	obj->transform.localScale({ .05f,.05f,.05f });
 	obj->transform.position(position);
 }
 
@@ -46,9 +46,23 @@ void KatamariGame::OnCreated()
 	CameraControl* cameraControl = new CameraControl;
 	Game::instance->mainCamera->AddComponent(*cameraControl);
 
-	//CreateCrocodile(Vector3::Zero);
-	//CreateDuriel(Vector3::Zero);
-	//CreateScooter(Vector3::Zero);
+	int lines = 2;
+	int columns = 2;
+	float distance = 4;
+	for (int i = 0; i < lines; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			Vector3 pos = Vector3::Zero + Vector3::Right * distance * i * 3 - Vector3::Forward * distance * j;
+			CreateCrocodile(pos);
+			pos = pos + Vector3::Right * distance;
+			CreateDuriel(pos);
+			pos = pos + Vector3::Right * distance;
+			CreateScooter(pos);
+		}
+	}
+
+
 
 	GameObject* playerObj = new GameObject;
 	Player* player = new Player;

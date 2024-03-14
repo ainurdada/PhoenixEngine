@@ -115,6 +115,9 @@
     <ClCompile Include="Games\Katamari\Scripts\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\SphereCollider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -172,6 +175,7 @@
     <ClInclude Include="Engine\GraphicsEngine\ConstantBuffer.h" />
     <ClInclude Include="Games\Katamari\KatamariGame.h" />
     <ClInclude Include="Games\Katamari\Scripts\Player.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\SphereCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

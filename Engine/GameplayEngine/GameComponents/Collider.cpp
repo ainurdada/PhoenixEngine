@@ -4,28 +4,12 @@
 #include "../../PhysicsEngine/Physics.h"
 #include "../../App/Game.h"
 
-void Collider::Awake()
-{
-}
-
-void Collider::Start()
-{
-}
-
 void Collider::DestroyResources()
 {
 	Game::instance->physics->RemoveCollider(this);
 }
 
-void Collider::Draw()
-{
-}
-
 void Collider::Initialize()
 {
 	Game::instance->physics->collidersInGame.emplace_back(this);
-}
-
-void Collider::Reload()
-{
 }

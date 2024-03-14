@@ -195,6 +195,7 @@
     <ClCompile Include="Engine\GraphicsEngine\TextureManager.cpp" />
     <ClCompile Include="Lib\Tools\StringHelper.cpp" />
     <ClCompile Include="Games\Katamari\Scripts\Player.cpp" />
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\SphereCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
@@ -246,6 +247,7 @@
     <ClInclude Include="Engine\GraphicsEngine\TextureManager.h" />
     <ClInclude Include="Lib\Tools\StringHelper.h" />
     <ClInclude Include="Games\Katamari\Scripts\Player.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\SphereCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

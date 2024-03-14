@@ -16,10 +16,5 @@ protected:
 	virtual void Initialize() override;
 	virtual CollisionInfo IsCollide(Collider* other) = 0;
 private:
-	// Inherited via GameComponent
-	void Awake() override;
-	void Start() override;
-	void Draw() override;
-	void Reload() override;
 };
 
