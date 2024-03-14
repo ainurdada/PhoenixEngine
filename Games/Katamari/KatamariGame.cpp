@@ -37,8 +37,14 @@ void KatamariGame::CreateScooter(Vector3 position)
 	rc->shader = ShaderManager::Get(BaseResource::litShader);
 	rc->modelPath = modelPath;
 	obj->AddComponent(*rc);
-	InstantiateGameObject(obj);
 	obj->transform.position(position);
+
+	SphereCollider* col = new SphereCollider;
+	col->radius = 1;
+	col->centerOffset = { 0,0.5f,0 };
+	obj->AddComponent(*col);
+
+	InstantiateGameObject(obj);
 }
 
 void KatamariGame::OnCreated()

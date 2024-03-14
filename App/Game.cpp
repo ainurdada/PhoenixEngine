@@ -119,11 +119,11 @@ void Game::render(float deltaFrame)
 	graphics.UpdateState();
 	graphics.SetUpViewPort(window.ClientWidth, window.ClientHeight);
 	graphics.UpdateRenderTarget();
-	OnDebugRender();
 	for (GameObject& obj : gameObjects)
 	{
 		obj.Draw();
 	}
+	OnDebugRender();
 	graphics.Present();
 }
 

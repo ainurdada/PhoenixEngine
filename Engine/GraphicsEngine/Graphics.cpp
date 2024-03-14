@@ -132,15 +132,29 @@ void Graphics::SetShader(const Shader& shader)
 
 HRESULT Graphics::SetUpRasterizer()
 {
+	HRESULT res;
+
 	rastDesc.CullMode = D3D11_CULL_BACK;
 	rastDesc.FillMode = D3D11_FILL_SOLID;
+	res = device->CreateRasterizerState(&rastDesc, &solidRastState);
 
-	HRESULT res;
-	res = device->CreateRasterizerState(&rastDesc, &rastState);
+	rastDesc.CullMode = D3D11_CULL_NONE;
+	rastDesc.FillMode = D3D11_FILL_WIREFRAME;
+	res = device->CreateRasterizerState(&rastDesc, &wireframeRastState);
 
-	context->RSSetState(rastState);
+	context->RSSetState(solidRastState);
 
 	return res;
+}
+
+void Graphics::SetSolidRasterizer()
+{
+	context->RSSetState(solidRastState);
+}
+
+void Graphics::SetWireframeRasterizer()
+{
+	context->RSSetState(wireframeRastState);
 }
 
 void Graphics::SetUpViewPort(int width, int height)
@@ -158,7 +172,7 @@ void Graphics::SetUpViewPort(int width, int height)
 void Graphics::UpdateState()
 {
 	context->ClearState();
-	context->RSSetState(rastState);
+	context->RSSetState(solidRastState);
 }
 
 void Graphics::UpdateRenderTarget()

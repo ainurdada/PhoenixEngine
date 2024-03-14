@@ -88,7 +88,7 @@ namespace DebugTool
 	void Debug::DrawWiredSphere(const DirectX::XMFLOAT3& position, float radius, const DirectX::XMFLOAT4& color)
 	{
 		std::unique_ptr<GeometricPrimitive> sphere;
-		sphere = GeometricPrimitive::CreateSphere(Game::instance->graphics.GetContext());
+		sphere = GeometricPrimitive::CreateSphere(Game::instance->graphics.GetContext(), radius * 2);
 		XMMATRIX world = XMMatrixTranslation(position.x, position.y, position.z);
 		sphere->Draw(
 			world,

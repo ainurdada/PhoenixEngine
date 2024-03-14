@@ -25,6 +25,8 @@ public:
 	void SetUpIA(const Shader& shader);
 	void SetShader(const Shader& shader);
 	HRESULT SetUpRasterizer();
+	void SetSolidRasterizer();
+	void SetWireframeRasterizer();
 	void SetUpViewPort(int width, int height);
 	void UpdateState();
 	void UpdateRenderTarget();
@@ -40,7 +42,8 @@ private:
 	DXGI_SWAP_CHAIN_DESC swapDesc = {};
 	ID3D11RenderTargetView* rtv;
 	CD3D11_RASTERIZER_DESC rastDesc = {};
-	ID3D11RasterizerState* rastState;
+	ID3D11RasterizerState* solidRastState;
+	ID3D11RasterizerState* wireframeRastState;
 	D3D11_VIEWPORT viewport = {};
 	ID3D11DepthStencilView* depthStencilView;
 	ID3D11Texture2D* depthStencilBuffer;

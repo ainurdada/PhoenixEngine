@@ -11,6 +11,9 @@ void RenderComponent::DestroyResources()
 using namespace DirectX;
 void RenderComponent::Draw()
 {
+	// Set graphics
+	Game::instance->graphics.SetSolidRasterizer();
+
 	// Set shader
 	Game::instance->graphics.SetUpIA(*shader);
 	Game::instance->graphics.SetShader(*shader);
