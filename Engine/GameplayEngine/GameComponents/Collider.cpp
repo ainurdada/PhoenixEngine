@@ -6,10 +6,10 @@
 
 void Collider::DestroyResources()
 {
-	Game::instance->physics->RemoveCollider(this);
+	Game::instance->physics.RemoveCollider(this);
 }
 
 void Collider::Initialize()
 {
-	Game::instance->physics->collidersInGame.emplace_back(this);
+	Game::instance->physics.collidersInGame.push_back(this);
 }

@@ -17,6 +17,8 @@ private:
 	void FixedUpdate() override;
 	void Draw() override;
 	void Reload() override;
-	CollisionInfo IsCollide(Collider* other) override;
+	CollisionInfo CheckCollision(Collider* other) override;
+	SMath::Vector3 FindFurthestPoint(SMath::Vector3 direction) const override;
+	SMath::Vector3 position() const override;
 };
 

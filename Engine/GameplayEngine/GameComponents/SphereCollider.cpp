@@ -1,6 +1,7 @@
 #include "SphereCollider.h"
 
 using namespace SMath;
+using namespace DirectX;
 
 void SphereCollider::Awake()
 {
@@ -29,7 +30,21 @@ void SphereCollider::Reload()
 {
 }
 
-CollisionInfo SphereCollider::IsCollide(Collider* other)
+CollisionInfo SphereCollider::CheckCollision(Collider* other)
 {
 	return CollisionInfo();
+}
+
+SMath::Vector3 SphereCollider::FindFurthestPoint(SMath::Vector3 direction) const
+{
+	Vector3 globalPosition = position();
+	Vector3 dir = direction;
+	dir.Normalize();
+	globalPosition += dir * radius;
+	return globalPosition;
+}
+
+SMath::Vector3 SphereCollider::position() const
+{
+	return gameObject->transform.position() + Vector3(XMVector3TransformNormal(centerOffset, gameObject->transform.LocalToWorld()));
 }

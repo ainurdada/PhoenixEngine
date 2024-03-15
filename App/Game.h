@@ -36,7 +36,7 @@ public:
 	Window window;
 	Graphics graphics;
 	InputDevice* input;
-	Physics* physics;
+	Physics physics;
 	Camera* mainCamera;
 
 private:

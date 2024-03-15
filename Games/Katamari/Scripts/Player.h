@@ -9,6 +9,7 @@ class Player : public BehaviourScript
 	void Update() override;
 	void Draw() override;
 
+	void OnCollide(Collider* other) override;
 public:
 	CameraControl* playerCamera;
 	float moveSpeed = 5.0f;

@@ -52,6 +52,15 @@ void KatamariGame::OnCreated()
 	CameraControl* cameraControl = new CameraControl;
 	Game::instance->mainCamera->AddComponent(*cameraControl);
 
+
+	GameObject* playerObj = new GameObject;
+	Player* player = new Player;
+	playerObj->AddComponent(*player);
+	InstantiateGameObject(playerObj);
+	cameraControl->player = &playerObj->transform;
+	player->playerCamera = cameraControl;
+
+
 	int lines = 2;
 	int columns = 2;
 	float distance = 4;
@@ -67,15 +76,6 @@ void KatamariGame::OnCreated()
 			CreateScooter(pos);
 		}
 	}
-
-
-
-	GameObject* playerObj = new GameObject;
-	Player* player = new Player;
-	playerObj->AddComponent(*player);
-	InstantiateGameObject(playerObj);
-	cameraControl->player = &playerObj->transform;
-	player->playerCamera = cameraControl;
 }
 
 void KatamariGame::OnUpdate()

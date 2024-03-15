@@ -70,9 +70,6 @@
     <ClCompile Include="Engine\PhysicsEngine\Physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\GameplayEngine\GameComponents\BoxCollider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\GameplayEngine\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -118,6 +115,9 @@
     <ClCompile Include="Engine\GameplayEngine\GameComponents\SphereCollider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\PhysicsEngine\Simplex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -153,7 +153,6 @@
     <ClInclude Include="Engine\GameplayEngine\GameObject.hpp" />
     <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
     <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
-    <ClInclude Include="Engine\GameplayEngine\GameComponents\BoxCollider.h" />
     <ClInclude Include="Engine\GameplayEngine\Camera.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
     <ClInclude Include="Basic\Shapes\Box.h" />
@@ -176,6 +175,7 @@
     <ClInclude Include="Games\Katamari\KatamariGame.h" />
     <ClInclude Include="Games\Katamari\Scripts\Player.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\SphereCollider.h" />
+    <ClInclude Include="Engine\PhysicsEngine\Simplex.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

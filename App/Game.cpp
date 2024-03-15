@@ -5,12 +5,10 @@ Game::Game()
 {
 	instance = this;
 	input = new InputDevice(this);
-	physics = new Physics;
 }
 
 Game::~Game()
 {
-	physics->~Physics();
 }
 
 Game* Game::instance = nullptr;
@@ -112,6 +110,7 @@ void Game::fixedUpdate()
 	{
 		gameObj.FixedUpdate();
 	}
+	physics.Update();
 }
 
 void Game::render(float deltaFrame)

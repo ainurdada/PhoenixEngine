@@ -5,7 +5,7 @@ class GameComponent;
 #endif 
 
 #include "../GameObject.h"
-
+#include "Collider.h"
 
 #ifndef GAME_COMPONENT_H
 #define GAME_COMPONENT_H
@@ -23,6 +23,7 @@ protected:
 	virtual void Initialize() = 0;
 	virtual void Reload() = 0;
 public:
+	virtual void OnCollide(Collider* other) {};
 	/// <summary>
 	/// The game object that this component is linked to
 	/// </summary>
