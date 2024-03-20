@@ -22,8 +22,9 @@ void GameObject::Start()
 
 void GameObject::Draw()
 {
-	for (GameComponent* comp : components) {
-		comp->Draw();
+	for (int i = 0; i < components.size(); i++)
+	{
+		components[i]->Draw();
 	}
 }
 

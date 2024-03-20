@@ -18,6 +18,9 @@ public:
 	void AddComponent(GameComponent& component);
 
 	template <typename T>
+	void RemoveComponent();
+
+	template <typename T>
 	T* GetComponent();
 
 private:

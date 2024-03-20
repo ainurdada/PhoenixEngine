@@ -50,6 +50,30 @@ void Transform::localScale(const SMath::Vector3& newLocalScale)
 	m_local_scale = newLocalScale;
 }
 
+const SMath::Vector3& Transform::scale() const
+{
+	if (parent != nullptr)
+	{
+		return XMVector3TransformNormal(m_local_scale, parent->LocalToWorld());
+	}
+	else
+	{
+		return m_local_scale;
+	}
+}
+
+void Transform::scale(const SMath::Vector3& newScale)
+{
+	if (parent != nullptr)
+	{
+		m_local_scale = XMVector3TransformNormal(newScale, XMMatrixInverse(nullptr, parent->LocalToWorld()));
+	}
+	else
+	{
+		m_local_scale = newScale;
+	}
+}
+
 SMath::Matrix Transform::LocalToWorld() const
 {
 	XMMATRIX m;
@@ -108,6 +132,7 @@ void Transform::Move(const SMath::Vector3& dir)
 
 void Transform::SetParent(Transform* parent)
 {
+	if (parent == this->parent) return;
 	if (this->parent != nullptr)
 	{
 		this->parent->childs.erase(std::remove(childs.begin(), childs.end(), this),
@@ -117,6 +142,24 @@ void Transform::SetParent(Transform* parent)
 	if (this->parent != nullptr)
 	{
 		this->parent->childs.push_back(this);
+	}
+}
+
+void Transform::SetParent(Transform* parent, bool safePositionRotationScale)
+{
+	if (safePositionRotationScale)
+	{
+		Vector3 scale = this->scale();
+		Quaternion rot = this->localRotation();
+		Vector3 pos = this->position();
+		SetParent(parent);
+		this->scale(scale);
+		this->localRotation(rot);
+		this->position(pos);
+	}
+	else
+	{
+		SetParent(parent);
 	}
 }
 

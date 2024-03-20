@@ -40,7 +40,7 @@ public:
 	Camera* mainCamera;
 
 private:
-	std::vector<GameObject> gameObjects;
+	std::vector<GameObject*> gameObjects;
 	virtual void processInput();
 	virtual void update(float deltaTime);
 	virtual void fixedUpdate();

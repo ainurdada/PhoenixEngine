@@ -13,5 +13,8 @@ class Player : public BehaviourScript
 public:
 	CameraControl* playerCamera;
 	float moveSpeed = 5.0f;
+
+private:
+	std::vector<Collider*> m_collidersToDelete;
 };
 

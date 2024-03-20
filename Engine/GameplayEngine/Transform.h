@@ -9,16 +9,18 @@ public:
 
 	///// get / set
 	const SMath::Vector3& localPosition() const;
-	void localPosition(const SMath::Vector3& newLocalPosition);
-
 	const SMath::Vector3& position() const;
-	void position(const SMath::Vector3& newPosition);
-
 	const SMath::Quaternion& localRotation() const;
-	void localRotation(const SMath::Quaternion& newLocalRotation);
-
 	const SMath::Vector3& localScale() const;
+	const SMath::Vector3& scale() const;
+
+	void localPosition(const SMath::Vector3& newLocalPosition);
+	void position(const SMath::Vector3& newPosition);
+	void localRotation(const SMath::Quaternion& newLocalRotation);
 	void localScale(const SMath::Vector3& newLocalScale);
+	void scale(const SMath::Vector3& newScale);
+
+
 
 	///// methods 
 	SMath::Matrix LocalToWorld() const;
@@ -31,6 +33,7 @@ public:
 	void RotateAroundPoint(const SMath::Vector3& point, const SMath::Vector3& axisAlongRotation, float angle);
 	void Move(const SMath::Vector3& dir);
 	void SetParent(Transform* parent);
+	void SetParent(Transform* parent, bool safePositionRotationScale);
 
 	SMath::Vector3 Right() const;
 	SMath::Vector3 Up() const;

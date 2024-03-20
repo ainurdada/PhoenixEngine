@@ -40,8 +40,7 @@ SMath::Vector3 SphereCollider::FindFurthestPoint(SMath::Vector3 direction) const
 	Vector3 globalPosition = position();
 	Vector3 dir = direction;
 	dir.Normalize();
-	globalPosition += dir * radius;
-	return globalPosition;
+	return globalPosition + dir * radius;
 }
 
 SMath::Vector3 SphereCollider::position() const

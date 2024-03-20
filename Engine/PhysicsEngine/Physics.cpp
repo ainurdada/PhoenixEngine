@@ -1,4 +1,5 @@
 #include "Physics.h"
+#include "../GameplayEngine/GameComponents/SphereCollider.h"
 
 #include "Simplex.h"
 
@@ -57,7 +58,20 @@ void Physics::RemoveCollider(Collider* col)
 #include "../DebugSystem/DebugSystem.h"
 bool Physics::CheckCollision(Collider& a, Collider& b)
 {
-	return GJK(a, b);
+	//return GJK(a, b);
+
+	SphereCollider sa = (SphereCollider&)a;
+	SphereCollider sb = (SphereCollider&)b;
+	float dist = (a.position() - b.position()).Length();
+	float radSum = sa.radius + sb.radius;
+	if (dist > radSum)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }
 
 static bool Line(Simplex& points, Vector3& direction)

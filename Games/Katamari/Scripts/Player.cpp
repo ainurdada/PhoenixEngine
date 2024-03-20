@@ -17,6 +17,13 @@ void Player::Awake()
 
 void Player::Update()
 {
+	for (Collider* col : m_collidersToDelete)
+	{
+		this->gameObject->GetComponent<SphereCollider>()->radius += ((SphereCollider*)col)->radius*2;
+		col->gameObject->RemoveComponent<SphereCollider>();
+	}
+	m_collidersToDelete.clear();
+
 	if (playerCamera->rotateAroundCentre)
 	{
 		if (Game::instance->input->IsKeyDown(Keys::A))
@@ -47,4 +54,6 @@ void Player::Draw()
 void Player::OnCollide(Collider* other)
 {
 	std::cout << "Collide" << std::endl;
+	other->gameObject->transform.SetParent(&gameObject->transform, true);
+	m_collidersToDelete.push_back(other);
 }

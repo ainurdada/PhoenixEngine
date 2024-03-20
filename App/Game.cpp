@@ -34,9 +34,9 @@ void Game::Run()
 
 	auto previousTime = std::chrono::steady_clock::now();
 	float lag = 0;
-	for (GameObject& gameObj : gameObjects)
+	for (GameObject* gameObj : gameObjects)
 	{
-		gameObj.Start();
+		gameObj->Start();
 	}
 
 	isRun = true;
@@ -50,10 +50,10 @@ void Game::Run()
 
 		while (lag >= time.GetFixedDeltaTime())
 		{
-			fixedUpdate();
 			lag -= time.GetFixedDeltaTime();
 		}
 		this->time.Update();
+		fixedUpdate();
 		update(this->time.GetDeltaTime());
 
 		render(lag / time.GetFixedDeltaTime());
@@ -70,7 +70,7 @@ void Game::InstantiateGameObject(GameObject* gameObject)
 	{
 		gameObject->Start();
 	}
-	gameObjects.push_back(*gameObject);
+	gameObjects.push_back(gameObject);
 }
 
 void Game::Quit()
@@ -98,17 +98,17 @@ void Game::processInput()
 void Game::update(float deltaTime)
 {
 	OnUpdate();
-	for (GameObject& gameObj : gameObjects)
+	for (GameObject* gameObj : gameObjects)
 	{
-		gameObj.Update(deltaTime);
+		gameObj->Update(deltaTime);
 	}
 }
 void Game::fixedUpdate()
 {
 	OnFixedUpdate();
-	for (GameObject& gameObj : gameObjects)
+	for (GameObject* gameObj : gameObjects)
 	{
-		gameObj.FixedUpdate();
+		gameObj->FixedUpdate();
 	}
 	physics.Update();
 }
@@ -118,9 +118,9 @@ void Game::render(float deltaFrame)
 	graphics.UpdateState();
 	graphics.SetUpViewPort(window.ClientWidth, window.ClientHeight);
 	graphics.UpdateRenderTarget();
-	for (GameObject& obj : gameObjects)
+	for (GameObject* obj : gameObjects)
 	{
-		obj.Draw();
+		obj->Draw();
 	}
 	OnDebugRender();
 	graphics.Present();
@@ -130,9 +130,9 @@ void Game::ClearResources()
 {
 	OnClearResources();
 	debug.ShotDown();
-	for (GameObject& gameObj : gameObjects)
+	for (GameObject* gameObj : gameObjects)
 	{
-		gameObj.Release();
+		gameObj->Release();
 	}
 	graphics.Cleanup();
 }
