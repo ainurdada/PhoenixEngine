@@ -2,6 +2,7 @@
 
 #include "../../../Lib/Math/Math.h"
 
+#include <vector>
 class LightManager
 {
 	struct DirectionalLightData {
@@ -9,7 +10,13 @@ class LightManager
 		float intensity;
 		SMath::Vector4 KaSpecPowKsX;
 	};
+
+	struct PointLightData {
+		SMath::Vector3 position;
+		float intensity;
+	};
 public:
 	DirectionalLightData dirLight;
+	std::vector<PointLightData> pointLights;
 };
 

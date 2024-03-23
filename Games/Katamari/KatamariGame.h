@@ -8,6 +8,7 @@ class KatamariGame : public Game
 	void CreateDuriel(Vector3 position);
 	void CreateScooter(Vector3 position);
 	void CreateDirLight(Vector3 direction, float intensity);
+	void CreatePointLight(Vector3 position, float intensity);
 
 	// Inherited via Game
 	void OnCreated() override;

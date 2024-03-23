@@ -121,6 +121,9 @@
     <ClCompile Include="Engine\GameplayEngine\GameComponents\DirectionalLightComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\PointLightComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -180,6 +183,7 @@
     <ClInclude Include="Engine\PhysicsEngine\Simplex.h" />
     <ClInclude Include="Engine\GraphicsEngine\Light\LightManager.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\DirectionalLightComponent.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\PointLightComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

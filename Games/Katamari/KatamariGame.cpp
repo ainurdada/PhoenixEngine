@@ -72,6 +72,16 @@ void KatamariGame::CreateDirLight(Vector3 direction, float intensity)
 	InstantiateGameObject(lightObj);
 }
 
+void KatamariGame::CreatePointLight(Vector3 position, float intensity)
+{
+	GameObject* lightObj = new GameObject;
+	PointLightComponent* comp = new PointLightComponent;
+	comp->intensity = intensity;
+	lightObj->transform.position(position);
+	lightObj->AddComponent(*comp);
+	InstantiateGameObject(lightObj);
+}
+
 
 
 void KatamariGame::OnCreated()
@@ -88,6 +98,7 @@ void KatamariGame::OnCreated()
 	player->playerCamera = cameraControl;
 
 	CreateDirLight(Vector3::Down, 1);
+	CreatePointLight({ 5,0,0 }, 1);
 
 	int lines = 2;
 	int columns = 2;

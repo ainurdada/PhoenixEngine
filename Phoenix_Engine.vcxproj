@@ -197,6 +197,7 @@
     <ClCompile Include="Games\Katamari\Scripts\Player.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\SphereCollider.cpp" />
     <ClCompile Include="Engine\PhysicsEngine\Simplex.cpp" />
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\PointLightComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
@@ -250,6 +251,7 @@
     <ClInclude Include="Games\Katamari\Scripts\Player.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\SphereCollider.h" />
     <ClInclude Include="Engine\PhysicsEngine\Simplex.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\PointLightComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

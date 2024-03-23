@@ -28,6 +28,12 @@ class Model
 	};
 	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
+	struct PointLightData {
+		SMath::Vector3 position;
+		float intensity;
+	};
+	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
+
 public:
 	bool Initialize(const LPCWSTR filePath);
 	void Release();
@@ -43,5 +49,6 @@ private:
 	std::string directory = "";
 	ConstantBuffer<ConstantData> constant_data;
 	ConstantBuffer<DirLightData> dir_light_data;
+	ConstantBuffer<PointLightData> point_light_data;
 	ID3D11Buffer* transform_buffer = nullptr;
 };

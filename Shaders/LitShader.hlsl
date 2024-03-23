@@ -36,6 +36,16 @@ cbuffer DirLightBuffer : register(b1)
     DirLightData dirLight;
 }
 
+struct PointLightData
+{
+    float3 position;
+    float intensity;
+};
+cbuffer PointLightBuffr : register(b2)
+{
+    PointLightData pointLight;
+}
+
 
 Texture2D txDiffuse : register(t0);
 SamplerState sampl : register(s0);
@@ -64,8 +74,17 @@ float4 PSMain(PS_IN input) : SV_Target
     
     float3 diffuse = kd * dirLight.intensity * max(0, dot(input.normal, lightDir));
     float3 spec = pow(max(0, dot(-viewDir, refVec)), dirLight.KaSpecPowKsX.y) * dirLight.intensity * dirLight.KaSpecPowKsX.z;
-    float3 ambient = dirLight.KaSpecPowKsX.x * dirLight.intensity * kd;
+    float3 ambient = dirLight.KaSpecPowKsX.x * kd;
     
     float4 col = float4(diffuse + spec + ambient, 1);
+    
+    lightDir = normalize(pointLight.position - input.worldPos.xyz);
+    refVec = normalize(reflect(lightDir, input.normal));
+    
+    diffuse = kd * pointLight.intensity * max(0, dot(input.normal, lightDir));
+    spec = pow(max(0, dot(-viewDir, refVec)), dirLight.KaSpecPowKsX.y) * pointLight.intensity * dirLight.KaSpecPowKsX.z;
+    
+    col += float4(diffuse + spec, 1);
+    
     return col;
 }
