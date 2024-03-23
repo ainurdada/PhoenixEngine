@@ -79,9 +79,6 @@
     <ClCompile Include="Engine\GameplayEngine\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Games\Katamari\SolarSystem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Games\Katamari\Scripts\CameraControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -116,6 +113,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Engine\PhysicsEngine\Simplex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GraphicsEngine\Light\LightManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\DirectionalLightComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -156,7 +159,6 @@
     <ClInclude Include="Engine\GameplayEngine\Camera.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
     <ClInclude Include="Basic\Shapes\Box.h" />
-    <ClInclude Include="Games\Katamari\SolarSystem.h" />
     <ClInclude Include="Games\Katamari\Scripts\CameraControl.h" />
     <ClInclude Include="Basic\Shapes\Sphere.h" />
     <ClInclude Include="Engine\FileManager\BaseResources.h" />
@@ -176,6 +178,8 @@
     <ClInclude Include="Games\Katamari\Scripts\Player.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\SphereCollider.h" />
     <ClInclude Include="Engine\PhysicsEngine\Simplex.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Light\LightManager.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\DirectionalLightComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />

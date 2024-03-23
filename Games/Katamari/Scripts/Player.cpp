@@ -53,7 +53,6 @@ void Player::Draw()
 
 void Player::OnCollide(Collider* other)
 {
-	std::cout << "Collide" << std::endl;
 	other->gameObject->transform.SetParent(&gameObject->transform, true);
 	m_collidersToDelete.push_back(other);
 }

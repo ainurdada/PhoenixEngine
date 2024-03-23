@@ -11,6 +11,12 @@ void KatamariGame::CreateCrocodile(Vector3 position)
 	rc->shader = ShaderManager::Get(BaseResource::litShader);
 	rc->modelPath = modelPath;
 	obj->AddComponent(*rc);
+
+	SphereCollider* col = new SphereCollider;
+	col->radius = 1;
+	col->centerOffset = { 0,0.5f,0 };
+	obj->AddComponent(*col);
+
 	InstantiateGameObject(obj);
 	obj->transform.localScale({ .05f,.05f,.05f });
 	obj->transform.position(position);
@@ -24,6 +30,12 @@ void KatamariGame::CreateDuriel(Vector3 position)
 	rc->shader = ShaderManager::Get(BaseResource::litShader);
 	rc->modelPath = modelPath;
 	obj->AddComponent(*rc);
+
+	SphereCollider* col = new SphereCollider;
+	col->radius = 1;
+	col->centerOffset = { 0,0.5f,0 };
+	obj->AddComponent(*col);
+
 	InstantiateGameObject(obj);
 	obj->transform.localScale({ .1f,.1f,.1f });
 	obj->transform.position(position);
@@ -47,6 +59,21 @@ void KatamariGame::CreateScooter(Vector3 position)
 	InstantiateGameObject(obj);
 }
 
+void KatamariGame::CreateDirLight(Vector3 direction, float intensity)
+{
+	GameObject* lightObj = new GameObject;
+	DirectionalLightComponent* comp = new DirectionalLightComponent;
+	comp->direction = direction;
+	comp->intensity = intensity;
+	comp->ambientKoeff = 0.23f;
+	comp->specKoeff = 0.77f;
+	comp->specPow = 89.6f;
+	lightObj->AddComponent(*comp);
+	InstantiateGameObject(lightObj);
+}
+
+
+
 void KatamariGame::OnCreated()
 {
 	CameraControl* cameraControl = new CameraControl;
@@ -60,6 +87,7 @@ void KatamariGame::OnCreated()
 	cameraControl->player = &playerObj->transform;
 	player->playerCamera = cameraControl;
 
+	CreateDirLight(Vector3::Down, 1);
 
 	int lines = 2;
 	int columns = 2;

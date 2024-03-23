@@ -16,8 +16,17 @@ class Model
 	struct ConstantData
 	{
 		SMath::Matrix WorldViewProjection;
+		SMath::Matrix World;
+		SMath::Vector4 ViewerPos;
 	};
 	static_assert((sizeof(ConstantData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
+
+	struct DirLightData{
+		SMath::Vector3 direction;
+		float intensity;
+		SMath::Vector4 KaSpecPowKsX;
+	};
+	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
 public:
 	bool Initialize(const LPCWSTR filePath);
@@ -33,5 +42,6 @@ private:
 	std::vector<Mesh> meshes;
 	std::string directory = "";
 	ConstantBuffer<ConstantData> constant_data;
+	ConstantBuffer<DirLightData> dir_light_data;
 	ID3D11Buffer* transform_buffer = nullptr;
 };

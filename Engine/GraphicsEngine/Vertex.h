@@ -4,5 +4,6 @@
 
 struct Vertex {
 	DirectX::XMFLOAT4 Pos;
+	DirectX::XMFLOAT4 Normal;
 	DirectX::XMFLOAT4 Tex;
 };

@@ -9,6 +9,7 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	HRESULT res;
 
 	D3D_FEATURE_LEVEL featureLevel[] = { D3D_FEATURE_LEVEL_11_1 };
+	DXGI_SWAP_CHAIN_DESC swapDesc = {};
 	ZeroMemory(&swapDesc, sizeof(swapDesc));
 	swapDesc.BufferCount = 2;
 	swapDesc.BufferDesc.Width = screenWidth;

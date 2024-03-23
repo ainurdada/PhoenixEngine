@@ -7,6 +7,7 @@ class KatamariGame : public Game
 	void CreateCrocodile(Vector3 position);
 	void CreateDuriel(Vector3 position);
 	void CreateScooter(Vector3 position);
+	void CreateDirLight(Vector3 direction, float intensity);
 
 	// Inherited via Game
 	void OnCreated() override;

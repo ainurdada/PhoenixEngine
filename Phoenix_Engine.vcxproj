@@ -169,6 +169,7 @@
     <ClCompile Include="Engine\GameplayEngine\Camera.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\Collider.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp" />
+    <ClCompile Include="Engine\GameplayEngine\GameComponents\DirectionalLightComponent.cpp" />
     <ClCompile Include="Engine\GameplayEngine\Transform.cpp" />
     <ClCompile Include="Basic\Shapes\Box2D.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\GameComponent.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="Engine\InputSystem\InputDevice.cpp" />
     <ClCompile Include="Games\Katamari\Scripts\CameraControl.cpp" />
     <ClCompile Include="Games\Katamari\KatamariGame.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\Light\LightManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp" />
@@ -187,7 +189,6 @@
     <ClCompile Include="App\Window.cpp" />
     <ClCompile Include="Lib\Delegates\Delegates.cpp" />
     <ClCompile Include="Engine\PhysicsEngine\Physics.cpp" />
-    <ClCompile Include="Games\Katamari\SolarSystem.cpp" />
     <ClCompile Include="Basic\Shapes\Sphere.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\ShaderManager.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Texture.cpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Engine\GameplayEngine\GameComponents\Collider.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BaseGameComponents.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BehaviourScript.h" />
+    <ClInclude Include="Engine\GameplayEngine\GameComponents\DirectionalLightComponent.h" />
     <ClInclude Include="Engine\GameplayEngine\GameObject.hpp" />
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
     <ClInclude Include="Engine\GameplayEngine\Transform.h" />
@@ -237,9 +239,9 @@
     <ClInclude Include="Lib\Math\src\Vec.h" />
     <ClInclude Include="App\Window.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Light\LightManager.h" />
     <ClInclude Include="PhoenixEngine.h" />
     <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
-    <ClInclude Include="Games\Katamari\SolarSystem.h" />
     <ClInclude Include="Basic\Shapes\Sphere.h" />
     <ClInclude Include="Engine\GraphicsEngine\ShaderManager.h" />
     <ClInclude Include="Engine\GraphicsEngine\Texture.h" />

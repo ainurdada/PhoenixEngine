@@ -19,6 +19,7 @@ bool Model::Initialize(const LPCWSTR filePath)
     Game::instance->graphics.GetDevice()->CreateBuffer(&transformBufDesc, nullptr, &transform_buffer);
 
     constant_data.Initialize(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext());
+    dir_light_data.Initialize(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext());
 
     std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
     this->directory = StringHelper::GetDirectoryFromPath(converter.to_bytes(filePath));
@@ -52,8 +53,23 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
             * Game::instance->mainCamera->ViewMatrix()
             * Game::instance->mainCamera->ProjectionMatrix()
         );
+        constant_data.data.World = XMMatrixTranspose(SMath::Matrix(meshes[i].GetTransformMatrix()) * modelMatrix);
+        constant_data.data.ViewerPos = {
+            Game::instance->mainCamera->transform.position().x,
+            Game::instance->mainCamera->transform.position().y,
+            Game::instance->mainCamera->transform.position().z,
+            1
+        };
         constant_data.ApplyChanges();
+
+        dir_light_data.data.direction = Game::instance->graphics.light.dirLight.direction;
+        dir_light_data.data.intensity = Game::instance->graphics.light.dirLight.intensity;
+        dir_light_data.data.KaSpecPowKsX = Game::instance->graphics.light.dirLight.KaSpecPowKsX;
+        dir_light_data.ApplyChanges();
+
         Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
+        Game::instance->graphics.GetContext()->PSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
+        Game::instance->graphics.GetContext()->PSSetConstantBuffers(1, 1, dir_light_data.GetAddressOf());
         meshes[i].Draw();
     }
 }
@@ -89,6 +105,14 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, DirectX::XMMATRIX& t
         vertex.Pos.y = mesh->mVertices[i].y;
         vertex.Pos.z = mesh->mVertices[i].z;
         vertex.Pos.w = 1;
+
+        if (mesh->HasNormals())
+        {
+            vertex.Normal.x = mesh->mNormals[i].x;
+            vertex.Normal.y = mesh->mNormals[i].y;
+            vertex.Normal.z = mesh->mNormals[i].z;
+            vertex.Normal.w = 0;
+        }
 
         if (mesh->mTextureCoords[0])
         {

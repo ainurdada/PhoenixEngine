@@ -15,6 +15,7 @@ class Graphics;
 #include "Mesh.h"
 #include "Shader.h"
 #include "../../Lib/Math/Math.h"
+#include "Light/LightManager.h"
 
 class Graphics
 {
@@ -35,11 +36,11 @@ public:
 
 	Vec4 backgroundColor;
 	ID3D11SamplerState* pSampler;
+	LightManager light;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;
 	IDXGISwapChain* swapChain;
-	DXGI_SWAP_CHAIN_DESC swapDesc = {};
 	ID3D11RenderTargetView* rtv;
 	CD3D11_RASTERIZER_DESC rastDesc = {};
 	ID3D11RasterizerState* solidRastState;
