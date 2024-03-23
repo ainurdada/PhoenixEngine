@@ -49,13 +49,13 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 	for (int i = 0; i < meshes.size(); i++)
 	{
 		// constant buffer
+		SMath::Matrix world = SMath::Matrix(meshes[i].GetTransformMatrix()) * modelMatrix;
 		constant_data.data.WorldViewProjection = XMMatrixTranspose(
-			SMath::Matrix(meshes[i].GetTransformMatrix())
-			* modelMatrix
+			world
 			* Game::instance->mainCamera->ViewMatrix()
 			* Game::instance->mainCamera->ProjectionMatrix()
 		);
-		constant_data.data.World = XMMatrixTranspose(SMath::Matrix(meshes[i].GetTransformMatrix()) * modelMatrix);
+		constant_data.data.World = XMMatrixTranspose(world);
 		constant_data.data.ViewerPos = {
 			Game::instance->mainCamera->transform.position().x,
 			Game::instance->mainCamera->transform.position().y,

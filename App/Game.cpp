@@ -50,10 +50,10 @@ void Game::Run()
 
 		while (lag >= time.GetFixedDeltaTime())
 		{
+			fixedUpdate();
 			lag -= time.GetFixedDeltaTime();
 		}
 		this->time.Update();
-		fixedUpdate();
 		update(this->time.GetDeltaTime());
 
 		render(lag / time.GetFixedDeltaTime());

@@ -97,7 +97,7 @@ void KatamariGame::OnCreated()
 	cameraControl->player = &playerObj->transform;
 	player->playerCamera = cameraControl;
 
-	CreateDirLight(Vector3::Down, 1);
+	CreateDirLight(Vector3::Down, 0);
 	CreatePointLight({ 5,0,0 }, 1);
 
 	int lines = 2;
