@@ -21,6 +21,7 @@ bool Model::Initialize(const LPCWSTR filePath)
 	constant_data.Initialize(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext());
 	dir_light_data.Initialize(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext());
 	point_light_data.Initialize(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext());
+	material_data.Initialize(Game::instance->graphics.GetDevice().Get(), Game::instance->graphics.GetContext());
 
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
 	this->directory = StringHelper::GetDirectoryFromPath(converter.to_bytes(filePath));
@@ -64,10 +65,15 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 		};
 		constant_data.ApplyChanges();
 
+		// material buffer
+		material_data.data.ambientKoeff = Game::instance->graphics.light.dirLight.KaSpecPowKsX.x;
+		material_data.data.specPower = Game::instance->graphics.light.dirLight.KaSpecPowKsX.y;
+		material_data.data.specKoeff = Game::instance->graphics.light.dirLight.KaSpecPowKsX.z;
+		material_data.ApplyChanges();
+
 		// direction light buffer
 		dir_light_data.data.direction = Game::instance->graphics.light.dirLight.direction;
 		dir_light_data.data.intensity = Game::instance->graphics.light.dirLight.intensity;
-		dir_light_data.data.KaSpecPowKsX = Game::instance->graphics.light.dirLight.KaSpecPowKsX;
 		dir_light_data.ApplyChanges();
 
 		// point light buffer
@@ -80,8 +86,9 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 
 		Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
 		Game::instance->graphics.GetContext()->PSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
-		Game::instance->graphics.GetContext()->PSSetConstantBuffers(1, 1, dir_light_data.GetAddressOf());
-		Game::instance->graphics.GetContext()->PSSetConstantBuffers(2, 1, point_light_data.GetAddressOf());
+		Game::instance->graphics.GetContext()->PSSetConstantBuffers(1, 1, material_data.GetAddressOf());
+		Game::instance->graphics.GetContext()->PSSetConstantBuffers(2, 1, dir_light_data.GetAddressOf());
+		Game::instance->graphics.GetContext()->PSSetConstantBuffers(3, 1, point_light_data.GetAddressOf());
 		meshes[i].Draw();
 	}
 }

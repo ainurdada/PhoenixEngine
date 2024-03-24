@@ -24,14 +24,24 @@ cbuffer ConstantBuffer : register(b0)
     ConstantData cdata;
 }
 
+struct MaterialData
+{
+    float Ka;
+    float SpecPow;
+    float Ks;
+    float X;
+};
+cbuffer DirLightBuffer : register(b1)
+{
+    MaterialData material;
+}
 
 struct DirLightData
 {
     float3 direction;
     float intensity;
-    float4 KaSpecPowKsX;
 };
-cbuffer DirLightBuffer : register(b1)
+cbuffer DirLightBuffer : register(b2)
 {
     DirLightData dirLight;
 }
@@ -41,7 +51,7 @@ struct PointLightData
     float3 position;
     float intensity;
 };
-cbuffer PointLightBuffr : register(b2)
+cbuffer PointLightBuffr : register(b3)
 {
     PointLightData pointLight;
 }
@@ -73,8 +83,8 @@ float4 PSMain(PS_IN input) : SV_Target
     float3 refVec = normalize(reflect(lightDir, input.normal));
     
     float3 diffuse = kd * dirLight.intensity * max(0, dot(input.normal, lightDir));
-    float3 spec = pow(max(0, dot(-viewDir, refVec)), dirLight.KaSpecPowKsX.y) * dirLight.intensity * dirLight.KaSpecPowKsX.z;
-    float3 ambient = dirLight.KaSpecPowKsX.x * kd;
+    float3 spec = pow(max(0, dot(-viewDir, refVec)), material.SpecPow) * dirLight.intensity * material.Ks;
+    float3 ambient = material.Ka * kd;
     
     float4 col = float4(diffuse + spec + ambient, 1);
     
@@ -82,7 +92,7 @@ float4 PSMain(PS_IN input) : SV_Target
     refVec = normalize(reflect(lightDir, input.normal));
     
     diffuse = kd * pointLight.intensity * max(0, dot(input.normal, lightDir));
-    spec = pow(max(0, dot(-viewDir, refVec)), dirLight.KaSpecPowKsX.y) * pointLight.intensity * dirLight.KaSpecPowKsX.z;
+    spec = pow(max(0, dot(-viewDir, refVec)), material.SpecPow) * pointLight.intensity * material.Ks;
     
     col += float4(diffuse + spec, 1);
     

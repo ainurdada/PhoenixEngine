@@ -24,13 +24,20 @@ class Model
 	struct DirLightData{
 		SMath::Vector3 direction;
 		float intensity;
-		SMath::Vector4 KaSpecPowKsX;
 	};
 	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
 	struct PointLightData {
 		SMath::Vector3 position;
 		float intensity;
+	};
+	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
+
+	struct MaterialData {
+		float ambientKoeff;
+		float specPower;
+		float specKoeff;
+		float x;
 	};
 	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
@@ -50,5 +57,6 @@ private:
 	ConstantBuffer<ConstantData> constant_data;
 	ConstantBuffer<DirLightData> dir_light_data;
 	ConstantBuffer<PointLightData> point_light_data;
+	ConstantBuffer<MaterialData> material_data;
 	ID3D11Buffer* transform_buffer = nullptr;
 };
