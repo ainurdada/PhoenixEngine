@@ -48,8 +48,12 @@ cbuffer DirLightBuffer : register(b2)
 
 struct PointLightData
 {
-    float3 position;
+    float3 color;
     float intensity;
+    float3 position;
+    float attenuation_a;
+    float attenuation_b;
+    float attenuation_c;
 };
 cbuffer PointLightBuffr : register(b3)
 {
@@ -78,6 +82,7 @@ float4 PSMain(PS_IN input) : SV_Target
     
     float3 kd = diffVal.xyz;
     
+    // directional light
     float3 viewDir = normalize(cdata.ViewerPos.xyz - input.worldPos.xyz);
     float3 lightDir = -dirLight.direction;
     float3 refVec = normalize(reflect(lightDir, input.normal));
@@ -88,13 +93,23 @@ float4 PSMain(PS_IN input) : SV_Target
     
     float4 col = float4(diffuse + spec + ambient, 1);
     
+    // point light
+    float distanceToLight = distance(pointLight.position, input.worldPos.xyz);
+    float attenuationFactor =
+    1 /
+    (
+        pointLight.attenuation_a 
+        + pointLight.attenuation_b * distanceToLight
+        + pointLight.attenuation_c * distanceToLight * distanceToLight
+    );
+    //attenuationFactor = 1;
     lightDir = normalize(pointLight.position - input.worldPos.xyz);
     refVec = normalize(reflect(lightDir, input.normal));
     
-    diffuse = kd * pointLight.intensity * max(0, dot(input.normal, lightDir));
-    spec = pow(max(0, dot(-viewDir, refVec)), material.SpecPow) * pointLight.intensity * material.Ks;
+    diffuse = attenuationFactor * kd * pointLight.intensity * max(0, dot(input.normal, lightDir));
+    spec = pow(max(0, dot(-viewDir, refVec)), material.SpecPow) * pointLight.intensity * material.Ks * attenuationFactor;
     
-    col += float4(diffuse + spec, 1);
+    col += float4(pointLight.color, 1) * float4(diffuse + spec, 0);
     
     return col;
 }

@@ -81,6 +81,10 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 		{
 			point_light_data.data.position = Game::instance->graphics.light.pointLights[0].position;
 			point_light_data.data.intensity = Game::instance->graphics.light.pointLights[0].intensity;
+			point_light_data.data.color = Game::instance->graphics.light.pointLights[0].color;
+			point_light_data.data.attenuation_a = Game::instance->graphics.light.pointLights[0].attenuation_a;
+			point_light_data.data.attenuation_b = Game::instance->graphics.light.pointLights[0].attenuation_b;
+			point_light_data.data.attenuation_c = Game::instance->graphics.light.pointLights[0].attenuation_c;
 			point_light_data.ApplyChanges();
 		}
 

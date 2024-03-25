@@ -2,6 +2,8 @@
 
 #include "../../App/Game.h"
 
+#include <wrl.h>
+
 void DirectionalLightComponent::Awake()
 {
 }

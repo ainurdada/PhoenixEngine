@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameComponent.h"
+#include "../../GraphicsEngine/Light/ShadowMap.h"
 #include "../../Lib/Math/Math.h"
 
 class DirectionalLightComponent : public GameComponent
@@ -12,7 +13,9 @@ public:
 	float ambientKoeff;
 	float specPow;
 	float specKoeff;
+
 private:
+	ShadowMap shadow_map;
 
 	// Inherited via GameComponent
 	void Awake() override;

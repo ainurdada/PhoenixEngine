@@ -5,7 +5,11 @@
 class PointLightComponent : public GameComponent
 {
 public:
+	SMath::Vector3 color;
 	float intensity;
+	float attenuation_a = 1.0f;
+	float attenuation_b = 0.1f;
+	float attenuation_c = 0.1f;
 private:
 	int index;
 

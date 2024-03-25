@@ -12,10 +12,18 @@ class LightManager
 	};
 
 	struct PointLightData {
+		SMath::Vector3 color;
 		SMath::Vector3 position;
 		float intensity;
+		float attenuation_a;
+		float attenuation_b;
+		float attenuation_c;
 	};
 public:
+	void Initialize();
+	void GenerateShadowMaps();
+
+
 	DirectionalLightData dirLight;
 	std::vector<PointLightData> pointLights;
 };

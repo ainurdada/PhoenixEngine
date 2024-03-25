@@ -65,7 +65,7 @@ void KatamariGame::CreateDirLight(Vector3 direction, float intensity)
 	DirectionalLightComponent* comp = new DirectionalLightComponent;
 	comp->direction = direction;
 	comp->intensity = intensity;
-	comp->ambientKoeff = 0.23f;
+	comp->ambientKoeff = 0.1f;
 	comp->specKoeff = 0.77f;
 	comp->specPow = 89.6f;
 	lightObj->AddComponent(*comp);
@@ -77,6 +77,9 @@ void KatamariGame::CreatePointLight(Vector3 position, float intensity)
 	GameObject* lightObj = new GameObject;
 	PointLightComponent* comp = new PointLightComponent;
 	comp->intensity = intensity;
+	comp->color = { 1,1,1 };
+	comp->attenuation_b = 0.1f;
+	comp->attenuation_c = 0.01f;
 	lightObj->transform.position(position);
 	lightObj->AddComponent(*comp);
 	InstantiateGameObject(lightObj);
@@ -97,8 +100,17 @@ void KatamariGame::OnCreated()
 	cameraControl->player = &playerObj->transform;
 	player->playerCamera = cameraControl;
 
+	GameObject* floor = new GameObject;
+	RenderComponent* floorRender = new RenderComponent;
+	floorRender->modelPath = L"Basic\\Shapes\\Models\\Cube.glb";
+	floorRender->shader = ShaderManager::Get(BaseResource::litShader);
+	floor->AddComponent(*floorRender);
+	floor->transform.scale({ 100,1,100 });
+	floor->transform.position({ 0,-1.1f,0 });
+	InstantiateGameObject(floor);
+
 	CreateDirLight(Vector3::Down, 0);
-	CreatePointLight({ 5,0,0 }, 1);
+	CreatePointLight({ 5,2,0 }, 1);
 
 	int lines = 2;
 	int columns = 2;

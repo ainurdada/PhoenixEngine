@@ -28,10 +28,14 @@ class Model
 	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
 	struct PointLightData {
-		SMath::Vector3 position;
+		SMath::Vector3 color;
 		float intensity;
+		SMath::Vector3 position;
+		float attenuation_a;
+		float attenuation_b;
+		float attenuation_c;
 	};
-	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
+	//static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
 	struct MaterialData {
 		float ambientKoeff;

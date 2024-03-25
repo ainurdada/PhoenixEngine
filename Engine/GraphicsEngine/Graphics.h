@@ -19,6 +19,10 @@ class Graphics;
 
 class Graphics
 {
+	struct GraphicSettings {
+		int shadowResolution = 1024;
+		int shadowCascadeCount = 1;
+	};
 public:
 	HRESULT Init(const HWND& hWnd, int screenWidth, int screenHeight);
 	const Microsoft::WRL::ComPtr<ID3D11Device>& GetDevice() const;
@@ -34,15 +38,15 @@ public:
 	void Present();
 	void Cleanup();
 
-	Vec4 backgroundColor;
+	GraphicSettings settings;
 	ID3D11SamplerState* pSampler;
 	LightManager light;
+	Vec4 backgroundColor;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;
 	IDXGISwapChain* swapChain;
 	ID3D11RenderTargetView* rtv;
-	CD3D11_RASTERIZER_DESC rastDesc = {};
 	ID3D11RasterizerState* solidRastState;
 	ID3D11RasterizerState* wireframeRastState;
 	D3D11_VIEWPORT viewport = {};

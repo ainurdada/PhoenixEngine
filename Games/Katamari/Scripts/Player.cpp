@@ -7,7 +7,7 @@ void Player::Awake()
 	rc->shader = ShaderManager::Get(BaseResource::litShader);
 	rc->modelPath = modelPath;
 	gameObject->AddComponent(*rc);
-	gameObject->transform.position(Vector3::Zero + Vector3::Forward * 2);
+	gameObject->transform.position(Vector3::Forward * 2 + Vector3::Up * 0.6f);
 	gameObject->transform.localScale({ .01f,.01f ,.01f });
 
 	SphereCollider* col = new SphereCollider;
