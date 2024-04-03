@@ -23,6 +23,11 @@ void RenderComponent::Draw()
 	model.Draw(gameObject->transform.LocalToWorld());
 }
 
+void RenderComponent::DrawShadow(LightCamera* lightCamera)
+{
+	model.DrawShadow(gameObject->transform.LocalToWorld(), lightCamera);
+}
+
 void RenderComponent::Initialize()
 {
 	// Init model

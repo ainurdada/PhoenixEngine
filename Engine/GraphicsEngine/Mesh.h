@@ -20,6 +20,7 @@ public:
 	const DirectX::XMMATRIX& GetTransformMatrix();
 private:
 	void Draw();
+	void DrawShadow();
 	VertexBuffer<Vertex> vb; 
 	IndexBuffer ib;
 	ID3D11DeviceContext* deviceContext;

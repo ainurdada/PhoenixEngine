@@ -14,6 +14,7 @@ public:
 	// Inherited via GameComponent
 	void DestroyResources() override;
 	void Draw() override;
+	void DrawShadow(LightCamera* lightCamera) override;
 	void Initialize() override;
 	void Reload() override;
 	void Update() override;

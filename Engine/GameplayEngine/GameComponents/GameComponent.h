@@ -6,6 +6,7 @@ class GameComponent;
 
 #include "../GameObject.h"
 #include "Collider.h"
+#include "../../GraphicsEngine/Light/LightCamera.h"
 
 #ifndef GAME_COMPONENT_H
 #define GAME_COMPONENT_H
@@ -20,6 +21,7 @@ protected:
 	virtual void FixedUpdate() = 0;
 	virtual void DestroyResources() = 0;
 	virtual void Draw() = 0;
+	virtual void DrawShadow(LightCamera* lightCamera) {};
 	virtual void Initialize() = 0;
 	virtual void Reload() = 0;
 public:

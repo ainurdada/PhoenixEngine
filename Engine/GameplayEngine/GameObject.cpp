@@ -42,6 +42,14 @@ void GameObject::FixedUpdate()
 	}
 }
 
+void GameObject::DrawShadow(LightCamera* lightCamera)
+{
+	for (GameComponent* comp : components)
+	{
+		comp->DrawShadow(lightCamera);
+	}
+}
+
 void GameObject::Release()
 {
 	for (GameComponent* comp : components) {

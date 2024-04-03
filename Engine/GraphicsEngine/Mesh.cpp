@@ -54,3 +54,11 @@ void Mesh::Draw()
 	deviceContext->IASetIndexBuffer(ib.Get(), DXGI_FORMAT_R32_UINT, 0);
 	deviceContext->DrawIndexed(ib.IndexCount(), 0, 0);
 }
+
+void Mesh::DrawShadow()
+{
+	UINT offset = 0;
+	deviceContext->IASetVertexBuffers(0, 1, vb.GetAddressOf(), vb.StridePtr(), &offset);
+	deviceContext->IASetIndexBuffer(ib.Get(), DXGI_FORMAT_R32_UINT, 0);
+	deviceContext->DrawIndexed(ib.IndexCount(), 0, 0);
+}

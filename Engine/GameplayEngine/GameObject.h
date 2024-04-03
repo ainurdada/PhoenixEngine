@@ -12,6 +12,7 @@ class GameObject;
 class GameObject
 {
 	friend class Game;
+	friend class ShadowMap;
 public:
 	GameObject() {};
 
@@ -27,6 +28,7 @@ private:
 	void Awake();
 	void Start();
 	void Draw();
+	void DrawShadow(LightCamera* lightCamera);
 	void Update(float deltaTime);
 	void FixedUpdate();
 	void Release();

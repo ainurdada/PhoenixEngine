@@ -97,6 +97,31 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 	}
 }
 
+void Model::DrawShadow(const SMath::Matrix& modelMatrix, LightCamera* lightCamera)
+{
+	for (int i = 0; i < meshes.size(); i++)
+	{
+		// constant buffer
+		SMath::Matrix world = SMath::Matrix(meshes[i].GetTransformMatrix()) * modelMatrix;
+		constant_data.data.WorldViewProjection = XMMatrixTranspose(
+			world
+			* lightCamera->ViewMatrix()
+			* lightCamera->ProjectionMatrix()
+		);
+		constant_data.data.World = XMMatrixTranspose(world);
+		constant_data.data.ViewerPos = {
+			lightCamera->transform.position().x,
+			lightCamera->transform.position().y,
+			lightCamera->transform.position().z,
+			1
+		};
+		constant_data.ApplyChanges();
+
+		Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
+		meshes[i].DrawShadow();
+	}
+}
+
 void Model::ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMATRIX& parentTransformMatrix)
 {
 	XMMATRIX nodeTransformMatrix = XMMatrixTranspose(XMMATRIX(&node->mTransformation.a1)) * parentTransformMatrix;

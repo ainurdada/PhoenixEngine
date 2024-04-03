@@ -179,6 +179,7 @@
     <ClCompile Include="Games\Katamari\Scripts\CameraControl.cpp" />
     <ClCompile Include="Games\Katamari\KatamariGame.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Light\LightManager.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\Light\LightCamera.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="Engine\PhysicsEngine\Simplex.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\PointLightComponent.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Light\ShadowMap.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\TextureRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Game.h" />
@@ -242,6 +244,7 @@
     <ClInclude Include="App\Window.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
     <ClInclude Include="Engine\GraphicsEngine\Light\LightManager.h" />
+    <ClInclude Include="Engine\GraphicsEngine\Light\LightCamera.h" />
     <ClInclude Include="PhoenixEngine.h" />
     <ClInclude Include="Engine\PhysicsEngine\Physics.h" />
     <ClInclude Include="Basic\Shapes\Sphere.h" />
@@ -254,6 +257,7 @@
     <ClInclude Include="Engine\PhysicsEngine\Simplex.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\PointLightComponent.h" />
     <ClInclude Include="Engine\GraphicsEngine\Light\ShadowMap.h" />
+    <ClInclude Include="Engine\GraphicsEngine\TextureRender.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />
@@ -272,6 +276,19 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\ShadowShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
       <FileType>Document</FileType>
     </Text>
   </ItemGroup>

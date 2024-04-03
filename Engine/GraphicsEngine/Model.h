@@ -8,6 +8,7 @@
 
 #include "Mesh.h"
 #include "ConstantBuffer.h"
+#include "Light/LightCamera.h"
 
 class Model
 {
@@ -50,6 +51,7 @@ public:
 	void Release();
 private:
 	void Draw(const SMath::Matrix& modelMatrix);
+	void DrawShadow(const SMath::Matrix& modelMatrix, LightCamera* lightCamera);
 	void ProcessNode(aiNode* node, const aiScene* scene, const DirectX::XMMATRIX& parentTransformMatrix);
 	Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene, DirectX::XMMATRIX& transformMatrix);
 	TextureStorageType DetermineTextureStorageType(const aiScene* pScene, aiMaterial* pMat, unsigned int index, aiTextureType textureType);

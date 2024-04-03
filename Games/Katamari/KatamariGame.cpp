@@ -139,7 +139,7 @@ void KatamariGame::OnFixedUpdate()
 
 void KatamariGame::OnDebugRender()
 {
-	Debug::DrawGrid(1000, 1000, 1, { 0.5f,0.5f,0.5f,1.0f });
+	//Debug::DrawGrid(1000, 1000, 1, { 0.5f,0.5f,0.5f,1.0f });
 }
 
 void KatamariGame::OnClearResources()
