@@ -17,9 +17,10 @@ void Player::Awake()
 
 void Player::Update()
 {
+	Vector3 oldPos = gameObject->transform.position();
 	for (Collider* col : m_collidersToDelete)
 	{
-		this->gameObject->GetComponent<SphereCollider>()->radius += ((SphereCollider*)col)->radius*2;
+		//this->gameObject->GetComponent<SphereCollider>()->radius += ((SphereCollider*)col)->radius*2;
 		col->gameObject->RemoveComponent<SphereCollider>();
 	}
 	m_collidersToDelete.clear();
@@ -34,7 +35,7 @@ void Player::Update()
 		{
 			gameObject->transform.Move(playerCamera->gameObject->transform.Right() * Game::instance->time.GetDeltaTime() * moveSpeed);
 		}
-		Vector3 forward = gameObject->transform.Up().Cross(-playerCamera->gameObject->transform.Right());
+		Vector3 forward = Vector3::Up.Cross(-playerCamera->gameObject->transform.Right());
 		forward.Normalize();
 		if (Game::instance->input->IsKeyDown(Keys::W))
 		{
@@ -43,6 +44,13 @@ void Player::Update()
 		if (Game::instance->input->IsKeyDown(Keys::S))
 		{
 			gameObject->transform.Move(-forward * Game::instance->time.GetDeltaTime() * moveSpeed);
+		}
+
+		Vector3 moveDirection = gameObject->transform.position() - oldPos;
+		if (moveDirection != DirectX::XMVectorZero())
+		{
+			Vector3 rotationAxis = Vector3::Up.Cross(moveDirection);
+			gameObject->transform.RotateAroundAxis(rotationAxis, rotationSpeeed * moveSpeed * Game::instance->time.GetDeltaTime());
 		}
 	}
 }
