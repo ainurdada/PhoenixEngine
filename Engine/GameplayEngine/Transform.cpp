@@ -66,7 +66,7 @@ void Transform::scale(const SMath::Vector3& newScale)
 {
 	if (parent != nullptr)
 	{
-		m_local_scale = XMVector3TransformNormal(newScale, XMMatrixInverse(nullptr, parent->LocalToWorld()));
+		m_local_scale = newScale / parent->scale();
 	}
 	else
 	{
