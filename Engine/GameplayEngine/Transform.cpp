@@ -35,9 +35,37 @@ const SMath::Quaternion& Transform::localRotation() const
 	return m_local_rotation;
 }
 
+const SMath::Quaternion& Transform::rotation() const
+{
+	if (parent != nullptr)
+	{
+		Matrix rotMatrix = Matrix::CreateFromQuaternion(parent->rotation());
+		//return m_local_rotation * Quaternion::CreateFromRotationMatrix(rotMatrix);
+		return m_local_rotation * parent->rotation();
+	}
+	else
+	{
+		return m_local_rotation;
+	}
+}
+
 void Transform::localRotation(const SMath::Quaternion& newLocalRotation)
 {
 	m_local_rotation = newLocalRotation;
+}
+
+void Transform::rotation(const SMath::Quaternion& newRotation)
+{
+	if (parent != nullptr)
+	{
+		Quaternion invParentRot;
+		parent->rotation().Inverse(invParentRot);
+		m_local_rotation = newRotation * invParentRot;
+	}
+	else
+	{
+		m_local_rotation = newRotation;
+	}
 }
 
 const SMath::Vector3& Transform::localScale() const
@@ -79,7 +107,7 @@ SMath::Matrix Transform::LocalToWorld() const
 	XMMATRIX m;
 	m = XMMatrixAffineTransformation(
 		m_local_scale,
-		g_XMZero,
+		XMVectorZero(),
 		m_local_rotation,
 		m_local_position
 	);
@@ -89,7 +117,7 @@ SMath::Matrix Transform::LocalToWorld() const
 		XMMATRIX mNext;
 		mNext = XMMatrixAffineTransformation(
 			next->m_local_scale,
-			g_XMZero,
+			XMVectorZero(),
 			next->m_local_rotation,
 			next->m_local_position
 		);
@@ -150,11 +178,11 @@ void Transform::SetParent(Transform* parent, bool safePositionRotationScale)
 	if (safePositionRotationScale)
 	{
 		Vector3 scale = this->scale();
-		Quaternion rot = this->localRotation();
+		Quaternion rot = this->rotation();
 		Vector3 pos = this->position();
 		SetParent(parent);
 		this->scale(scale);
-		this->localRotation(rot);
+		this->rotation(rot);
 		this->position(pos);
 	}
 	else

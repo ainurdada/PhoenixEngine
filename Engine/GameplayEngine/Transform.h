@@ -11,12 +11,14 @@ public:
 	const SMath::Vector3& localPosition() const;
 	const SMath::Vector3& position() const;
 	const SMath::Quaternion& localRotation() const;
+	const SMath::Quaternion& rotation() const;
 	const SMath::Vector3& localScale() const;
 	const SMath::Vector3& scale() const;
 
 	void localPosition(const SMath::Vector3& newLocalPosition);
 	void position(const SMath::Vector3& newPosition);
 	void localRotation(const SMath::Quaternion& newLocalRotation);
+	void rotation(const SMath::Quaternion& newRotation);
 	void localScale(const SMath::Vector3& newLocalScale);
 	void scale(const SMath::Vector3& newScale);
 
