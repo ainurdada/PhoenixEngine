@@ -22,9 +22,7 @@ void ShadowMap::Initialize(LightCamera* lightCamera)
 	shadowMaplDesc.CPUAccessFlags = 0;
 	shadowMaplDesc.MiscFlags = 0;
 
-	ID3D11Texture2D* shadowTexArr;
-	HRESULT res = Game::instance->graphics.GetDevice()->CreateTexture2D(&shadowMaplDesc, NULL, &shadowTexArr);
-
+	HRESULT res = Game::instance->graphics.GetDevice()->CreateTexture2D(&shadowMaplDesc, nullptr, &shadowTex);
 	if (FAILED(res))
 	{
 		// error
@@ -33,11 +31,12 @@ void ShadowMap::Initialize(LightCamera* lightCamera)
 	D3D11_DEPTH_STENCIL_VIEW_DESC dViewDesc = {};
 	ZeroMemory(&dViewDesc, sizeof(dViewDesc));
 	dViewDesc.Format = DXGI_FORMAT_D32_FLOAT;
-	dViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DARRAY;
+	//dViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DARRAY;
+	dViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	dViewDesc.Texture2DArray.MipSlice = 0;
-	dViewDesc.Texture2DArray.FirstArraySlice = 0;
-	dViewDesc.Texture2DArray.ArraySize = Game::instance->graphics.settings.shadowCascadeCount;
-	res = Game::instance->graphics.GetDevice()->CreateDepthStencilView(shadowTexArr, &dViewDesc, &depthDSV);
+	//dViewDesc.Texture2DArray.FirstArraySlice = 0;
+	//dViewDesc.Texture2DArray.ArraySize = Game::instance->graphics.settings.shadowCascadeCount;
+	res = Game::instance->graphics.GetDevice()->CreateDepthStencilView(shadowTex, &dViewDesc, &depthDSV);
 
 	if (FAILED(res))
 	{
@@ -46,17 +45,19 @@ void ShadowMap::Initialize(LightCamera* lightCamera)
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 	srvDesc.Format = DXGI_FORMAT_R32_FLOAT;
-	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2DARRAY;
+	//srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2DARRAY;
+	srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2DArray.MostDetailedMip = 0;
 	srvDesc.Texture2DArray.MipLevels = 1;
 	srvDesc.Texture2DArray.FirstArraySlice = 0;
 	srvDesc.Texture2DArray.ArraySize = Game::instance->graphics.settings.shadowCascadeCount;
-	res = Game::instance->graphics.GetDevice()->CreateShaderResourceView(shadowTexArr, &srvDesc, &depthSRV);
+	res = Game::instance->graphics.GetDevice()->CreateShaderResourceView(shadowTex, &srvDesc, &depthSRV);
 
 	if (FAILED(res))
 	{
 		// error
 	}
+
 
 	shadowShader = ShaderManager::Get(BaseResource::shadowShader);
 }
@@ -73,7 +74,6 @@ void ShadowMap::Generate(GameObject* gameObjects[], int count)
 	Game::instance->graphics.SetUpIA(*shadowShader);
 	Game::instance->graphics.SetShader(*shadowShader);
 
-	//Game::instance->graphics.GetContext()->VSSetShaderResources(0, 1, &depthSRV);
 
 	for (int i = 0; i < count; i++)
 	{
@@ -81,7 +81,12 @@ void ShadowMap::Generate(GameObject* gameObjects[], int count)
 	}
 }
 
-ID3D11ShaderResourceView* ShadowMap::GetShaderResource()
+ID3D11ShaderResourceView* ShadowMap::GetShaderResource() const
 {
 	return depthSRV;
+}
+
+ID3D11ShaderResourceView* const* ShadowMap::GetAdresOfShaderResource() const
+{
+	return &depthSRV;
 }

@@ -13,11 +13,14 @@ class Game;
 #include "../Engine/GameplayEngine/Camera.h"
 #include "../Engine/DebugSystem/DebugSystem.h"
 #include "../Engine/GameplayEngine/GameComponents/PointLightComponent.h"
+#include "../Engine/GameplayEngine/GameComponents/DirectionalLightComponent.h"
 
 class Game
 {
 	friend class Collider;
 	friend class PointLightComponent;
+	friend class DirectionalLightComponent;
+	friend class Model;
 
 public:
 	Game();
@@ -43,6 +46,7 @@ public:
 
 private:
 	std::vector<GameObject*> gameObjects;
+	DirectionalLightComponent* dirLight;
 	std::vector<PointLightComponent*> pointLights;
 	virtual void processInput();
 	virtual void update(float deltaTime);

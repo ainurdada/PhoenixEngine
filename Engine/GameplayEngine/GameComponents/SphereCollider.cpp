@@ -22,7 +22,7 @@ void SphereCollider::FixedUpdate()
 #include "../../DebugSystem/DebugSystem.h"
 void SphereCollider::Draw()
 {
-	Vector3 pos = gameObject->transform.position() + centerOffset;
+	//Vector3 pos = gameObject->transform.position() + centerOffset;
 	//DebugTool::Debug::DrawWiredSphere(pos, radius, { 0,1,0,1 });
 }
 

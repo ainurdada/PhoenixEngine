@@ -29,6 +29,7 @@ class Model
 	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
 	struct PointLightData {
+		SMath::Matrix viewProjection;
 		SMath::Vector3 color;
 		float intensity;
 		SMath::Vector3 position;

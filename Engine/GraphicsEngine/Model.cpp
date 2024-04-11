@@ -56,7 +56,7 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 			* Game::instance->mainCamera->ViewMatrix()
 			* Game::instance->mainCamera->ProjectionMatrix()
 		);
-		constant_data.data.World = XMMatrixTranspose(world);
+		constant_data.data.World = world.Transpose();
 		constant_data.data.ViewerPos = {
 			Game::instance->mainCamera->transform.position().x,
 			Game::instance->mainCamera->transform.position().y,
@@ -66,26 +66,28 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 		constant_data.ApplyChanges();
 
 		// material buffer
-		material_data.data.ambientKoeff = Game::instance->graphics.light.dirLight.KaSpecPowKsX.x;
-		material_data.data.specPower = Game::instance->graphics.light.dirLight.KaSpecPowKsX.y;
-		material_data.data.specKoeff = Game::instance->graphics.light.dirLight.KaSpecPowKsX.z;
+		material_data.data.ambientKoeff = Game::instance->dirLight->ambientKoeff;
+		material_data.data.specPower = Game::instance->dirLight->specPow;
+		material_data.data.specKoeff = Game::instance->dirLight->specKoeff;
 		material_data.ApplyChanges();
 
 		// direction light buffer
-		dir_light_data.data.direction = Game::instance->graphics.light.dirLight.direction;
-		dir_light_data.data.intensity = Game::instance->graphics.light.dirLight.intensity;
+		dir_light_data.data.direction = Game::instance->dirLight->direction;
+		dir_light_data.data.intensity = Game::instance->dirLight->intensity;
 		dir_light_data.ApplyChanges();
 
 		// point light buffer
-		if (Game::instance->graphics.light.pointLights.size() != 0)
+		if (Game::instance->pointLights.size() != 0)
 		{
-			point_light_data.data.position = Game::instance->graphics.light.pointLights[0].position;
-			point_light_data.data.intensity = Game::instance->graphics.light.pointLights[0].intensity;
-			point_light_data.data.color = Game::instance->graphics.light.pointLights[0].color;
-			point_light_data.data.attenuation_a = Game::instance->graphics.light.pointLights[0].attenuation_a;
-			point_light_data.data.attenuation_b = Game::instance->graphics.light.pointLights[0].attenuation_b;
-			point_light_data.data.attenuation_c = Game::instance->graphics.light.pointLights[0].attenuation_c;
+			point_light_data.data.viewProjection = Game::instance->pointLights[0]->GetCameras()[0].ViewProjectionMatrix();
+			point_light_data.data.position = Game::instance->pointLights[0]->gameObject->transform.position();
+			point_light_data.data.intensity = Game::instance->pointLights[0]->intensity;
+			point_light_data.data.color = Game::instance->pointLights[0]->color;
+			point_light_data.data.attenuation_a = Game::instance->pointLights[0]->attenuation_a;
+			point_light_data.data.attenuation_b = Game::instance->pointLights[0]->attenuation_b;
+			point_light_data.data.attenuation_c = Game::instance->pointLights[0]->attenuation_c;
 			point_light_data.ApplyChanges();
+			Game::instance->graphics.GetContext()->PSSetShaderResources(1, 1, Game::instance->pointLights[0]->GetShadowMaps()[0].GetAdresOfShaderResource());
 		}
 
 		Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, constant_data.GetAddressOf());

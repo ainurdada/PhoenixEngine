@@ -6,19 +6,24 @@ using namespace SMath;
 using namespace DirectX;
 LightCamera::LightCamera()
 {
+	maxClipDistance = 1000;
 	UpdateProjectionMatrix();
 }
 
-const SMath::Matrix& LightCamera::ViewMatrix()
+const SMath::Matrix& LightCamera::ViewProjectionMatrix() const
 {
-	m_viewMatrix = XMMatrixLookAtLH(
+	Matrix view = ViewMatrix();
+	return XMMatrixTranspose(view * m_projectionMatrix);
+}
+
+const SMath::Matrix& LightCamera::ViewMatrix() const
+{
+	return XMMatrixLookAtLH(
 		transform.position(),
 		transform.position() + transform.Forward(),
-		transform.Up()
-	);
-	return m_viewMatrix;
+		transform.Up());
 }
-const SMath::Matrix& LightCamera::ProjectionMatrix()
+const SMath::Matrix& LightCamera::ProjectionMatrix() const
 {
 	return m_projectionMatrix;
 }

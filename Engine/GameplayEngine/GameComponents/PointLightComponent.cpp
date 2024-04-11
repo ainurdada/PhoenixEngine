@@ -3,10 +3,21 @@
 #include "../../App/Game.h"
 
 using namespace SMath;
+using namespace DirectX;
 
 void PointLightComponent::GenerateShadowMaps(GameObject* gameObjects[], int count)
 {
 	shadow_map[0].Generate(gameObjects, count);
+}
+
+const std::vector<LightCamera> PointLightComponent::GetCameras() const
+{
+	return cameras;
+}
+
+const std::vector<ShadowMap> PointLightComponent::GetShadowMaps() const
+{
+	return shadow_map;
 }
 
 void PointLightComponent::Awake()
@@ -19,12 +30,9 @@ void PointLightComponent::Start()
 
 void PointLightComponent::Update()
 {
-	Game::instance->graphics.light.pointLights[index].color = color;
-	Game::instance->graphics.light.pointLights[index].position = gameObject->transform.position();
-	Game::instance->graphics.light.pointLights[index].intensity = intensity;
-	Game::instance->graphics.light.pointLights[index].attenuation_a = attenuation_a;
-	Game::instance->graphics.light.pointLights[index].attenuation_b = attenuation_b;
-	Game::instance->graphics.light.pointLights[index].attenuation_c = attenuation_c;
+	for (LightCamera& camera : cameras) {
+		camera.UpdateProjectionMatrix();
+	}
 }
 
 void PointLightComponent::FixedUpdate()
@@ -37,12 +45,11 @@ void PointLightComponent::DestroyResources()
 
 void PointLightComponent::Draw()
 {
+	DebugTool::Debug::DrawWiredSphere(this->gameObject->transform.position(), 0.1f, { 1,1,1,1 });
 }
 
 void PointLightComponent::Initialize()
 {
-	index = Game::instance->graphics.light.pointLights.size();
-	Game::instance->graphics.light.pointLights.push_back({});
 	Game::instance->pointLights.push_back(this);
 	for (int i = 0; i < 6; i++)
 	{

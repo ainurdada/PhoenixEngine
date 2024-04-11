@@ -48,6 +48,7 @@ cbuffer DirLightBuffer : register(b2)
 
 struct PointLightData
 {
+    float4x4 viewProjection;
     float3 color;
     float intensity;
     float3 position;
@@ -62,7 +63,9 @@ cbuffer PointLightBuffr : register(b3)
 
 
 Texture2D txDiffuse : register(t0);
+Texture2D pointLightShadowMap : register(t1);
 SamplerState sampl : register(s0);
+SamplerState samplerClamp : register(s1);
 
 PS_IN VSMain(VS_IN input)
 {
@@ -81,6 +84,7 @@ float4 PSMain(PS_IN input) : SV_Target
     clip(diffVal.a - 0.01f);
     
     float3 kd = diffVal.xyz;
+    float3 ambient = material.Ka * kd;
     
     // directional light
     float3 viewDir = normalize(cdata.ViewerPos.xyz - input.worldPos.xyz);
@@ -89,27 +93,43 @@ float4 PSMain(PS_IN input) : SV_Target
     
     float3 diffuse = kd * dirLight.intensity * max(0, dot(input.normal, lightDir));
     float3 spec = pow(max(0, dot(-viewDir, refVec)), material.SpecPow) * dirLight.intensity * material.Ks;
-    float3 ambient = material.Ka * kd;
     
     float4 col = float4(diffuse + spec + ambient, 1);
     
     // point light
-    float distanceToLight = distance(pointLight.position, input.worldPos.xyz);
-    float attenuationFactor =
-    1 /
+    float4 posInPointLightView = mul(float4(input.worldPos.xyz,1), pointLight.viewProjection);
+    posInPointLightView.z = -posInPointLightView.z;
+    posInPointLightView.w = -posInPointLightView.w;
+    float2 shadowTexCoord = float2
     (
-        pointLight.attenuation_a 
-        + pointLight.attenuation_b * distanceToLight
-        + pointLight.attenuation_c * distanceToLight * distanceToLight
+        posInPointLightView.x / posInPointLightView.w * 0.5f + 0.5f,
+        -posInPointLightView.y / posInPointLightView.w * 0.5f + 0.5f
     );
-    //attenuationFactor = 1;
-    lightDir = normalize(pointLight.position - input.worldPos.xyz);
-    refVec = normalize(reflect(lightDir, input.normal));
+    if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y))
+    {
+        // compare depth
+        float depth = pointLightShadowMap.Sample(samplerClamp, shadowTexCoord).r;
+        return float4(depth, depth, depth, 1);
+        float lightDepth = posInPointLightView.z / posInPointLightView.w /*- (5e-6f)*/;
+        return float4(lightDepth, lightDepth, 0, 1);
+        if (lightDepth < depth)
+        {
+            float distanceToLight = distance(pointLight.position, input.worldPos.xyz);
+            float attenuationFactor =
+            1 /
+            (
+                pointLight.attenuation_a 
+                + pointLight.attenuation_b * distanceToLight
+                + pointLight.attenuation_c * distanceToLight * distanceToLight
+            );
+            lightDir = normalize(pointLight.position - input.worldPos.xyz);
+            refVec = normalize(reflect(lightDir, input.normal));
     
-    diffuse = attenuationFactor * kd * pointLight.intensity * max(0, dot(input.normal, lightDir));
-    spec = pow(max(0, dot(-viewDir, refVec)), material.SpecPow) * pointLight.intensity * material.Ks * attenuationFactor;
+            diffuse = attenuationFactor * kd * pointLight.intensity * max(0, dot(input.normal, lightDir));
+            spec = pow(max(0, dot(-viewDir, refVec)), material.SpecPow) * pointLight.intensity * material.Ks * attenuationFactor;
     
-    col += float4(pointLight.color, 1) * float4(diffuse + spec, 0);
-    
+            col += float4(pointLight.color, 1) * float4(diffuse + spec, 0);
+        }
+    }
     return col;
 }

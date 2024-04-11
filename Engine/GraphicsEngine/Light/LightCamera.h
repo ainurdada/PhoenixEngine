@@ -7,8 +7,9 @@ class LightCamera
 {
 public:
 	LightCamera();
-	const SMath::Matrix& ViewMatrix();
-	const SMath::Matrix& ProjectionMatrix();
+	const SMath::Matrix& ViewProjectionMatrix() const;
+	const SMath::Matrix& ViewMatrix() const;
+	const SMath::Matrix& ProjectionMatrix() const;
 
 	void UpdateProjectionMatrix();
 	void SetPerspective(bool perspective);
@@ -24,7 +25,6 @@ private:
 	float maxClipDistance = 1000.0f;
 	float m_fov = 90.0f;
 	float aspectRation = 1;
-	SMath::Matrix m_viewMatrix;
 	SMath::Matrix m_projectionMatrix;
 };
 

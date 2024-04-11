@@ -110,7 +110,7 @@ void KatamariGame::OnCreated()
 	InstantiateGameObject(floor);
 
 	CreateDirLight(Vector3::Down, 0);
-	CreatePointLight({ 5,2,0 }, 1);
+	CreatePointLight({ 5,5,0 }, 2);
 
 	int lines = 2;
 	int columns = 2;

@@ -12,6 +12,7 @@ class LightManager
 	};
 
 	struct PointLightData {
+		SMath::Matrix viewProjection;
 		SMath::Vector3 color;
 		SMath::Vector3 position;
 		float intensity;

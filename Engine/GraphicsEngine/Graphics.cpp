@@ -87,13 +87,19 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 		cout << "failed to create DepthStencilView" << endl;
 	}
 
-	D3D11_SAMPLER_DESC sampDesc;
+	D3D11_SAMPLER_DESC sampDesc{};
 	ZeroMemory(&sampDesc, sizeof(sampDesc));
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;      // Тип фильтрации
-	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;         // Задаем координаты
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;         
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-	sampDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+	sampDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
+	sampDesc.MipLODBias = 0;
+	sampDesc.BorderColor[0] = 0;
+	sampDesc.BorderColor[1] = 0;
+	sampDesc.BorderColor[2] = 0;
+	sampDesc.BorderColor[3] = 0;
+	sampDesc.MaxAnisotropy = 1;
 	sampDesc.MinLOD = 0;
 	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
@@ -103,6 +109,16 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 		cout << "failed to create SamplerState" << endl;
 	}
 
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+
+	res = device->CreateSamplerState(&sampDesc, &samplerClamp);
+	if (FAILED(res))
+	{
+		cout << "failed to create SamplerState" << endl;
+	}
+	 
 	return res;
 }
 
