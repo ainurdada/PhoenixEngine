@@ -12,10 +12,12 @@ class Game;
 #include "../Engine/InputSystem/InputDevice.h"
 #include "../Engine/GameplayEngine/Camera.h"
 #include "../Engine/DebugSystem/DebugSystem.h"
+#include "../Engine/GameplayEngine/GameComponents/PointLightComponent.h"
 
 class Game
 {
 	friend class Collider;
+	friend class PointLightComponent;
 
 public:
 	Game();
@@ -41,6 +43,7 @@ public:
 
 private:
 	std::vector<GameObject*> gameObjects;
+	std::vector<PointLightComponent*> pointLights;
 	virtual void processInput();
 	virtual void update(float deltaTime);
 	virtual void fixedUpdate();

@@ -10,7 +10,8 @@ class ShadowMap
 {
 public:
 	void Initialize(LightCamera* lightCamera);
-	void Generate(GameObject gameObjects[], int count);
+	void Generate(GameObject* gameObjects[], int count);
+	ID3D11ShaderResourceView* GetShaderResource();
 private:
 	const Shader* shadowShader;
 	LightCamera* light_camera;

@@ -55,20 +55,6 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 		cout << "failed to create RenderTargetView" << endl;
 	}
 
-	// shadow rtv
-	D3D11_TEXTURE2D_DESC shadow_texture_descriptor{};
-	shadow_texture_descriptor.Width = settings.shadowResolution;
-	shadow_texture_descriptor.Height = settings.shadowResolution;
-	shadow_texture_descriptor.MipLevels = 1;
-	shadow_texture_descriptor.ArraySize = 1;
-	shadow_texture_descriptor.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
-	shadow_texture_descriptor.SampleDesc.Count = 1;
-	shadow_texture_descriptor.Usage = D3D11_USAGE_DEFAULT;
-	shadow_texture_descriptor.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
-	ID3D11Texture2D* shadow_texture;
-	device->CreateTexture2D(&shadow_texture_descriptor, nullptr, &shadow_texture);
-	device->CreateRenderTargetView(shadow_texture, nullptr, &rtv_shadow);
-	device->CreateShaderResourceView(shadow_texture, nullptr, &resource_shadow);
 
 	//Describe our Depth/Stencil Buffer
 	D3D11_TEXTURE2D_DESC depthStencilDesc;
@@ -194,14 +180,6 @@ void Graphics::UpdateState()
 
 void Graphics::UpdateRenderTarget()
 {
-}
-
-void Graphics::SetShadowDrawMode()
-{
-	float color[4] = { 0.f,0.f,0.f,0.f };
-	context->ClearRenderTargetView(rtv_shadow, color);
-	context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	context->OMSetRenderTargets(1, &rtv_shadow, depthStencilView);
 }
 
 void Graphics::SetObjectDrawMode()

@@ -49,6 +49,11 @@ void LightCamera::SetPerspective(bool perspective)
 	UpdateProjectionMatrix();
 }
 
+void LightCamera::SetRotation(const SMath::Vector3& forward, const SMath::Vector3& up)
+{
+	transform.LookAt(transform.position() + forward, up);
+}
+
 float LightCamera::fov() const
 {
 	return m_fov;

@@ -36,11 +36,12 @@ HRESULT Shader::Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device>
 		return res;
 	}
 
-	res = device->CreateVertexShader(
-		vertexBC->GetBufferPointer(),
-		vertexBC->GetBufferSize(),
-		nullptr, &VS);
-
+	if (vertexBC != nullptr) {
+		res = device->CreateVertexShader(
+			vertexBC->GetBufferPointer(),
+			vertexBC->GetBufferSize(),
+			nullptr, &VS);
+	}
 	ID3DBlob* pixelBC = nullptr;
 	ID3DBlob* errorPixelCode = nullptr;
 	res = D3DCompileFromFile(pathToShader,
@@ -60,10 +61,12 @@ HRESULT Shader::Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device>
 		std::cout << compileErrors << std::endl;
 	}
 
-	res = device->CreatePixelShader(
-		pixelBC->GetBufferPointer(),
-		pixelBC->GetBufferSize(),
-		nullptr, &PS);
+	if (pixelBC != nullptr) {
+		res = device->CreatePixelShader(
+			pixelBC->GetBufferPointer(),
+			pixelBC->GetBufferSize(),
+			nullptr, &PS);
+	}
 
 	D3D11_INPUT_ELEMENT_DESC inputElements[] = {
 		D3D11_INPUT_ELEMENT_DESC {

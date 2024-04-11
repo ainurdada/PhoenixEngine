@@ -25,5 +25,6 @@ public:
 
 	DirectionalLightData dirLight;
 	std::vector<PointLightData> pointLights;
+	
 };
 

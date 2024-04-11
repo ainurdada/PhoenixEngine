@@ -153,6 +153,11 @@ void Transform::RotateAroundPoint(const SMath::Vector3& point, const SMath::Vect
 	m_local_rotation *= q;
 }
 
+void Transform::Rotate(const SMath::Quaternion deltaRotation)
+{
+	rotation(rotation() * deltaRotation);
+}
+
 void Transform::Move(const SMath::Vector3& dir)
 {
 	position(position() + dir);
@@ -189,6 +194,17 @@ void Transform::SetParent(Transform* parent, bool safePositionRotationScale)
 	{
 		SetParent(parent);
 	}
+}
+
+void Transform::LookAt(const SMath::Vector3& targetPosition, const SMath::Vector3 up)
+{
+	Vector3 dir = targetPosition - position();
+	dir.Normalize();
+	Quaternion deltaRotation = Quaternion::FromToRotation(Forward(), dir);
+	Rotate(deltaRotation);
+	Vector3 right = up.Cross(Forward());
+	deltaRotation = Quaternion::FromToRotation(Right(), right);
+	Rotate(deltaRotation);
 }
 
 Vector3 Transform::Right() const

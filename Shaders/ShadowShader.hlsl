@@ -28,7 +28,7 @@ VS_OUT VSMain(VS_IN input)
     return output;
 }
 
-float4 PSMain(VS_OUT input)
+float4 PSMain(VS_OUT input) : SV_Target
 {
-    
+    return float4(0, 0, 0, 0);
 }

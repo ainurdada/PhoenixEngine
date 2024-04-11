@@ -12,6 +12,7 @@ public:
 
 	void UpdateProjectionMatrix();
 	void SetPerspective(bool perspective);
+	void SetRotation(const SMath::Vector3& forward, const SMath::Vector3& up);
 
 	float fov() const;
 	void fov(float value);

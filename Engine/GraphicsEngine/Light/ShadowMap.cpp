@@ -8,7 +8,7 @@ void ShadowMap::Initialize(LightCamera* lightCamera)
 {
 	this->light_camera = lightCamera;
 
-	D3D11_TEXTURE2D_DESC shadowMaplDesc;
+	D3D11_TEXTURE2D_DESC shadowMaplDesc{};
 	ZeroMemory(&shadowMaplDesc, sizeof(shadowMaplDesc));
 	shadowMaplDesc.Width = Game::instance->graphics.settings.shadowResolution;
 	shadowMaplDesc.Height = Game::instance->graphics.settings.shadowResolution;
@@ -61,11 +61,11 @@ void ShadowMap::Initialize(LightCamera* lightCamera)
 	shadowShader = ShaderManager::Get(BaseResource::shadowShader);
 }
 
-void ShadowMap::Generate(GameObject gameObjects[], int count)
+void ShadowMap::Generate(GameObject* gameObjects[], int count)
 {
 	Game::instance->graphics.SetUpViewPort(Game::instance->graphics.settings.shadowResolution, Game::instance->graphics.settings.shadowResolution);
+	Game::instance->graphics.GetContext()->ClearDepthStencilView(depthDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	Game::instance->graphics.GetContext()->OMSetRenderTargets(0, nullptr, depthDSV);
-	Game::instance->graphics.GetContext()->ClearDepthStencilView(depthDSV, D3D11_CLEAR_DEPTH, 1.0f, 0);
 
 	Game::instance->graphics.SetSolidRasterizer();
 
@@ -77,6 +77,11 @@ void ShadowMap::Generate(GameObject gameObjects[], int count)
 
 	for (int i = 0; i < count; i++)
 	{
-		gameObjects[i].DrawShadow(light_camera);
+		gameObjects[i]->DrawShadow(light_camera);
 	}
+}
+
+ID3D11ShaderResourceView* ShadowMap::GetShaderResource()
+{
+	return depthSRV;
 }

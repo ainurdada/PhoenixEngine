@@ -33,9 +33,11 @@ public:
 	void RotateAroundAxis(const SMath::Vector3& axis, float angle);
 	void RotateAroundLocalAxis(const SMath::Vector3& axis, float angle);
 	void RotateAroundPoint(const SMath::Vector3& point, const SMath::Vector3& axisAlongRotation, float angle);
+	void Rotate(const SMath::Quaternion deltaRotation);
 	void Move(const SMath::Vector3& dir);
 	void SetParent(Transform* parent);
 	void SetParent(Transform* parent, bool safePositionRotationScale);
+	void LookAt(const SMath::Vector3& targetPosition, const SMath::Vector3 up);
 
 	SMath::Vector3 Right() const;
 	SMath::Vector3 Up() const;
