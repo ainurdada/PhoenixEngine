@@ -2,7 +2,6 @@
 
 #include "GameComponent.h"
 #include "../../GraphicsEngine/Light/ShadowMap.h"
-#include "../../Lib/Math/Math.h"
 
 class DirectionalLightComponent : public GameComponent
 {

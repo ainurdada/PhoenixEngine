@@ -35,6 +35,8 @@ public:
 	void SetUpViewPort(int width, int height);
 	void UpdateState();
 	void UpdateRenderTarget();
+	void SetShadowDrawMode();
+	void SetObjectDrawMode();
 	void Present();
 	void Cleanup();
 
@@ -47,6 +49,8 @@ private:
 	ID3D11DeviceContext* context;
 	IDXGISwapChain* swapChain;
 	ID3D11RenderTargetView* rtv;
+	ID3D11RenderTargetView* rtv_shadow;
+	ID3D11ShaderResourceView* resource_shadow;
 	ID3D11RasterizerState* solidRastState;
 	ID3D11RasterizerState* wireframeRastState;
 	D3D11_VIEWPORT viewport = {};

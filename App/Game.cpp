@@ -116,8 +116,14 @@ void Game::fixedUpdate()
 void Game::render(float deltaFrame)
 {
 	graphics.UpdateState();
+	graphics.SetUpViewPort(graphics.settings.shadowResolution, graphics.settings.shadowResolution);
+	graphics.SetShadowDrawMode();
+	for (GameObject* obj : gameObjects)
+	{
+		obj->DrawShadow(graphics.light.pointLights[0]);
+	}
 	graphics.SetUpViewPort(window.ClientWidth, window.ClientHeight);
-	graphics.UpdateRenderTarget();
+	graphics.SetObjectDrawMode();
 	for (GameObject* obj : gameObjects)
 	{
 		obj->Draw();

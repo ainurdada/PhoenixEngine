@@ -21,7 +21,6 @@ class LightManager
 	};
 public:
 	void Initialize();
-	void GenerateShadowMaps();
 
 
 	DirectionalLightData dirLight;
