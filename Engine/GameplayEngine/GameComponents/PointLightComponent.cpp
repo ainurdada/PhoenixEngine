@@ -56,7 +56,7 @@ void PointLightComponent::Initialize()
 		cameras[i].transform.SetParent(&this->gameObject->transform);
 		cameras[i].transform.localPosition({0,0,0});
 	}
-	cameras[0].SetRotation(-Vector3::Up, Vector3::Forward);
+	cameras[0].SetRotation(-gameObject->transform.Up(), gameObject->transform.Forward());
 	shadow_map[0].Initialize(&cameras[0]);
 }
 

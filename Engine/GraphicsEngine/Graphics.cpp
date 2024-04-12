@@ -109,9 +109,9 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 		cout << "failed to create SamplerState" << endl;
 	}
 
-	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
-	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
-	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
 
 	res = device->CreateSamplerState(&sampDesc, &samplerClamp);
 	if (FAILED(res))

@@ -100,7 +100,10 @@
       <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)Lib\assimp\bin\x64" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "$(SolutionDir)Lib\assimp\bin\x64" "$(OutDir)"
+xcopy /y /d /i /e /s "$(SolutionDir)Models\*" "$(OutDir)\Models"
+xcopy /y /d /i /e /s "$(SolutionDir)Shaders\*" "$(OutDir)\Shaders"
+xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Shapes\Models"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,7 +124,10 @@
       <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)Lib\assimp\bin\x64" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "$(SolutionDir)Lib\assimp\bin\x64" "$(OutDir)"
+xcopy /y /d /i /e /s "$(SolutionDir)Models\*" "$(OutDir)\Models"
+xcopy /y /d /i /e /s "$(SolutionDir)Shaders\*" "$(OutDir)\Shaders"
+xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Shapes\Models"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -138,7 +144,10 @@
       <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)Lib\assimp\bin\x64" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "$(SolutionDir)Lib\assimp\bin\x64" "$(OutDir)"
+xcopy /y /d /i /e /s "$(SolutionDir)Models\*" "$(OutDir)\Models"
+xcopy /y /d /i /e /s "$(SolutionDir)Shaders\*" "$(OutDir)\Shaders"
+xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Shapes\Models"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,7 +168,10 @@
       <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d "$(SolutionDir)Lib\assimp\bin\x64" "$(OutDir)"</Command>
+      <Command>xcopy /y /d "$(SolutionDir)Lib\assimp\bin\x64" "$(OutDir)"
+xcopy /y /d /i /e /s "$(SolutionDir)Models\*" "$(OutDir)\Models"
+xcopy /y /d /i /e /s "$(SolutionDir)Shaders\*" "$(OutDir)\Shaders"
+xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Shapes\Models"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

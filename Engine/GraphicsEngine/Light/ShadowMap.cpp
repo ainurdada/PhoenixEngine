@@ -8,8 +8,7 @@ void ShadowMap::Initialize(LightCamera* lightCamera)
 {
 	this->light_camera = lightCamera;
 
-	D3D11_TEXTURE2D_DESC shadowMaplDesc{};
-	ZeroMemory(&shadowMaplDesc, sizeof(shadowMaplDesc));
+	D3D11_TEXTURE2D_DESC shadowMaplDesc = {};
 	shadowMaplDesc.Width = Game::instance->graphics.settings.shadowResolution;
 	shadowMaplDesc.Height = Game::instance->graphics.settings.shadowResolution;
 	shadowMaplDesc.ArraySize = Game::instance->graphics.settings.shadowCascadeCount;
@@ -29,13 +28,12 @@ void ShadowMap::Initialize(LightCamera* lightCamera)
 	}
 
 	D3D11_DEPTH_STENCIL_VIEW_DESC dViewDesc = {};
-	ZeroMemory(&dViewDesc, sizeof(dViewDesc));
 	dViewDesc.Format = DXGI_FORMAT_D32_FLOAT;
 	//dViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DARRAY;
 	dViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	dViewDesc.Texture2DArray.MipSlice = 0;
-	//dViewDesc.Texture2DArray.FirstArraySlice = 0;
-	//dViewDesc.Texture2DArray.ArraySize = Game::instance->graphics.settings.shadowCascadeCount;
+	dViewDesc.Texture2DArray.FirstArraySlice = 0;
+	dViewDesc.Texture2DArray.ArraySize = Game::instance->graphics.settings.shadowCascadeCount;
 	res = Game::instance->graphics.GetDevice()->CreateDepthStencilView(shadowTex, &dViewDesc, &depthDSV);
 
 	if (FAILED(res))

@@ -6,7 +6,7 @@ using namespace SMath;
 using namespace DirectX;
 LightCamera::LightCamera()
 {
-	maxClipDistance = 1000;
+	maxClipDistance = 10;
 	UpdateProjectionMatrix();
 }
 

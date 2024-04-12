@@ -102,8 +102,8 @@ float4 PSMain(PS_IN input) : SV_Target
     posInPointLightView.w = -posInPointLightView.w;
     float2 shadowTexCoord = float2
     (
-        posInPointLightView.x / posInPointLightView.w * 0.5f + 0.5f,
-        -posInPointLightView.y / posInPointLightView.w * 0.5f + 0.5f
+        posInPointLightView.x / posInPointLightView.w / 2.0f + 0.5f,
+        -posInPointLightView.y / posInPointLightView.w / 2.0f + 0.5f
     );
     if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y))
     {

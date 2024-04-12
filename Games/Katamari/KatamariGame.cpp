@@ -81,6 +81,7 @@ void KatamariGame::CreatePointLight(Vector3 position, float intensity)
 	comp->attenuation_b = 0.1f;
 	comp->attenuation_c = 0.01f;
 	lightObj->transform.position(position);
+	lightObj->transform.RotateAroundAxis(Vector3::Forward, 30 * DEG_TO_RAD);
 	lightObj->AddComponent(*comp);
 	InstantiateGameObject(lightObj);
 }

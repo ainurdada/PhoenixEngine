@@ -24,16 +24,16 @@ VS_OUT VSMain(VS_IN input)
 {
     VS_OUT output = (VS_OUT) 0;
     output.pos = mul(input.pos, cdata.WorldViewProjection);
-    output.pos = float4(0.f, 0.f, 0.5f, 1);
+    //output.pos.z = 0.11f;
     //output.pos.z = output.pos.z / output.pos.w;
     return output;
 }
 
-float4 PSMain(VS_OUT input) : SV_Target
-{
-    float depth = input.pos.z / input.pos.w;
-    return float4(0, 0, 0, 1);
-}
+//float4 PSMain(VS_OUT input) : SV_Target
+//{
+//    float depth = input.pos.z / input.pos.w;
+//    return float4(0.5f, 0, 0.5f, 1);
+//}
 
 //RasterizerState Depth
 //{
