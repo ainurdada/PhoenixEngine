@@ -51,10 +51,12 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 	{
 		// constant buffer
 		SMath::Matrix world = SMath::Matrix(meshes[i].GetTransformMatrix()) * modelMatrix;
+		SMath::Matrix cameraView = Game::instance->mainCamera->ViewMatrix();
+		SMath::Matrix cameraProjection = Game::instance->mainCamera->ProjectionMatrix();
 		constant_data.data.WorldViewProjection = XMMatrixTranspose(
 			world
-			* Game::instance->mainCamera->ViewMatrix()
-			* Game::instance->mainCamera->ProjectionMatrix()
+			* cameraView
+			* cameraProjection
 		);
 		constant_data.data.World = world.Transpose();
 		constant_data.data.ViewerPos = {
@@ -105,10 +107,12 @@ void Model::DrawShadow(const SMath::Matrix& modelMatrix, LightCamera* lightCamer
 	{
 		// constant buffer
 		SMath::Matrix world = SMath::Matrix(meshes[i].GetTransformMatrix()) * modelMatrix;
+		SMath::Matrix cameraView = lightCamera->ViewMatrix();
+		SMath::Matrix cameraProjection = lightCamera->ProjectionMatrix();
 		constant_data.data.WorldViewProjection = XMMatrixTranspose(
 			world
-			* lightCamera->ViewMatrix()
-			* lightCamera->ProjectionMatrix()
+			* cameraView
+			* cameraProjection
 		);
 		constant_data.data.World = XMMatrixTranspose(world);
 		constant_data.data.ViewerPos = {

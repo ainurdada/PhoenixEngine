@@ -31,16 +31,16 @@ void Camera::UpdateProjectionMatrix()
 		m_projectionMatrix = XMMatrixPerspectiveFovLH(
 			m_fov * DEG_TO_RAD / zoomFactor,
 			(float)Game::instance->window.ClientWidth / (float)Game::instance->window.ClientHeight,
-			minClipDistance,
-			maxClipDistance);
+			min_clip_distance,
+			max_clip_distance);
 	}
 	else
 	{
 		m_projectionMatrix = XMMatrixOrthographicLH(
 			(float)Game::instance->window.ClientWidth / zoomFactor * 0.025f,
 			(float)Game::instance->window.ClientHeight / zoomFactor * 0.025f,
-			minClipDistance,
-			maxClipDistance);
+			min_clip_distance,
+			max_clip_distance);
 	}
 }
 
@@ -66,4 +66,26 @@ float Camera::zoom()
 float Camera::fov() const
 {
 	return m_fov;
+}
+
+void Camera::maxClipDistance(float value)
+{
+	max_clip_distance = value;
+	UpdateProjectionMatrix();
+}
+
+void Camera::minClipDistance(float value)
+{
+	min_clip_distance = value;
+	UpdateProjectionMatrix();
+}
+
+float Camera::maxClipDistance() const
+{
+	return max_clip_distance;
+}
+
+float Camera::minClipDistance() const
+{
+	return min_clip_distance;
 }

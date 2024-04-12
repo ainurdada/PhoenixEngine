@@ -41,7 +41,7 @@ public:
 
 	GraphicSettings settings;
 	ID3D11SamplerState* pSampler;
-	ID3D11SamplerState* samplerClamp;
+	ID3D11SamplerState* shadowCompSampler;
 	Vec4 backgroundColor;
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> device;

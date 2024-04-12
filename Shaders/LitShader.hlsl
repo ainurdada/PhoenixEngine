@@ -65,7 +65,7 @@ cbuffer PointLightBuffr : register(b3)
 Texture2D txDiffuse : register(t0);
 Texture2D pointLightShadowMap : register(t1);
 SamplerState sampl : register(s0);
-SamplerState samplerClamp : register(s1);
+SamplerComparisonState samplerClamp : register(s1);
 
 PS_IN VSMain(VS_IN input)
 {
@@ -77,6 +77,15 @@ PS_IN VSMain(VS_IN input)
     
     return output;
 }
+
+//float vectorToDepth(float3 vec, float n, float f)
+//{
+//    float3 AbsVec = abs(vec);
+//    float LocalZcomp = max(AbsVec.x, max(AbsVec.y, AbsVec.z));
+
+//    float NormZComp = (f + n) / (f - n) - (2 * f * n) / (f - n) / LocalZcomp;
+//    return (NormZComp + 1.0) * 0.5;
+//}
 
 float4 PSMain(PS_IN input) : SV_Target
 {
@@ -102,17 +111,16 @@ float4 PSMain(PS_IN input) : SV_Target
     posInPointLightView.w = -posInPointLightView.w;
     float2 shadowTexCoord = float2
     (
-        posInPointLightView.x / posInPointLightView.w / 2.0f + 0.5f,
-        -posInPointLightView.y / posInPointLightView.w / 2.0f + 0.5f
+        -posInPointLightView.x / posInPointLightView.w / 2.0f + 0.5f,
+        posInPointLightView.y / posInPointLightView.w / 2.0f + 0.5f
     );
     if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y))
     {
         // compare depth
-        float depth = pointLightShadowMap.Sample(samplerClamp, shadowTexCoord).r;
-        return float4(depth, depth, depth, 1);
-        float lightDepth = posInPointLightView.z / posInPointLightView.w /*- (5e-6f)*/;
-        return float4(lightDepth, lightDepth, 0, 1);
-        if (lightDepth < depth)
+        float lightDepth = posInPointLightView.z / posInPointLightView.w - 0.001f;
+        float depth = pointLightShadowMap.SampleCmp(samplerClamp, shadowTexCoord,lightDepth);
+        //return float4(depth, 0, 0, 1);
+        if (depth)
         {
             float distanceToLight = distance(pointLight.position, input.worldPos.xyz);
             float attenuationFactor =

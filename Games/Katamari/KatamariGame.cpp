@@ -92,7 +92,7 @@ void KatamariGame::OnCreated()
 {
 	CameraControl* cameraControl = new CameraControl;
 	Game::instance->mainCamera->AddComponent(*cameraControl);
-
+	//Game::instance->mainCamera->maxClipDistance(10);
 
 	GameObject* playerObj = new GameObject;
 	Player* player = new Player;
@@ -111,7 +111,7 @@ void KatamariGame::OnCreated()
 	InstantiateGameObject(floor);
 
 	CreateDirLight(Vector3::Down, 0);
-	CreatePointLight({ 5,5,0 }, 2);
+	CreatePointLight({ 5,2,0 }, 2);
 
 	int lines = 2;
 	int columns = 2;

@@ -32,7 +32,7 @@ VS_OUT VSMain(VS_IN input)
 //float4 PSMain(VS_OUT input) : SV_Target
 //{
 //    float depth = input.pos.z / input.pos.w;
-//    return float4(0.5f, 0, 0.5f, 1);
+//    return float4(depth, depth, depth, 1);
 //}
 
 //RasterizerState Depth

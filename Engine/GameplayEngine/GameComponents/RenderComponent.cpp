@@ -19,7 +19,7 @@ void RenderComponent::Draw()
 	Game::instance->graphics.SetShader(*shader);
 
 	Game::instance->graphics.GetContext()->PSSetSamplers(0, 1, &Game::instance->graphics.pSampler);
-	Game::instance->graphics.GetContext()->PSSetSamplers(1, 1, &Game::instance->graphics.samplerClamp);
+	Game::instance->graphics.GetContext()->PSSetSamplers(1, 1, &Game::instance->graphics.shadowCompSampler);
 
 	model.Draw(gameObject->transform.LocalToWorld());
 }

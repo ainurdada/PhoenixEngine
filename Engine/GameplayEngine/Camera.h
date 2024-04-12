@@ -16,12 +16,16 @@ public:
 	void zoom(float value);
 	float zoom();
 	float fov() const;
+	void maxClipDistance(float value);
+	void minClipDistance(float value);
+	float maxClipDistance() const;
+	float minClipDistance() const;
 
 private:
 	bool isPerspective = true;
 
-	float minClipDistance = 0.1f;
-	float maxClipDistance = 1000.0f;
+	float min_clip_distance = 0.1f;
+	float max_clip_distance = 1000.0f;
 	float m_fov = 90.0f;
 	float aspectRation = 16.0f / 9.0f;
 
