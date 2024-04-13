@@ -81,7 +81,7 @@ void KatamariGame::CreatePointLight(Vector3 position, float intensity)
 	comp->attenuation_b = 0.1f;
 	comp->attenuation_c = 0.01f;
 	lightObj->transform.position(position);
-	lightObj->transform.RotateAroundAxis(Vector3::Forward, 30 * DEG_TO_RAD);
+	lightObj->transform.RotateAroundAxis(Vector3::Forward, 45 * DEG_TO_RAD);
 	lightObj->AddComponent(*comp);
 	InstantiateGameObject(lightObj);
 }
@@ -92,7 +92,6 @@ void KatamariGame::OnCreated()
 {
 	CameraControl* cameraControl = new CameraControl;
 	Game::instance->mainCamera->AddComponent(*cameraControl);
-	//Game::instance->mainCamera->maxClipDistance(10);
 
 	GameObject* playerObj = new GameObject;
 	Player* player = new Player;
@@ -103,15 +102,17 @@ void KatamariGame::OnCreated()
 
 	GameObject* floor = new GameObject;
 	RenderComponent* floorRender = new RenderComponent;
-	floorRender->modelPath = L"Basic\\Shapes\\Models\\Cube.glb";
+	floorRender->modelPath = L"Models\\Room\\salt_tower_lower_room.glb";
 	floorRender->shader = ShaderManager::Get(BaseResource::litShader);
 	floor->AddComponent(*floorRender);
-	floor->transform.scale({ 100,1,100 });
-	floor->transform.position({ 0,-1.1f,0 });
+	floor->transform.scale({ 10,10,10 });
+	floor->transform.position({ 0,-2.4f,0 });
 	InstantiateGameObject(floor);
 
+	
+
 	CreateDirLight(Vector3::Down, 0);
-	CreatePointLight({ 5,2,0 }, 2);
+	CreatePointLight({ 5,10,0 }, 5);
 
 	int lines = 2;
 	int columns = 2;

@@ -20,7 +20,7 @@ class Graphics;
 class Graphics
 {
 	struct GraphicSettings {
-		int shadowResolution = 1024;
+		int shadowResolution = 2048;
 		int shadowCascadeCount = 1;
 	};
 public:

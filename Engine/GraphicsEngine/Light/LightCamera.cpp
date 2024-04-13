@@ -6,7 +6,6 @@ using namespace SMath;
 using namespace DirectX;
 LightCamera::LightCamera()
 {
-	//maxClipDistance = 10;
 	UpdateProjectionMatrix();
 }
 
@@ -34,7 +33,7 @@ void LightCamera::UpdateProjectionMatrix()
 	{
 		m_projectionMatrix = XMMatrixPerspectiveFovLH(
 			m_fov * DEG_TO_RAD,
-			(float)Game::instance->window.ClientWidth / (float)Game::instance->window.ClientHeight,
+			aspectRation,
 			minClipDistance,
 			maxClipDistance);
 	}

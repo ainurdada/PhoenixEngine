@@ -7,7 +7,9 @@ using namespace DirectX;
 
 void PointLightComponent::GenerateShadowMaps(GameObject* gameObjects[], int count)
 {
-	shadow_map[0].Generate(gameObjects, count);
+	for (int i = 0; i < 6; i++) {
+		shadow_map[i].Generate(gameObjects, count);
+	}
 }
 
 const std::vector<LightCamera> PointLightComponent::GetCameras() const
@@ -18,6 +20,11 @@ const std::vector<LightCamera> PointLightComponent::GetCameras() const
 const std::vector<ShadowMap> PointLightComponent::GetShadowMaps() const
 {
 	return shadow_map;
+}
+
+const std::vector<ID3D11ShaderResourceView*> PointLightComponent::GetShadowMapsResourceAdresses() const
+{
+	return resourceAdresses;
 }
 
 void PointLightComponent::Awake()
@@ -54,10 +61,18 @@ void PointLightComponent::Initialize()
 	for (int i = 0; i < 6; i++)
 	{
 		cameras[i].transform.SetParent(&this->gameObject->transform);
-		cameras[i].transform.localPosition({0,0,0});
+		cameras[i].transform.localPosition({ 0,0,0 });
 	}
-	cameras[0].SetRotation(-gameObject->transform.Up(), gameObject->transform.Forward());
-	shadow_map[0].Initialize(&cameras[0]);
+	cameras[0].SetRotation(-Vector3::Up, Vector3::Forward);
+	cameras[1].SetRotation(Vector3::Up, -Vector3::Forward);
+	cameras[2].SetRotation(Vector3::Forward, Vector3::Up);
+	cameras[3].SetRotation(-Vector3::Forward, Vector3::Up);
+	cameras[4].SetRotation(Vector3::Right, -Vector3::Up);
+	cameras[5].SetRotation(-Vector3::Right, Vector3::Up);
+	for (int i = 0; i < 6; i++) {
+		shadow_map[i].Initialize(&cameras[i]);
+		resourceAdresses[i] = shadow_map[i].GetShaderResource();
+	}
 }
 
 void PointLightComponent::Reload()

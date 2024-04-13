@@ -12,6 +12,7 @@ public:
 	void GenerateShadowMaps(GameObject* gameObjects[], int count);
 	const std::vector<LightCamera> GetCameras() const;
 	const std::vector<ShadowMap> GetShadowMaps() const;
+	const std::vector<ID3D11ShaderResourceView*> GetShadowMapsResourceAdresses() const;
 
 	SMath::Vector3 color;
 	float intensity;
@@ -21,6 +22,7 @@ public:
 private:
 	int index;
 	std::vector<ShadowMap> shadow_map = std::vector<ShadowMap>(6);
+	std::vector<ID3D11ShaderResourceView*> resourceAdresses = std::vector<ID3D11ShaderResourceView*>(6);
 	std::vector<LightCamera> cameras = std::vector<LightCamera>(6);
 
 	// Inherited via GameComponent

@@ -81,7 +81,9 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 		// point light buffer
 		if (Game::instance->pointLights.size() != 0)
 		{
-			point_light_data.data.viewProjection = Game::instance->pointLights[0]->GetCameras()[0].ViewProjectionMatrix();
+			for (int i = 0; i < 6; i++) {
+				point_light_data.data.viewProjection[i] = Game::instance->pointLights[0]->GetCameras()[i].ViewProjectionMatrix();
+			}
 			point_light_data.data.position = Game::instance->pointLights[0]->gameObject->transform.position();
 			point_light_data.data.intensity = Game::instance->pointLights[0]->intensity;
 			point_light_data.data.color = Game::instance->pointLights[0]->color;
@@ -89,7 +91,7 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 			point_light_data.data.attenuation_b = Game::instance->pointLights[0]->attenuation_b;
 			point_light_data.data.attenuation_c = Game::instance->pointLights[0]->attenuation_c;
 			point_light_data.ApplyChanges();
-			Game::instance->graphics.GetContext()->PSSetShaderResources(1, 1, Game::instance->pointLights[0]->GetShadowMaps()[0].GetAdresOfShaderResource());
+			Game::instance->graphics.GetContext()->PSSetShaderResources(1, 6, Game::instance->pointLights[0]->GetShadowMapsResourceAdresses().data());
 		}
 
 		Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
