@@ -20,7 +20,7 @@ void GBuffer::Initialize(ID3D11Device* device, int screenWidth, int screenHeigt,
 	diffuseTextureDesc.CPUAccessFlags = 0;
 	diffuseTextureDesc.MiscFlags = 0;
 	device->CreateTexture2D(&diffuseTextureDesc, nullptr, &diffuseTexture);
-	device->CreateRenderTargetView(diffuseTexture, nullptr, &diffuseRTV);
+	device->CreateRenderTargetView(diffuseTexture, nullptr, &rtvs.diffuseRTV);
 
 	ID3D11Texture2D* diffuseDSVTexture;
 	D3D11_TEXTURE2D_DESC diffuseDSVTextureDesc = diffuseTextureDesc;
@@ -40,7 +40,7 @@ void GBuffer::Initialize(ID3D11Device* device, int screenWidth, int screenHeigt,
 	diffuseSRVDesc.Texture2DArray.MostDetailedMip = 0;
 	diffuseSRVDesc.Texture2DArray.MipLevels = 1;
 	diffuseSRVDesc.Texture2DArray.FirstArraySlice = 0;
-	device->CreateShaderResourceView(diffuseTexture, &diffuseSRVDesc, &diffuseSRV);
+	device->CreateShaderResourceView(diffuseTexture, &diffuseSRVDesc, &srvs.diffuseSRV);
 #pragma endregion
 }
 
@@ -50,8 +50,13 @@ void GBuffer::SetRenderTargets(ID3D11DeviceContext* context)
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	context->VSSetShader(shader->VS, nullptr, 0);
 	context->PSSetShader(shader->PS, nullptr, 0);
-	context->OMSetRenderTargets(1, &diffuseRTV, diffuseDSV);
+	context->OMSetRenderTargets(1, &rtvs.diffuseRTV, diffuseDSV);
 	float color[4] = { 0,0,0,1 };
 	context->ClearDepthStencilView(diffuseDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	context->ClearRenderTargetView(diffuseRTV, color);
+	context->ClearRenderTargetView(rtvs.diffuseRTV, color);
+}
+
+GBuffer::GBufferSRVs GBuffer::GetSRVs()
+{
+	return srvs;
 }

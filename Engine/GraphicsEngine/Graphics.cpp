@@ -1,6 +1,7 @@
 #include "Graphics.h"
 
 #include "iostream"
+#include "ShaderManager.h"
 #include "../FileManager/BaseResources.h"
 
 using namespace std;
@@ -49,6 +50,9 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 
 	gBuffer.Initialize(device.Get(), screenWidth, screenHeight, BaseResource::gBufferShader);
 
+	outputShader = ShaderManager::Get(BaseResource::screenQuadShader);
+	int indexes[] = { 0,1,2,2,1,3 };
+	outputIb.Initialize(device.Get(), indexes, 6);
 
 	ID3D11Texture2D* backTex;
 	res = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backTex);	// __uuidof(ID3D11Texture2D)
@@ -206,12 +210,21 @@ void Graphics::UpdateRenderTarget()
 
 void Graphics::SetObjectDrawMode()
 {
-	//context->OMSetRenderTargets(1, &rtv, depthStencilView);
-	//float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f };
-	//context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	//context->ClearRenderTargetView(rtv, color);
-
 	gBuffer.SetRenderTargets(context);
+}
+
+void Graphics::Output()
+{
+	SetUpIA(*outputShader);
+	SetShader(*outputShader);
+	context->OMSetRenderTargets(1, &rtv, depthStencilView);
+	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f };
+	context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	context->ClearRenderTargetView(rtv, color);
+	ID3D11ShaderResourceView* firstSrv = gBuffer.GetSRVs().diffuseSRV;
+	context->PSSetShaderResources(0, 1, &firstSrv);
+	context->IASetIndexBuffer(outputIb.Get(), DXGI_FORMAT_R32_UINT, 0);
+	context->DrawIndexed(outputIb.IndexCount(), 0, 0);
 }
 
 void Graphics::Present()

@@ -37,6 +37,7 @@ public:
 	void UpdateState();
 	void UpdateRenderTarget();
 	void SetObjectDrawMode();
+	void Output();
 	void Present();
 	void Cleanup();
 
@@ -45,6 +46,8 @@ public:
 	ID3D11SamplerState* shadowCompSampler;
 	Vec4 backgroundColor;
 private:
+	const Shader* outputShader;
+	IndexBuffer outputIb;
 	GBuffer gBuffer;
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;

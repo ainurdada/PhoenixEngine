@@ -126,6 +126,7 @@ void Game::render(float deltaFrame)
 		obj->Draw();
 	}
 	OnDebugRender();
+	graphics.Output();
 	graphics.Present();
 }
 
