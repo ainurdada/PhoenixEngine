@@ -19,11 +19,16 @@ class Shader
 	friend class Graphics;
 	friend class ShaderManager;
 	friend class DebugLine;
+	friend class GBuffer;
 public:
+	enum {
+		FLAG_PS = 1 << 0,
+		FLAG_VS = 1 << 1
+	};
 	Shader() {};
 	~Shader();
 private:
-	HRESULT Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device> device);
+	HRESULT Compile(LPCWSTR shaderPath, Microsoft::WRL::ComPtr<ID3D11Device> device, UINT flags = FLAG_PS | FLAG_VS);
 
 	ID3D11VertexShader* VS = nullptr;
 	ID3D11PixelShader* PS = nullptr;

@@ -1,6 +1,7 @@
 #include "Graphics.h"
 
 #include "iostream"
+#include "../FileManager/BaseResources.h"
 
 using namespace std;
 
@@ -45,6 +46,9 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	{
 		cout << "failed to create DeviceAndSwapChain" << endl;
 	}
+
+	gBuffer.Initialize(device.Get(), screenWidth, screenHeight, BaseResource::gBufferShader);
+
 
 	ID3D11Texture2D* backTex;
 	res = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backTex);	// __uuidof(ID3D11Texture2D)
@@ -202,10 +206,12 @@ void Graphics::UpdateRenderTarget()
 
 void Graphics::SetObjectDrawMode()
 {
-	context->OMSetRenderTargets(1, &rtv, depthStencilView);
-	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f };
-	context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	context->ClearRenderTargetView(rtv, color);
+	//context->OMSetRenderTargets(1, &rtv, depthStencilView);
+	//float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f };
+	//context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	//context->ClearRenderTargetView(rtv, color);
+
+	gBuffer.SetRenderTargets(context);
 }
 
 void Graphics::Present()

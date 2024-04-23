@@ -58,9 +58,6 @@
     <ClCompile Include="Lib\Delegates\Delegates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Basic\Shapes\Box2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -133,6 +130,9 @@
     <ClCompile Include="Engine\GraphicsEngine\TextureRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\GraphicsEngine\GBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\Window.h">
@@ -157,7 +157,6 @@
     <ClInclude Include="Engine\GraphicsEngine\Mesh.h" />
     <ClInclude Include="Lib\Math\src\Vec.h" />
     <ClInclude Include="Lib\Delegates\Delegates.h" />
-    <ClInclude Include="Basic\Shapes\Box2D.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\BehaviourScript.h" />
     <ClInclude Include="PhoenixEngine.h" />
     <ClInclude Include="Engine\GameplayEngine\GameplayEngine.h" />
@@ -196,6 +195,7 @@
     <ClInclude Include="Engine\GraphicsEngine\Light\ShadowMap.h" />
     <ClInclude Include="Engine\GraphicsEngine\Light\LightCamera.h" />
     <ClInclude Include="Engine\GraphicsEngine\TextureRender.h" />
+    <ClInclude Include="Engine\GraphicsEngine\GBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="Lib\Delegates\Delegates.natvis" />
@@ -204,6 +204,8 @@
     <Text Include="Shaders\LitShader.hlsl" />
     <Text Include="Shaders\LineDebugShader.hlsl" />
     <Text Include="Shaders\ShadowShader.hlsl" />
+    <Text Include="Shaders\GBufferShader.hlsl" />
+    <Text Include="Shaders\ScreenQuadShader.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

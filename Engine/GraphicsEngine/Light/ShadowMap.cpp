@@ -57,7 +57,7 @@ void ShadowMap::Initialize(LightCamera* lightCamera)
 	}
 
 
-	shadowShader = ShaderManager::Get(BaseResource::shadowShader);
+	shadowShader = ShaderManager::Get(BaseResource::shadowShader, Shader::FLAG_VS);
 }
 
 void ShadowMap::Generate(GameObject* gameObjects[], int count)

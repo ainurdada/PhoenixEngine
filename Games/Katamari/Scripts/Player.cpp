@@ -63,4 +63,5 @@ void Player::OnCollide(Collider* other)
 {
 	other->gameObject->transform.SetParent(&gameObject->transform, true);
 	m_collidersToDelete.push_back(other);
+	other->isEnable = false;
 }

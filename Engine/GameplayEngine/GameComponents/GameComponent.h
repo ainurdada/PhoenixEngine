@@ -30,6 +30,7 @@ public:
 	/// The game object that this component is linked to
 	/// </summary>
 	GameObject* gameObject = nullptr;
+	bool isEnable = true;
 };
 #endif 
 

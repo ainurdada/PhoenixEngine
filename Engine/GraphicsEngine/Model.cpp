@@ -160,14 +160,12 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, DirectX::XMMATRIX& t
 		vertex.Pos.x = mesh->mVertices[i].x;
 		vertex.Pos.y = mesh->mVertices[i].y;
 		vertex.Pos.z = mesh->mVertices[i].z;
-		vertex.Pos.w = 1;
 
 		if (mesh->HasNormals())
 		{
 			vertex.Normal.x = mesh->mNormals[i].x;
 			vertex.Normal.y = mesh->mNormals[i].y;
 			vertex.Normal.z = mesh->mNormals[i].z;
-			vertex.Normal.w = 0;
 		}
 
 		if (mesh->mTextureCoords[0])

@@ -183,7 +183,6 @@ xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Sha
     <ClCompile Include="Engine\GameplayEngine\GameComponents\BehaviourScript.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\DirectionalLightComponent.cpp" />
     <ClCompile Include="Engine\GameplayEngine\Transform.cpp" />
-    <ClCompile Include="Basic\Shapes\Box2D.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\GameComponent.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameObject.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Model.cpp" />
@@ -192,6 +191,7 @@ xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Sha
     <ClCompile Include="Games\Katamari\KatamariGame.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Light\LightManager.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Light\LightCamera.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\GBuffer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\Graphics.cpp" />
     <ClCompile Include="Engine\GameplayEngine\GameComponents\RenderComponent.cpp" />
@@ -237,7 +237,6 @@ xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Sha
     <ClInclude Include="Engine\GraphicsEngine\VertexBuffer.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\PhysicsEngine\PhysicsEngine.h" />
-    <ClInclude Include="Basic\Shapes\Box2D.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\GameComponent.h" />
     <ClInclude Include="Engine\GameplayEngine\GameObject.h" />
     <ClInclude Include="Engine\GraphicsEngine\Graphics.h" />
@@ -247,6 +246,7 @@ xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Sha
     <ClInclude Include="Engine\InputSystem\Keys.h" />
     <ClInclude Include="Games\Katamari\Scripts\CameraControl.h" />
     <ClInclude Include="Games\Katamari\KatamariGame.h" />
+    <ClInclude Include="Engine\GraphicsEngine\GBuffer.h" />
     <ClInclude Include="Lib\Math\Math.h" />
     <ClInclude Include="Engine\GameplayEngine\GameComponents\RenderComponent.h" />
     <ClInclude Include="Engine\GraphicsEngine\Shader.h" />
@@ -293,6 +293,32 @@ xcopy /y /d /i /e /s "$(SolutionDir)\Basic\Shapes\Models\*" "$(OutDir)\Basic\Sha
   </ItemGroup>
   <ItemGroup>
     <Text Include="Shaders\ShadowShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\GBufferShader.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Shaders\ScreenQuadShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Compute</ShaderType>

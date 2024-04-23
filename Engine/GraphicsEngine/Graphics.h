@@ -14,6 +14,7 @@ class Graphics;
 
 #include "Mesh.h"
 #include "Shader.h"
+#include "GBuffer.h"
 #include "../../Lib/Math/Math.h"
 #include "Light/LightManager.h"
 
@@ -44,6 +45,7 @@ public:
 	ID3D11SamplerState* shadowCompSampler;
 	Vec4 backgroundColor;
 private:
+	GBuffer gBuffer;
 	Microsoft::WRL::ComPtr<ID3D11Device> device;
 	ID3D11DeviceContext* context;
 	IDXGISwapChain* swapChain;

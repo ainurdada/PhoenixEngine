@@ -14,8 +14,8 @@ namespace Basic
 		std::vector<Vertex> points;
 		std::vector<int> indexes;
 
-		XMFLOAT4 pos = { 0, radius,0,1 };
-		Vector4 tex = { 0,0,0,0 };
+		Vector3 pos = { 0, radius,0 };
+		Vector3 tex = { 0,0,0 };
 		Vertex vert = { pos, tex };
 		points.push_back(vert);
 		for (int i = 1; i <= stackCount - 1; i++)
@@ -35,7 +35,7 @@ namespace Basic
 				points.push_back(vert);
 			}
 		}
-		pos = { 0, -radius, 0,1 };
+		pos = { 0, -radius, 0 };
 		tex = { 0,1 };
 		vert = { pos, tex };
 		points.push_back(vert);

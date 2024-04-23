@@ -15,8 +15,10 @@ void Physics::Update()
 {
 	for (int i = 0; i < collidersInGame.size(); i++)
 	{
+		if (!collidersInGame[i]->isEnable) continue;
 		for (int j = i + 1; j < collidersInGame.size(); j++)
 		{
+			if (!collidersInGame[j]->isEnable) continue;
 			if (CheckCollision(*collidersInGame[i], *collidersInGame[j]))
 			{
 				for (GameComponent* comp : collidersInGame[i]->gameObject->components)
