@@ -28,15 +28,6 @@ class Model
 	};
 	static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
-	struct PointLightData {
-		SMath::Matrix viewProjection[6];
-		SMath::Vector3 color;
-		float intensity;
-		SMath::Vector3 position;
-		float attenuation_a;
-		float attenuation_b;
-		float attenuation_c;
-	};
 	//static_assert((sizeof(DirLightData) % 16) == 0, "Constant Buffer size must be 16-byte aligned");
 
 	struct MaterialData {
@@ -63,7 +54,6 @@ private:
 	std::string directory = "";
 	ConstantBuffer<ConstantData> constant_data;
 	ConstantBuffer<DirLightData> dir_light_data;
-	ConstantBuffer<PointLightData> point_light_data;
 	ConstantBuffer<MaterialData> material_data;
 	ID3D11Buffer* transform_buffer = nullptr;
 };

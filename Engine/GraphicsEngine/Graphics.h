@@ -17,9 +17,22 @@ class Graphics;
 #include "GBuffer.h"
 #include "../../Lib/Math/Math.h"
 #include "Light/LightManager.h"
+#include "ConstantBuffer.h"
 
 class Graphics
 {
+	struct ConstantData {
+		SMath::Vector3 ViewerPosition;
+	};
+	struct PointLightData {
+		SMath::Matrix viewProjection[6];
+		SMath::Vector3 color;
+		float intensity;
+		SMath::Vector3 position;
+		float attenuation_a;
+		float attenuation_b;
+		float attenuation_c;
+	};
 	struct GraphicSettings {
 		int shadowResolution = 2048;
 		int shadowCascadeCount = 1;
@@ -56,6 +69,6 @@ private:
 	ID3D11RasterizerState* solidRastState;
 	ID3D11RasterizerState* wireframeRastState;
 	D3D11_VIEWPORT viewport = {};
-	ID3D11DepthStencilView* depthStencilView;
-	ID3D11Texture2D* depthStencilBuffer;
+	ConstantBuffer<PointLightData> point_light_data;
+	ConstantBuffer<ConstantData> constant_data;
 };

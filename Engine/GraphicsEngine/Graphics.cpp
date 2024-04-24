@@ -54,6 +54,9 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	int indexes[] = { 0,1,2,2,1,3 };
 	outputIb.Initialize(device.Get(), indexes, 6);
 
+	constant_data.Initialize(device.Get(), context);
+	point_light_data.Initialize(device.Get(), context);
+
 	ID3D11Texture2D* backTex;
 	res = swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backTex);	// __uuidof(ID3D11Texture2D)
 	res = device->CreateRenderTargetView(backTex, nullptr, &rtv);
@@ -63,42 +66,10 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 		cout << "failed to create RenderTargetView" << endl;
 	}
 
-
-	//Describe our Depth/Stencil Buffer
-	D3D11_TEXTURE2D_DESC depthStencilDesc;
-	ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
-	depthStencilDesc.Width = screenWidth;
-	depthStencilDesc.Height = screenHeight;
-	depthStencilDesc.MipLevels = 1;
-	depthStencilDesc.ArraySize = 1;
-	depthStencilDesc.Format = DXGI_FORMAT_D32_FLOAT;
-	depthStencilDesc.SampleDesc.Count = 1;
-	depthStencilDesc.SampleDesc.Quality = 0;
-	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
-	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	depthStencilDesc.CPUAccessFlags = 0;
-	depthStencilDesc.MiscFlags = 0;
-
-	//Create the Depth/Stencil View
-	res = device->CreateTexture2D(&depthStencilDesc, NULL, &depthStencilBuffer);
-
-	D3D11_DEPTH_STENCIL_VIEW_DESC dsvDesc;
-	ZeroMemory(&dsvDesc, sizeof(dsvDesc));
-	dsvDesc.Format = depthStencilDesc.Format;
-	dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-	dsvDesc.Texture2D.MipSlice = 0;
-
-	res = device->CreateDepthStencilView(depthStencilBuffer, &dsvDesc, &depthStencilView);
-
-	if (FAILED(res))
-	{
-		cout << "failed to create DepthStencilView" << endl;
-	}
-
 	D3D11_SAMPLER_DESC sampDesc{};
 	ZeroMemory(&sampDesc, sizeof(sampDesc));
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;      // Тип фильтрации
-	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;         
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
@@ -128,7 +99,7 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	{
 		cout << "failed to create SamplerState" << endl;
 	}
-	 
+
 	return res;
 }
 
@@ -213,14 +184,38 @@ GBuffer& Graphics::GetGBuffer()
 	return gBuffer;
 }
 
+
+#include "../../App/Game.h"
 void Graphics::Output()
 {
 	SetUpIA(*outputShader);
 	SetShader(*outputShader);
-	context->OMSetRenderTargets(1, &rtv, depthStencilView);
+	context->OMSetRenderTargets(1, &rtv, nullptr);
 	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f };
-	context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	context->ClearRenderTargetView(rtv, color);
+
+	// constant buffer
+	constant_data.data.ViewerPosition = Game::instance->mainCamera->transform.position();
+	constant_data.ApplyChanges();
+	Game::instance->graphics.GetContext()->PSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
+
+	// point light buffer
+	if (Game::instance->pointLights.size() != 0)
+	{
+		for (int i = 0; i < 6; i++) {
+			point_light_data.data.viewProjection[i] = Game::instance->pointLights[0]->GetCameras()[i].ViewProjectionMatrix();
+		}
+		point_light_data.data.position = Game::instance->pointLights[0]->gameObject->transform.position();
+		point_light_data.data.intensity = Game::instance->pointLights[0]->intensity;
+		point_light_data.data.color = Game::instance->pointLights[0]->color;
+		point_light_data.data.attenuation_a = Game::instance->pointLights[0]->attenuation_a;
+		point_light_data.data.attenuation_b = Game::instance->pointLights[0]->attenuation_b;
+		point_light_data.data.attenuation_c = Game::instance->pointLights[0]->attenuation_c;
+		point_light_data.ApplyChanges();
+		//Game::instance->graphics.GetContext()->PSSetShaderResources(1, 6, Game::instance->pointLights[0]->GetShadowMapsResourceAdresses().data());
+	}
+	Game::instance->graphics.GetContext()->PSSetConstantBuffers(1, 1, point_light_data.GetAddressOf());
+
 	context->PSSetShaderResources(0, gBuffer.GetSRVs().count, &gBuffer.GetSRVs().diffuseSRV);
 	context->IASetIndexBuffer(outputIb.Get(), DXGI_FORMAT_R32_UINT, 0);
 	context->DrawIndexed(outputIb.IndexCount(), 0, 0);
@@ -234,8 +229,6 @@ void Graphics::Present()
 void Graphics::Cleanup()
 {
 	if (context) context->ClearState();
-	if (depthStencilBuffer) depthStencilBuffer->Release();
-	if (depthStencilView) depthStencilView->Release();
 	if (rtv) rtv->Release();
 	if (swapChain) swapChain->Release();
 	if (context) context->Release();

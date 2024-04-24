@@ -21,6 +21,7 @@ class Game
 	friend class PointLightComponent;
 	friend class DirectionalLightComponent;
 	friend class Model;
+	friend class Graphics;
 
 public:
 	Game();
