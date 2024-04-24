@@ -12,13 +12,12 @@ using namespace DirectX;
 void RenderComponent::Draw()
 {
 	// Set graphics
-	Game::instance->graphics.SetSolidRasterizer();
+	//Game::instance->graphics.SetSolidRasterizer();
 
 	// Set shader
 	//Game::instance->graphics.SetUpIA(*shader);
 	//Game::instance->graphics.SetShader(*shader);
 
-	Game::instance->graphics.GetContext()->PSSetSamplers(0, 1, &Game::instance->graphics.pSampler);
 	//Game::instance->graphics.GetContext()->PSSetSamplers(1, 1, &Game::instance->graphics.shadowCompSampler);
 
 	model.Draw(gameObject->transform.LocalToWorld());

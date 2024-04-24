@@ -1,8 +1,8 @@
 struct VS_IN
 {
-    float3 Position : POSITION;
-    float3 Normal : NORMAL;
-    float2 TexCoord : TEXCOORD;
+    float4 Position : POSITION;
+    float4 Normal : NORMAL;
+    float4 TexCoord : TEXCOORD0;
 };
 
 struct PS_IN
@@ -37,9 +37,9 @@ SamplerState sampl : register(s0);
 PS_IN VSMain(VS_IN input)
 {
     PS_IN output = (PS_IN) 0;
-    output.pos = mul(float4(input.Position, 1), cdata.WorldViewProjection);
-    output.tex = input.TexCoord;
-    output.normal = normalize(mul(float4(input.Normal, 0), cdata.World).xyz);
+    output.pos = mul(input.Position, cdata.WorldViewProjection);
+    output.tex = input.TexCoord.xy;
+    output.normal = normalize(mul(input.Normal, cdata.World).xyz);
     return output;
 }
 

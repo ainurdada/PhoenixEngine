@@ -36,7 +36,7 @@ public:
 	void SetUpViewPort(int width, int height);
 	void UpdateState();
 	void UpdateRenderTarget();
-	void SetObjectDrawMode();
+	GBuffer& GetGBuffer();
 	void Output();
 	void Present();
 	void Cleanup();

@@ -208,9 +208,9 @@ void Graphics::UpdateRenderTarget()
 {
 }
 
-void Graphics::SetObjectDrawMode()
+GBuffer& Graphics::GetGBuffer()
 {
-	gBuffer.SetRenderTargets(context);
+	return gBuffer;
 }
 
 void Graphics::Output()

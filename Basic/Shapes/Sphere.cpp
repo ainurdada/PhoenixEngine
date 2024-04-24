@@ -14,8 +14,8 @@ namespace Basic
 		std::vector<Vertex> points;
 		std::vector<int> indexes;
 
-		Vector3 pos = { 0, radius,0 };
-		Vector3 tex = { 0,0,0 };
+		Vector4 pos = { 0, radius,0,1 };
+		Vector4 tex = { 0,0,0,0 };
 		Vertex vert = { pos, tex };
 		points.push_back(vert);
 		for (int i = 1; i <= stackCount - 1; i++)

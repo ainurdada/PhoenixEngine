@@ -26,6 +26,7 @@ class GBuffer
 public:
 	void Initialize(ID3D11Device* device, int screenWidth, int screenHeigt, LPCWSTR shaderPath);
 	void SetRenderTargets(ID3D11DeviceContext* context);
+	void PrepareToDrawObject(ID3D11DeviceContext* context);
 	GBufferSRVs GetSRVs();
 private:
 	const Shader* shader;

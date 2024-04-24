@@ -120,9 +120,12 @@ void Game::render(float deltaFrame)
 	//pointLights[0]->GenerateShadowMaps(gameObjects.data(), gameObjects.size());
 
 	graphics.SetUpViewPort(window.ClientWidth, window.ClientHeight);
-	graphics.SetObjectDrawMode();
+	graphics.GetGBuffer().SetRenderTargets(graphics.GetContext());
 	for (GameObject* obj : gameObjects)
 	{
+		graphics.GetGBuffer().PrepareToDrawObject(graphics.GetContext());
+		graphics.GetContext()->PSSetSamplers(0, 1, &graphics.pSampler);
+		Game::instance->graphics.SetSolidRasterizer();
 		obj->Draw();
 	}
 	OnDebugRender();

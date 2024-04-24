@@ -44,16 +44,21 @@ void GBuffer::Initialize(ID3D11Device* device, int screenWidth, int screenHeigt,
 #pragma endregion
 }
 
+
 void GBuffer::SetRenderTargets(ID3D11DeviceContext* context)
+{
+	context->OMSetRenderTargets(1, &rtvs.diffuseRTV, diffuseDSV);
+	float color[4] = { 0,0,0,1 };
+	context->ClearDepthStencilView(diffuseDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	context->ClearRenderTargetView(rtvs.diffuseRTV, color);
+}
+
+void GBuffer::PrepareToDrawObject(ID3D11DeviceContext* context)
 {
 	context->IASetInputLayout(shader->layout);
 	context->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	context->VSSetShader(shader->VS, nullptr, 0);
 	context->PSSetShader(shader->PS, nullptr, 0);
-	context->OMSetRenderTargets(1, &rtvs.diffuseRTV, diffuseDSV);
-	float color[4] = { 0,0,0,1 };
-	context->ClearDepthStencilView(diffuseDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-	context->ClearRenderTargetView(rtvs.diffuseRTV, color);
 }
 
 GBuffer::GBufferSRVs GBuffer::GetSRVs()

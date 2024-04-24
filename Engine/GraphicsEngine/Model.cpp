@@ -67,38 +67,38 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 		};
 		constant_data.ApplyChanges();
 
-		// material buffer
-		material_data.data.ambientKoeff = Game::instance->dirLight->ambientKoeff;
-		material_data.data.specPower = Game::instance->dirLight->specPow;
-		material_data.data.specKoeff = Game::instance->dirLight->specKoeff;
-		material_data.ApplyChanges();
+		//// material buffer
+		//material_data.data.ambientKoeff = Game::instance->dirLight->ambientKoeff;
+		//material_data.data.specPower = Game::instance->dirLight->specPow;
+		//material_data.data.specKoeff = Game::instance->dirLight->specKoeff;
+		//material_data.ApplyChanges();
 
-		// direction light buffer
-		dir_light_data.data.direction = Game::instance->dirLight->direction;
-		dir_light_data.data.intensity = Game::instance->dirLight->intensity;
-		dir_light_data.ApplyChanges();
+		//// direction light buffer
+		//dir_light_data.data.direction = Game::instance->dirLight->direction;
+		//dir_light_data.data.intensity = Game::instance->dirLight->intensity;
+		//dir_light_data.ApplyChanges();
 
-		// point light buffer
-		if (Game::instance->pointLights.size() != 0)
-		{
-			for (int i = 0; i < 6; i++) {
-				point_light_data.data.viewProjection[i] = Game::instance->pointLights[0]->GetCameras()[i].ViewProjectionMatrix();
-			}
-			point_light_data.data.position = Game::instance->pointLights[0]->gameObject->transform.position();
-			point_light_data.data.intensity = Game::instance->pointLights[0]->intensity;
-			point_light_data.data.color = Game::instance->pointLights[0]->color;
-			point_light_data.data.attenuation_a = Game::instance->pointLights[0]->attenuation_a;
-			point_light_data.data.attenuation_b = Game::instance->pointLights[0]->attenuation_b;
-			point_light_data.data.attenuation_c = Game::instance->pointLights[0]->attenuation_c;
-			point_light_data.ApplyChanges();
-			Game::instance->graphics.GetContext()->PSSetShaderResources(1, 6, Game::instance->pointLights[0]->GetShadowMapsResourceAdresses().data());
-		}
+		//// point light buffer
+		//if (Game::instance->pointLights.size() != 0)
+		//{
+		//	for (int i = 0; i < 6; i++) {
+		//		point_light_data.data.viewProjection[i] = Game::instance->pointLights[0]->GetCameras()[i].ViewProjectionMatrix();
+		//	}
+		//	point_light_data.data.position = Game::instance->pointLights[0]->gameObject->transform.position();
+		//	point_light_data.data.intensity = Game::instance->pointLights[0]->intensity;
+		//	point_light_data.data.color = Game::instance->pointLights[0]->color;
+		//	point_light_data.data.attenuation_a = Game::instance->pointLights[0]->attenuation_a;
+		//	point_light_data.data.attenuation_b = Game::instance->pointLights[0]->attenuation_b;
+		//	point_light_data.data.attenuation_c = Game::instance->pointLights[0]->attenuation_c;
+		//	point_light_data.ApplyChanges();
+		//	Game::instance->graphics.GetContext()->PSSetShaderResources(1, 6, Game::instance->pointLights[0]->GetShadowMapsResourceAdresses().data());
+		//}
 
 		Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
 		Game::instance->graphics.GetContext()->PSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
-		Game::instance->graphics.GetContext()->PSSetConstantBuffers(1, 1, material_data.GetAddressOf());
-		Game::instance->graphics.GetContext()->PSSetConstantBuffers(2, 1, dir_light_data.GetAddressOf());
-		Game::instance->graphics.GetContext()->PSSetConstantBuffers(3, 1, point_light_data.GetAddressOf());
+		//Game::instance->graphics.GetContext()->PSSetConstantBuffers(1, 1, material_data.GetAddressOf());
+		//Game::instance->graphics.GetContext()->PSSetConstantBuffers(2, 1, dir_light_data.GetAddressOf());
+		//Game::instance->graphics.GetContext()->PSSetConstantBuffers(3, 1, point_light_data.GetAddressOf());
 		meshes[i].Draw();
 	}
 }
@@ -160,12 +160,14 @@ Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, DirectX::XMMATRIX& t
 		vertex.Pos.x = mesh->mVertices[i].x;
 		vertex.Pos.y = mesh->mVertices[i].y;
 		vertex.Pos.z = mesh->mVertices[i].z;
+		vertex.Pos.w = 1;
 
 		if (mesh->HasNormals())
 		{
 			vertex.Normal.x = mesh->mNormals[i].x;
 			vertex.Normal.y = mesh->mNormals[i].y;
 			vertex.Normal.z = mesh->mNormals[i].z;
+			vertex.Normal.w = 0;
 		}
 
 		if (mesh->mTextureCoords[0])

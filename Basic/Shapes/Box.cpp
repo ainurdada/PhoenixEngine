@@ -16,8 +16,8 @@ namespace Basic {
 			{
 				for (int k = 0; k < 2; k++)
 				{
-					Vector3 v = { i * extents.x, j * extents.y, k * extents.z };
-					Vector3 c = { color.x * i, color.y * j, color.z * k };
+					Vector4 v = { i * extents.x, j * extents.y, k * extents.z,1 };
+					Vector4 c = { color.x * i, color.y * j, color.z * k,0 };
 					Vertex vert = { v,c };
 					points.push_back(vert);
 				}
