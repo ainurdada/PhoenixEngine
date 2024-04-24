@@ -6,6 +6,8 @@ struct PS_IN
 };
 
 Texture2D<float4> DiffuseTex : register(t0);
+Texture2D<float4> NormalTex : register(t1);
+Texture2D<float> DepthTex : register(t2);
 
 PS_IN VSMain(uint id : SV_VertexID)
 {
@@ -18,5 +20,7 @@ PS_IN VSMain(uint id : SV_VertexID)
 float4 PSMain(PS_IN input) : SV_Target
 {
     float4 diffuse = DiffuseTex.Load(input.Position.xyz);
+    float4 normal = NormalTex.Load(input.Position.xyz);
+    float depth = DepthTex.Load(input.Position.xyz);
     return diffuse;
 }

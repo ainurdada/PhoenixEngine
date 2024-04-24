@@ -221,8 +221,7 @@ void Graphics::Output()
 	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f };
 	context->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	context->ClearRenderTargetView(rtv, color);
-	ID3D11ShaderResourceView* firstSrv = gBuffer.GetSRVs().diffuseSRV;
-	context->PSSetShaderResources(0, 1, &firstSrv);
+	context->PSSetShaderResources(0, gBuffer.GetSRVs().count, &gBuffer.GetSRVs().diffuseSRV);
 	context->IASetIndexBuffer(outputIb.Get(), DXGI_FORMAT_R32_UINT, 0);
 	context->DrawIndexed(outputIb.IndexCount(), 0, 0);
 }

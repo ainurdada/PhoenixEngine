@@ -15,7 +15,7 @@ struct PS_IN
 struct GBuffer
 {
     float4 DiffuseColor : SV_Target0;
-    //float3 Normal : SV_Target1;
+    float3 Normal : SV_Target1;
     //float3 Specular : SV_Target2;
     //float Depth : SV_Target3;
 };
@@ -48,5 +48,7 @@ GBuffer PSMain(PS_IN input)
     GBuffer output = (GBuffer) 0;
     float4 texColor = txDiffuse.Sample(sampl, input.tex);
     output.DiffuseColor = texColor;
+    input.normal = normalize(input.normal);
+    output.Normal = input.normal;
     return output;
 }
