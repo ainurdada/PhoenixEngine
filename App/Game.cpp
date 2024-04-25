@@ -117,7 +117,7 @@ void Game::render(float deltaFrame)
 {
 	graphics.UpdateState();
 
-	//pointLights[0]->GenerateShadowMaps(gameObjects.data(), gameObjects.size());
+	pointLights[0]->GenerateShadowMaps(gameObjects.data(), gameObjects.size());
 
 	graphics.SetUpViewPort(window.ClientWidth, window.ClientHeight);
 	graphics.GetGBuffer().SetRenderTargets(graphics.GetContext());
@@ -129,6 +129,7 @@ void Game::render(float deltaFrame)
 		obj->Draw();
 	}
 	OnDebugRender();
+	graphics.GetContext()->PSSetSamplers(0, 1, &graphics.shadowCompSampler);
 	graphics.Output();
 	graphics.Present();
 }

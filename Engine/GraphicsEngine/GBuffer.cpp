@@ -158,6 +158,8 @@ void GBuffer::SetRenderTargets(ID3D11DeviceContext* context)
 	float color[4] = { 0,0,0,1 };
 	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	context->ClearRenderTargetView(rtvs.diffuseRTV, color);
+	context->ClearRenderTargetView(rtvs.specularRTV, color);
+	context->ClearRenderTargetView(rtvs.worldPosRTV, color);
 	context->ClearRenderTargetView(rtvs.normalRTV, color);
 }
 

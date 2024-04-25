@@ -102,11 +102,11 @@ void KatamariGame::OnCreated()
 
 	GameObject* floor = new GameObject;
 	RenderComponent* floorRender = new RenderComponent;
-	floorRender->modelPath = L"Models\\Room\\salt_tower_lower_room.glb";
+	floorRender->modelPath = L"Basic\\Shapes\\Models\\Cube.glb";
 	floorRender->shader = ShaderManager::Get(BaseResource::litShader);
 	floor->AddComponent(*floorRender);
-	floor->transform.scale({ 10,10,10 });
-	floor->transform.position({ 0,-2.4f,0 });
+	floor->transform.scale({ 100,1,100 });
+	floor->transform.position({ 0,-0.95f,0 });
 	InstantiateGameObject(floor);
 
 	

@@ -68,13 +68,13 @@ void ShadowMap::Generate(GameObject* gameObjects[], int count)
 
 	Game::instance->graphics.SetSolidRasterizer();
 
-	// Set shader
-	Game::instance->graphics.SetUpIA(*shadowShader);
-	Game::instance->graphics.SetShader(*shadowShader);
 
 
 	for (int i = 0; i < count; i++)
 	{
+		// Set shader
+		Game::instance->graphics.SetUpIA(*shadowShader);
+		Game::instance->graphics.SetShader(*shadowShader);
 		gameObjects[i]->DrawShadow(light_camera);
 	}
 }

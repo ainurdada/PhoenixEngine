@@ -90,9 +90,9 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 
 	sampDesc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	sampDesc.ComparisonFunc = D3D11_COMPARISON_LESS_EQUAL;
-	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
-	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
-	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
 
 	res = device->CreateSamplerState(&sampDesc, &shadowCompSampler);
 	if (FAILED(res))
@@ -217,6 +217,7 @@ void Graphics::Output()
 	Game::instance->graphics.GetContext()->PSSetConstantBuffers(1, 1, point_light_data.GetAddressOf());
 
 	context->PSSetShaderResources(0, gBuffer.GetSRVs().count, &gBuffer.GetSRVs().diffuseSRV);
+	context->PSSetShaderResources(gBuffer.GetSRVs().count, 6, Game::instance->pointLights[0]->GetShadowMapsResourceAdresses().data());
 	context->IASetIndexBuffer(outputIb.Get(), DXGI_FORMAT_R32_UINT, 0);
 	context->DrawIndexed(outputIb.IndexCount(), 0, 0);
 }
