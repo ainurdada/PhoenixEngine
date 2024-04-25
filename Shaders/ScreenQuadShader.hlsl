@@ -56,7 +56,7 @@ float3 doLigt(float3 position, float3 normal, float3 color, PointLightData point
         if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y))
         {
         // compare depth
-            float lightDepth = posInPointLightView.z / posInPointLightView.w - 0.001f;
+            float lightDepth = posInPointLightView.z / posInPointLightView.w- 0.000001f;
             float depth = pointLightShadowMap[cameraIndex].SampleCmp(samplerClamp, shadowTexCoord, lightDepth);
             if (depth)
             {
