@@ -46,6 +46,7 @@ public:
 	HRESULT SetUpRasterizer();
 	void SetSolidRasterizer();
 	void SetWireframeRasterizer();
+	void SetShadowRasterizer();
 	void SetUpViewPort(int width, int height);
 	void UpdateState();
 	void UpdateRenderTarget();
@@ -68,6 +69,7 @@ private:
 	ID3D11RenderTargetView* rtv;
 	ID3D11RasterizerState* solidRastState;
 	ID3D11RasterizerState* wireframeRastState;
+	ID3D11RasterizerState* shadowRastState;
 	D3D11_VIEWPORT viewport = {};
 	ConstantBuffer<PointLightData> point_light_data;
 	ConstantBuffer<ConstantData> constant_data;

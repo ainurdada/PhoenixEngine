@@ -38,9 +38,43 @@ Texture2D<float3> SpecularTex : register(t4);
 Texture2D pointLightShadowMap[6] : register(t5);
 SamplerComparisonState samplerClamp : register(s0);
 
+static const float SMAP_SIZE = 2048.0f;
+static const float SMAP_DX = 1.0f / SMAP_SIZE;
+float CalcShadowFactor(SamplerComparisonState samShadow,
+                       Texture2D shadowMap,
+                       float4 shadowPosH)
+{
+    // Complete projection by doing division by w.
+    shadowPosH.xyz /= shadowPosH.w;
+    
+    // Depth in NDC space.
+    float depth = shadowPosH.z;
+
+    // Texel size.
+    const float dx = SMAP_DX;
+
+    float percentLit = 0.0f;
+    const float2 offsets[9] =
+    {
+        float2(-dx, -dx), float2(0.0f, -dx), float2(dx, -dx),
+        float2(-dx, 0.0f), float2(0.0f, 0.0f), float2(dx, 0.0f),
+        float2(-dx, +dx), float2(0.0f, +dx), float2(dx, +dx)
+    };
+
+    [unroll]
+    for (int i = 0; i < 9; ++i)
+    {
+        percentLit += shadowMap.SampleCmpLevelZero(samShadow,
+            shadowPosH.xy + offsets[i], depth).r;
+    }
+
+    return percentLit /= 9.0f;
+}
+
 float3 doLigt(float3 position, float3 normal, float3 color, PointLightData pointLight, float AmbientKoef, float SpecularPower, float SpecularKoef)
 {
-    float3 col = AmbientKoef * color;
+    float3 ambient = AmbientKoef * color;
+    float3 col = ambient;
     [unroll]
     for (int i = 0; i < 6; i++)
     {
@@ -56,7 +90,7 @@ float3 doLigt(float3 position, float3 normal, float3 color, PointLightData point
         if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y))
         {
         // compare depth
-            float lightDepth = posInPointLightView.z / posInPointLightView.w- 0.000001f;
+            float lightDepth = posInPointLightView.z / posInPointLightView.w /*- 0.00001f*/;
             float depth = pointLightShadowMap[cameraIndex].SampleCmp(samplerClamp, shadowTexCoord, lightDepth);
             if (depth)
             {
@@ -75,8 +109,9 @@ float3 doLigt(float3 position, float3 normal, float3 color, PointLightData point
                 float3 viewDir = normalize(cdata.ViewerPos.xyz - position);
                 float3 spec = pow(max(0, dot(-viewDir, refVec)), SpecularPower) * pointLight.intensity * SpecularKoef * attenuationFactor;
     
-                col = pointLight.color * (col + diffuse + spec);
+                col = depth * pointLight.color * (ambient + diffuse + spec);
             }
+            //col = float3(depth, depth, depth);
         }
     }
     return col;

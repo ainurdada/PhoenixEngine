@@ -66,7 +66,7 @@ void ShadowMap::Generate(GameObject* gameObjects[], int count)
 	Game::instance->graphics.GetContext()->ClearDepthStencilView(depthDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	Game::instance->graphics.GetContext()->OMSetRenderTargets(0, nullptr, depthDSV);
 
-	Game::instance->graphics.SetSolidRasterizer();
+	Game::instance->graphics.SetShadowRasterizer();
 
 
 
