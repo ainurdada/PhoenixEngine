@@ -90,9 +90,9 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 
 	sampDesc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT;
 	sampDesc.ComparisonFunc = D3D11_COMPARISON_LESS_EQUAL;
-	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
-	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
-	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
+	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 	//sampDesc.MaxAnisotropy = 0;
 
 	res = device->CreateSamplerState(&sampDesc, &shadowCompSampler);

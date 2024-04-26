@@ -63,8 +63,8 @@ float LightCamera::fov() const
 	return m_fov;
 }
 
-void LightCamera::fov(float value)
+void LightCamera::fov(float radians)
 {
-	m_fov = value;
+	m_fov = radians;
 	UpdateProjectionMatrix();
 }

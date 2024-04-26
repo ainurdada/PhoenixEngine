@@ -16,7 +16,7 @@ public:
 	void SetRotation(const SMath::Vector3& forward, const SMath::Vector3& up);
 
 	float fov() const;
-	void fov(float value);
+	void fov(float radians);
 
 	Transform transform;
 private:

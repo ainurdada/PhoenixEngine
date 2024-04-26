@@ -34,7 +34,7 @@ class Graphics
 		float attenuation_c;
 	};
 	struct GraphicSettings {
-		int shadowResolution = 2048;
+		int shadowResolution = 1024 * 2;
 		int shadowCascadeCount = 1;
 	};
 public:
