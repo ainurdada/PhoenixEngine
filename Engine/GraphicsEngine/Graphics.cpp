@@ -74,10 +74,10 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
 	sampDesc.MipLODBias = 0;
-	sampDesc.BorderColor[0] = 0;
-	sampDesc.BorderColor[1] = 0;
-	sampDesc.BorderColor[2] = 0;
-	sampDesc.BorderColor[3] = 0;
+	sampDesc.BorderColor[0] = 0.0f;
+	sampDesc.BorderColor[1] = 0.0f;
+	sampDesc.BorderColor[2] = 0.0f;
+	sampDesc.BorderColor[3] = 0.0f;
 	sampDesc.MaxAnisotropy = 1;
 	sampDesc.MinLOD = 0;
 	sampDesc.MaxLOD = D3D11_FLOAT32_MAX;
@@ -93,6 +93,7 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_BORDER;
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_BORDER;
 	sampDesc.AddressW = D3D11_TEXTURE_ADDRESS_BORDER;
+	//sampDesc.MaxAnisotropy = 0;
 
 	res = device->CreateSamplerState(&sampDesc, &shadowCompSampler);
 	if (FAILED(res))
@@ -205,6 +206,8 @@ void Graphics::Output()
 	context->OMSetRenderTargets(1, &rtv, nullptr);
 	float color[4] = { backgroundColor.x, backgroundColor.y, backgroundColor.z, 1.0f };
 	context->ClearRenderTargetView(rtv, color);
+
+	context->PSSetSamplers(0, 1, &shadowCompSampler);
 
 	// constant buffer
 	constant_data.data.ViewerPosition = Game::instance->mainCamera->transform.position();

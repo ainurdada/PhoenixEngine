@@ -74,46 +74,42 @@ float CalcShadowFactor(SamplerComparisonState samShadow,
 float3 doLigt(float3 position, float3 normal, float3 color, PointLightData pointLight, float AmbientKoef, float SpecularPower, float SpecularKoef)
 {
     float3 ambient = AmbientKoef * color;
-    float3 col = ambient;
+    float depth = 0;
     [unroll]
     for (int i = 0; i < 6; i++)
     {
-        int cameraIndex = i;
-        float4 posInPointLightView = mul(float4(position, 1), pointLight.viewProjection[cameraIndex]);
-        posInPointLightView.z = -posInPointLightView.z;
-        posInPointLightView.w = -posInPointLightView.w;
+        float4 posInPointLightView = mul(float4(position, 1), pointLight.viewProjection[i]);
+        posInPointLightView.z = posInPointLightView.z;
+        posInPointLightView.w = posInPointLightView.w;
         float2 shadowTexCoord = float2
         (
-            -posInPointLightView.x / posInPointLightView.w / 2.0f + 0.5f,
-            posInPointLightView.y / posInPointLightView.w / 2.0f + 0.5f
+            posInPointLightView.x / posInPointLightView.w / 2.0f + 0.5f,
+            -posInPointLightView.y / posInPointLightView.w / 2.0f + 0.5f
         );
         if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y))
         {
         // compare depth
             float lightDepth = posInPointLightView.z / posInPointLightView.w /*- 0.00001f*/;
-            float depth = pointLightShadowMap[cameraIndex].SampleCmp(samplerClamp, shadowTexCoord, lightDepth);
-            if (depth)
-            {
-                float distanceToLight = distance(pointLight.position, position);
-                float attenuationFactor =
+            depth += pointLightShadowMap[i].SampleCmp(samplerClamp, shadowTexCoord, lightDepth);
+            //return float3(1, 1, 1);
+        }
+    }
+    float distanceToLight = distance(pointLight.position, position);
+    float attenuationFactor =
                 1 /
                 (
                     pointLight.attenuation_a 
                     + pointLight.attenuation_b * distanceToLight
                     + pointLight.attenuation_c * distanceToLight * distanceToLight
                 );
-                float3 lightDir = normalize(pointLight.position - position);
-                float3 refVec = normalize(reflect(lightDir, normal));
+    float3 lightDir = normalize(pointLight.position - position);
+    float3 refVec = normalize(reflect(lightDir, normal));
     
-                float3 diffuse = attenuationFactor * color * pointLight.intensity * max(0, dot(normal, lightDir));
-                float3 viewDir = normalize(cdata.ViewerPos.xyz - position);
-                float3 spec = pow(max(0, dot(-viewDir, refVec)), SpecularPower) * pointLight.intensity * SpecularKoef * attenuationFactor;
+    float3 diffuse = attenuationFactor * color * pointLight.intensity * max(0, dot(normal, lightDir));
+    float3 viewDir = normalize(cdata.ViewerPos.xyz - position);
+    float3 spec = pow(max(0, dot(-viewDir, refVec)), SpecularPower) * pointLight.intensity * SpecularKoef * attenuationFactor;
     
-                col = depth * pointLight.color * (ambient + diffuse + spec);
-            }
-            //col = float3(depth, depth, depth);
-        }
-    }
+    float3 col = (1.0f - depth) * ambient + depth * pointLight.color * (ambient + diffuse + spec);
     return col;
 }
 

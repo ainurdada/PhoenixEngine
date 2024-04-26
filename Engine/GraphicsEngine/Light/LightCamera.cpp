@@ -32,7 +32,7 @@ void LightCamera::UpdateProjectionMatrix()
 	if (isPerspective)
 	{
 		m_projectionMatrix = XMMatrixPerspectiveFovLH(
-			m_fov * DEG_TO_RAD,
+			m_fov,
 			aspectRation,
 			minClipDistance,
 			maxClipDistance);

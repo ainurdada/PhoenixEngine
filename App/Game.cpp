@@ -129,7 +129,6 @@ void Game::render(float deltaFrame)
 		obj->Draw();
 	}
 	OnDebugRender();
-	graphics.GetContext()->PSSetSamplers(0, 1, &graphics.shadowCompSampler);
 	graphics.Output();
 	graphics.Present();
 }
