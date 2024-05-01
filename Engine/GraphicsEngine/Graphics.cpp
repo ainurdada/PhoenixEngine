@@ -88,7 +88,7 @@ HRESULT Graphics::Init(const HWND& hWnd, int screenWidth, int screenHeight)
 		cout << "failed to create SamplerState" << endl;
 	}
 
-	sampDesc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_POINT;
+	sampDesc.Filter = D3D11_FILTER_COMPARISON_MIN_MAG_MIP_LINEAR;
 	sampDesc.ComparisonFunc = D3D11_COMPARISON_LESS_EQUAL;
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -145,9 +145,10 @@ HRESULT Graphics::SetUpRasterizer()
 
 	rastDesc.CullMode = D3D11_CULL_BACK;
 	rastDesc.FillMode = D3D11_FILL_SOLID;
-	rastDesc.DepthBias = 1000;
+	rastDesc.DepthClipEnable = true;
+	rastDesc.DepthBias = 10;
 	rastDesc.DepthBiasClamp = 0.0f;
-	rastDesc.SlopeScaledDepthBias = 1.0f;
+	rastDesc.SlopeScaledDepthBias = 4.f;
 	res = device->CreateRasterizerState(&rastDesc, &shadowRastState);
 
 	context->RSSetState(solidRastState);

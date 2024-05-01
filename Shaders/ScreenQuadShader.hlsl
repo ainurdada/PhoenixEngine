@@ -83,9 +83,6 @@ float3 doLigt(float3 position, float3 normal, float3 color, PointLightData point
         );
         if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y))
         {
-            // compare depth
-            float lightDepth = posInPointLightView.z / posInPointLightView.w;
-            float shadowFactor = CalcShadowFactor(samplerClamp, pointLightShadowMap[i], shadowTexCoord, lightDepth);
                 float distanceToLight = distance(pointLight.position, position);
                 float attenuationFactor =
                     1 /
@@ -98,10 +95,15 @@ float3 doLigt(float3 position, float3 normal, float3 color, PointLightData point
                 float3 refVec = normalize(reflect(lightDir, normal));
     
                 float3 diffuse = attenuationFactor * color * pointLight.intensity * max(0, dot(normal, lightDir));
-                float3 viewDir = normalize(cdata.ViewerPos.xyz - position);
-                float3 spec = pow(max(0, dot(-viewDir, refVec)), SpecularPower) * pointLight.intensity * SpecularKoef * attenuationFactor;
-    
-            col += shadowFactor * pointLight.color * (ambient + diffuse + spec);
+                if (diffuse.x || diffuse.y || diffuse.z)
+                {
+                    // compare depth
+                    float lightDepth = posInPointLightView.z / posInPointLightView.w;
+                    float shadowFactor = CalcShadowFactor(samplerClamp, pointLightShadowMap[i], shadowTexCoord, lightDepth);
+                    float3 viewDir = normalize(cdata.ViewerPos.xyz - position);
+                    float3 spec = pow(max(0, dot(-viewDir, refVec)), SpecularPower) * pointLight.intensity * SpecularKoef * attenuationFactor;
+                    col += shadowFactor * pointLight.color * (ambient + diffuse + spec);
+                }
         }
     }
     return col;
