@@ -22,7 +22,13 @@ class Graphics;
 class Graphics
 {
 	struct ConstantData {
-		SMath::Vector3 ViewerPosition;
+		SMath::Matrix InverseProjection;
+		SMath::Matrix InverseView;
+		SMath::Vector4 ViewerPosition;
+		SMath::Vector4 ViewDirection;
+		int screenResolution[2];
+		float nearPlaneDistance;
+		float fov;
 	};
 	struct PointLightData {
 		SMath::Matrix viewProjection[6];

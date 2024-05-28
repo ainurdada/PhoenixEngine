@@ -211,7 +211,22 @@ void Graphics::Output()
 	context->PSSetSamplers(0, 1, &shadowCompSampler);
 
 	// constant buffer
-	constant_data.data.ViewerPosition = Game::instance->mainCamera->transform.position();
+	SMath::Matrix cameraView = Game::instance->mainCamera->ViewMatrix();
+	cameraView = DirectX::XMMatrixInverse(nullptr, cameraView);
+	SMath::Matrix cameraProjection = Game::instance->mainCamera->ProjectionMatrix();
+	cameraProjection = DirectX::XMMatrixInverse(nullptr, cameraProjection);
+	SMath::Matrix VP = DirectX::XMMatrixTranspose(
+		//cameraView
+		cameraProjection 
+	);
+	constant_data.data.InverseProjection = DirectX::XMMatrixTranspose(cameraProjection);
+	constant_data.data.InverseView = DirectX::XMMatrixTranspose(cameraView);
+	constant_data.data.ViewerPosition = SMath::Vector4(Game::instance->mainCamera->transform.position());
+	constant_data.data.ViewDirection = SMath::Vector4(Game::instance->mainCamera->transform.Forward());
+	constant_data.data.screenResolution[0] = Game::instance->window.ClientWidth;
+	constant_data.data.screenResolution[1] = Game::instance->window.ClientHeight;
+	constant_data.data.nearPlaneDistance = Game::instance->mainCamera->minClipDistance();
+	constant_data.data.fov = Game::instance->mainCamera->fov() * DEG_TO_RAD;
 	constant_data.ApplyChanges();
 	Game::instance->graphics.GetContext()->PSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
 

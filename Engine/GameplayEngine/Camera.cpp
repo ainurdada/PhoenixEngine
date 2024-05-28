@@ -63,6 +63,10 @@ float Camera::zoom()
 	return zoomFactor;
 }
 
+/// <summary>
+/// get fov value in degrees
+/// </summary>
+/// <returns></returns>
 float Camera::fov() const
 {
 	return m_fov;

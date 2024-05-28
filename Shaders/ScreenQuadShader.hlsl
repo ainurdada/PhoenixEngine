@@ -7,7 +7,13 @@ struct PS_IN
 
 struct ConstantData
 {
-    float3 ViewerPos;
+    float4x4 InverseProjection;
+    float4x4 InverseView;
+    float4 ViewerPos;
+    float4 ViewDirection;
+    int2 screenResolution;
+    float nearPlaneDistance;
+    float fov;
 };
 cbuffer ConstantBuffer : register(b0)
 {
@@ -30,12 +36,11 @@ cbuffer PointLightBuffer : register(b1)
 }
 
 Texture2D<float4> DiffuseTex : register(t0);
-Texture2D<float4> WorldPos : register(t1);
+Texture2D<float> Depth : register(t1);
 Texture2D<float4> NormalTex : register(t2);
-Texture2D<float> DepthTex : register(t3);
-Texture2D<float3> SpecularTex : register(t4);
+Texture2D<float3> SpecularTex : register(t3);
 
-Texture2D pointLightShadowMap[6] : register(t5);
+Texture2D pointLightShadowMap[6] : register(t4);
 SamplerComparisonState samplerClamp : register(s0);
 
 static const float SMAP_SIZE = 2048.0f;
@@ -74,36 +79,34 @@ float3 doLigt(float3 position, float3 normal, float3 color, PointLightData point
     for (int i = 0; i < 6; i++)
     {
         float4 posInPointLightView = mul(float4(position, 1), pointLight.viewProjection[i]);
-        posInPointLightView.z = posInPointLightView.z;
-        posInPointLightView.w = posInPointLightView.w;
         float2 shadowTexCoord = float2
         (
             posInPointLightView.x / posInPointLightView.w / 2.0f + 0.5f,
             -posInPointLightView.y / posInPointLightView.w / 2.0f + 0.5f
         );
-        if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y))
+        float lightDepth = posInPointLightView.z / posInPointLightView.w;
+        if ((saturate(shadowTexCoord.x) == shadowTexCoord.x) && (saturate(shadowTexCoord.y) == shadowTexCoord.y) && lightDepth >= 0)
         {
-                float distanceToLight = distance(pointLight.position, position);
-                float attenuationFactor =
+            float distanceToLight = distance(pointLight.position, position);
+            float attenuationFactor =
                     1 /
                     (
                         pointLight.attenuation_a 
                         + pointLight.attenuation_b * distanceToLight
                         + pointLight.attenuation_c * distanceToLight * distanceToLight
                     );
-                float3 lightDir = normalize(pointLight.position - position);
-                float3 refVec = normalize(reflect(lightDir, normal));
+            float3 lightDir = normalize(pointLight.position - position);
+            float3 refVec = normalize(reflect(lightDir, normal));
     
-                float3 diffuse = attenuationFactor * color * pointLight.intensity * max(0, dot(normal, lightDir));
-                if (diffuse.x || diffuse.y || diffuse.z)
-                {
+            float3 diffuse = attenuationFactor * color * pointLight.intensity * max(0, dot(normal, lightDir));
+            if (diffuse.x || diffuse.y || diffuse.z)
+            {
                     // compare depth
-                    float lightDepth = posInPointLightView.z / posInPointLightView.w;
-                    float shadowFactor = CalcShadowFactor(samplerClamp, pointLightShadowMap[i], shadowTexCoord, lightDepth);
-                    float3 viewDir = normalize(cdata.ViewerPos.xyz - position);
-                    float3 spec = pow(max(0, dot(-viewDir, refVec)), SpecularPower) * pointLight.intensity * SpecularKoef * attenuationFactor;
-                    col += shadowFactor * pointLight.color * (ambient + diffuse + spec);
-                }
+                float shadowFactor = CalcShadowFactor(samplerClamp, pointLightShadowMap[i], shadowTexCoord, lightDepth);
+                float3 viewDir = normalize(cdata.ViewerPos.xyz - position);
+                float3 spec = pow(max(0, dot(-viewDir, refVec)), SpecularPower) * pointLight.intensity * SpecularKoef * attenuationFactor;
+                col += shadowFactor * pointLight.color * (diffuse + spec);
+            }
         }
     }
     return col;
@@ -117,15 +120,27 @@ PS_IN VSMain(uint id : SV_VertexID)
     return output;
 }
 
+float3 CalculateWorldPosition(float4 screenPosition)
+{
+    float2 texCoord = screenPosition.xy / cdata.screenResolution;
+    float4 clip = float4(float2(texCoord.x, 1.0f - texCoord.y) * 2.0f - 1.0f, screenPosition.z, screenPosition.w);
+    float4 view = mul(clip, cdata.InverseProjection);
+    view = view / view.w;
+    float4 world = mul(view, cdata.InverseView);
+    return world.xyz;
+}
+
 float4 PSMain(PS_IN input) : SV_Target
 {
     float4 diffuse = DiffuseTex.Load(input.Position.xyz);
     float4 normal = NormalTex.Load(input.Position.xyz);
     float3 specular = SpecularTex.Load(input.Position.xyz);
-    float4 position = WorldPos.Load(input.Position.xyz);
-    float depth = DepthTex.Load(input.Position.xyz);
+    float depth = Depth.Load(input.Position.xyz);
     
-    float3 color = doLigt(position.xyz, normal.xyz, diffuse.rgb, pointLight, specular.x, specular.y, specular.z);
+    float3 position = CalculateWorldPosition(float4(input.Position.xy, depth, 1.0f));
+    //return float4(position, 1);
+  
+    float3 color = doLigt(position, normal.xyz, diffuse.rgb, pointLight, specular.x, specular.y, specular.z);
     
     return float4(color, 1);
 }
