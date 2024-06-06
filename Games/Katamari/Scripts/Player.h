@@ -12,6 +12,7 @@ class Player : public BehaviourScript
 	void OnCollide(Collider* other) override;
 public:
 	CameraControl* playerCamera;
+	GameObject* skybox;
 	float moveSpeed = 5.0f;
 	float rotationSpeeed = 1.0f;
 

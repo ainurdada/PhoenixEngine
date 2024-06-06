@@ -93,12 +93,6 @@ void KatamariGame::OnCreated()
 	CameraControl* cameraControl = new CameraControl;
 	Game::instance->mainCamera->AddComponent(*cameraControl);
 
-	GameObject* playerObj = new GameObject;
-	Player* player = new Player;
-	playerObj->AddComponent(*player);
-	InstantiateGameObject(playerObj);
-	cameraControl->player = &playerObj->transform;
-	player->playerCamera = cameraControl;
 
 	GameObject* floor = new GameObject;
 	RenderComponent* floorRender = new RenderComponent;
@@ -109,6 +103,22 @@ void KatamariGame::OnCreated()
 	floor->transform.position({ 0,-0.95f,0 });
 	InstantiateGameObject(floor);
 
+	GameObject* sky = new GameObject;
+	RenderComponent* skyRender = new RenderComponent;
+	skyRender->modelPath = L"Models\\Skybox\\out.glb";
+	skyRender->shader = ShaderManager::Get(BaseResource::litShader);
+	skyRender->ambientKoef = 1;
+	sky->AddComponent(*skyRender);
+	sky->transform.position({ 0, 0,0 });
+	InstantiateGameObject(sky);
+
+	GameObject* playerObj = new GameObject;
+	Player* player = new Player;
+	player->skybox = sky;
+	player->playerCamera = cameraControl;
+	playerObj->AddComponent(*player);
+	InstantiateGameObject(playerObj);
+	cameraControl->player = &playerObj->transform;
 	
 
 	CreateDirLight(Vector3::Down, 0);

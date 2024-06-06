@@ -146,7 +146,7 @@ HRESULT Graphics::SetUpRasterizer()
 	rastDesc.CullMode = D3D11_CULL_BACK;
 	rastDesc.FillMode = D3D11_FILL_SOLID;
 	rastDesc.DepthClipEnable = true;
-	rastDesc.DepthBias = 10;
+	rastDesc.DepthBias = 100;
 	rastDesc.DepthBiasClamp = 0.0f;
 	rastDesc.SlopeScaledDepthBias = 4.f;
 	res = device->CreateRasterizerState(&rastDesc, &shadowRastState);

@@ -20,6 +20,7 @@ void RenderComponent::Draw()
 
 	//Game::instance->graphics.GetContext()->PSSetSamplers(1, 1, &Game::instance->graphics.shadowCompSampler);
 
+	model.ambientKoeff = ambientKoef;
 	model.Draw(gameObject->transform.LocalToWorld());
 }
 

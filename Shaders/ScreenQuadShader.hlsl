@@ -138,7 +138,7 @@ float4 PSMain(PS_IN input) : SV_Target
     float depth = Depth.Load(input.Position.xyz);
     
     float3 position = CalculateWorldPosition(float4(input.Position.xy, depth, 1.0f));
-    //return float4(position, 1);
+    //return float4(depth, depth, depth, 1);
   
     float3 color = doLigt(position, normal.xyz, diffuse.rgb, pointLight, specular.x, specular.y, specular.z);
     

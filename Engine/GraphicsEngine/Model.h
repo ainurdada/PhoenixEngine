@@ -56,4 +56,7 @@ private:
 	ConstantBuffer<DirLightData> dir_light_data;
 	ConstantBuffer<MaterialData> material_data;
 	ID3D11Buffer* transform_buffer = nullptr;
+	float ambientKoeff = -1;
+	float specPower = -1;
+	float specKoeff = -1;
 };

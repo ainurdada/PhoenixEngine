@@ -53,6 +53,8 @@ void Player::Update()
 			gameObject->transform.RotateAroundAxis(rotationAxis, rotationSpeeed * moveSpeed * Game::instance->time.GetDeltaTime());
 		}
 	}
+
+	skybox->transform.position(playerCamera->gameObject->transform.position());
 }
 
 void Player::Draw()

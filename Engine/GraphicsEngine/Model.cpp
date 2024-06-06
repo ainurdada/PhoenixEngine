@@ -27,8 +27,8 @@ bool Model::Initialize(const LPCWSTR filePath)
 
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(converter.to_bytes(filePath),
-											 aiProcess_Triangulate
-											 | aiProcess_ConvertToLeftHanded
+		aiProcess_Triangulate
+		| aiProcess_ConvertToLeftHanded
 	);
 	if (nullptr == scene)
 	{
@@ -67,9 +67,18 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 		constant_data.ApplyChanges();
 
 		// material buffer
-		material_data.data.ambientKoeff = Game::instance->dirLight->ambientKoeff;
-		material_data.data.specPower = Game::instance->dirLight->specPow;
-		material_data.data.specKoeff = Game::instance->dirLight->specKoeff;
+		material_data.data.ambientKoeff = ambientKoeff;
+		material_data.data.specPower = specPower;
+		material_data.data.specKoeff = specKoeff;
+		if (ambientKoeff < 0) {
+			material_data.data.ambientKoeff = Game::instance->dirLight->ambientKoeff;
+		}
+		if (specPower < 0) {
+			material_data.data.specPower = Game::instance->dirLight->specPow;
+		}
+		if (specKoeff < 0) {
+			material_data.data.specKoeff = Game::instance->dirLight->specKoeff;
+		}
 		material_data.ApplyChanges();
 
 		//// direction light buffer
@@ -77,7 +86,7 @@ void Model::Draw(const SMath::Matrix& modelMatrix)
 		//dir_light_data.data.intensity = Game::instance->dirLight->intensity;
 		//dir_light_data.ApplyChanges();
 
-		
+
 
 		Game::instance->graphics.GetContext()->VSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
 		Game::instance->graphics.GetContext()->PSSetConstantBuffers(0, 1, constant_data.GetAddressOf());
@@ -261,9 +270,9 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* pMaterial, aiTextur
 			{
 				int index = GetTextureIndex(&path);
 				Texture embeddedIndexTexture(device,
-											 reinterpret_cast<uint8_t*>(pScene->mTextures[index]->pcData),
-											 pScene->mTextures[index]->mWidth,
-											 textureType);
+					reinterpret_cast<uint8_t*>(pScene->mTextures[index]->pcData),
+					pScene->mTextures[index]->mWidth,
+					textureType);
 				materialTextures.push_back(embeddedIndexTexture);
 				break;
 			}
@@ -271,9 +280,9 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* pMaterial, aiTextur
 			{
 				const aiTexture* pTexture = pScene->GetEmbeddedTexture(path.C_Str());
 				Texture embeddedTexture(device,
-										reinterpret_cast<uint8_t*>(pTexture->pcData),
-										pTexture->mWidth,
-										textureType);
+					reinterpret_cast<uint8_t*>(pTexture->pcData),
+					pTexture->mWidth,
+					textureType);
 				materialTextures.push_back(embeddedTexture);
 				break;
 			}

@@ -24,6 +24,7 @@ public:
 public:
 	LPCWSTR modelPath;
 	const Shader* shader;
+	float ambientKoef = -1;
 private:
 	Model model;
 };
