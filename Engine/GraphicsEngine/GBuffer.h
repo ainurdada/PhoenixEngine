@@ -8,16 +8,15 @@ class GBuffer
 {
 	struct GBufferRTVs {
 		ID3D11RenderTargetView* diffuseRTV;
-		ID3D11RenderTargetView* depthPosRTV;
 		ID3D11RenderTargetView* normalRTV;
 		ID3D11RenderTargetView* specularRTV;
-		const int count = 4;
+		const int count = 3;
 	};
 
 	struct GBufferSRVs
 	{
 		ID3D11ShaderResourceView* diffuseSRV;
-		ID3D11ShaderResourceView* depthPosSRV;
+		ID3D11ShaderResourceView* depthSRV;
 		ID3D11ShaderResourceView* normalSRV;
 		ID3D11ShaderResourceView* specularSRV;
 		const int count = 4;

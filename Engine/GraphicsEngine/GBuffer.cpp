@@ -33,34 +33,6 @@ void GBuffer::Initialize(ID3D11Device* device, int screenWidth, int screenHeigt,
 	}
 #pragma endregion
 
-#pragma region WorldPos
-	{
-		ID3D11Texture2D* worldPosTexture;
-		D3D11_TEXTURE2D_DESC worldPosTextureDesc = {};
-		worldPosTextureDesc.Width = screenWidth;
-		worldPosTextureDesc.Height = screenHeigt;
-		worldPosTextureDesc.Format = DXGI_FORMAT_R32_FLOAT;
-		worldPosTextureDesc.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_RENDER_TARGET;
-		worldPosTextureDesc.Usage = D3D11_USAGE_DEFAULT;
-		worldPosTextureDesc.MipLevels = 1;
-		worldPosTextureDesc.ArraySize = 1;
-		worldPosTextureDesc.SampleDesc.Count = 1;
-		worldPosTextureDesc.SampleDesc.Quality = 0;
-		worldPosTextureDesc.CPUAccessFlags = 0;
-		worldPosTextureDesc.MiscFlags = 0;
-		device->CreateTexture2D(&worldPosTextureDesc, nullptr, &worldPosTexture);
-		device->CreateRenderTargetView(worldPosTexture, nullptr, &rtvs.depthPosRTV);
-
-		D3D11_SHADER_RESOURCE_VIEW_DESC worldPosSRVDesc = {};
-		worldPosSRVDesc.Format = DXGI_FORMAT_R32_FLOAT;
-		worldPosSRVDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
-		worldPosSRVDesc.Texture2DArray.MostDetailedMip = 0;
-		worldPosSRVDesc.Texture2DArray.MipLevels = 1;
-		worldPosSRVDesc.Texture2DArray.FirstArraySlice = 0;
-		device->CreateShaderResourceView(worldPosTexture, &worldPosSRVDesc, &srvs.depthPosSRV);
-	}
-#pragma endregion
-
 #pragma region Specular
 	{
 		ID3D11Texture2D* specularTexture;
@@ -139,6 +111,14 @@ void GBuffer::Initialize(ID3D11Device* device, int screenWidth, int screenHeigt,
 		diffuseDSVDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 		diffuseDSVDesc.Texture2D.MipSlice = 0;
 		device->CreateDepthStencilView(depthTexture, &diffuseDSVDesc, &dsv);
+
+		D3D11_SHADER_RESOURCE_VIEW_DESC worldPosSRVDesc = {};
+		worldPosSRVDesc.Format = DXGI_FORMAT_R32_FLOAT;
+		worldPosSRVDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+		worldPosSRVDesc.Texture2DArray.MostDetailedMip = 0;
+		worldPosSRVDesc.Texture2DArray.MipLevels = 1;
+		worldPosSRVDesc.Texture2DArray.FirstArraySlice = 0;
+		device->CreateShaderResourceView(depthTexture, &worldPosSRVDesc, &srvs.depthSRV);
 	}
 #pragma endregion
 }
@@ -151,7 +131,6 @@ void GBuffer::SetRenderTargets(ID3D11DeviceContext* context)
 	context->ClearDepthStencilView(dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	context->ClearRenderTargetView(rtvs.diffuseRTV, color);
 	context->ClearRenderTargetView(rtvs.specularRTV, color);
-	context->ClearRenderTargetView(rtvs.depthPosRTV, color);
 	context->ClearRenderTargetView(rtvs.normalRTV, color);
 }
 
