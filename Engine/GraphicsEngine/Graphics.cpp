@@ -212,13 +212,13 @@ void Graphics::Output()
 
 	// constant buffer
 	SMath::Matrix cameraView = Game::instance->mainCamera->ViewMatrix();
-	cameraView = DirectX::XMMatrixInverse(nullptr, cameraView);
 	SMath::Matrix cameraProjection = Game::instance->mainCamera->ProjectionMatrix();
-	cameraProjection = DirectX::XMMatrixInverse(nullptr, cameraProjection);
-	SMath::Matrix VP = DirectX::XMMatrixTranspose(
-		//cameraView
-		cameraProjection 
+	constant_data.data.WorldViewProjection = XMMatrixTranspose(
+		cameraView
+		* cameraProjection
 	);
+	cameraView = DirectX::XMMatrixInverse(nullptr, cameraView);
+	cameraProjection = DirectX::XMMatrixInverse(nullptr, cameraProjection);
 	constant_data.data.InverseProjection = DirectX::XMMatrixTranspose(cameraProjection);
 	constant_data.data.InverseView = DirectX::XMMatrixTranspose(cameraView);
 	constant_data.data.ViewerPosition = SMath::Vector4(Game::instance->mainCamera->transform.position());

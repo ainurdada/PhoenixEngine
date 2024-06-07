@@ -9,6 +9,7 @@ struct ConstantData
 {
     float4x4 InverseProjection;
     float4x4 InverseView;
+    float4x4 VP;
     float4 ViewerPos;
     float4 ViewDirection;
     int2 screenResolution;
@@ -120,7 +121,7 @@ PS_IN VSMain(uint id : SV_VertexID)
     return output;
 }
 
-float3 CalculateWorldPosition(float4 screenPosition)
+float3 ScreenToWorld(float4 screenPosition)
 {
     float2 texCoord = screenPosition.xy / cdata.screenResolution;
     float4 clip = float4(float2(texCoord.x, 1.0f - texCoord.y) * 2.0f - 1.0f, screenPosition.z, screenPosition.w);
@@ -130,17 +131,115 @@ float3 CalculateWorldPosition(float4 screenPosition)
     return world.xyz;
 }
 
+float4 ScreenToNDC(float2 screenPosition)
+{
+    float2 texCoord = screenPosition / cdata.screenResolution;
+    return float4(float2(texCoord.x, 1.0f - texCoord.y) * 2.0f - 1.0f, 0, 1.0f);
+}
+
+float3 ScreenToView(float2 screenPosition)
+{
+    return mul(ScreenToNDC(screenPosition), cdata.InverseProjection);
+}
+
+float2 WorldToScreen(float3 worldPosition)
+{
+    float4 clip = mul(float4(worldPosition, 1), cdata.VP);
+    float2 ndc;
+    ndc.x = clip.x / clip.w;
+    ndc.y = clip.y / clip.w;
+    ndc.x = (ndc.x + 1) / 2;
+    ndc.y = 1 - (ndc.y + 1) / 2;
+    float2 screen = float2(ndc.x * cdata.screenResolution.x, ndc.y * cdata.screenResolution.y);
+    return screen;
+}
+
+float2 ViewToScreen(float4 viewPos)
+{
+    float2 ndc;
+    ndc.x = viewPos.x / viewPos.w;
+    ndc.y = viewPos.y / viewPos.w;
+    ndc.x = (ndc.x + 1) / 2;
+    ndc.y = 1 - (ndc.y + 1) / 2;
+    return float2(ndc.x * cdata.screenResolution.x, ndc.y * cdata.screenResolution.y);
+}
+
+float3 WorldToNDC(float3 worldPosition)
+{
+    float4 clip = mul(float4(worldPosition, 1), cdata.VP);
+    float3 ndc;
+    ndc.x = clip.x / clip.w;
+    ndc.y = clip.y / clip.w;
+    ndc.z = clip.z / clip.w;
+    return ndc;
+}
+
+float4 WorldToView(float3 worldPosition)
+{
+    return mul(float4(worldPosition, 1), cdata.VP);
+}
+
+float CalculateAmbientOcclusion(float3 worldPosition, float3 texturePosition, float pixelDepth)
+{
+    int rayCount = 6;
+    int targetRayCount = 0;
+    float3 offsets[] =
+    {
+        { 1, 0, 0 },
+        { -1, 0, 0 },
+        { 0, 1, 0 },
+        { 0, -1, 0 },
+        { 0, 0, 1 },
+        { 0, 0, -1 }
+    };
+    float step = 0.01f;
+    float maxStep = .5f;
+    //[unroll]
+    for (int x = -1; x <= 1; x++)
+    {
+        for (int y = -1; y <= 1; y++)
+        {
+            for (int z = -1; z <= 0; z++)
+            {
+                //[unroll]
+                for (float offsetFactor = step; offsetFactor < maxStep * pixelDepth; offsetFactor += step * pixelDepth)
+                {
+                    float4 rayViewPos = WorldToView(worldPosition) + float4(normalize(float3(x, y, z)) * offsetFactor, 0);
+                    float2 currentTextureCoords = ViewToScreen(rayViewPos);
+                    float currentDepth = Depth.Load(float3(currentTextureCoords, 0));
+                    float rayDepth = rayViewPos.z / rayViewPos.w;
+                    if (rayDepth > currentDepth)
+                    {
+                        targetRayCount += 1;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    float result = float(targetRayCount) / float(9);
+    return result;
+}
+
 float4 PSMain(PS_IN input) : SV_Target
 {
     float4 diffuse = DiffuseTex.Load(input.Position.xyz);
     float4 normal = NormalTex.Load(input.Position.xyz);
     float3 specular = SpecularTex.Load(input.Position.xyz);
     float depth = Depth.Load(input.Position.xyz);
+    float3 position = ScreenToWorld(float4(input.Position.xy, depth, 1.0f));
     
-    float3 position = CalculateWorldPosition(float4(input.Position.xy, depth, 1.0f));
-    //return float4(depth, depth, depth, 1);
-  
-    float3 color = doLigt(position, normal.xyz, diffuse.rgb, pointLight, specular.x, specular.y, specular.z);
+    //return float4(WorldToScreen(position).xy, 0, 1);
+    //return float4(input.Position.xy- WorldToScreen(position).xy, 0, 1);
+    
+    float ambientOcclusionFactor = 1 - CalculateAmbientOcclusion(position, input.Position.xyz, depth);
+    
+    return ambientOcclusionFactor.xxxx;
+    //return float4(ambientOcclusionFactor / float2(cdata.screenResolution), 0, 1);
+    float3 color = doLigt(position, normal.xyz, diffuse.rgb, pointLight, specular.x * ambientOcclusionFactor, specular.y, specular.z);
+    
+    
+    color = color * ambientOcclusionFactor.x;
     
     return float4(color, 1);
 }

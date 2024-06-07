@@ -24,6 +24,7 @@ class Graphics
 	struct ConstantData {
 		SMath::Matrix InverseProjection;
 		SMath::Matrix InverseView;
+		SMath::Matrix WorldViewProjection;
 		SMath::Vector4 ViewerPosition;
 		SMath::Vector4 ViewDirection;
 		int screenResolution[2];
