@@ -181,28 +181,24 @@ float4 WorldToView(float3 worldPosition)
 
 float CalculateAmbientOcclusion(float3 worldPosition, float3 texturePosition, float pixelDepth)
 {
-    int rayCount = 6;
+    int rayCount = 0;
     int targetRayCount = 0;
-    float3 offsets[] =
-    {
-        { 1, 0, 0 },
-        { -1, 0, 0 },
-        { 0, 1, 0 },
-        { 0, -1, 0 },
-        { 0, 0, 1 },
-        { 0, 0, -1 }
-    };
-    float step = 0.01f;
-    float maxStep = .5f;
+    float step = 0.0005f;
+    float maxStep = .005f;
+    float depthFactor = pixelDepth;
     //[unroll]
-    for (int x = -1; x <= 1; x++)
+    for (float x = -1; x <= 1; x += 0.3f)
     {
-        for (int y = -1; y <= 1; y++)
+        for (float y = -1; y <= 1; y += 0.3f)
         {
-            for (int z = -1; z <= 0; z++)
+            for (float z = -1; z <= 0; z += 0.3f)
             {
+                if (x == y && y == z)
+                    continue;
+                
+                rayCount++;
                 //[unroll]
-                for (float offsetFactor = step; offsetFactor < maxStep * pixelDepth; offsetFactor += step * pixelDepth)
+                for (float offsetFactor = step * depthFactor; offsetFactor < maxStep * depthFactor; offsetFactor += step * depthFactor)
                 {
                     float4 rayViewPos = WorldToView(worldPosition) + float4(normalize(float3(x, y, z)) * offsetFactor, 0);
                     float2 currentTextureCoords = ViewToScreen(rayViewPos);
@@ -217,7 +213,7 @@ float CalculateAmbientOcclusion(float3 worldPosition, float3 texturePosition, fl
             }
         }
     }
-    float result = float(targetRayCount) / float(9);
+    float result = float(targetRayCount) / float(rayCount);
     return result;
 }
 
@@ -234,7 +230,7 @@ float4 PSMain(PS_IN input) : SV_Target
     
     float ambientOcclusionFactor = 1 - CalculateAmbientOcclusion(position, input.Position.xyz, depth);
     
-    return ambientOcclusionFactor.xxxx;
+    //return ambientOcclusionFactor.xxxx;
     //return float4(ambientOcclusionFactor / float2(cdata.screenResolution), 0, 1);
     float3 color = doLigt(position, normal.xyz, diffuse.rgb, pointLight, specular.x * ambientOcclusionFactor, specular.y, specular.z);
     
